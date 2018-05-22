@@ -97,7 +97,7 @@ class PianoView: UIView {
                 if path.contains(location) {
                     let note = noteByPathArea[path]
                     if let note = note {
-                        //TODO: remove note from touchedKeys if touchedKeys contains note
+                        //TODO: remove note from touchedKeys if touchedKeys contains note; then eliminate NOT .contains below
                         if touchedKeys.count < 6 && !touchedKeys.contains(where: {$0 == note}) { touchedKeys.append(note) }
                         noteNameDelegate?.touchedKeys = touchedKeys
                         noteNameDelegate?.noteDisplayNeedsUpdate()
