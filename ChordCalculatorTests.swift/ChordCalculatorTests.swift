@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import MusicWeb
+@testable import Chord_Calculator
 
 class MusicWebTests: XCTestCase {
     

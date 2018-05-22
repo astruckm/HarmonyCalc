@@ -38,8 +38,8 @@
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
-		723350FF20B3AD2700BE9ADB /* ChordCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723350FD20B3AD2600BE9ADB /* ChordCalculatorTests.swift */; };
-		7233510020B3AD2700BE9ADB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 723350FE20B3AD2600BE9ADB /* Info.plist */; };
+		7233510220B3C95000BE9ADB /* ChordCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723350FD20B3AD2600BE9ADB /* ChordCalculatorTests.swift */; };
+		7233510420B3C97600BE9ADB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 723350FE20B3AD2600BE9ADB /* Info.plist */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
@@ -368,7 +368,7 @@
 				7213F5A420AB07D000090B75 /* F5.m4a in Resources */,
 				7213F5A120AB07D000090B75 /* G♭5.m4a in Resources */,
 				7213F5A020AB07D000090B75 /* G♭4.m4a in Resources */,
-				7233510020B3AD2700BE9ADB /* Info.plist in Resources */,
+				7233510420B3C97600BE9ADB /* Info.plist in Resources */,
 				7213F5A720AB07D000090B75 /* B♭4.m4a in Resources */,
 				7213F5A620AB07D000090B75 /* E4.m4a in Resources */,
 				7213F59E20AB07D000090B75 /* E♭5.m4a in Resources */,
@@ -405,7 +405,6 @@
 				728AEA3520AA51E000CBB974 /* Audio.swift in Sources */,
 				726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
-				723350FF20B3AD2700BE9ADB /* ChordCalculatorTests.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
@@ -418,6 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7233510220B3C95000BE9ADB /* ChordCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
