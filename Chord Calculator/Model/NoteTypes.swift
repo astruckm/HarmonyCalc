@@ -1,6 +1,6 @@
 //
 //  NoteTypes.swift
-//  Chord Connections
+//  Chord Calculator
 //
 //  Created by ASM on 3/20/18.
 //  Copyright © 2018 ASM. All rights reserved.

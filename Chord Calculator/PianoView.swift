@@ -1,6 +1,6 @@
 //
 //  PianoView.swift
-//  Chord Connections
+//  Chord Calculator
 //
 //  Created by ASM on 3/4/18.
 //  Copyright © 2018 ASM. All rights reserved.
@@ -25,7 +25,9 @@ protocol PlaysNotes {
 }
 
 class PianoView: UIView {
+    //***************************************************
     //MARK: Layout observers
+    //***************************************************
     private var isCompactHeight = false
     private var isCompactWidth = false
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -53,7 +55,6 @@ class PianoView: UIView {
     
     private var whiteKeyHeight: CGFloat { return bounds.height }
     private var blackKeyHeight: CGFloat { return bounds.height / 1.5 }
-    
     private var whiteKeyBottomWidth: CGFloat { return ((bounds.width - (CGFloat(numberOfWhiteKeys-1) * spaceBetweenKeys))  /  CGFloat(numberOfWhiteKeys)) } //Octave plus a fifth, encompasses bounds' whole span
     private var whiteKeyTopWidthCDE: CGFloat { return whiteKeyBottomWidth - (blackKeyWidth * 2 / 3) }
     private var whiteKeyTopWidthFGAB: CGFloat { return whiteKeyBottomWidth - (blackKeyWidth * 3 / 4) }
@@ -87,9 +88,9 @@ class PianoView: UIView {
     var keyWasTouched = false
     let colors = Colors()
     
-    //************************************
+    //***************************************************
     //MARK: Touch events
-    //************************************
+    //***************************************************
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -117,9 +118,9 @@ class PianoView: UIView {
         return
     }
     
-    //**********************************************
+    //***************************************************
     //MARK: Draw all the keys
-    //**********************************************
+    //***************************************************
     override func draw(_ rect: CGRect) {
         var numberOfWhiteKeysDrawn = 0
         var startingXValue: CGFloat = bounds.minX
@@ -185,7 +186,8 @@ class PianoView: UIView {
         }
     }
     
-    //MARK: Drawing (sub)functions
+    
+    //Drawing helper functions
     private func drawBlackKey(startingX: CGFloat) {
         let startingPoint = CGPoint(x: startingX, y: bounds.minY)
         let path = UIBezierPath()
@@ -256,7 +258,7 @@ class PianoView: UIView {
         strokeAndFillPath(path)
     }
     
-    //Helper function for drawing (sub)functions
+    //Helper function for drawing subfunctions
     private func strokeAndFillPath(_ path: UIBezierPath) {
         path.lineWidth = 0.3
         UIColor.black.setStroke()

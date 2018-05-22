@@ -1,16 +1,22 @@
 //
 //  NoteModel.swift
-//  Chord Connections
+//  Chord Calculator
 //
 //  Created by ASM on 2/24/18.
 //  Copyright © 2018 ASM. All rights reserved.
+//
+//  This file is the brain of the calculator, taking in notes and outputting tonal and atonal collections
 //
 
 import Foundation
 
 struct HarmonyModel {
+    //***************************************************
+    //MARK: Properties
+    //***************************************************
+    
+    //TODO: This should be read by NoteViewController, communicated to PianoView
     let maximumNotesInCollection = 6
-    var currentCollection: [PitchClass]?
     
     //TODO: Add more chords?
     //In normal form
@@ -42,9 +48,11 @@ struct HarmonyModel {
         "ø⁷": 1
     ]
     
+    //***************************************************
     //MARK: Types
+    //***************************************************
     
-    //These probably only useful if account for semitone equivalent intervals
+    //This probably only useful if account for semitone equivalent intervals
     enum PitchIntervalClass: Int, Hashable {
         case unison = 0, minorSecond, majorSecond, minorThird, majorThird, perfectFourth, tritone, perfectFifth, minorSixth, majorSixth, minorSeventh, majorSeventh
     }
@@ -52,6 +60,10 @@ struct HarmonyModel {
     enum TonalChordType: String {
         case major = "Maj", minor = "min", diminished = "o", augmented = "+", suspended = "Sus", dominantSeventh = "⁷", minorSeventh = "min⁷", majorSeventh = "Maj⁷", diminishedSeventh = "o⁷", halfDiminishedSeventh = "ø⁷"
     }
+    
+    //***************************************************
+    //MARK: General note transformation funcs
+    //***************************************************
     
     //input notes in a chord, output all possible inversions
     private func allInversions(of notes: [PitchClass]) -> [[(PitchClass)]] {
@@ -65,7 +77,6 @@ struct HarmonyModel {
         return allInversionsOfCollection
     }
     
-    //MARK: Convert Types
     //Int value for a key
     func keyValue(pitch: (PitchClass, Octave)) -> Int {
         return pitch.0.rawValue + (pitch.1.rawValue * 12)
@@ -207,10 +218,10 @@ struct HarmonyModel {
     }
     
     
-    //****************************************************************
+    //**********************************************************
     //MARK: Tonal collections
-    //****************************************************************
-    
+    //**********************************************************
+
     //Helper func, use on collections that are in normal form already
     private mutating func intervalsBetweenPitches(pitchCollection: [PitchClass]) -> [Int] {
         guard pitchCollection.count >= 2 else { return [] }
@@ -279,25 +290,10 @@ struct HarmonyModel {
     func getHarmonyValueForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
 
         if pitchCollection.count > 1 {
-//        let pitchClasses = pitchCollection.map({$0.0})
-            
-//            let normalFormPC = normalForm(of: pitchClasses)
-//            let normalFormIntAsString = normalFormPC.map({String($0.rawValue)})
-
-            //functions below shouldn't call normalForm(of:)
-            
-//            let primeFormPC = primeForm(of: pitchClasses)
-//            let primeFormAsString = primeFormPC.map({String($0)})
-
-//            if let chordPC = getChordIdentity(of: pitchClasses) {
-//            let chordRoot = chordPC.0
-//            //There are 3 possibilities: white key, sharp, or flat. If !isBlackKey then [0]; if .isBlackKey, [0] if collectionUsesSharps, [1] if not.
-//            let chordRootAsString = (chordRoot.isBlackKey && !collectionUsesSharps) ? chordRoot.possibleSpellings[1] : chordRoot.possibleSpellings[0]
-//            let chordQualityAsString = chordPC.1.rawValue
-            
-            //shouldn't again call getChordIdentity(of:)
-//            if let chordInversion = getChordInversion(of: pitchCollection)
-
+            //Get normal form
+            //Use it to get prime form and chord type
+            //Use chord type to get inversion
+            //Convert everything to Strings
         }
         
         return ("", "", nil, nil)

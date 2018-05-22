@@ -34,7 +34,6 @@
 		722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E46EA2042593100DAF987 /* AppDelegate.swift */; };
 		722E46ED2042593100DAF987 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E46EC2042593100DAF987 /* NoteViewController.swift */; };
 		722E46F02042593100DAF987 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46EE2042593100DAF987 /* Main.storyboard */; };
-		722E46F32042593100DAF987 /* ChordCalculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 722E46F12042593100DAF987 /* ChordCalculator.xcdatamodeld */; };
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
@@ -94,7 +93,6 @@
 		722E46EA2042593100DAF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		722E46EC2042593100DAF987 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		722E46EF2042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		722E46F22042593100DAF987 /* Chord_Connections.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Chord_Connections.xcdatamodel; sourceTree = "<group>"; };
 		722E46F42042593100DAF987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		722E46F72042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722E46F92042593100DAF987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				722E46EC2042593100DAF987 /* NoteViewController.swift */,
 				724A3CF3204CD8DE008E5840 /* PianoView.swift */,
 				72C7197A206145400055C742 /* Model */,
-				722E46F12042593100DAF987 /* ChordCalculator.xcdatamodeld */,
 				722E471B2042594C00DAF987 /* Supporting Files */,
 			);
 			path = "Chord Calculator";
@@ -401,7 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				722E46ED2042593100DAF987 /* NoteViewController.swift in Sources */,
-				722E46F32042593100DAF987 /* ChordCalculator.xcdatamodeld in Sources */,
 				728AEA3520AA51E000CBB974 /* Audio.swift in Sources */,
 				726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
@@ -706,19 +702,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		722E46F12042593100DAF987 /* ChordCalculator.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				722E46F22042593100DAF987 /* Chord_Connections.xcdatamodel */,
-			);
-			currentVersion = 722E46F22042593100DAF987 /* Chord_Connections.xcdatamodel */;
-			path = ChordCalculator.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 722E46DF2042593100DAF987 /* Project object */;
 }

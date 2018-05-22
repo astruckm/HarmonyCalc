@@ -1,6 +1,6 @@
 //
 //  NoteViewController.swift
-//  Chord Connections
+//  Chord Calculator
 //
 //  Created by ASM on 2/24/18.
 //  Copyright © 2018 ASM. All rights reserved.
@@ -133,7 +133,6 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         piano.backgroundColor = .darkGray
         reset.setTitle("Clear", for: .normal)
         
-        //TODO: Add persistance for this var
         if audioIsOn {
             audioOnOff.setImage(audioOn, for: .normal)
         } else {

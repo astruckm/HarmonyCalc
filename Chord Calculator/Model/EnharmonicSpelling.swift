@@ -1,12 +1,14 @@
 //
 //  EnharmonicSpelling.swift
-//  MusicWeb
+//  Chord Calculator
 //
 //  Created by ASM on 4/24/18.
 //  Copyright © 2018 ASM. All rights reserved.
 //
 
 import Foundation
+
+//TODO:
 
 //func that takes in a pitch collection and outputs a pitch collection with correct .possibleSpellings
 //run this func in NoteViewController on harmonyModel output
