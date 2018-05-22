@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Note View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="NoteViewController" customModule="MusicWeb" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY5-Ft-flR" customClass="PianoView" customModule="MusicWeb" customModuleProvider="target">
+                                <rect key="frame" x="20" y="64" width="335" height="394"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="192" id="HeX-gd-LQb">
+                                        <variation key="heightClass=compact" constant="144"/>
+                                    </constraint>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iEC-f1-8av" userLabel="Labels Stack">
+                                <rect key="frame" x="20" y="488" width="335" height="180"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGF-LW-d9W" userLabel="Notes">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="33.666666666666664"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33.5" id="x3e-KW-h8v"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="28"/>
+                                        <color key="textColor" red="0.25098039220000001" green="0.48627450979999998" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="42"/>
+                                        </variation>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="N6R-EJ-sp8" userLabel="Collections Stack">
+                                        <rect key="frame" x="0.0" y="53.666666666666622" width="335" height="126.33333333333331"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cYC-3W-bG4" userLabel="Tonal Stack">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="63.333333333333336"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="02s-ZX-FS6" userLabel="Chord Stack">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="31.666666666666668"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krz-QI-bBq">
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="31.666666666666668"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <state key="normal" title="Chord:">
+                                                                    <color key="titleColor" red="0.25098039220000001" green="0.48627450979999998" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                                <connections>
+                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Chord" popoverAnchorView="krz-QI-bBq" id="0cb-gh-vys">
+                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                                    </segue>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CMaj" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dE-FG-M2I">
+                                                                <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.666666666666668"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                            </label>
+                                                        </subviews>
+                                                        <variation key="heightClass=compact" distribution="fill" spacing="44.399999999999999"/>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dmp-2C-zPx" userLabel="Inversion Stack">
+                                                        <rect key="frame" x="0.0" y="31.666666666666742" width="335" height="31.666666666666671"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNn-ZL-4a0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="31.666666666666668"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <state key="normal" title="Inversion:">
+                                                                    <color key="titleColor" red="0.25098039220000001" green="0.48627450979999998" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                                <connections>
+                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Inversion" popoverAnchorView="bNn-ZL-4a0" id="Zzm-Rm-unX">
+                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                                    </segue>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Root position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35I-2z-3RM" userLabel="Inversion">
+                                                                <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.666666666666668"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                            </label>
+                                                        </subviews>
+                                                        <variation key="heightClass=compact" distribution="fill" spacing="10"/>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6sQ-os-gOA" userLabel="Atonal Stack">
+                                                <rect key="frame" x="0.0" y="63.333333333333371" width="335" height="63"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pK7-vq-Tr5" userLabel="NormalForm Stack">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="31.666666666666668"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC5-Ve-bTh">
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="31.666666666666668"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <state key="normal" title="Normal form:">
+                                                                    <color key="titleColor" red="0.25098039220000001" green="0.48627450979999998" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                                <connections>
+                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Normal Form" popoverAnchorView="iC5-Ve-bTh" id="i9g-mx-zwL">
+                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                                    </segue>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[10,11,0,1,3,4]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvv-Cz-r8K" userLabel="Normal Form">
+                                                                <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.666666666666668"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="44F-ca-jLk" userLabel="PrimeForm Stack">
+                                                        <rect key="frame" x="0.0" y="31.666666666666629" width="335" height="31.333333333333329"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-WX-x2H">
+                                                                <rect key="frame" x="0.0" y="0.0" width="162.66666666666666" height="31.333333333333332"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <state key="normal" title="Prime form:">
+                                                                    <color key="titleColor" red="0.25098039220000001" green="0.48627450979999998" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </state>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                                <connections>
+                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Prime Form" popoverAnchorView="CNE-WX-x2H" id="a88-48-qbT">
+                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                                    </segue>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(012356)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPs-zH-CSu" userLabel="Prime Form">
+                                                                <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.333333333333332"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=regular-widthClass=regular">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                                                </variation>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="6sQ-os-gOA" firstAttribute="height" secondItem="cYC-3W-bG4" secondAttribute="height" id="iYX-YQ-swG"/>
+                                        </constraints>
+                                        <variation key="heightClass=compact" axis="horizontal" distribution="fillProportionally" spacing="30"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="212" id="TDD-NI-aO5"/>
+                                    <constraint firstAttribute="height" constant="180" id="yyv-oX-TTW">
+                                        <variation key="heightClass=compact" constant="120"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="240"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="heightClass=compact" spacing="5"/>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CfP-pG-ZRs" userLabel="Controls Stack">
+                                <rect key="frame" x="20" y="708" width="335" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-03-Zgx">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="♯ / ♭">
+                                            <color key="titleColor" red="0.25098039220000001" green="0.48627450979999998" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="switchFlatSharp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zxc-1J-H7F"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-rm-Jab">
+                                        <rect key="frame" x="89.333333333333329" y="0.0" width="54.999999999999986" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="55" id="O1R-9I-GKM"/>
+                                            <constraint firstAttribute="height" constant="40" id="sM3-16-MML"/>
+                                        </constraints>
+                                        <state key="normal" title="Audio On/Off" image="Audio Off"/>
+                                        <connections>
+                                            <action selector="audioOnOff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NWK-b8-vz1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcr-xe-GHC" userLabel="Play">
+                                        <rect key="frame" x="189.66666666666666" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="nXD-AU-VvR"/>
+                                        </constraints>
+                                        <state key="normal" image="blue play button2">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="playChord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hiD-sp-REJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKq-Vz-LOA">
+                                        <rect key="frame" x="275" y="0.0" width="60" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="A6U-Eg-8oT">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Cxm-9R-Acb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" red="0.25098039215686274" green="0.48627450980392156" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="resetNotes:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DX6-lO-qyE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BY5-Ft-flR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="2p5-0f-MGl"/>
+                            <constraint firstItem="iEC-f1-8av" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="34q-ng-HBL"/>
+                            <constraint firstItem="BY5-Ft-flR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="EQe-ge-h3O"/>
+                            <constraint firstItem="iEC-f1-8av" firstAttribute="leading" secondItem="CfP-pG-ZRs" secondAttribute="leading" id="GBg-x6-lUz">
+                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="CfP-pG-ZRs" firstAttribute="top" secondItem="iEC-f1-8av" secondAttribute="bottom" constant="40" id="VbK-sJ-xmz">
+                                <variation key="heightClass=compact" constant="12"/>
+                            </constraint>
+                            <constraint firstItem="CfP-pG-ZRs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dcI-1c-2KR">
+                                <variation key="heightClass=regular-widthClass=regular" constant="120"/>
+                            </constraint>
+                            <constraint firstItem="BY5-Ft-flR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eZz-Ih-RG4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="CfP-pG-ZRs" secondAttribute="bottom" constant="30" id="mgG-ed-j9p">
+                                <variation key="heightClass=compact" constant="12"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="BY5-Ft-flR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="tJo-FJ-vvo">
+                                <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                            </constraint>
+                            <constraint firstItem="CfP-pG-ZRs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yZJ-hW-UM2"/>
+                            <constraint firstItem="iEC-f1-8av" firstAttribute="top" secondItem="BY5-Ft-flR" secondAttribute="bottom" constant="30" id="zaK-Do-uqc">
+                                <variation key="heightClass=compact" constant="12"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="audioOnOff" destination="CQp-rm-Jab" id="Uok-ms-I3m"/>
+                        <outlet property="chord" destination="9dE-FG-M2I" id="3jB-K7-Fd9"/>
+                        <outlet property="chordButton" destination="krz-QI-bBq" id="j3h-k3-dfn"/>
+                        <outlet property="inversion" destination="35I-2z-3RM" id="ori-jr-IHC"/>
+                        <outlet property="inversionButton" destination="bNn-ZL-4a0" id="2x0-Gn-tNc"/>
+                        <outlet property="normalForm" destination="tvv-Cz-r8K" id="ufO-RQ-nO0"/>
+                        <outlet property="normalFormButton" destination="iC5-Ve-bTh" id="JlR-db-V42"/>
+                        <outlet property="noteName" destination="UGF-LW-d9W" id="fwK-D4-sJi"/>
+                        <outlet property="piano" destination="BY5-Ft-flR" id="hKp-qE-gSh"/>
+                        <outlet property="primeForm" destination="fPs-zH-CSu" id="C7O-fe-jXS"/>
+                        <outlet property="primeFormButton" destination="CNE-WX-x2H" id="PIB-tq-X15"/>
+                        <outlet property="reset" destination="wKq-Vz-LOA" id="gF7-xe-cBU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135.19999999999999" y="131.78410794602701"/>
+        </scene>
+        <!--Definitions View Controller-->
+        <scene sceneID="5H3-Sf-wSK">
+            <objects>
+                <viewController modalPresentationStyle="currentContext" id="SiE-2d-NtS" userLabel="Definitions View Controller" customClass="DefinitionsViewController" customModule="MusicWeb" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S4p-8A-Nl8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor...." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="icH-zZ-V1q">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                                </variation>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="icH-zZ-V1q" firstAttribute="bottom" secondItem="SKn-j6-y7q" secondAttribute="bottom" id="CEn-Qk-T2I"/>
+                            <constraint firstItem="icH-zZ-V1q" firstAttribute="top" secondItem="SKn-j6-y7q" secondAttribute="top" id="WAS-g4-3tD"/>
+                            <constraint firstItem="icH-zZ-V1q" firstAttribute="leading" secondItem="SKn-j6-y7q" secondAttribute="leading" id="csW-o9-6r6"/>
+                            <constraint firstItem="SKn-j6-y7q" firstAttribute="trailing" secondItem="icH-zZ-V1q" secondAttribute="trailing" id="lsb-g9-R8E"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SKn-j6-y7q"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="240" height="240"/>
+                    <connections>
+                        <outlet property="definition" destination="icH-zZ-V1q" id="G8g-uq-j2l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecs-VE-Yhd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="868" y="125.61576354679804"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Audio Off" width="1340" height="1015"/>
+        <image name="blue play button2" width="650" height="725"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0cb-gh-vys"/>
+    </inferredMetricsTieBreakers>
+</document>
