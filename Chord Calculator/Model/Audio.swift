@@ -5,16 +5,17 @@
 //  Created by ASM on 5/14/18.
 //  Copyright © 2018 ASM. All rights reserved.
 
-
 import Foundation
 import AVFoundation
+
+//TODO: Implement sampler using AudioKit dependency
 
 class Audio: NSObject, AVAudioPlayerDelegate {
     static let sharedInstance = Audio()
     
     var players = [URL: AVAudioPlayer]()
-    var duplicatePlayers = [AVAudioPlayer]()
     
+    //Used by NoteVC to load sound if audio is not on
     func loadSound(at url: URL) {
         do {
             let player = try AVAudioPlayer(contentsOf: url)
@@ -27,22 +28,14 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     //Audio player
     func playSound(soundFileName: String) {
         if let url = urlLookUp(of: soundFileName) {
-            if let player = players[url] {
-                    let duplicatePlayer = try! AVAudioPlayer(contentsOf: url)
-                    duplicatePlayer.delegate = self
-                    duplicatePlayers.append(duplicatePlayer)
-                    player.prepareToPlay()
-                    player.play()
-                    print("added to duplicate player")
-            } else {
-                do {
-                    let player = try AVAudioPlayer(contentsOf: url)
-                    players[url] = player
-                    player.prepareToPlay()
-                    player.play()
-                } catch let error as NSError {
-                    print(error.description)
-                }
+            do {
+                let player = try AVAudioPlayer(contentsOf: url)
+                players[url] = player
+                player.delegate = self
+                player.prepareToPlay()
+                player.play()
+            } catch let error as NSError {
+                print(error.description)
             }
         } else {
             print("Couldn't load audio file")
@@ -57,16 +50,6 @@ class Audio: NSObject, AVAudioPlayerDelegate {
         for player in players.values {
             player.play()
         }
-    }
-    
-    func playSoundNotification(notification: NSNotification) {
-        if let soundFileName = notification.userInfo?["fileName"] as? String {
-            playSound(soundFileName: soundFileName)
-        }
-    }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        duplicatePlayers.remove(at: duplicatePlayers.index(of: player)!)
     }
     
     //Helper function

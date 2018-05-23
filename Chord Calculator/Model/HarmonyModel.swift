@@ -6,7 +6,6 @@
 //  Copyright © 2018 ASM. All rights reserved.
 //
 //  This file is the brain of the calculator, taking in notes and outputting tonal and atonal collections
-//
 
 import Foundation
 
