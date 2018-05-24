@@ -13,12 +13,12 @@
         <!--Note View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="NoteViewController" customModule="MusicWeb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="NoteViewController" customModule="Chord_Calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY5-Ft-flR" customClass="PianoView" customModule="MusicWeb" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BY5-Ft-flR" customClass="PianoView" customModule="Chord_Calculator" customModuleProvider="target">
                                 <rect key="frame" x="20" y="64" width="335" height="394"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -208,8 +208,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-rm-Jab">
                                         <rect key="frame" x="89.333333333333329" y="0.0" width="54.999999999999986" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="55" id="O1R-9I-GKM"/>
-                                            <constraint firstAttribute="height" constant="40" id="sM3-16-MML"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="55" id="O1R-9I-GKM"/>
                                         </constraints>
                                         <state key="normal" title="Audio On/Off" image="Audio Off"/>
                                         <connections>
@@ -231,9 +230,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKq-Vz-LOA">
                                         <rect key="frame" x="275" y="0.0" width="60" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="A6U-Eg-8oT">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
-                                            </constraint>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Cxm-9R-Acb"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -248,6 +244,11 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Zwk-zW-XnQ">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -302,7 +303,7 @@
         <!--Definitions View Controller-->
         <scene sceneID="5H3-Sf-wSK">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="SiE-2d-NtS" userLabel="Definitions View Controller" customClass="DefinitionsViewController" customModule="MusicWeb" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="currentContext" id="SiE-2d-NtS" userLabel="Definitions View Controller" customClass="DefinitionsViewController" customModule="Chord_Calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S4p-8A-Nl8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -341,6 +342,6 @@
         <image name="blue play button2" width="650" height="725"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0cb-gh-vys"/>
+        <segue reference="a88-48-qbT"/>
     </inferredMetricsTieBreakers>
 </document>

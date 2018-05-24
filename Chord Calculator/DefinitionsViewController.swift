@@ -36,14 +36,14 @@ class DefinitionsViewController: UIViewController {
         7 = G
         8 = G♯/A♭
         9 = A
-        t = A♯/B♭
-        e = B
+        t(10) = A♯/B♭
+        e(11) = B
         """,
-        "Prime Form": "Prime form takes the collection's normal form, then transposes it so its first note is 0 and compares it against its inversion to find the most compact version. This classifies the collection in a more general form by its constituent intervals. Chord Calculator uses the Forte version of prime form."
+        "Prime Form": "Prime form takes the collection's normal form, then transposes it so its first note is 0 and compares it against its inversion to find the most compact version. This classifies the collection in a more general form by its intervals. Chord Calculator uses the Forte version of prime form."
     ]
     
     var chordType: String?
-    var contentHeight: CGFloat? //TODO: figure out how to get this
+    var contentHeight: CGFloat? //TODO: figure out how to get this based on definitions and font size
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-//TODO: Implement sampler using AudioKit dependency
+//TODO: Implement sampler using AudioKit
 
 class Audio: NSObject, AVAudioPlayerDelegate {
     static let sharedInstance = Audio()

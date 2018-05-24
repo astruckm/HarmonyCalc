@@ -113,7 +113,6 @@ struct HarmonyModel {
     
     mutating func normalForm(of pitchCollection: [PitchClass]) ->  [PitchClass] {
         guard pitchCollection.count >= 2 else { return [] }
-        //TODO: Double check this is correct!
         let pcNoDuplicates = Array(Set(pitchCollection))
         let pitchCollectionInversions = allInversions(of: pcNoDuplicates)
         
