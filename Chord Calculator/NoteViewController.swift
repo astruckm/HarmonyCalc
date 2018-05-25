@@ -33,13 +33,15 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         }
     }
     
+    //*****************************************
     //MARK: Properties
+    //*****************************************
     let colors = Colors()
     var harmonyModel = HarmonyModel()
     var collectionUsesSharps = true
     var audioIsOn = true
-    let audioOn = UIImage(named: "Audio On.png")
-    let audioOff = UIImage(named: "Audio Off.png")
+    let audioOn = UIImage(named: "audio on black.png")
+    let audioOff = UIImage(named: "audio off black.png")
     
     //*****************************************
     //DisplaysNotes
@@ -197,8 +199,10 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
-
+    
+    //*****************************************
     //MARK: Actions
+    //*****************************************
     @IBAction func audioOnOff(_ sender: UIButton) {
         if audioIsOn {
             audioOnOff.setImage(audioOff, for: .normal)
@@ -233,7 +237,9 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     
     //TODO: Persist audioIsOn and collectionUsesSharps
     
+    //*****************************************
     //MARK: Get chords/collections
+    //*****************************************
     func updateCollectionLabels() {
         let normalFormText: String
         let primeFormText: String
@@ -281,6 +287,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         inversion.text = inversionText
     }
 }
+
 
 extension NoteViewController {
     func sizeClass() -> (UIUserInterfaceSizeClass, UIUserInterfaceSizeClass) {
