@@ -62,6 +62,9 @@
                                                                 <state key="normal" title="Chord:">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -74,8 +77,10 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CMaj" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dE-FG-M2I">
                                                                 <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.666666666666668"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -92,6 +97,9 @@
                                                                 <state key="normal" title="Inversion:">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -104,8 +112,10 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Root position" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35I-2z-3RM" userLabel="Inversion">
                                                                 <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.333333333333332"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -127,6 +137,9 @@
                                                                 <state key="normal" title="Normal form:">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -139,8 +152,10 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[10,11,0,1,3,4]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="tvv-Cz-r8K" userLabel="Normal Form">
                                                                 <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.666666666666668"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -156,6 +171,9 @@
                                                                 <state key="normal" title="Prime form:">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -168,8 +186,10 @@
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(012356)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPs-zH-CSu" userLabel="Prime Form">
                                                                 <rect key="frame" x="172.66666666666663" y="0.0" width="162.33333333333337" height="31.666666666666668"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
+                                                                <variation key="heightClass=compact-widthClass=compact">
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                                 </variation>
@@ -198,8 +218,9 @@
                                 <rect key="frame" x="20" y="708" width="335" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-03-Zgx">
-                                        <rect key="frame" x="0.0" y="0.0" width="44" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                                         <state key="normal" title="♯ / ♭">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -211,19 +232,19 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-rm-Jab">
-                                        <rect key="frame" x="89.333333333333329" y="0.0" width="54.999999999999986" height="40"/>
+                                        <rect key="frame" x="94" y="0.0" width="55" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="55" id="O1R-9I-GKM"/>
                                         </constraints>
-                                        <state key="normal" title="Audio On/Off" image="speaker off black"/>
+                                        <state key="normal" title="Audio On/Off" image="audio off black"/>
                                         <connections>
                                             <action selector="audioOnOff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NWK-b8-vz1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcr-xe-GHC" userLabel="Play">
-                                        <rect key="frame" x="189.66666666666666" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="188" y="0.0" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="nXD-AU-VvR"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="nXD-AU-VvR"/>
                                         </constraints>
                                         <state key="normal" image="Black Play Button 1x">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -233,11 +254,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKq-Vz-LOA">
-                                        <rect key="frame" x="275" y="0.0" width="60" height="40"/>
+                                        <rect key="frame" x="267" y="0.0" width="68" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Cxm-9R-Acb"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                                         <state key="normal" title="Clear">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -260,6 +282,7 @@
                         <constraints>
                             <constraint firstItem="BY5-Ft-flR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="2p5-0f-MGl"/>
                             <constraint firstItem="iEC-f1-8av" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="34q-ng-HBL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="iEC-f1-8av" secondAttribute="trailing" constant="40" id="BJd-fh-zC3"/>
                             <constraint firstItem="BY5-Ft-flR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="EQe-ge-h3O"/>
                             <constraint firstItem="iEC-f1-8av" firstAttribute="leading" secondItem="CfP-pG-ZRs" secondAttribute="leading" id="GBg-x6-lUz"/>
                             <constraint firstItem="CfP-pG-ZRs" firstAttribute="top" secondItem="iEC-f1-8av" secondAttribute="bottom" constant="40" id="VbK-sJ-xmz">
@@ -271,7 +294,7 @@
                             </constraint>
                             <constraint firstItem="BY5-Ft-flR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eZz-Ih-RG4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="CfP-pG-ZRs" secondAttribute="bottom" constant="30" id="mgG-ed-j9p">
-                                <variation key="heightClass=compact" constant="8"/>
+                                <variation key="heightClass=compact" constant="10"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
                             <constraint firstItem="BY5-Ft-flR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="tJo-FJ-vvo">
@@ -289,6 +312,7 @@
                         <outlet property="audioOnOff" destination="CQp-rm-Jab" id="Uok-ms-I3m"/>
                         <outlet property="chord" destination="9dE-FG-M2I" id="3jB-K7-Fd9"/>
                         <outlet property="chordButton" destination="krz-QI-bBq" id="j3h-k3-dfn"/>
+                        <outlet property="flatSharp" destination="jcb-03-Zgx" id="Qqi-LZ-8bM"/>
                         <outlet property="inversion" destination="35I-2z-3RM" id="ori-jr-IHC"/>
                         <outlet property="inversionButton" destination="bNn-ZL-4a0" id="2x0-Gn-tNc"/>
                         <outlet property="normalForm" destination="tvv-Cz-r8K" id="ufO-RQ-nO0"/>
@@ -343,7 +367,7 @@
     </scenes>
     <resources>
         <image name="Black Play Button 1x" width="595" height="688"/>
-        <image name="speaker off black" width="1300" height="1000"/>
+        <image name="audio off black" width="650" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="a88-48-qbT"/>

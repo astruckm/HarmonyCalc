@@ -24,6 +24,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     @IBOutlet weak var normalForm: UILabel!
     @IBOutlet weak var primeForm: UILabel!
     
+    @IBOutlet weak var flatSharp: UIButton!
     @IBOutlet weak var audioOnOff: UIButton!
     @IBOutlet weak var reset: UIButton!
     @IBOutlet weak var piano: PianoView! {
@@ -134,6 +135,8 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         piano.isMultipleTouchEnabled = true
         piano.backgroundColor = .darkGray
         reset.setTitle("Clear", for: .normal)
+        reset.layer.borderWidth = 1.0
+        flatSharp.layer.borderWidth = 1.0
         
         if audioIsOn {
             audioOnOff.setImage(audioOn, for: .normal)

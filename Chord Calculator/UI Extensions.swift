@@ -28,5 +28,6 @@ struct Colors {
     let heavy = UIColor(red: 207/255, green: 217/255, blue: 223/255, alpha: 0.5)
     let rain = UIColor(red: 226/255, green: 235/255, blue: 240/255, alpha: 0.5)
     let someMagenta = UIColor(red: 221/255, green: 59/255, blue: 185/255, alpha: 0.8)
-    let someSilver = UIColor(red: 121/255, green: 124/255, blue: 167/255, alpha: 1.0)
+    let silverPurple = UIColor(red: 121/255, green: 124/255, blue: 167/255, alpha: 1.0)
+    let someGray = UIColor(red: 133/255, green: 124/255, blue: 137/255, alpha: 1.0)
 }
