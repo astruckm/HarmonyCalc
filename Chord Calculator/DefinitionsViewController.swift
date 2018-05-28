@@ -22,7 +22,7 @@ class DefinitionsViewController: UIViewController {
         ø⁷  = Half diminished seventh
         Sus = Suspension
         """,
-        "Inversion": "The inversion of the chord. Determined by the lowest (bass) note.",
+        "Inversion": "Whether the chord is in root position or is an inversion of the chord. Determined by the lowest (bass).",
         "Normal Form": """
         Normal form is the most compact ordering of the notes in a chord (or "collection," in music set theory).
         

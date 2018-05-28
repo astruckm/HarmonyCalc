@@ -135,8 +135,6 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         piano.isMultipleTouchEnabled = true
         piano.backgroundColor = .darkGray
         reset.setTitle("Clear", for: .normal)
-        reset.layer.borderWidth = 1.0
-        flatSharp.layer.borderWidth = 1.0
         
         if audioIsOn {
             audioOnOff.setImage(audioOn, for: .normal)
@@ -149,6 +147,12 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         super.viewDidLayoutSubviews()
         piano.noteByPathArea = [:]
         piano.setNeedsDisplay()
+//        normalFormButton.titleLabel?.adjustsFontSizeToFitWidth = true
+//        normalFormButton.titleLabel?.minimumScaleFactor = 0.5
+        reset.layer.borderWidth = 1.0
+        reset.layer.cornerRadius = 5
+        flatSharp.layer.borderWidth = 1.0
+        flatSharp.layer.cornerRadius = 5
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -271,10 +271,10 @@ struct HarmonyModel {
                         var distanceFromRoot = Int(bassNoteIndex) - rootIndex!
                         if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
                         switch distanceFromRoot {
-                        case 0: return "Root position"
-                        case 1: return "1st inversion"
-                        case 2: return "2nd inversion"
-                        case 3: return "3rd inversion"
+                        case 0: return "Root"
+                        case 1: return "1st"
+                        case 2: return "2nd"
+                        case 3: return "3rd"
                         default: return nil
                         }
                     }
