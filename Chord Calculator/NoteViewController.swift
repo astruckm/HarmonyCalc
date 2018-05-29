@@ -147,11 +147,9 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         super.viewDidLayoutSubviews()
         piano.noteByPathArea = [:]
         piano.setNeedsDisplay()
-//        normalFormButton.titleLabel?.adjustsFontSizeToFitWidth = true
-//        normalFormButton.titleLabel?.minimumScaleFactor = 0.5
-        reset.layer.borderWidth = 1.0
+        reset.layer.borderWidth = 2.0
         reset.layer.cornerRadius = 5
-        flatSharp.layer.borderWidth = 1.0
+        flatSharp.layer.borderWidth = 2.0
         flatSharp.layer.cornerRadius = 5
     }
     
@@ -184,7 +182,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         case "Chord":
             controller?.sourceView = chordButton
             controller?.sourceRect = chordButton.frame
-            popOverSize.height = view.bounds.height / 3
+            popOverSize.height = view.bounds.height / 2.4
         case "Inversion":
             controller?.sourceView = inversionButton
             controller?.sourceRect = inversionButton.frame
@@ -192,7 +190,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         case "Normal Form":
             controller?.sourceView = normalFormButton
             controller?.sourceRect = normalFormButton.frame
-            popOverSize.height = view.bounds.height / 1.5
+            popOverSize.height = view.bounds.height / 0.95
         case "Prime Form":
             controller?.sourceView = primeFormButton
             controller?.sourceRect = primeFormButton.frame

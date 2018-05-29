@@ -43,21 +43,17 @@ class DefinitionsViewController: UIViewController {
     ]
     
     var chordType: String?
-    var contentHeight: CGFloat? //TODO: figure out how to get this based on definitions and font size
     
     override func viewDidLoad() {
         super.viewDidLoad()
         definition.isEditable = false
+        if presentingViewController?.traitCollection.verticalSizeClass == .regular && presentingViewController?.traitCollection.horizontalSizeClass == .regular {
+            definition.font = UIFont(name: (definition.font?.fontName)!, size: 40)
+        }
         
         if let chordType = chordType, let definitionsText = definitions[chordType] {
             definition.text = definitionsText
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        contentHeight = definition.bounds.height
-        print("viewDidAppear height: \(String(describing: contentHeight))")
     }
     
     //TODO: Dismiss button?
