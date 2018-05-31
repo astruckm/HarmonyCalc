@@ -180,25 +180,26 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
         controller?.permittedArrowDirections = .down
         switch identifier {
         case "Chord":
-            controller?.sourceView = chordButton
-            controller?.sourceRect = chordButton.frame
-            popOverSize.height = view.bounds.height / 2.4
+            assignPopOverSource(to: controller, with: chordButton)
+            popOverSize.height = view.bounds.height / 2.1
         case "Inversion":
-            controller?.sourceView = inversionButton
-            controller?.sourceRect = inversionButton.frame
-            popOverSize.height = view.bounds.height / 5
+            assignPopOverSource(to: controller, with: inversionButton)
+            popOverSize.height = view.bounds.height / 4.6
         case "Normal Form":
-            controller?.sourceView = normalFormButton
-            controller?.sourceRect = normalFormButton.frame
+            assignPopOverSource(to: controller, with: normalFormButton)
             popOverSize.height = view.bounds.height / 0.95
         case "Prime Form":
-            controller?.sourceView = primeFormButton
-            controller?.sourceRect = primeFormButton.frame
+            assignPopOverSource(to: controller, with: primeFormButton)
             popOverSize.height = view.bounds.height / 1.8
         default: break
         }
         vc.preferredContentSize = popOverSize
         print("popOverSize equals \(popOverSize)")
+    }
+    
+    private func assignPopOverSource(to controller: UIPopoverPresentationController?, with button: UIButton) {
+        controller?.sourceView = button
+        controller?.sourceRect = button.frame
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
@@ -303,9 +304,9 @@ extension NoteViewController {
         let newPopOverSize: CGSize
         switch sizeClass {
         case (.compact, .compact):
-            newPopOverSize = CGSize(width: popOverWidth / 0.9, height: popOverHeight)
+            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight)
         case (.compact, .regular):
-            newPopOverSize = CGSize(width: popOverWidth / 1.1, height: popOverHeight)
+            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight)
         case (.regular, .compact):
             newPopOverSize = CGSize(width: popOverWidth / 1.0, height: popOverHeight)
         case (.regular, .regular):
