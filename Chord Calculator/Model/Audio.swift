@@ -15,7 +15,7 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     
     var players = [URL: AVAudioPlayer]()
     
-    //Used by NoteVC to load sound if audio is not on
+    //Used by NoteVC to load sound files if audio is not on
     func loadSound(at url: URL) {
         do {
             let player = try AVAudioPlayer(contentsOf: url)
@@ -52,7 +52,6 @@ class Audio: NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    //Helper function
     func urlLookUp(of soundFileName: String) -> URL? {
         if let url = Bundle.main.url(forResource: soundFileName, withExtension: "m4a") {
             return url
