@@ -187,14 +187,13 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
             popOverSize.height = view.bounds.height / 4.6
         case "Normal Form":
             assignPopOverSource(to: controller, with: normalFormButton)
-            popOverSize.height = view.bounds.height / 0.95
+            popOverSize.height = view.bounds.height / 1.4
         case "Prime Form":
             assignPopOverSource(to: controller, with: primeFormButton)
-            popOverSize.height = view.bounds.height / 1.8
+            popOverSize.height = view.bounds.height / 1.5
         default: break
         }
         vc.preferredContentSize = popOverSize
-        print("popOverSize equals \(popOverSize)")
     }
     
     private func assignPopOverSource(to controller: UIPopoverPresentationController?, with button: UIButton) {
@@ -304,13 +303,13 @@ extension NoteViewController {
         let newPopOverSize: CGSize
         switch sizeClass {
         case (.compact, .compact):
-            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight)
+            newPopOverSize = CGSize(width: popOverWidth / 0.7, height: popOverHeight / 0.8)
         case (.compact, .regular):
-            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight)
+            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight / 1.2)
         case (.regular, .compact):
             newPopOverSize = CGSize(width: popOverWidth / 1.0, height: popOverHeight)
         case (.regular, .regular):
-            newPopOverSize = CGSize(width: popOverWidth / 0.7, height: popOverHeight)
+            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight / 1.6)
         default:
             newPopOverSize = CGSize(width: popOverWidth, height: popOverHeight)
         }
