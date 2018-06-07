@@ -164,11 +164,7 @@ struct HarmonyModel {
         guard pitchCollection.count >= 2 else { return [] }
         let pcNormalForm = normalForm(of: pitchCollection)
         
-        let transposedToZero = pcNormalForm.map {
-            element -> PitchClass in
-            let transposedInt = element.rawValue - pcNormalForm[0].rawValue
-            return putInRange(keyValue: transposedInt)
-        }
+        let transposedToZero = pcNormalForm.map({putInRange(keyValue: $0.rawValue-pcNormalForm[0].rawValue)}) 
         
         let inversion = pitchCollectionInversion(of: pcNormalForm)
         
