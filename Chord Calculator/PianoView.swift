@@ -71,10 +71,11 @@ class PianoView: UIView {
                 noteValue -= 12
                 octave = .one
             }
-            let pitchClass = PitchClass(rawValue: noteValue)!
-            noteValue += 1
-            keysArray.append((pitchClass, octave))
-            if !pitchClass.isBlackKey { decrementer -= 1 }
+            if let pitchClass = PitchClass(rawValue: noteValue) {
+                noteValue += 1
+                keysArray.append((pitchClass, octave))
+                if !pitchClass.isBlackKey { decrementer -= 1 }
+            }
         }
         return keysArray
     }

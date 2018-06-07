@@ -33,7 +33,7 @@ class DefinitionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         definition.isEditable = false
-        if presentingViewController?.traitCollection.verticalSizeClass == .regular && presentingViewController?.traitCollection.horizontalSizeClass == .regular {
+        if presentingViewController?.traitCollection.verticalSizeClass == .regular && presentingViewController?.traitCollection.horizontalSizeClass == .regular && definition.font != nil {
             definition.font = UIFont(name: (definition.font?.fontName)!, size: 40)
         }
         

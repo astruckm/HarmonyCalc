@@ -81,7 +81,7 @@ struct HarmonyModel {
         return pitch.0.rawValue + (pitch.1.rawValue * 12)
     }
     
-    //Make any Int a PitchClass
+    //Make any Int the corresponding PitchClass
     private func putInRange(keyValue: Int) -> PitchClass {
         if keyValue < 12 && keyValue >= 0 {
             return PitchClass(rawValue: keyValue)!
@@ -164,17 +164,11 @@ struct HarmonyModel {
         guard pitchCollection.count >= 2 else { return [] }
         let pcNormalForm = normalForm(of: pitchCollection)
         
-        let transposedToZero = pcNormalForm.map({
+        let transposedToZero = pcNormalForm.map {
             element -> PitchClass in
             let transposedInt = element.rawValue - pcNormalForm[0].rawValue
-            if let transposedElement = PitchClass(rawValue: transposedInt) {
-                return transposedElement
-            } else if let transposedElementPlusOctave = PitchClass(rawValue: transposedInt+12) {
-                return transposedElementPlusOctave
-            } else {
-                return PitchClass(rawValue: element.rawValue)!
-            }
-        })
+            return putInRange(keyValue: transposedInt)
+        }
         
         let inversion = pitchCollectionInversion(of: pcNormalForm)
         
@@ -234,24 +228,14 @@ struct HarmonyModel {
     
     mutating func getChordIdentity(of pitchCollection: [PitchClass]) -> (root: PitchClass, chordQuality: TonalChordType)? {
         guard pitchCollection.count >= 2 else { return nil }
-        //eliminate duplicate notes
-        var rawValues = pitchCollection.map({$0.rawValue})
-        rawValues = Array(Set(rawValues))
-        let pcNoDuplicates: [PitchClass] = rawValues.map { rawValue -> PitchClass in
-            guard rawValue >= 0 && rawValue < 12 else { fatalError("Pitch class value error") }
-            return PitchClass(rawValue: rawValue)!
-        }
+        let pcNoDuplicates = Array(Set(pitchCollection))
         let pcNormalForm = normalForm(of: pcNoDuplicates)
         let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
         //TODO: This chordType String is actually what I want to send to ViewController
         if let chordType = tonalChordIntervalsInNormalForm[intervals.description] {
-            if let rootIndex = tonalChordRootIndexInNormalForm[chordType] {
-                if let tonalChordType = TonalChordType(rawValue: chordType) {
-                    if rootIndex != nil {
-                        let rootPitchClass = pcNormalForm[rootIndex!]
-                        return (rootPitchClass, tonalChordType)
-                    }
-                }
+            if let rootIndex = tonalChordRootIndexInNormalForm[chordType], let tonalChordType = TonalChordType(rawValue: chordType)  {
+                let rootPitchClass = pcNormalForm[rootIndex!]
+                return (rootPitchClass, tonalChordType)
             }
         }
         return nil
@@ -261,22 +245,19 @@ struct HarmonyModel {
         guard pitchCollection.count >= 2 else { return nil }
         let pitchClasses: [PitchClass] = pitchCollection.map({$0.0})
         if let chordIdentity = getChordIdentity(of: pitchClasses) {
-            if let bassNoteKeyValue = pitchCollection.map({ pc in keyValue(pitch: pc) }).min()
-            {
+            if let bassNoteKeyValue = pitchCollection.map({ pc in keyValue(pitch: pc) }).min() {
                 let bassNote = putInRange(keyValue: bassNoteKeyValue)
                 let pcNormalForm = normalForm(of: pitchClasses)
                 //See where bassNote's index is in normal form
-                if let bassNoteIndex = pcNormalForm.index(of: bassNote) {
-                    if let rootIndex = tonalChordRootIndexInNormalForm[chordIdentity.1.rawValue] {
-                        var distanceFromRoot = Int(bassNoteIndex) - rootIndex!
-                        if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
-                        switch distanceFromRoot {
-                        case 0: return "Root"
-                        case 1: return "1st"
-                        case 2: return "2nd"
-                        case 3: return "3rd"
-                        default: return nil
-                        }
+                if let bassNoteIndex = pcNormalForm.index(of: bassNote), let rootIndex = tonalChordRootIndexInNormalForm[chordIdentity.1.rawValue] {
+                    var distanceFromRoot = Int(bassNoteIndex) - rootIndex!
+                    if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
+                    switch distanceFromRoot {
+                    case 0: return "Root"
+                    case 1: return "1st"
+                    case 2: return "2nd"
+                    case 3: return "3rd"
+                    default: return nil
                     }
                 }
             }
@@ -288,10 +269,10 @@ struct HarmonyModel {
     func getHarmonyValueForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
 
         if pitchCollection.count > 1 {
-            //Get normal form
-            //Use it to get prime form and chord type
-            //Use chord type to get inversion
-            //Convert everything to Strings
+            //1. Get normal form
+            //2. Use it to get prime form and chord type
+            //3. Use chord type to get inversion
+            //4. Convert everything to Strings
         }
         
         return ("", "", nil, nil)

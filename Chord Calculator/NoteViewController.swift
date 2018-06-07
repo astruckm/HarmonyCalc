@@ -154,7 +154,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        view.layer.sublayers?.first?.frame = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height) //TODO: THIS IS VERY HACK-Y!!!! Need some way to get what view.bounds WILL BE
+        view.layer.sublayers?.first?.frame = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height) //TODO: Perhaps there is some less hacky-y way to get what view.bounds WILL BE
         super.viewWillTransition(to: size, with: coordinator)
     }
     
@@ -167,33 +167,34 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     //MARK: Navigation
     //*****************************************
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! DefinitionsViewController
-        let identifier = segue.identifier
-        vc.chordType = identifier
-        
-        var popOverSize = CGSize(width: view.bounds.width/2, height: view.bounds.height/2)
-        let sizeClass = self.sizeClass()
-        popOverSize = changePopoverSize(popOverWidth: popOverSize.width, popOverHeight: popOverSize.height, sizeClass: sizeClass)
-        
-        let controller = vc.popoverPresentationController
-        controller?.delegate = self
-        controller?.permittedArrowDirections = .down
-        switch identifier {
-        case "Chord":
-            assignPopOverSource(to: controller, with: chordButton)
-            popOverSize.height = view.bounds.height / 2.1
-        case "Inversion":
-            assignPopOverSource(to: controller, with: inversionButton)
-            popOverSize.height = view.bounds.height / 4.6
-        case "Normal Form":
-            assignPopOverSource(to: controller, with: normalFormButton)
-            popOverSize.height = view.bounds.height / 1.4
-        case "Prime Form":
-            assignPopOverSource(to: controller, with: primeFormButton)
-            popOverSize.height = view.bounds.height / 1.5
-        default: break
+        if let vc = segue.destination as? DefinitionsViewController {
+            let identifier = segue.identifier
+            vc.chordType = identifier
+            
+            var popOverSize = CGSize(width: view.bounds.width/2, height: view.bounds.height/2)
+            let sizeClass = self.sizeClass()
+            popOverSize = changePopoverSize(popOverWidth: popOverSize.width, popOverHeight: popOverSize.height, sizeClass: sizeClass)
+            
+            let controller = vc.popoverPresentationController
+            controller?.delegate = self
+            controller?.permittedArrowDirections = .down
+            switch identifier {
+            case "Chord":
+                assignPopOverSource(to: controller, with: chordButton)
+                popOverSize.height = view.bounds.height / 2.1
+            case "Inversion":
+                assignPopOverSource(to: controller, with: inversionButton)
+                popOverSize.height = view.bounds.height / 4.6
+            case "Normal Form":
+                assignPopOverSource(to: controller, with: normalFormButton)
+                popOverSize.height = view.bounds.height / 1.4
+            case "Prime Form":
+                assignPopOverSource(to: controller, with: primeFormButton)
+                popOverSize.height = view.bounds.height / 1.5
+            default: break
+            }
+            vc.preferredContentSize = popOverSize
         }
-        vc.preferredContentSize = popOverSize
     }
     
     private func assignPopOverSource(to controller: UIPopoverPresentationController?, with button: UIButton) {
@@ -265,7 +266,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
             
             if let chordPC = harmonyModel.getChordIdentity(of: pitchClasses) {
                 let chordRoot = chordPC.0
-                //There are 3 possibilities: white key, sharp, or flat. If !isBlackKey then [0]; if .isBlackKey, [0] if collectionUsesSharps, [1] if not.
+                //There are 3 possibilities: white key, sharp, or flat.
                 let chordRootAsString = (chordRoot.isBlackKey && !collectionUsesSharps) ? chordRoot.possibleSpellings[1] : chordRoot.possibleSpellings[0]
                 let chordQualityAsString = chordPC.1.rawValue
                 chordText = chordRootAsString + chordQualityAsString
