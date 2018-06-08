@@ -306,7 +306,6 @@
 				TargetAttributes = {
 					722E46E62042593100DAF987 = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
 					};
 					722E46FD2042593100DAF987 = {
 						CreatedOnToolsVersion = 9.2;
@@ -575,6 +574,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/Chord Calculator/Supporting Files/Info.plist";
@@ -583,8 +583,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ASM.ChordCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.ChordCalculator;
 				PRODUCT_NAME = "Chord Calculator";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -594,6 +595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/Chord Calculator/Supporting Files/Info.plist";
@@ -602,8 +604,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ASM.ChordCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.ChordCalculator;
 				PRODUCT_NAME = "Chord Calculator";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
