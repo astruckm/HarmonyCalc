@@ -629,7 +629,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicWeb.app/MusicWeb";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chord Calculator.app/Chord Calculator";
 			};
 			name = Debug;
 		};
@@ -650,7 +650,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicWeb.app/MusicWeb";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chord Calculator.app/Chord Calculator";
 			};
 			name = Release;
 		};
