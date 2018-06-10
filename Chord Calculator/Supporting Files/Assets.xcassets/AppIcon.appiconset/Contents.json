@@ -39,13 +39,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "C C App Icon iPhone 2x no alpha.png",
+      "filename" : "C C App Icon iPhone 2x.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "C C App Icon iPhone 3x no alpha.png",
+      "filename" : "C C App Icon iPhone 3x.png",
       "scale" : "3x"
     },
     {
@@ -93,7 +93,7 @@
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "C C App Icon iPad Mini-1.png",
+      "filename" : "C C App Icon iPad Mini 2x.png",
       "scale" : "2x"
     },
     {
@@ -105,7 +105,7 @@
     {
       "size" : "1024x1024",
       "idiom" : "ios-marketing",
-      "filename" : "C C App Icon.png",
+      "filename" : "C C App Icon App Store.png",
       "scale" : "1x"
     }
   ],
