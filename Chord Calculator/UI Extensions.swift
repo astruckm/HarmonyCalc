@@ -22,8 +22,6 @@ extension UIView {
 }
 
 struct Colors {
-    let emerald = UIColor(red: 34/255, green: 143/255, blue: 50/255, alpha: 0.5)
-    let water = UIColor(red: 56/255, green: 180/255, blue: 211/255, alpha: 0.5)
     let blueBlue = UIColor(red: 64/255, green: 124/255, blue: 200/255, alpha: 1.0)
     let heavy = UIColor(red: 207/255, green: 217/255, blue: 223/255, alpha: 0.5)
     let rain = UIColor(red: 226/255, green: 235/255, blue: 240/255, alpha: 0.5)

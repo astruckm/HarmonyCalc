@@ -138,7 +138,7 @@ struct HarmonyModel {
         }
         
         //Loop at least once through length of pitch collections checking span between second-to-last, then third-to-last, etc.
-        var shortestCollection = [[PitchClass]]() //singular
+        var shortestCollection = [[PitchClass]]()
         for loopIndex in 0...(shortestCollections[0].count-1) {
             for collection in shortestCollections {
                 let intervalSpan = intervalNumberBetweenKeys(keyOne: (collection[collection.count-1-loopIndex], Octave.one), keyTwo: (collection[0], Octave.zero))

@@ -11,10 +11,6 @@ import Foundation
 enum PitchClass: Int, Comparable, Hashable {
     case c = 0, cSharp, d, dSharp, e, f, fSharp, g, gSharp, a, aSharp, b
     
-    static func <(lhs: PitchClass, rhs: PitchClass) -> Bool {
-        return lhs.rawValue < rhs.rawValue
-    }
-    
     var isBlackKey: Bool {
         return String(describing: self).contains("Sharp")
     }
@@ -76,6 +72,10 @@ enum PitchClass: Int, Comparable, Hashable {
         case .b:
             return [.b, .c]
         }
+    }
+    
+    static func <(lhs: PitchClass, rhs: PitchClass) -> Bool {
+        return lhs.rawValue < rhs.rawValue
     }
 }
 

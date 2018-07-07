@@ -43,6 +43,7 @@ class PianoView: UIView {
     //Define number of keys and their geometric relations
     //***************************************************
     private let whiteKeyBottomWidthToBlackKeyWidthRatio: CGFloat = (23.5 / 13.7) //Ratio according to wikipedia
+    
     //Only draw an octave if in portrait on an iPhone
     private var numberOfWhiteKeys: Int {
         if !isCompactWidth || (isCompactWidth && isCompactHeight) {
@@ -128,7 +129,7 @@ class PianoView: UIView {
         var incrementer: CGFloat = 0.0
         var leftMostX: CGFloat = 0.0
         
-        for key in arrayOfKeys[0..<(arrayOfKeys.count-1)] {
+        for key in arrayOfKeys[0..<(arrayOfKeys.count)] {
             keyWasTouched = touchedKeys.contains(where: {$0 == key}) ? true : false
             currentPath = nil
             switch key.0 {
@@ -160,30 +161,6 @@ class PianoView: UIView {
                 noteByPathArea[path] = key
             }
             startingXValue += incrementer
-        }
-        //make final note fill out view, this code is deprecated, as final .b of octave will fill out view
-        keyWasTouched = touchedKeys.contains(where: {$0 == arrayOfKeys[arrayOfKeys.count-1]}) ? true : false
-        leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
-        if numberOfWhiteKeys == 7 || numberOfWhiteKeys == 14 {
-            let startingPoint = CGPoint(x: startingXValue, y: bounds.minY)
-            let path = UIBezierPath()
-            
-            path.move(to: startingPoint)
-            path.addLine(to: CGPoint(x: startingPoint.x, y: blackKeyHeight + spaceBetweenKeys))
-            path.addLine(to: CGPoint(x: leftMostX, y: blackKeyHeight + spaceBetweenKeys))
-            path.addLine(to: CGPoint(x: leftMostX, y: whiteKeyHeight))
-            path.addLine(to: CGPoint(x: bounds.maxX-0.2, y: whiteKeyHeight))
-            path.addLine(to: CGPoint(x: bounds.maxX-0.2, y: startingPoint.y))
-            path.addLine(to: startingPoint)
-            path.close()
-            currentPath = path
-            
-            if keyWasTouched { colors.blueBlue.setFill() } else { UIColor.white.setFill() }
-            
-            path.fill()
-        }
-        if let path = currentPath {
-            noteByPathArea[path] = arrayOfKeys[arrayOfKeys.count-1]
         }
     }
     
