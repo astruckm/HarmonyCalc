@@ -53,10 +53,11 @@ class PianoView: UIView {
         }
     }
     private let spaceBetweenKeys: CGFloat = 0.5
+    private var boundsWidthUse: CGFloat { return (bounds.width - (2 * spaceBetweenKeys)) } //spaceBetweenKeys also b/w far left and far right
     
     private var whiteKeyHeight: CGFloat { return bounds.height }
     private var blackKeyHeight: CGFloat { return bounds.height / 1.5 }
-    private var whiteKeyBottomWidth: CGFloat { return ((bounds.width - (CGFloat(numberOfWhiteKeys-1) * spaceBetweenKeys))  /  CGFloat(numberOfWhiteKeys)) } //Octave plus a fifth, encompasses bounds' whole span
+    private var whiteKeyBottomWidth: CGFloat { return ((boundsWidthUse - (CGFloat(numberOfWhiteKeys-1) * spaceBetweenKeys))  /  CGFloat(numberOfWhiteKeys)) }
     private var whiteKeyTopWidthCDE: CGFloat { return whiteKeyBottomWidth - (blackKeyWidth * 2 / 3) }
     private var whiteKeyTopWidthFGAB: CGFloat { return whiteKeyBottomWidth - (blackKeyWidth * 3 / 4) }
     private var blackKeyWidth: CGFloat { return whiteKeyBottomWidth / whiteKeyBottomWidthToBlackKeyWidthRatio }
@@ -125,7 +126,7 @@ class PianoView: UIView {
     //***************************************************
     override func draw(_ rect: CGRect) {
         var numberOfWhiteKeysDrawn = 0
-        var startingXValue: CGFloat = bounds.minX
+        var startingXValue: CGFloat = bounds.minX + spaceBetweenKeys
         var incrementer: CGFloat = 0.0
         var leftMostX: CGFloat = 0.0
         
@@ -134,9 +135,11 @@ class PianoView: UIView {
             currentPath = nil
             switch key.0 {
             case .c, .f:
-                leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
-                startingXValue = leftMostX //Align it back with bottom of keyboard counter
-                
+                //Ensure first .c startingXValue isn't 0
+                if numberOfWhiteKeysDrawn != 0 {
+                    leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
+                    startingXValue = leftMostX //Align it back with bottom of keyboard counter
+                }
                 let topWidth = key.0 == .c ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
                 drawWhiteKeysCF(startingX: startingXValue, topWidth: topWidth)
                 numberOfWhiteKeysDrawn += 1
