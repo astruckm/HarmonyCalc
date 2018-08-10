@@ -35,7 +35,7 @@ class PianoView: UIView {
         isCompactHeight = traitCollection.verticalSizeClass == .compact ? true : false
         isCompactWidth = traitCollection.horizontalSizeClass == .compact ? true : false
         touchedKeys = []
-        noteByPathArea = [:]
+        keyByPathArea = [:]
     }
     
     //***************************************************
@@ -83,7 +83,7 @@ class PianoView: UIView {
     }
     //To map a touch's area in layer to its note
     private var currentPath: UIBezierPath? = nil
-    var noteByPathArea = [UIBezierPath: (PitchClass, Octave)]()
+    var keyByPathArea = [UIBezierPath: (PitchClass, Octave)]()
     var noteNameDelegate: DisplaysNotes?
     var playNoteDelegate: PlaysNotes?
     
@@ -97,19 +97,7 @@ class PianoView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
-            for path in noteByPathArea.keys {
-                if path.contains(location) {
-                    let note = noteByPathArea[path]
-                    if let note = note {
-                        //TODO: remove note from touchedKeys if touchedKeys contains note; then eliminate NOT .contains below
-                        if touchedKeys.count < 6 && !touchedKeys.contains(where: {$0 == note}) { touchedKeys.append(note) }
-                        noteNameDelegate?.touchedKeys = touchedKeys
-                        noteNameDelegate?.noteDisplayNeedsUpdate()
-                        playNoteDelegate?.noteOn(keyPressed: note)
-                    }
-                    break
-                }
-            }
+            checkIfPathContains(location)
         }
     }
     
@@ -119,6 +107,41 @@ class PianoView: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         return
+    }
+    
+    //Touch events sub-funcs
+    private func checkIfPathContains(_ location: CGPoint) {
+        for path in keyByPathArea.keys {
+            if path.contains(location) {
+                checkTouchedKeys(for: path)
+                break
+            }
+        }
+    }
+    
+    private func checkTouchedKeys(for path: UIBezierPath) {
+        if let key = keyByPathArea[path] {
+            //TODO: remove note from touchedKeys if touchedKeys contains note; then eliminate NOT .contains below
+            for (index, touchedKey) in touchedKeys.enumerated() {
+                if touchedKey == key {
+                    touchedKeys.remove(at: index)
+                    print("removed \(touchedKey.0) from touchedKeys")
+                    updateNoteVCDelegates(keyPressed: key)
+                    return
+                }
+            }
+            if touchedKeys.count < 6 /*&& !touchedKeys.contains(where: {$0 == key})*/ {
+                touchedKeys.append(key)
+                print("added \(key.0) to touchedKeys")
+            }
+            updateNoteVCDelegates(keyPressed: key)
+        }
+    }
+    
+    private func updateNoteVCDelegates(keyPressed key: (PitchClass, Octave)) {
+        noteNameDelegate?.touchedKeys = touchedKeys
+        noteNameDelegate?.noteDisplayNeedsUpdate()
+        playNoteDelegate?.noteOn(keyPressed: key)
     }
     
     //***************************************************
@@ -161,7 +184,7 @@ class PianoView: UIView {
                 incrementer = blackKeyWidth + spaceBetweenKeys
             }
             if let path = currentPath {
-                noteByPathArea[path] = key
+                keyByPathArea[path] = key
             }
             startingXValue += incrementer
         }

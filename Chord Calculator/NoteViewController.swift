@@ -145,7 +145,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        piano.noteByPathArea = [:]
+        piano.keyByPathArea = [:]
         piano.setNeedsDisplay()
         reset.layer.borderWidth = 2.0
         reset.layer.cornerRadius = 5
@@ -233,7 +233,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     }
     
     func resetNotes() {
-        piano.noteByPathArea = [:]
+        piano.keyByPathArea = [:]
         piano.touchedKeys = []
         noteName.text = " "
         self.touchedKeys = []

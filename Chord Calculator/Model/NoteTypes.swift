@@ -83,7 +83,9 @@ enum NoteLetter: String {
     case c = "C", d = "D", e = "E", f = "F", g = "G", a = "A", b = "B"
 }
 
-enum Octave: Int {
+enum Octave: Int, Equatable {
     case zero = 0
     case one = 1
 }
+
+//TODO: TypeAlias ("Key"?) for (PitchClass, Octave)
