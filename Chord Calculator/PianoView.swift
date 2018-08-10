@@ -119,29 +119,27 @@ class PianoView: UIView {
         }
     }
     
+    //Remove key if already touched, otherwise add it to chord
     private func checkTouchedKeys(for path: UIBezierPath) {
         if let key = keyByPathArea[path] {
-            //TODO: remove note from touchedKeys if touchedKeys contains note; then eliminate NOT .contains below
             for (index, touchedKey) in touchedKeys.enumerated() {
                 if touchedKey == key {
                     touchedKeys.remove(at: index)
-                    print("removed \(touchedKey.0) from touchedKeys")
-                    updateNoteVCDelegates(keyPressed: key)
+                    updateNoteNameDelegate(keyPressed: key)
                     return
                 }
             }
-            if touchedKeys.count < 6 /*&& !touchedKeys.contains(where: {$0 == key})*/ {
+            if touchedKeys.count < 6 {
                 touchedKeys.append(key)
-                print("added \(key.0) to touchedKeys")
             }
-            updateNoteVCDelegates(keyPressed: key)
+            updateNoteNameDelegate(keyPressed: key)
+            playNoteDelegate?.noteOn(keyPressed: key)
         }
     }
     
-    private func updateNoteVCDelegates(keyPressed key: (PitchClass, Octave)) {
+    private func updateNoteNameDelegate(keyPressed key: (PitchClass, Octave)) {
         noteNameDelegate?.touchedKeys = touchedKeys
         noteNameDelegate?.noteDisplayNeedsUpdate()
-        playNoteDelegate?.noteOn(keyPressed: key)
     }
     
     //***************************************************

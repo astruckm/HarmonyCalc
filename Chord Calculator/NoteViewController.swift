@@ -84,11 +84,11 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     var player: AVAudioPlayer?
     
     func noteOn(keyPressed: (PitchClass, Octave)) {
-            let pitchClass = keyPressed.0
-            let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
-            let keyValue = harmonyModel.keyValue(pitch: keyPressed)
-            let octave = String((keyValue / 12) + 4)
-            let soundFileName = note + octave
+        let pitchClass = keyPressed.0
+        let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
+        let keyValue = harmonyModel.keyValue(pitch: keyPressed)
+        let octave = String((keyValue / 12) + 4)
+        let soundFileName = note + octave
         
         if audioIsOn {
             audioEngine.playSound(soundFileName: soundFileName)
