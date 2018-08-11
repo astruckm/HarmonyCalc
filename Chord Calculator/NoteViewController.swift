@@ -84,11 +84,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     var player: AVAudioPlayer?
     
     func noteOn(keyPressed: (PitchClass, Octave)) {
-        let pitchClass = keyPressed.0
-        let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
-        let keyValue = harmonyModel.keyValue(pitch: keyPressed)
-        let octave = String((keyValue / 12) + 4)
-        let soundFileName = note + octave
+        let soundFileName = getSoundFileName(ofKey: keyPressed)
         
         if audioIsOn {
             audioEngine.playSound(soundFileName: soundFileName)
@@ -103,11 +99,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     func playAllNotes() {
         var soundFileNames = [String]()
         for touchedKey in touchedKeys {
-            let pitchClass = touchedKey.0
-            let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
-            let keyValue = harmonyModel.keyValue(pitch: touchedKey)
-            let octave = String((keyValue / 12) + 4)
-            let soundFileName = note + octave
+            let soundFileName = getSoundFileName(ofKey: touchedKey)
             soundFileNames.append(soundFileName)
         }
         if audioIsOn {
@@ -116,11 +108,25 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     }
     
     func noteOff(keyOff: (PitchClass, Octave)) {
-        return
+        let soundFileName = getSoundFileName(ofKey: keyOff)
+        let url = audioEngine.urlLookUp(of: soundFileName)
+        if let url = url {
+            audioEngine.removeSound(at: url)
+        }
     }
     
     func allNotesOff(keysOff: [(PitchClass, Octave)]) {
         return
+    }
+    
+    private func getSoundFileName(ofKey key: (PitchClass, Octave)) -> String {
+        let pitchClass = key.0
+        let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
+        let keyValue = harmonyModel.keyValue(pitch: key)
+        let octave = String((keyValue / 12) + 4) ///+4 b/c C0 is C4 (i.e. middle C)
+        let soundFileName = note + octave
+        
+        return soundFileName
     }
     
     //*****************************************

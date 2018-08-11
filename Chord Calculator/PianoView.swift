@@ -125,19 +125,20 @@ class PianoView: UIView {
             for (index, touchedKey) in touchedKeys.enumerated() {
                 if touchedKey == key {
                     touchedKeys.remove(at: index)
-                    updateNoteNameDelegate(keyPressed: key)
+                    updateNoteNameDelegate()
+                    playNoteDelegate?.noteOff(keyOff: key)
                     return
                 }
             }
             if touchedKeys.count < 6 {
                 touchedKeys.append(key)
             }
-            updateNoteNameDelegate(keyPressed: key)
+            updateNoteNameDelegate()
             playNoteDelegate?.noteOn(keyPressed: key)
         }
     }
     
-    private func updateNoteNameDelegate(keyPressed key: (PitchClass, Octave)) {
+    private func updateNoteNameDelegate() {
         noteNameDelegate?.touchedKeys = touchedKeys
         noteNameDelegate?.noteDisplayNeedsUpdate()
     }

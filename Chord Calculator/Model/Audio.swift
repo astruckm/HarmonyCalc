@@ -13,9 +13,9 @@ import AVFoundation
 class Audio: NSObject, AVAudioPlayerDelegate {
     static let sharedInstance = Audio()
     
-    var players = [URL: AVAudioPlayer]()
+    var players = [URL: AVAudioPlayer]() ///TODO: remove player when user taps already played key
     
-    //Used by NoteVC to load sound files if audio is not on
+    //Load sound files if audio is not on
     func loadSound(at url: URL) {
         do {
             let player = try AVAudioPlayer(contentsOf: url)
@@ -23,6 +23,11 @@ class Audio: NSObject, AVAudioPlayerDelegate {
         } catch let error as NSError {
             print(error.description)
         }
+    }
+    
+    //Remove sound file if colored key is re-tapped
+    func removeSound(at url: URL) {
+        players.removeValue(forKey: url)
     }
     
     //Audio player
