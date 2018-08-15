@@ -7,7 +7,7 @@
 //
 //  This file is the brain of the calculator, taking in notes and outputting tonal and atonal collections
 
-//TODO: break this up into smaller files: Collection/Chord Types (non-encapsulated), atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC
+//TODO: break this up into smaller files: atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC
 
 import Foundation
 
@@ -16,7 +16,7 @@ struct HarmonyModel {
     //MARK: Properties
     //***************************************************
     
-    //TODO: This should be read by NoteViewController, communicated to PianoView
+    //TODO: Need both?
     let maxNotesInCollection: Int
     var maxNotes: Int { return maxNotesInCollection % 12 }
     
@@ -50,20 +50,7 @@ struct HarmonyModel {
         "o⁷": 0, //placeholder value; will need enharmonic info to determine
         "ø⁷": 1
     ]
-    
-    //***************************************************
-    //MARK: Types
-    //***************************************************
-    
-    //This probably only useful if account for semitone equivalent intervals
-    enum PitchIntervalClass: Int, Hashable {
-        case unison = 0, minorSecond, majorSecond, minorThird, majorThird, perfectFourth, tritone, perfectFifth, minorSixth, majorSixth, minorSeventh, majorSeventh
-    }
-    
-    enum TonalChordType: String {
-        case major = "Maj", minor = "min", diminished = "o", augmented = "+", suspended = "Sus", dominantSeventh = "⁷", minorSeventh = "min⁷", majorSeventh = "Maj⁷", diminishedSeventh = "o⁷", halfDiminishedSeventh = "ø⁷"
-    }
-    
+        
     //***************************************************
     //MARK: General note transformation funcs
     //***************************************************
