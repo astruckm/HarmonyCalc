@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopoverPresentationControllerDelegate {
+class NoteViewController: UIViewController, HasNoteCollection, DisplaysNotes, PlaysNotes, UIPopoverPresentationControllerDelegate {
     //*****************************************
     //MARK: Outlets
     //*****************************************
@@ -29,6 +29,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     @IBOutlet weak var reset: UIButton!
     @IBOutlet weak var piano: PianoView! {
         didSet {
+            piano.noteCollectionDelegate = self
             piano.noteNameDelegate = self
             piano.playNoteDelegate = self
         }
@@ -38,11 +39,17 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     //MARK: Properties
     //*****************************************
     let colors = Colors()
-    var harmonyModel = HarmonyModel()
+    var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     var collectionUsesSharps = true
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
+    
+    //*****************************************
+    //HasNoteCollection
+    //*****************************************
+
+    var maxTouchableNotes: Int { return harmonyModel.maxNotes }
     
     //*****************************************
     //DisplaysNotes
@@ -170,7 +177,7 @@ class NoteViewController: UIViewController, DisplaysNotes, PlaysNotes, UIPopover
     }
     
     //*****************************************
-    //MARK: Navigation
+    //MARK: Navigation (Popovers)
     //*****************************************
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? DefinitionsViewController {

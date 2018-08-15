@@ -43,6 +43,7 @@
 		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
+		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSpelling.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,11 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				722E46EE2042593100DAF987 /* Main.storyboard */,
-				72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */,
-				726ECD0E209E8A3B000231BF /* UI Extensions.swift */,
-				722E46EC2042593100DAF987 /* NoteViewController.swift */,
-				724A3CF3204CD8DE008E5840 /* PianoView.swift */,
-				72C7197A206145400055C742 /* Model */,
+				723E6C932120E3BB00B92E72 /* Views&Controllers */,
+				72C7197A206145400055C742 /* Models */,
 				722E471B2042594C00DAF987 /* Supporting Files */,
 			);
 			path = "Chord Calculator";
@@ -188,7 +187,19 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		72C7197A206145400055C742 /* Model */ = {
+		723E6C932120E3BB00B92E72 /* Views&Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */,
+				726ECD0E209E8A3B000231BF /* UI Extensions.swift */,
+				722E46EC2042593100DAF987 /* NoteViewController.swift */,
+				724A3CF3204CD8DE008E5840 /* PianoView.swift */,
+				72A5E60A212490F500C52D45 /* NoteProtocols.swift */,
+			);
+			path = "Views&Controllers";
+			sourceTree = "<group>";
+		};
+		72C7197A206145400055C742 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				728AEA3420AA51E000CBB974 /* Audio.swift */,
@@ -196,7 +207,7 @@
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
 				72C71978206144D50055C742 /* NoteTypes.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		72F6210420A90CFB00DBBE13 /* Samples */ = {
@@ -399,6 +410,7 @@
 				722E46ED2042593100DAF987 /* NoteViewController.swift in Sources */,
 				728AEA3520AA51E000CBB974 /* Audio.swift in Sources */,
 				726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */,
+				72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,

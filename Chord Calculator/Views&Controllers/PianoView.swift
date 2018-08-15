@@ -12,17 +12,6 @@
 
 import UIKit
 
-protocol DisplaysNotes {
-    var noteNames: String { get set }
-    var touchedKeys: [(PitchClass, Octave)] { get set }
-    func noteDisplayNeedsUpdate()
-}
-
-protocol PlaysNotes {
-    func noteOn(keyPressed: (PitchClass, Octave))
-    func noteOff(keyOff: (PitchClass, Octave))
-    func allNotesOff(keysOff: [(PitchClass, Octave)])
-}
 
 class PianoView: UIView {
     //***************************************************
@@ -84,6 +73,7 @@ class PianoView: UIView {
     //To map a touch's area in layer to its note
     private var currentPath: UIBezierPath? = nil
     var keyByPathArea = [UIBezierPath: (PitchClass, Octave)]()
+    var noteCollectionDelegate: HasNoteCollection?
     var noteNameDelegate: DisplaysNotes?
     var playNoteDelegate: PlaysNotes?
     
@@ -130,7 +120,7 @@ class PianoView: UIView {
                     return
                 }
             }
-            if touchedKeys.count < 6 {
+            if let maxNotes = noteCollectionDelegate?.maxTouchableNotes, touchedKeys.count < maxNotes {
                 touchedKeys.append(key)
             }
             updateNoteNameDelegate()

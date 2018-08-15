@@ -7,6 +7,8 @@
 //
 //  This file is the brain of the calculator, taking in notes and outputting tonal and atonal collections
 
+//TODO: break this up into smaller files: Collection/Chord Types (non-encapsulated), atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC
+
 import Foundation
 
 struct HarmonyModel {
@@ -15,9 +17,11 @@ struct HarmonyModel {
     //***************************************************
     
     //TODO: This should be read by NoteViewController, communicated to PianoView
-    let maximumNotesInCollection = 6
+    let maxNotesInCollection: Int
+    var maxNotes: Int { return maxNotesInCollection % 12 }
     
-    //TODO: Add more chords?
+    //TODO: Add more chords
+    //TODO: These 2 dictionaries should be one data structure [String: [String: Int?]]
     //In normal form
     private let tonalChordIntervalsInNormalForm: [String: String] = [
         "[4, 3]": "Maj",
@@ -87,6 +91,7 @@ struct HarmonyModel {
             return PitchClass(rawValue: keyValue)!
         }
         
+        //TODO: modulo/base operator to simplify this?
         var newPitchValue = keyValue
         while newPitchValue >= 12 || newPitchValue < 0 {
             if newPitchValue >= 12 { newPitchValue -= 12 }
@@ -164,7 +169,7 @@ struct HarmonyModel {
         guard pitchCollection.count >= 2 else { return [] }
         let pcNormalForm = normalForm(of: pitchCollection)
         
-        let transposedToZero = pcNormalForm.map({putInRange(keyValue: $0.rawValue-pcNormalForm[0].rawValue)})
+        let transposedToZero = pcNormalForm.map{putInRange(keyValue: $0.rawValue-pcNormalForm[0].rawValue)}
         
         let inversion = pitchCollectionInversion(of: pcNormalForm)
         
@@ -172,23 +177,23 @@ struct HarmonyModel {
         var counter = 1
         while counter < pcNormalForm.count {
             if transposedToZero[counter] < inversion[counter] {
-                return transposedToZero.map({$0.rawValue})
+                return transposedToZero.map{$0.rawValue}
             } else if transposedToZero[counter] > inversion[counter] {
-                return inversion.map({$0.rawValue})
+                return inversion.map{$0.rawValue}
             }
             counter += 1
         }
         
         //if inversion and uninverted are equally packed left
-        return transposedToZero.map({$0.rawValue})
+        return transposedToZero.map{$0.rawValue}
     }
     
     //Helper func for Prime form func, so transposes to zero
     private func pitchCollectionInversion(of set: [PitchClass]) -> [PitchClass] {
-        let rawInvertedValues = set.map({ 12 - $0.rawValue })
-        let invertedValues = rawInvertedValues.map({putInRange(keyValue: $0)})
+        let rawInvertedValues = set.map{ 12 - $0.rawValue }
+        let invertedValues = rawInvertedValues.map{putInRange(keyValue: $0)}
         let lastPCRawValue = invertedValues[(invertedValues.count-1)].rawValue
-        var invertedValuesTransposedToZero = invertedValues.map({element -> PitchClass in
+        var invertedValuesTransposedToZero = invertedValues.map { element -> PitchClass in
             let intValue = element.rawValue - lastPCRawValue
             if intValue < 0 {
                 let intPCValue = putInRange(keyValue: intValue)
@@ -200,7 +205,7 @@ struct HarmonyModel {
                 print("Error: inversion not executed correctly")
                 return element
             }
-        })
+        }
         invertedValuesTransposedToZero.sort(by: <)
         return invertedValuesTransposedToZero
     }
@@ -239,7 +244,7 @@ struct HarmonyModel {
     
     mutating func getChordInversion(of pitchCollection: [(PitchClass, Octave)]) -> String? {
         guard pitchCollection.count >= 2 else { return nil }
-        let pitchClasses: [PitchClass] = pitchCollection.map({$0.0})
+        let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
         if let chordIdentity = getChordIdentity(of: pitchClasses) {
             if let bassNoteKeyValue = pitchCollection.map({ pc in keyValue(pitch: pc) }).min() {
                 let bassNote = putInRange(keyValue: bassNoteKeyValue)
@@ -262,14 +267,13 @@ struct HarmonyModel {
     }
     
     //TODO: Chord (i.e. root + type/quality), inversion (i.e. root's index), normal form, prime form should all be called by func with massive output that is tuple of every chord form you would want, as Strings. ViewController shouldn't have to type convert.
-    func getHarmonyValueForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
-
-        if pitchCollection.count > 1 {
-            //1. Get normal form
+    mutating func getHarmonyValueForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
+        guard pitchCollection.count >= 2 else { return ("", "", nil, nil) }
+//        let normalForm = self.normalForm(of: pitchCollection.map { $0.0 } )
+            
             //2. Use it to get prime form and chord type
             //3. Use chord type to get inversion
             //4. Convert everything to Strings
-        }
         
         return ("", "", nil, nil)
     }

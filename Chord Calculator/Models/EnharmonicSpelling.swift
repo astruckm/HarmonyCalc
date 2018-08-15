@@ -11,7 +11,6 @@ import Foundation
 //TODO:
 
 //func that takes in a pitch collection and outputs a pitch collection with correct .possibleSpellings
-//run this func in NoteViewController on harmonyModel output
 
 func bestEnharmonicSpelling(of pitchCollection: [PitchClass]) -> [PitchClass] {
     //reconcile .possibleSpellings with possible NoteLetter
