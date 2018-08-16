@@ -13,7 +13,7 @@ import AVFoundation
 class Audio: NSObject, AVAudioPlayerDelegate {
     static let sharedInstance = Audio()
     
-    var players = [URL: AVAudioPlayer]() ///TODO: remove player when user taps already played key
+    var players = [URL: AVAudioPlayer]()
     
     //Load sound files if audio is not on
     func loadSound(at url: URL) {

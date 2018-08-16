@@ -8,15 +8,17 @@
 
 import XCTest
 @testable import Chord_Calculator
+//@testable import Chord_Calculator
 
 class MusicWebTests: XCTestCase {
     
     var harmonyModelUnderTest: HarmonyModel!
+    //Collections to test
     var pitchCollectionsToTest: [PitchClass] = []
     
     override func setUp() {
         super.setUp()
-        harmonyModelUnderTest = HarmonyModel()
+        harmonyModelUnderTest = HarmonyModel(maxNotesInCollection: 6)
     }
     
     override func tearDown() {
@@ -25,7 +27,7 @@ class MusicWebTests: XCTestCase {
         super.tearDown()
     }
     
-    //TODO: test various combinations of pitch collections once there is omnibus pitch collection function
+    //TODO: test various combinations of pitch collections
     //2-note, 3-note, etc.
     //tonal, non-tonal; different inversions of same collection
     
@@ -37,6 +39,8 @@ class MusicWebTests: XCTestCase {
         //Then
         XCTAssertEqual(calculatedValue, [.gSharp, .c, .d], "Score computed from guess is wrong")
     }
+    
+    
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

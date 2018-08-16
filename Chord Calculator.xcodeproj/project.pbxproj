@@ -201,14 +201,22 @@
 			path = "Views&Controllers";
 			sourceTree = "<group>";
 		};
+		72A5E60E2124DEF600C52D45 /* Custom Types */ = {
+			isa = PBXGroup;
+			children = (
+				72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */,
+				72C71978206144D50055C742 /* NoteTypes.swift */,
+			);
+			path = "Custom Types";
+			sourceTree = "<group>";
+		};
 		72C7197A206145400055C742 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				728AEA3420AA51E000CBB974 /* Audio.swift */,
 				724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */,
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
-				72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */,
-				72C71978206144D50055C742 /* NoteTypes.swift */,
+				72A5E60E2124DEF600C52D45 /* Custom Types */,
 			);
 			path = Models;
 			sourceTree = "<group>";
