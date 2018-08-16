@@ -7,7 +7,7 @@
 //
 //  This file is the brain of the calculator, taking in notes and outputting tonal and atonal collections
 
-//TODO: break this up into smaller files: atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC
+//TODO: break this up into smaller files: atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC (takes come NoteVC code too)
 
 import Foundation
 
@@ -50,50 +50,7 @@ struct HarmonyModel {
         "o⁷": 0, //placeholder value; will need enharmonic info to determine
         "ø⁷": 1
     ]
-        
-    //***************************************************
-    //MARK: General note transformation funcs
-    //***************************************************
-    
-    //input notes in a chord, output all possible inversions
-    private func allInversions(of notes: [PitchClass]) -> [[(PitchClass)]] {
-        var allInversionsOfCollection = [[PitchClass]]()
-        var inversion = notes.sorted(by: <)
-        for _ in 0...(notes.count-1) {
-            allInversionsOfCollection.append(inversion)
-            let firstNote = inversion.remove(at: 0)
-            inversion.append(firstNote)
-        }
-        return allInversionsOfCollection
-    }
-    
-    //Int value for a key
-    func keyValue(pitch: (PitchClass, Octave)) -> Int {
-        return pitch.0.rawValue + (pitch.1.rawValue * 12)
-    }
-    
-    //Make any Int the corresponding PitchClass
-    private func putInRange(keyValue: Int) -> PitchClass {
-        if keyValue < 12 && keyValue >= 0 {
-            return PitchClass(rawValue: keyValue)!
-        }
-        
-        //TODO: modulo/base operator to simplify this?
-        var newPitchValue = keyValue
-        while newPitchValue >= 12 || newPitchValue < 0 {
-            if newPitchValue >= 12 { newPitchValue -= 12 }
-            if newPitchValue < 0 { newPitchValue += 12 }
-        }
-        return PitchClass(rawValue: newPitchValue)!
-    }
-    
-    private mutating func intervalNumberBetweenKeys(keyOne: (PitchClass, Octave), keyTwo: (PitchClass, Octave)) -> Int {
-        var rawInterval = abs(keyValue(pitch: keyOne) - keyValue(pitch: keyTwo))
-        //Put keys in same octave
-        rawInterval %= 12
-        return rawInterval
-    }
-    
+            
     //**********************************************************
     //MARK: Set Theory
     //Using Joseph N. Straus' "Introduction to Post-Tonal Theory"
@@ -172,7 +129,7 @@ struct HarmonyModel {
         
         let transposedToZero = pcNormalForm.map{putInRange(keyValue: $0.rawValue-pcNormalForm[0].rawValue)}
         let inversion = pitchCollectionInversion(of: pcNormalForm)
-                
+        
         //if inversion and uninverted are equally packed left
         return packToLeft(originalCollection: transposedToZero, inversion: inversion).map{$0.rawValue}
     }
@@ -273,7 +230,7 @@ struct HarmonyModel {
     }
     
     //TODO: Chord (i.e. root + type/quality), inversion (i.e. root's index), normal form, prime form should all be called by func with massive output that is tuple of every chord form you would want, as Strings. ViewController shouldn't have to type convert.
-    mutating func getHarmonyValueForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
+    mutating func getHarmonyValuesForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
         guard pitchCollection.count >= 2 else { return ("", "", nil, nil) }
 //        let normalForm = self.normalForm(of: pitchCollection.map { $0.0 } )
             

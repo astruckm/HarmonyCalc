@@ -45,6 +45,7 @@
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
+		72A5E61221262F0600C52D45 /* Note Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* Note Transforms.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +110,7 @@
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
+		72A5E61121262F0600C52D45 /* Note Transforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note Transforms.swift"; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,6 +218,7 @@
 				728AEA3420AA51E000CBB974 /* Audio.swift */,
 				724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */,
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
+				72A5E61121262F0600C52D45 /* Note Transforms.swift */,
 				72A5E60E2124DEF600C52D45 /* Custom Types */,
 			);
 			path = Models;
@@ -423,6 +426,7 @@
 				726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */,
 				72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */,
 				72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */,
+				72A5E61221262F0600C52D45 /* Note Transforms.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
