@@ -37,35 +37,16 @@
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
-		7233510220B3C95000BE9ADB /* ChordCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723350FD20B3AD2600BE9ADB /* ChordCalculatorTests.swift */; };
-		7233510420B3C97600BE9ADB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 723350FE20B3AD2600BE9ADB /* Info.plist */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
-		72A5E61221262F0600C52D45 /* Note Transforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* Note Transforms.swift */; };
+		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		722E46FF2042593100DAF987 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 722E46DF2042593100DAF987 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 722E46E62042593100DAF987;
-			remoteInfo = "Chord Connections";
-		};
-		722E470A2042593100DAF987 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 722E46DF2042593100DAF987 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 722E46E62042593100DAF987;
-			remoteInfo = "Chord Connections";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G4.m4a; path = "../../../../../Asset Creation/Audio Files/G4.m4a"; sourceTree = "<group>"; };
@@ -99,38 +80,20 @@
 		722E46F42042593100DAF987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		722E46F72042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722E46F92042593100DAF987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		722E46FE2042593100DAF987 /* ChordCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChordCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		722E47092042593100DAF987 /* ChordCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChordCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		722E471C2042598D00DAF987 /* HarmonyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModel.swift; sourceTree = "<group>"; };
-		723350FD20B3AD2600BE9ADB /* ChordCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChordCalculatorTests.swift; path = ChordCalculatorTests.swift/ChordCalculatorTests.swift; sourceTree = "<group>"; };
-		723350FE20B3AD2600BE9ADB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ChordCalculatorTests.swift/Info.plist; sourceTree = "<group>"; };
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
 		724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSpelling.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
-		72A5E61121262F0600C52D45 /* Note Transforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note Transforms.swift"; sourceTree = "<group>"; };
+		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		722E46E42042593100DAF987 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		722E46FB2042593100DAF987 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		722E47062042593100DAF987 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -144,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				722E46E92042593100DAF987 /* Chord Calculator */,
-				722E47012042593100DAF987 /* ChordCalculatorTests */,
 				722E46E82042593100DAF987 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,8 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				722E46E72042593100DAF987 /* Chord Calculator.app */,
-				722E46FE2042593100DAF987 /* ChordCalculatorTests.xctest */,
-				722E47092042593100DAF987 /* ChordCalculatorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,15 +128,6 @@
 				722E471B2042594C00DAF987 /* Supporting Files */,
 			);
 			path = "Chord Calculator";
-			sourceTree = "<group>";
-		};
-		722E47012042593100DAF987 /* ChordCalculatorTests */ = {
-			isa = PBXGroup;
-			children = (
-				723350FD20B3AD2600BE9ADB /* ChordCalculatorTests.swift */,
-				723350FE20B3AD2600BE9ADB /* Info.plist */,
-			);
-			name = ChordCalculatorTests;
 			sourceTree = "<group>";
 		};
 		722E471B2042594C00DAF987 /* Supporting Files */ = {
@@ -218,7 +169,7 @@
 				728AEA3420AA51E000CBB974 /* Audio.swift */,
 				724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */,
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
-				72A5E61121262F0600C52D45 /* Note Transforms.swift */,
+				72A5E61121262F0600C52D45 /* NoteTransforms.swift */,
 				72A5E60E2124DEF600C52D45 /* Custom Types */,
 			);
 			path = Models;
@@ -283,42 +234,6 @@
 			productReference = 722E46E72042593100DAF987 /* Chord Calculator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		722E46FD2042593100DAF987 /* ChordCalculatorTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 722E47152042593100DAF987 /* Build configuration list for PBXNativeTarget "ChordCalculatorTests" */;
-			buildPhases = (
-				722E46FA2042593100DAF987 /* Sources */,
-				722E46FB2042593100DAF987 /* Frameworks */,
-				722E46FC2042593100DAF987 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				722E47002042593100DAF987 /* PBXTargetDependency */,
-			);
-			name = ChordCalculatorTests;
-			productName = "Chord ConnectionsTests";
-			productReference = 722E46FE2042593100DAF987 /* ChordCalculatorTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		722E47082042593100DAF987 /* ChordCalculatorUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 722E47182042593100DAF987 /* Build configuration list for PBXNativeTarget "ChordCalculatorUITests" */;
-			buildPhases = (
-				722E47052042593100DAF987 /* Sources */,
-				722E47062042593100DAF987 /* Frameworks */,
-				722E47072042593100DAF987 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				722E470B2042593100DAF987 /* PBXTargetDependency */,
-			);
-			name = ChordCalculatorUITests;
-			productName = "Chord ConnectionsUITests";
-			productReference = 722E47092042593100DAF987 /* ChordCalculatorUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -331,16 +246,6 @@
 				TargetAttributes = {
 					722E46E62042593100DAF987 = {
 						CreatedOnToolsVersion = 9.2;
-					};
-					722E46FD2042593100DAF987 = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 722E46E62042593100DAF987;
-					};
-					722E47082042593100DAF987 = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 722E46E62042593100DAF987;
 					};
 				};
 			};
@@ -358,8 +263,6 @@
 			projectRoot = "";
 			targets = (
 				722E46E62042593100DAF987 /* Chord Calculator */,
-				722E46FD2042593100DAF987 /* ChordCalculatorTests */,
-				722E47082042593100DAF987 /* ChordCalculatorUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -389,7 +292,6 @@
 				7213F5A420AB07D000090B75 /* F5.m4a in Resources */,
 				7213F5A120AB07D000090B75 /* G♭5.m4a in Resources */,
 				7213F5A020AB07D000090B75 /* G♭4.m4a in Resources */,
-				7233510420B3C97600BE9ADB /* Info.plist in Resources */,
 				7213F5A720AB07D000090B75 /* B♭4.m4a in Resources */,
 				7213F5A620AB07D000090B75 /* E4.m4a in Resources */,
 				7213F59E20AB07D000090B75 /* E♭5.m4a in Resources */,
@@ -397,20 +299,6 @@
 				7213F5AA20AB07D000090B75 /* C4.m4a in Resources */,
 				7213F59D20AB07D000090B75 /* D4.m4a in Resources */,
 				722E46F02042593100DAF987 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		722E46FC2042593100DAF987 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		722E47072042593100DAF987 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,7 +314,7 @@
 				726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */,
 				72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */,
 				72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */,
-				72A5E61221262F0600C52D45 /* Note Transforms.swift in Sources */,
+				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
@@ -436,35 +324,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		722E46FA2042593100DAF987 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7233510220B3C95000BE9ADB /* ChordCalculatorTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		722E47052042593100DAF987 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		722E47002042593100DAF987 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 722E46E62042593100DAF987 /* Chord Calculator */;
-			targetProxy = 722E46FF2042593100DAF987 /* PBXContainerItemProxy */;
-		};
-		722E470B2042593100DAF987 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 722E46E62042593100DAF987 /* Chord Calculator */;
-			targetProxy = 722E470A2042593100DAF987 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		722E46EE2042593100DAF987 /* Main.storyboard */ = {
@@ -640,88 +500,6 @@
 			};
 			name = Release;
 		};
-		722E47162042593100DAF987 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48535654Y7;
-				INFOPLIST_FILE = "Chord ConnectionsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ASM.Chord-ConnectionsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chord Calculator.app/Chord Calculator";
-			};
-			name = Debug;
-		};
-		722E47172042593100DAF987 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48535654Y7;
-				INFOPLIST_FILE = "Chord ConnectionsTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ASM.Chord-ConnectionsTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chord Calculator.app/Chord Calculator";
-			};
-			name = Release;
-		};
-		722E47192042593100DAF987 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48535654Y7;
-				INFOPLIST_FILE = "Chord ConnectionsUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ASM.Chord-ConnectionsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Chord Connections";
-			};
-			name = Debug;
-		};
-		722E471A2042593100DAF987 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 48535654Y7;
-				INFOPLIST_FILE = "Chord ConnectionsUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ASM.Chord-ConnectionsUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Chord Connections";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -739,24 +517,6 @@
 			buildConfigurations = (
 				722E47132042593100DAF987 /* Debug */,
 				722E47142042593100DAF987 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		722E47152042593100DAF987 /* Build configuration list for PBXNativeTarget "ChordCalculatorTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				722E47162042593100DAF987 /* Debug */,
-				722E47172042593100DAF987 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		722E47182042593100DAF987 /* Build configuration list for PBXNativeTarget "ChordCalculatorUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				722E47192042593100DAF987 /* Debug */,
-				722E471A2042593100DAF987 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

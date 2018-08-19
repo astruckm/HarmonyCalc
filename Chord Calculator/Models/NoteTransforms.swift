@@ -31,12 +31,8 @@ func putInRange(keyValue: Int) -> PitchClass {
         return PitchClass(rawValue: keyValue)!
     }
     
-    //TODO: modulo/base operator to simplify this?
-    var newPitchValue = keyValue
-    while newPitchValue >= 12 || newPitchValue < 0 {
-        if newPitchValue >= 12 { newPitchValue -= 12 }
-        if newPitchValue < 0 { newPitchValue += 12 }
-    }
+    var newPitchValue = keyValue % 12
+    if newPitchValue < 0 { newPitchValue += 12 }
     return PitchClass(rawValue: newPitchValue)!
 }
 
