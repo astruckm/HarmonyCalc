@@ -1,4 +1,4 @@
-# Chord Calculator
+# HarmonyCalc
 
 ![hc2](https://user-images.githubusercontent.com/26372687/41388940-3b3e671e-6f5c-11e8-88f5-3af733db8732.gif)
 
