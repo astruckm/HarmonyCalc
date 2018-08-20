@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/asm/Developer/Chord Calculator/Chord Calculator.xcodeproj">
+      location = "self:../HarmonyCalc">
    </FileRef>
 </Workspace>

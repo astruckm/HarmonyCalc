@@ -40,6 +40,7 @@
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
+		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
@@ -73,7 +74,7 @@
 		7213F59020AB07CF00090B75 /* D5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = D5.m4a; path = "../../../../../Asset Creation/Audio Files/D5.m4a"; sourceTree = "<group>"; };
 		7213F59120AB07D000090B75 /* E5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = E5.m4a; path = "../../../../../Asset Creation/Audio Files/E5.m4a"; sourceTree = "<group>"; };
 		7213F59220AB07D000090B75 /* C4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = C4.m4a; path = "../../../../../Asset Creation/Audio Files/C4.m4a"; sourceTree = "<group>"; };
-		722E46E72042593100DAF987 /* Chord Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chord Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		722E46E72042593100DAF987 /* HarmonyCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonyCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		722E46EA2042593100DAF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		722E46EC2042593100DAF987 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		722E46EF2042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
 		724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSpelling.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
+		728230FC212AEE1300397FDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
@@ -106,7 +108,7 @@
 		722E46DE2042593100DAF987 = {
 			isa = PBXGroup;
 			children = (
-				722E46E92042593100DAF987 /* Chord Calculator */,
+				722E46E92042593100DAF987 /* HarmonyCalc */,
 				722E46E82042593100DAF987 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,12 +116,12 @@
 		722E46E82042593100DAF987 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				722E46E72042593100DAF987 /* Chord Calculator.app */,
+				722E46E72042593100DAF987 /* HarmonyCalc.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		722E46E92042593100DAF987 /* Chord Calculator */ = {
+		722E46E92042593100DAF987 /* HarmonyCalc */ = {
 			isa = PBXGroup;
 			children = (
 				722E46EE2042593100DAF987 /* Main.storyboard */,
@@ -127,7 +129,7 @@
 				72C7197A206145400055C742 /* Models */,
 				722E471B2042594C00DAF987 /* Supporting Files */,
 			);
-			path = "Chord Calculator";
+			path = HarmonyCalc;
 			sourceTree = "<group>";
 		};
 		722E471B2042594C00DAF987 /* Supporting Files */ = {
@@ -138,6 +140,7 @@
 				722E46F42042593100DAF987 /* Assets.xcassets */,
 				722E46F62042593100DAF987 /* LaunchScreen.storyboard */,
 				722E46F92042593100DAF987 /* Info.plist */,
+				728230FC212AEE1300397FDE /* Default-568h@2x.png */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -217,9 +220,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		722E46E62042593100DAF987 /* Chord Calculator */ = {
+		722E46E62042593100DAF987 /* HarmonyCalc */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 722E47122042593100DAF987 /* Build configuration list for PBXNativeTarget "Chord Calculator" */;
+			buildConfigurationList = 722E47122042593100DAF987 /* Build configuration list for PBXNativeTarget "HarmonyCalc" */;
 			buildPhases = (
 				722E46E32042593100DAF987 /* Sources */,
 				722E46E42042593100DAF987 /* Frameworks */,
@@ -229,9 +232,9 @@
 			);
 			dependencies = (
 			);
-			name = "Chord Calculator";
+			name = HarmonyCalc;
 			productName = "Chord Connections";
-			productReference = 722E46E72042593100DAF987 /* Chord Calculator.app */;
+			productReference = 722E46E72042593100DAF987 /* HarmonyCalc.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -249,7 +252,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 722E46E22042593100DAF987 /* Build configuration list for PBXProject "Chord Calculator" */;
+			buildConfigurationList = 722E46E22042593100DAF987 /* Build configuration list for PBXProject "HarmonyCalc" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -262,7 +265,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				722E46E62042593100DAF987 /* Chord Calculator */,
+				722E46E62042593100DAF987 /* HarmonyCalc */,
 			);
 		};
 /* End PBXProject section */
@@ -277,6 +280,7 @@
 				7213F59920AB07D000090B75 /* C5.m4a in Resources */,
 				7213F59C20AB07D000090B75 /* D♭5.m4a in Resources */,
 				722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */,
+				728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */,
 				7213F59620AB07D000090B75 /* A♭4.m4a in Resources */,
 				7213F5A220AB07D000090B75 /* G5.m4a in Resources */,
 				7213F59320AB07D000090B75 /* G4.m4a in Resources */,
@@ -465,14 +469,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
-				INFOPLIST_FILE = "$(SRCROOT)/Chord Calculator/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.ChordCalculator;
-				PRODUCT_NAME = "Chord Calculator";
+				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalc;
+				PRODUCT_NAME = HarmonyCalc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -486,14 +490,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
-				INFOPLIST_FILE = "$(SRCROOT)/Chord Calculator/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.ChordCalculator;
-				PRODUCT_NAME = "Chord Calculator";
+				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalc;
+				PRODUCT_NAME = HarmonyCalc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -503,7 +507,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		722E46E22042593100DAF987 /* Build configuration list for PBXProject "Chord Calculator" */ = {
+		722E46E22042593100DAF987 /* Build configuration list for PBXProject "HarmonyCalc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				722E47102042593100DAF987 /* Debug */,
@@ -512,7 +516,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		722E47122042593100DAF987 /* Build configuration list for PBXNativeTarget "Chord Calculator" */ = {
+		722E47122042593100DAF987 /* Build configuration list for PBXNativeTarget "HarmonyCalc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				722E47132042593100DAF987 /* Debug */,

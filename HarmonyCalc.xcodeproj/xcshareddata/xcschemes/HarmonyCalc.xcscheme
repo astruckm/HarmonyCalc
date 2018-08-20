@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "722E46E62042593100DAF987"
-               BuildableName = "Chord Calculator.app"
-               BlueprintName = "Chord Calculator"
-               ReferencedContainer = "container:Chord Calculator.xcodeproj">
+               BuildableName = "HarmonyCalc.app"
+               BlueprintName = "HarmonyCalc"
+               ReferencedContainer = "container:HarmonyCalc.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "722E46FD2042593100DAF987"
                BuildableName = "ChordCalculatorTests.xctest"
                BlueprintName = "ChordCalculatorTests"
-               ReferencedContainer = "container:Chord Calculator.xcodeproj">
+               ReferencedContainer = "container:HarmonyCalc.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "722E47082042593100DAF987"
                BuildableName = "ChordCalculatorUITests.xctest"
                BlueprintName = "ChordCalculatorUITests"
-               ReferencedContainer = "container:Chord Calculator.xcodeproj">
+               ReferencedContainer = "container:HarmonyCalc.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "722E46E62042593100DAF987"
-            BuildableName = "Chord Calculator.app"
-            BlueprintName = "Chord Calculator"
-            ReferencedContainer = "container:Chord Calculator.xcodeproj">
+            BuildableName = "HarmonyCalc.app"
+            BlueprintName = "HarmonyCalc"
+            ReferencedContainer = "container:HarmonyCalc.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "722E46E62042593100DAF987"
-            BuildableName = "Chord Calculator.app"
-            BlueprintName = "Chord Calculator"
-            ReferencedContainer = "container:Chord Calculator.xcodeproj">
+            BuildableName = "HarmonyCalc.app"
+            BlueprintName = "HarmonyCalc"
+            ReferencedContainer = "container:HarmonyCalc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "722E46E62042593100DAF987"
-            BuildableName = "Chord Calculator.app"
-            BlueprintName = "Chord Calculator"
-            ReferencedContainer = "container:Chord Calculator.xcodeproj">
+            BuildableName = "HarmonyCalc.app"
+            BlueprintName = "HarmonyCalc"
+            ReferencedContainer = "container:HarmonyCalc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
