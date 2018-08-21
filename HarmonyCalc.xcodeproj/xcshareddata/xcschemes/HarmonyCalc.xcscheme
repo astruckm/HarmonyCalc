@@ -32,26 +32,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "722E46FD2042593100DAF987"
-               BuildableName = "ChordCalculatorTests.xctest"
-               BlueprintName = "ChordCalculatorTests"
-               ReferencedContainer = "container:HarmonyCalc.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "722E47082042593100DAF987"
-               BuildableName = "ChordCalculatorUITests.xctest"
-               BlueprintName = "ChordCalculatorUITests"
-               ReferencedContainer = "container:HarmonyCalc.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "725A2FB5212B715800B64C21"
                BuildableName = "HarmonyCalcTests.xctest"
                BlueprintName = "HarmonyCalcTests"

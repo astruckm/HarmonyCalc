@@ -11,7 +11,7 @@
 
 import Foundation
 
-struct HarmonyModel {
+public struct HarmonyModel {
     //***************************************************
     //MARK: Properties
     //***************************************************

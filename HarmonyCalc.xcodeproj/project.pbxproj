@@ -40,7 +40,6 @@
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
 		725A2FB9212B715800B64C21 /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */; };
-		725A2FC0212B8D7B00B64C21 /* HarmonyCalcTests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = 725A2FB6212B715800B64C21 /* HarmonyCalcTests.xctest */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
@@ -153,6 +152,7 @@
 				722E46EE2042593100DAF987 /* Main.storyboard */,
 				723E6C932120E3BB00B92E72 /* Views&Controllers */,
 				72C7197A206145400055C742 /* Models */,
+				725A2FC3212BAAD700B64C21 /* Persistence */,
 				722E471B2042594C00DAF987 /* Supporting Files */,
 			);
 			path = HarmonyCalc;
@@ -174,11 +174,10 @@
 		723E6C932120E3BB00B92E72 /* Views&Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */,
-				726ECD0E209E8A3B000231BF /* UI Extensions.swift */,
 				722E46EC2042593100DAF987 /* NoteViewController.swift */,
 				724A3CF3204CD8DE008E5840 /* PianoView.swift */,
-				725A2FC1212B94BE00B64C21 /* Defaults.swift */,
+				72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */,
+				726ECD0E209E8A3B000231BF /* UI Extensions.swift */,
 				72A5E60A212490F500C52D45 /* NoteProtocols.swift */,
 			);
 			path = "Views&Controllers";
@@ -191,6 +190,14 @@
 				725A2FBA212B715800B64C21 /* Info.plist */,
 			);
 			path = HarmonyCalcTests;
+			sourceTree = "<group>";
+		};
+		725A2FC3212BAAD700B64C21 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				725A2FC1212B94BE00B64C21 /* Defaults.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		72A5E60E2124DEF600C52D45 /* Custom Types */ = {
@@ -369,7 +376,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				725A2FC0212B8D7B00B64C21 /* HarmonyCalcTests.xctest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

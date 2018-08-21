@@ -7,8 +7,11 @@
 //
 
 import XCTest
+@testable import HarmonyCalc
 
 class HarmonyCalcTests: XCTestCase {
+    
+    var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     
     override func setUp() {
         super.setUp()
@@ -16,23 +19,20 @@ class HarmonyCalcTests: XCTestCase {
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is called after thUse of unresolved identifier 'HarmonyModel'e invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
+    func testNontonal() {
+        let pitchCollection: [PitchClass] = [.c, .gSharp, .d]
+        XCTAssert(harmonyModel.normalForm(of: pitchCollection) == [.gSharp, .c, .d])
+        XCTAssert(harmonyModel.primeForm(of: pitchCollection) == [0,2,6])
+        XCTAssert(harmonyModel.getChordIdentity(of: pitchCollection) == nil)
+        let keys = pitchCollection.map{($0, Octave.zero)}
+        XCTAssert(harmonyModel.getChordInversion(of: keys) == nil)
+        
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    
-    
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
     
 }

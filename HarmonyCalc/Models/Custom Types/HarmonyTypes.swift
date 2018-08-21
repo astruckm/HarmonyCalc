@@ -8,10 +8,10 @@
 
 import Foundation
 
-enum PitchIntervalClass: Int, Hashable {
+public enum PitchIntervalClass: Int, Hashable {
     case unison = 0, minorSecond, majorSecond, minorThird, majorThird, perfectFourth, tritone, perfectFifth, minorSixth, majorSixth, minorSeventh, majorSeventh
 }
 
-enum TonalChordType: String {
+public enum TonalChordType: String {
     case major = "Maj", minor = "min", diminished = "o", augmented = "+", suspended = "Sus", dominantSeventh = "⁷", minorSeventh = "min⁷", majorSeventh = "Maj⁷", diminishedSeventh = "o⁷", halfDiminishedSeventh = "ø⁷"
 }

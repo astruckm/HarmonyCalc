@@ -11,7 +11,7 @@ import Foundation
 
 typealias Key = (PitchClass, Octave)
 
-enum PitchClass: Int, Comparable, Hashable {
+public enum PitchClass: Int, Comparable, Hashable {
     case c = 0, cSharp, d, dSharp, e, f, fSharp, g, gSharp, a, aSharp, b
     
     var isBlackKey: Bool {
@@ -53,16 +53,16 @@ enum PitchClass: Int, Comparable, Hashable {
         }
     }
     
-    static func <(lhs: PitchClass, rhs: PitchClass) -> Bool {
+    public static func <(lhs: PitchClass, rhs: PitchClass) -> Bool {
         return lhs.rawValue < rhs.rawValue
     }
 }
 
-enum NoteLetter: String {
+public enum NoteLetter: String {
     case c = "C", d = "D", e = "E", f = "F", g = "G", a = "A", b = "B"
 }
 
-enum Octave: Int, Equatable {
+public enum Octave: Int, Equatable {
     case zero = 0
     case one = 1
 }
