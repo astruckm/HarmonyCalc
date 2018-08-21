@@ -48,6 +48,16 @@
                ReferencedContainer = "container:HarmonyCalc.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "725A2FB5212B715800B64C21"
+               BuildableName = "HarmonyCalcTests.xctest"
+               BlueprintName = "HarmonyCalcTests"
+               ReferencedContainer = "container:HarmonyCalc.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

@@ -44,6 +44,7 @@ class NoteViewController: UIViewController, HasNoteCollection, DisplaysNotes, Pl
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
+    let defaults = Defaults()
     
     //*****************************************
     //HasNoteCollection
@@ -149,11 +150,11 @@ class NoteViewController: UIViewController, HasNoteCollection, DisplaysNotes, Pl
         piano.backgroundColor = .darkGray
         reset.setTitle("Clear", for: .normal)
         
-        if audioIsOn {
-            audioOnOff.setImage(audioOn, for: .normal)
-        } else {
-            audioOnOff.setImage(audioOff, for: .normal)
-        }
+        audioIsOn = defaults.userDefaults.bool(forKey: defaults.audioIsOn)
+        collectionUsesSharps = defaults.userDefaults.bool(forKey: defaults.collectionUsesSharps)
+
+        let audioImage: UIImage? = audioIsOn ? audioOn : audioOff
+        audioOnOff.setImage(audioImage, for: .normal)        
     }
     
     override func viewDidLayoutSubviews() {
@@ -230,6 +231,7 @@ class NoteViewController: UIViewController, HasNoteCollection, DisplaysNotes, Pl
             audioOnOff.setImage(audioOn, for: .normal)
             audioIsOn = true
         }
+        defaults.writeAudioSetting(audioIsOn)
     }
     
     @IBAction func resetNotes(_ sender: UIButton) {
@@ -242,19 +244,18 @@ class NoteViewController: UIViewController, HasNoteCollection, DisplaysNotes, Pl
     
     @IBAction func switchFlatSharp(_ sender: UIButton) {
         collectionUsesSharps = collectionUsesSharps == true ? false : true
+        defaults.writeCollectionUsesSharps(collectionUsesSharps)
         noteDisplayNeedsUpdate()
     }
     
     func resetNotes() {
         piano.keyByPathArea = [:]
         piano.touchedKeys = []
+        audioEngine.players = [:]
         noteName.text = " "
         self.touchedKeys = []
         updateCollectionLabels()
-        audioEngine.players = [:]
     }
-    
-    //TODO: Persist audioIsOn and collectionUsesSharps
     
     //*****************************************
     //MARK: Get chords/collections
