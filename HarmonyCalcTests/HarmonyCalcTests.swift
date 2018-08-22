@@ -30,8 +30,15 @@ class HarmonyCalcTests: XCTestCase {
         XCTAssert(harmonyModel.getChordIdentity(of: pitchCollection) == nil)
         let keys = pitchCollection.map{($0, Octave.zero)}
         XCTAssert(harmonyModel.getChordInversion(of: keys) == nil)
-        
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testTonal() {
+        let pitchCollection: [PitchClass] = [.fSharp, .dSharp, .aSharp, .cSharp]
+        XCTAssert(harmonyModel.normalForm(of: pitchCollection) == [.aSharp, .cSharp, .dSharp, .fSharp])
+        XCTAssert(harmonyModel.primeForm(of: pitchCollection) == [0,3,5,8])
+        XCTAssert(harmonyModel.getChordIdentity(of: pitchCollection)! == (.dSharp, .minorSeventh))
+        let keys = pitchCollection.map{($0, Octave.zero)}
+        XCTAssert(harmonyModel.getChordInversion(of: keys)! == "3rd")
     }
     
     
