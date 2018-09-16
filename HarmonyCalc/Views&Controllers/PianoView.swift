@@ -73,7 +73,7 @@ class PianoView: UIView {
     //To map a touch's area in layer to its note
     private var currentPath: UIBezierPath? = nil
     var keyByPathArea = [UIBezierPath: (PitchClass, Octave)]()
-    var noteCollectionDelegate: HasNoteCollection?
+    var noteCollectionDelegate: NoteCollectionConstraints?
     var noteNameDelegate: DisplaysNotes?
     var playNoteDelegate: PlaysNotes?
     
@@ -92,14 +92,18 @@ class PianoView: UIView {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        return
+        super.touchesMoved(touches, with: event)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        return
+        super.touchesEnded(touches, with: event)
     }
     
-    //Touch events sub-funcs
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+    }
+    
+    //Check if touched area is within a key
     private func checkIfPathContains(_ location: CGPoint) {
         for path in keyByPathArea.keys {
             if path.contains(location) {

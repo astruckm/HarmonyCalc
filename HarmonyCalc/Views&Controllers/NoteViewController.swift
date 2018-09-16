@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class NoteViewController: UIViewController, HasNoteCollection, DisplaysNotes, PlaysNotes, UIPopoverPresentationControllerDelegate {
+class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysNotes, PlaysNotes, UIPopoverPresentationControllerDelegate {
     //*****************************************
     //MARK: Outlets
     //*****************************************
@@ -47,7 +47,7 @@ class NoteViewController: UIViewController, HasNoteCollection, DisplaysNotes, Pl
     let defaults = Defaults()
     
     //*****************************************
-    //HasNoteCollection
+    //NoteCollectionConstraints
     //*****************************************
 
     var maxTouchableNotes: Int { return harmonyModel.maxNotes }
