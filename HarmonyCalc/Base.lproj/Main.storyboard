@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -227,7 +226,7 @@
                                 </constraints>
                                 <variation key="heightClass=regular-widthClass=regular" spacing="20"/>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CfP-pG-ZRs" userLabel="Controls Stack">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CfP-pG-ZRs" userLabel="Controls Stack">
                                 <rect key="frame" x="20" y="518" width="280" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-03-Zgx">
@@ -244,20 +243,20 @@
                                             <action selector="switchFlatSharp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zxc-1J-H7F"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-rm-Jab">
-                                        <rect key="frame" x="77" y="0.0" width="55" height="40"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-rm-Jab">
+                                        <rect key="frame" x="74" y="0.0" width="55" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="55" id="O1R-9I-GKM">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="75"/>
                                             </constraint>
                                         </constraints>
-                                        <state key="normal" title="Audio On/Off" image="audio off black"/>
+                                        <state key="normal" image="audio off black"/>
                                         <connections>
                                             <action selector="audioOnOff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NWK-b8-vz1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcr-xe-GHC" userLabel="Play">
-                                        <rect key="frame" x="150" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="153" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="nXD-AU-VvR">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="55"/>
@@ -272,9 +271,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKq-Vz-LOA">
                                         <rect key="frame" x="208" y="0.0" width="72" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Cxm-9R-Acb"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <inset key="contentEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
                                         <state key="normal" title="Clear">
@@ -298,6 +294,10 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CfP-pG-ZRs" secondAttribute="trailing" constant="20" id="1oU-mA-eyV">
+                                <variation key="heightClass=compact" constant="40"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="120"/>
+                            </constraint>
                             <constraint firstItem="BY5-Ft-flR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="2p5-0f-MGl"/>
                             <constraint firstItem="BY5-Ft-flR" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="EQe-ge-h3O"/>
                             <constraint firstItem="iEC-f1-8av" firstAttribute="leading" secondItem="CfP-pG-ZRs" secondAttribute="leading" id="GBg-x6-lUz"/>
