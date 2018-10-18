@@ -274,7 +274,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
                 else { return String(element.rawValue) } }
             normalFormText = "[" + normalFormAsString.joined(separator: ",") + "]"
             
-            let primeFormPC = harmonyModel.primeForm(of: pitchClasses)
+            let primeFormPC = harmonyModel.primeForm(ofCollectionInNormalForm: normalFormPC)
             let primeFormAsString = primeFormPC.map({String($0)})
             primeFormText = "(" + primeFormAsString.joined() + ")"
             

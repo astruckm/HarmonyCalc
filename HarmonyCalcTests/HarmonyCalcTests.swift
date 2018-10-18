@@ -25,8 +25,10 @@ class HarmonyCalcTests: XCTestCase {
     
     func testNontonal() {
         let pitchCollection: [PitchClass] = [.c, .gSharp, .d]
-        XCTAssert(harmonyModel.normalForm(of: pitchCollection) == [.gSharp, .c, .d])
-        XCTAssert(harmonyModel.primeForm(of: pitchCollection) == [0,2,6])
+        let normalFormPC: [PitchClass] = harmonyModel.normalForm(of: pitchCollection)
+        
+        XCTAssert(normalFormPC == [.gSharp, .c, .d])
+        XCTAssert(harmonyModel.primeForm(ofCollectionInNormalForm: normalFormPC) == [0,2,6])
         XCTAssert(harmonyModel.getChordIdentity(of: pitchCollection) == nil)
         let keys = pitchCollection.map{($0, Octave.zero)}
         XCTAssert(harmonyModel.getChordInversion(of: keys) == nil)
@@ -34,8 +36,10 @@ class HarmonyCalcTests: XCTestCase {
     
     func testTonal() {
         let pitchCollection: [PitchClass] = [.fSharp, .dSharp, .aSharp, .cSharp]
-        XCTAssert(harmonyModel.normalForm(of: pitchCollection) == [.aSharp, .cSharp, .dSharp, .fSharp])
-        XCTAssert(harmonyModel.primeForm(of: pitchCollection) == [0,3,5,8])
+        let normalFormPC: [PitchClass] = harmonyModel.normalForm(of: pitchCollection)
+        
+        XCTAssert(normalFormPC == [.aSharp, .cSharp, .dSharp, .fSharp])
+        XCTAssert(harmonyModel.primeForm(ofCollectionInNormalForm: normalFormPC) == [0,3,5,8])
         XCTAssert(harmonyModel.getChordIdentity(of: pitchCollection)! == (.dSharp, .minorSeventh))
         let keys = pitchCollection.map{($0, Octave.zero)}
         XCTAssert(harmonyModel.getChordInversion(of: keys)! == "3rd")

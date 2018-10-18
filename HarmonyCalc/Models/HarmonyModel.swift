@@ -122,13 +122,11 @@ public struct HarmonyModel {
     }
     
     //Outputs Ints because this is the most reduced kind of set
-    //TODO: make this into primeFormFromNormalForm(of:)
-    mutating func primeForm(of pitchCollection: [PitchClass]) -> [Int] {
+    mutating func primeForm(ofCollectionInNormalForm pitchCollection: [PitchClass]) -> [Int] {
         guard pitchCollection.count >= 2 else { return [] }
-        let pcNormalForm = normalForm(of: pitchCollection)
         
-        let transposedToZero = pcNormalForm.map{putInRange(keyValue: $0.rawValue-pcNormalForm[0].rawValue)}
-        let inversion = pitchCollectionInversion(of: pcNormalForm)
+        let transposedToZero = pitchCollection.map{putInRange(keyValue: $0.rawValue-pitchCollection[0].rawValue)}
+        let inversion = pitchCollectionInversion(of: pitchCollection)
         
         //if inversion and uninverted are equally packed left
         return packToLeft(originalCollection: transposedToZero, inversion: inversion).map{$0.rawValue}
