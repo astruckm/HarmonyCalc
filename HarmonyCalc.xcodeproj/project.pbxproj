@@ -152,6 +152,7 @@
 				722E46EE2042593100DAF987 /* Main.storyboard */,
 				723E6C932120E3BB00B92E72 /* Views&Controllers */,
 				72C7197A206145400055C742 /* Models */,
+				72A5E60E2124DEF600C52D45 /* Custom Types */,
 				725A2FC3212BAAD700B64C21 /* Persistence */,
 				722E471B2042594C00DAF987 /* Supporting Files */,
 			);
@@ -216,7 +217,6 @@
 				724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */,
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
 				72A5E61121262F0600C52D45 /* NoteTransforms.swift */,
-				72A5E60E2124DEF600C52D45 /* Custom Types */,
 			);
 			path = Models;
 			sourceTree = "<group>";
