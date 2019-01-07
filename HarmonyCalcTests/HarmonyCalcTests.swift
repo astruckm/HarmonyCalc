@@ -2,7 +2,7 @@
 //  HarmonyCalcTests.swift
 //  HarmonyCalcTests
 //
-//  Created by ASM on 8/20/18.
+//  Created by ASM on 12/31/18.
 //  Copyright © 2018 ASM. All rights reserved.
 //
 
@@ -11,16 +11,19 @@ import XCTest
 
 class HarmonyCalcTests: XCTestCase {
     
+    //Mocks
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
+    let bestHarmonicSpelling = BestEnharmonicSpelling()
     
+    //Items under test
+    
+
     override func setUp() {
-        super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
-        // Put teardown code here. This method is called after thUse of unresolved identifier 'HarmonyModel'e invocation of each test method in the class.
-        super.tearDown()
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
     func testNontonal() {
@@ -45,5 +48,23 @@ class HarmonyCalcTests: XCTestCase {
         XCTAssert(harmonyModel.getChordInversion(of: keys)! == "3rd")
     }
     
+    func testCorrectAccidentalTypeTriads() {
+        let shouldBeSharpsPC: [PitchClass] = [.cSharp, .e, .gSharp]
+        let shouldBeFlatsPC: [PitchClass] = [.cSharp, .f, .gSharp]
+        
+        XCTAssert(bestHarmonicSpelling.collectionShouldUseSharps(shouldBeSharpsPC))
+        XCTAssert(!(bestHarmonicSpelling.collectionShouldUseSharps(shouldBeFlatsPC)))
+    }
     
+    func testCorrectAccidentalTypeAtonal() {
+        let atonalPC: [PitchClass] = [.e, .f, .gSharp]
+        XCTAssert(!bestHarmonicSpelling.collectionShouldUseSharps(atonalPC))
+    }
+    
+    func testCorrectAccidentalTypeAmbiguous() {
+        let ambiguouslySpelledPC: [PitchClass] = [.cSharp, .f, .g, .b]
+        XCTAssert(bestHarmonicSpelling.collectionShouldUseSharps(ambiguouslySpelledPC))
+    }
+
+
 }

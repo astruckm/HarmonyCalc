@@ -243,7 +243,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
     }
     
     @IBAction func switchFlatSharp(_ sender: UIButton) {
-        collectionUsesSharps = collectionUsesSharps == true ? false : true
+        collectionUsesSharps = collectionUsesSharps ? false : true
         defaults.writeCollectionUsesSharps(collectionUsesSharps)
         noteDisplayNeedsUpdate()
     }

@@ -60,6 +60,19 @@ public enum PitchClass: Int, Comparable, Hashable {
 
 public enum NoteLetter: String {
     case c = "C", d = "D", e = "E", f = "F", g = "G", a = "A", b = "B"
+    
+    //To compare scale degrees in a diatonic scale
+    var abstractTonalScaleDegree: Int {
+        switch self {
+        case .c: return 0
+        case .d: return 1
+        case .e: return 2
+        case .f: return 3
+        case .g: return 4
+        case .a: return 5
+        case .b: return 6
+        }
+    }
 }
 
 public enum Octave: Int, Equatable {
@@ -67,4 +80,8 @@ public enum Octave: Int, Equatable {
     case one = 1
 }
 
-
+public struct Note {
+    let pitchClass: PitchClass
+    let noteLetter: NoteLetter
+    let octave: Octave?
+}

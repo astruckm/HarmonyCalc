@@ -16,7 +16,6 @@ public struct HarmonyModel {
     //MARK: Properties
     //***************************************************
     
-    //TODO: Need both?
     let maxNotesInCollection: Int
     var maxNotes: Int { return maxNotesInCollection % 12 }
     

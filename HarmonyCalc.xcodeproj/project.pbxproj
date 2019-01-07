@@ -39,11 +39,11 @@
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
-		725A2FB9212B715800B64C21 /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
+		72A10F4821DA09FC0091861C /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
@@ -52,7 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		725A2FBB212B715800B64C21 /* PBXContainerItemProxy */ = {
+		72A10F4A21DA09FC0091861C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 722E46DF2042593100DAF987 /* Project object */;
 			proxyType = 1;
@@ -96,13 +96,15 @@
 		722E471C2042598D00DAF987 /* HarmonyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModel.swift; sourceTree = "<group>"; };
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
 		724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSpelling.swift; sourceTree = "<group>"; };
-		725A2FB6212B715800B64C21 /* HarmonyCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarmonyCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
 		725A2FBA212B715800B64C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725A2FC1212B94BE00B64C21 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		728230FC212AEE1300397FDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarmonyCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
+		72A10F4921DA09FC0091861C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
 		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
@@ -118,7 +120,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		725A2FB3212B715800B64C21 /* Frameworks */ = {
+		72A10F4221DA09FC0091861C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -133,6 +135,7 @@
 			children = (
 				722E46E92042593100DAF987 /* HarmonyCalc */,
 				725A2FB7212B715800B64C21 /* HarmonyCalcTests */,
+				72A10F4621DA09FC0091861C /* HarmonyCalcTests */,
 				722E46E82042593100DAF987 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -141,7 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				722E46E72042593100DAF987 /* HarmonyCalc.app */,
-				725A2FB6212B715800B64C21 /* HarmonyCalcTests.xctest */,
+				72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,6 +202,15 @@
 				725A2FC1212B94BE00B64C21 /* Defaults.swift */,
 			);
 			path = Persistence;
+			sourceTree = "<group>";
+		};
+		72A10F4621DA09FC0091861C /* HarmonyCalcTests */ = {
+			isa = PBXGroup;
+			children = (
+				72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */,
+				72A10F4921DA09FC0091861C /* Info.plist */,
+			);
+			path = HarmonyCalcTests;
 			sourceTree = "<group>";
 		};
 		72A5E60E2124DEF600C52D45 /* Custom Types */ = {
@@ -280,22 +292,22 @@
 			productReference = 722E46E72042593100DAF987 /* HarmonyCalc.app */;
 			productType = "com.apple.product-type.application";
 		};
-		725A2FB5212B715800B64C21 /* HarmonyCalcTests */ = {
+		72A10F4421DA09FC0091861C /* HarmonyCalcTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 725A2FBF212B715800B64C21 /* Build configuration list for PBXNativeTarget "HarmonyCalcTests" */;
+			buildConfigurationList = 72A10F4C21DA09FC0091861C /* Build configuration list for PBXNativeTarget "HarmonyCalcTests" */;
 			buildPhases = (
-				725A2FB2212B715800B64C21 /* Sources */,
-				725A2FB3212B715800B64C21 /* Frameworks */,
-				725A2FB4212B715800B64C21 /* Resources */,
+				72A10F4121DA09FC0091861C /* Sources */,
+				72A10F4221DA09FC0091861C /* Frameworks */,
+				72A10F4321DA09FC0091861C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				725A2FBC212B715800B64C21 /* PBXTargetDependency */,
+				72A10F4B21DA09FC0091861C /* PBXTargetDependency */,
 			);
 			name = HarmonyCalcTests;
 			productName = HarmonyCalcTests;
-			productReference = 725A2FB6212B715800B64C21 /* HarmonyCalcTests.xctest */;
+			productReference = 72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -304,7 +316,7 @@
 		722E46DF2042593100DAF987 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = ASM;
 				TargetAttributes = {
@@ -312,9 +324,8 @@
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 1000;
 					};
-					725A2FB5212B715800B64C21 = {
-						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 1000;
+					72A10F4421DA09FC0091861C = {
+						CreatedOnToolsVersion = 10.1;
 						TestTargetID = 722E46E62042593100DAF987;
 					};
 				};
@@ -333,7 +344,7 @@
 			projectRoot = "";
 			targets = (
 				722E46E62042593100DAF987 /* HarmonyCalc */,
-				725A2FB5212B715800B64C21 /* HarmonyCalcTests */,
+				72A10F4421DA09FC0091861C /* HarmonyCalcTests */,
 			);
 		};
 /* End PBXProject section */
@@ -374,7 +385,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		725A2FB4212B715800B64C21 /* Resources */ = {
+		72A10F4321DA09FC0091861C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -404,21 +415,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		725A2FB2212B715800B64C21 /* Sources */ = {
+		72A10F4121DA09FC0091861C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				725A2FB9212B715800B64C21 /* HarmonyCalcTests.swift in Sources */,
+				72A10F4821DA09FC0091861C /* HarmonyCalcTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		725A2FBC212B715800B64C21 /* PBXTargetDependency */ = {
+		72A10F4B21DA09FC0091861C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 722E46E62042593100DAF987 /* HarmonyCalc */;
-			targetProxy = 725A2FBB212B715800B64C21 /* PBXContainerItemProxy */;
+			targetProxy = 72A10F4A21DA09FC0091861C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -562,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -583,7 +594,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -596,7 +607,7 @@
 			};
 			name = Release;
 		};
-		725A2FBD212B715800B64C21 /* Debug */ = {
+		72A10F4D21DA09FC0091861C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -604,13 +615,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = HarmonyCalcTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASM.HarmonyCalcTests;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalcTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -618,7 +631,7 @@
 			};
 			name = Debug;
 		};
-		725A2FBE212B715800B64C21 /* Release */ = {
+		72A10F4E21DA09FC0091861C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -626,13 +639,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = HarmonyCalcTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ASM.HarmonyCalcTests;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalcTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -661,11 +675,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		725A2FBF212B715800B64C21 /* Build configuration list for PBXNativeTarget "HarmonyCalcTests" */ = {
+		72A10F4C21DA09FC0091861C /* Build configuration list for PBXNativeTarget "HarmonyCalcTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				725A2FBD212B715800B64C21 /* Debug */,
-				725A2FBE212B715800B64C21 /* Release */,
+				72A10F4D21DA09FC0091861C /* Debug */,
+				72A10F4E21DA09FC0091861C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
