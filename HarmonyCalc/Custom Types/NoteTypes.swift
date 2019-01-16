@@ -9,9 +9,9 @@
 import Foundation
 
 
-typealias Key = (PitchClass, Octave)
+typealias Key = (pitchClass: PitchClass, octave: Octave)
 
-public enum PitchClass: Int, Comparable, Hashable {
+public enum PitchClass: Int, Comparable, Hashable, CaseIterable {
     case c = 0, cSharp, d, dSharp, e, f, fSharp, g, gSharp, a, aSharp, b
     
     var isBlackKey: Bool {
@@ -75,7 +75,7 @@ public enum NoteLetter: String {
     }
 }
 
-public enum Octave: Int, Equatable {
+public enum Octave: Int, Equatable, CaseIterable {
     case zero = 0
     case one = 1
 }

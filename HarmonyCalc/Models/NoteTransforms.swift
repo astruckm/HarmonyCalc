@@ -20,25 +20,26 @@ func allInversions(of collection: [PitchClass]) -> [[(PitchClass)]] {
     return allInversionsOfCollection
 }
 
-//Int value for a key
-func keyValue(pitch: (PitchClass, Octave)) -> Int {
-    return pitch.0.rawValue + (pitch.1.rawValue * 12)
+//Int value for a key, starting from 0 for lowest C possible
+//TODO: replace with MIDI noteÇ number
+func keyValue(pitch: Key) -> Int {
+    return pitch.pitchClass.rawValue + (pitch.octave.rawValue * PitchClass.allCases.count)
 }
 
 //Make any Int the corresponding PitchClass
 func putInRange(keyValue: Int) -> PitchClass {
-    if keyValue < 12 && keyValue >= 0 {
+    let numNotesInOctave = PitchClass.allCases.count
+    if keyValue < numNotesInOctave && keyValue >= 0 {
         return PitchClass(rawValue: keyValue)!
     }
     
-    var newPitchValue = keyValue % 12
-    if newPitchValue < 0 { newPitchValue += 12 }
+    var newPitchValue = keyValue % numNotesInOctave
+    if newPitchValue < 0 { newPitchValue += numNotesInOctave }
     return PitchClass(rawValue: newPitchValue)!
 }
 
-func intervalNumberBetweenKeys(keyOne: (PitchClass, Octave), keyTwo: (PitchClass, Octave)) -> Int {
-    var rawInterval = abs(keyValue(pitch: keyOne) - keyValue(pitch: keyTwo))
+func intervalNumberBetweenKeys(keyOne: Key, keyTwo: Key) -> Int {
+    let rawInterval = abs(keyValue(pitch: keyOne) - keyValue(pitch: keyTwo))
     //Put keys in same octave
-    rawInterval %= 12
-    return rawInterval
+    return rawInterval % PitchClass.allCases.count
 }
