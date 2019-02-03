@@ -20,9 +20,9 @@ func allInversions(of collection: [PitchClass]) -> [[(PitchClass)]] {
     return allInversionsOfCollection
 }
 
-//Int value for a key, starting from 0 for lowest C possible
-//TODO: replace with MIDI noteÇ number
-func keyValue(pitch: Key) -> Int {
+//Abstract Int value for a key, starting from 0 for lowest C possible/known
+//TODO: add func for MIDI note number
+func keyValue(pitch: PianoKey) -> Int {
     return pitch.pitchClass.rawValue + (pitch.octave.rawValue * PitchClass.allCases.count)
 }
 
@@ -38,7 +38,7 @@ func putInRange(keyValue: Int) -> PitchClass {
     return PitchClass(rawValue: newPitchValue)!
 }
 
-func intervalNumberBetweenKeys(keyOne: Key, keyTwo: Key) -> Int {
+func intervalNumberBetweenKeys(keyOne: PianoKey, keyTwo: PianoKey) -> Int {
     let rawInterval = abs(keyValue(pitch: keyOne) - keyValue(pitch: keyTwo))
     //Put keys in same octave
     return rawInterval % PitchClass.allCases.count

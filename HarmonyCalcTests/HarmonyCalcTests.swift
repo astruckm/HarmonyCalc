@@ -14,6 +14,7 @@ class HarmonyCalcTests: XCTestCase {
     //Mocks
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     let bestHarmonicSpelling = BestEnharmonicSpelling()
+    let conversions = Conversions()
     
     //Items under test
     
@@ -48,6 +49,11 @@ class HarmonyCalcTests: XCTestCase {
         XCTAssert(harmonyModel.getChordInversion(of: keys)! == "3rd")
     }
     
+
+}
+
+//Test enharmonic spelling detection
+extension HarmonyCalcTests {
     func testCorrectAccidentalTypeTriads() {
         let shouldBeSharpsPC: [PitchClass] = [.cSharp, .e, .gSharp]
         let shouldBeFlatsPC: [PitchClass] = [.cSharp, .f, .gSharp]
@@ -65,6 +71,38 @@ class HarmonyCalcTests: XCTestCase {
         let ambiguouslySpelledPC: [PitchClass] = [.cSharp, .f, .g, .b]
         XCTAssert(bestHarmonicSpelling.collectionShouldUseSharps(ambiguouslySpelledPC))
     }
+}
 
+//Test harmony types
+extension HarmonyCalcTests {
+    func testIntervalFromQualityAndSize() {
+        let diminishedFourth = Interval(quality: .diminished, size: .fourth)
+        let minorSeventh = Interval(quality: .minor, size: .seventh)
+        let undefinedInterval = Interval(quality: .perfect, size: .second)
+        
+        XCTAssert(diminishedFourth?.pitchIntervalClass == .four)
+        XCTAssert(minorSeventh?.pitchIntervalClass == .ten)
+        XCTAssert(undefinedInterval == nil)
+    }
+    
+    func testIntervalFromPIClassAndSize() {
+        let tritone1 = Interval(intervalClass: .six, size: .fifth)
+        let tritone2 = Interval(intervalClass: .six, size: .fourth)
+        let undefinedInterval = Interval(intervalClass: .seven, size: .fourth)
+        
+        XCTAssert(tritone1?.quality == .diminished)
+        XCTAssert(tritone2?.quality == .augmented)
+        XCTAssert(undefinedInterval == nil)
+    }
+}
 
+//Test conversions between types
+extension HarmonyCalcTests {
+    func testPitchIntervalClassBetweenNotes() {
+        
+    }
+    
+    func testIntervalDiatonicSizeBetweenNotes() {
+        
+    }
 }

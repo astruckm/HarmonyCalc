@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7200AC5921EF1E85006B778D /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200AC5821EF1E85006B778D /* Conversions.swift */; };
 		7213F59320AB07D000090B75 /* G4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57B20AB07CE00090B75 /* G4.m4a */; };
 		7213F59420AB07D000090B75 /* D♭4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57C20AB07CE00090B75 /* D♭4.m4a */; };
 		7213F59520AB07D000090B75 /* B♭5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57D20AB07CE00090B75 /* B♭5.m4a */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7200AC5821EF1E85006B778D /* Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversions.swift; sourceTree = "<group>"; };
 		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G4.m4a; path = "../../../../../Asset Creation/Audio Files/G4.m4a"; sourceTree = "<group>"; };
 		7213F57C20AB07CE00090B75 /* D♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "D♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/D♭4.m4a"; sourceTree = "<group>"; };
 		7213F57D20AB07CE00090B75 /* B♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "B♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/B♭5.m4a"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */,
+				7200AC5821EF1E85006B778D /* Conversions.swift */,
 				72C71978206144D50055C742 /* NoteTypes.swift */,
 			);
 			path = "Custom Types";
@@ -408,6 +411,7 @@
 				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
+				7200AC5921EF1E85006B778D /* Conversions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
 				724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */,
