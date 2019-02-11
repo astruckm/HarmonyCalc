@@ -123,9 +123,25 @@ public struct Interval: CustomStringConvertible {
 public enum TonalChordType: String {
     case major = "Maj", minor = "min", diminished = "o", augmented = "+", suspended = "Sus", dominantSeventh = "⁷", minorSeventh = "min⁷", majorSeventh = "Maj⁷", diminishedSeventh = "o⁷", halfDiminishedSeventh = "ø⁷"
     
-    
-    var orderedIntervals: [Interval] {
-        return []
+    var orderedIntervalsInNormalForm: [Interval] {
+        guard let minorSecond = Interval(quality: .minor, size: .second) else { return [] }
+        guard let majorSecond = Interval(quality: .major, size: .second) else { return [] }
+        guard let minorThird = Interval(quality: .minor, size: .third) else { return [] }
+        guard let majorThird = Interval(quality: .major, size: .third) else { return [] }
+        guard let perfectFourth = Interval(quality: .perfect, size: .fourth) else { return [] }
+        
+        switch self {
+        case .major: return [majorThird, minorThird]
+        case .minor: return [minorThird, majorThird]
+        case .diminished: return [minorThird, minorThird]
+        case .augmented: return [majorThird, majorThird]
+        case .suspended: return [perfectFourth, majorSecond]
+        case .dominantSeventh: return [majorSecond, majorThird, majorThird]
+        case .minorSeventh: return [majorSecond, minorThird, majorThird]
+        case .majorSeventh: return [minorSecond, majorThird, minorThird]
+        case .diminishedSeventh: return [minorThird, minorThird, minorThird]
+        case .halfDiminishedSeventh: return [majorSecond, minorThird, minorThird]
+        }
     }
 }
 
