@@ -14,8 +14,6 @@ struct BestEnharmonicSpelling {
     func collectionShouldUseSharps(_ pitchCollection: [PitchClass]) -> Bool {
         let allSharps: [Note] = pitchCollection.compactMap{Note(pitchClass: $0, noteLetter: $0.possibleLetterNames[0], octave: nil)}
         let allFlats: [Note] = pitchCollection.compactMap{Note(pitchClass: $0, noteLetter: $0.isBlackKey ? $0.possibleLetterNames[1] : $0.possibleLetterNames[0], octave: nil)}
-        print("all sharps: \(pairsWithSuboptimalSpellings(among: allSharps).count)")
-        print("all flats: \(pairsWithSuboptimalSpellings(among: allFlats).count)")
         return pairsWithSuboptimalSpellings(among: allSharps).count <= pairsWithSuboptimalSpellings(among: allFlats).count
     }
     
@@ -58,35 +56,6 @@ struct BestEnharmonicSpelling {
     }
 
 }
-
-
-
-/*
-
-//reconcile .possibleSpellings with possible NoteLetter
-func bestEnharmonicSpelling(of pitchCollection: [PitchClass]) -> [(PitchClass, NoteLetter)] {
-    //a. prefer to have each PitchClass have a different Letter Name if possible
-    
-    //b. prefer to have uniformity of flats or sharps if possible
-    //c. prefer to not have diminished or augmented intervals if possible (#1. & #2 will help with this--so just check for B-Db, D#-F and any B#, Cb, E#, Fbs)
-
-    return []
-}
-
-func bestLetterNames(of pitchCollection: [PitchClass]) -> [(PitchClass, NoteLetter)] {
-    let letterNamesInPC = Set<NoteLetter>()
-    //if length of letterNamesInPC is same as pitchCollection, can skip this step
-    let initialLetterNames: [NoteLetter] = pitchCollection.map { $0.possibleLetterNames.first! }
-    var differentLetterNamePC: [PitchClass] = []
-    for pitchClass in pitchCollection {
-        
-    }
-
-    
-    return []
-}
-
-*/
 
 
     
