@@ -8,7 +8,7 @@
 
 import Foundation
 
-//Irrespective of scale
+//Irrespective of scale or chord
 protocol BestEnharmonicSpellingDelegate {
     func bestSpelling(of pitchCollection: [PitchClass]) -> [Note]
 }

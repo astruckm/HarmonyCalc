@@ -20,6 +20,6 @@ protocol PlaysNotes {
     func allNotesOff(keysOff: [(PitchClass, Octave)])
 }
 
-protocol NoteCollectionConstraints {
+protocol NoteCollectionConstraintsDelegate {
     var maxTouchableNotes: Int { get }
 }

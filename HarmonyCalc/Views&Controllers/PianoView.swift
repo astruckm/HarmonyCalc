@@ -73,7 +73,7 @@ class PianoView: UIView {
     //To map a touch's area in layer to its note
     private var currentPath: UIBezierPath? = nil
     var keyByPathArea = [UIBezierPath: (PitchClass, Octave)]()
-    var noteCollectionDelegate: NoteCollectionConstraints?
+    var noteCollectionDelegate: NoteCollectionConstraintsDelegate?
     var noteNameDelegate: DisplaysNotes?
     var playNoteDelegate: PlaysNotes?
     

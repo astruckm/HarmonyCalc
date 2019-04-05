@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysNotes, PlaysNotes, UIPopoverPresentationControllerDelegate {
+class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, DisplaysNotes, PlaysNotes, BestEnharmonicSpellingDelegate, UIPopoverPresentationControllerDelegate {
     //*****************************************
     //MARK: Outlets
     //*****************************************
@@ -41,6 +41,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
     let colors = Colors()
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     var collectionUsesSharps = true
+    var collectionShouldUseSharps: Bool { return wellSpelledNotes.map{$0.description}.contains("♯") }
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
@@ -57,31 +58,36 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
     //*****************************************
     var touchedKeys: [(PitchClass, Octave)] = []
     var pitchClasses: [PitchClass] { return Array(Set(touchedKeys.map{$0.0})).sorted(by: <) }
-    var possibleNoteNames: [[String]] {
-        return pitchClasses.map{$0.possibleSpellings} }
-    func noteDisplayNeedsUpdate() {
-        updateCollectionLabels()
-        if collectionUsesSharps {
-            let arrayOfNoteNames = possibleNoteNames.map{$0[0]}
-            noteNames = arrayOfNoteNames.joined(separator: ", ")
-        } else {
-            var arrayOfNoteNames = [String]()
-            for pitchClass in pitchClasses {
-                if pitchClass.isBlackKey {
-                arrayOfNoteNames.append(pitchClass.possibleSpellings[1])
-                } else {
-                arrayOfNoteNames.append(pitchClass.possibleSpellings[0])
-                }
-            }
-            noteNames = arrayOfNoteNames.joined(separator: ", ")
-        }
-    }
+    var wellSpelledNotes: [Note] { return bestSpelling(of: pitchClasses) }
+    var possibleNoteNames: [[String]] { return pitchClasses.map{$0.possibleSpellings} }
     var noteNames: String {
         get {
             return noteName.text ?? " "
         }
         set {
             noteName.text = newValue
+        }
+    }
+    func noteDisplayNeedsUpdate() {
+        collectionUsesSharps = collectionShouldUseSharps
+        updateCollectionLabels(usingSharps: collectionUsesSharps)
+        updateNoteNames(usingSharps: collectionUsesSharps)
+        //TODO: @IBAction for sharp/flat button should be updateNoteNames(usingSharps: collectionUsesSharps)
+    }
+    private func updateNoteNames(usingSharps: Bool) {
+        if usingSharps {
+            let arrayOfNoteNames = possibleNoteNames.map{$0[0]}
+            noteNames = arrayOfNoteNames.joined(separator: ", ")
+        } else {
+            var arrayOfNoteNames = [String]()
+            for pitchClass in pitchClasses {
+                if pitchClass.isBlackKey {
+                    arrayOfNoteNames.append(pitchClass.possibleSpellings[1])
+                } else {
+                    arrayOfNoteNames.append(pitchClass.possibleSpellings[0])
+                }
+            }
+            noteNames = arrayOfNoteNames.joined(separator: ", ")
         }
     }
     
@@ -224,13 +230,9 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
     //MARK: Actions
     //*****************************************
     @IBAction func audioOnOff(_ sender: UIButton) {
-        if audioIsOn {
-            audioOnOff.setImage(audioOff, for: .normal)
-            audioIsOn = false
-        } else {
-            audioOnOff.setImage(audioOn, for: .normal)
-            audioIsOn = true
-        }
+        let audioOnOrOffImage = audioIsOn ? audioOff : audioOn
+        audioOnOff.setImage(audioOnOrOffImage, for: .normal)
+        audioIsOn.toggle()
         defaults.writeAudioSetting(audioIsOn)
     }
     
@@ -243,9 +245,10 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
     }
     
     @IBAction func switchFlatSharp(_ sender: UIButton) {
-        collectionUsesSharps = collectionUsesSharps ? false : true
+        collectionUsesSharps.toggle()
         defaults.writeCollectionUsesSharps(collectionUsesSharps)
-        noteDisplayNeedsUpdate()
+        updateCollectionLabels(usingSharps: collectionUsesSharps)
+        updateNoteNames(usingSharps: collectionUsesSharps)
     }
     
     func resetNotes() {
@@ -254,13 +257,13 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
         audioEngine.players = [:]
         noteName.text = " "
         self.touchedKeys = []
-        updateCollectionLabels()
+        updateCollectionLabels(usingSharps: collectionShouldUseSharps)
     }
     
     //*****************************************
     //MARK: Get chords/collections
     //*****************************************
-    func updateCollectionLabels() {
+    func updateCollectionLabels(usingSharps: Bool) {
         let normalFormText: String
         let primeFormText: String
         let chordText: String
@@ -281,7 +284,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraints, DisplaysN
             if let chordPC = harmonyModel.getChordIdentity(of: pitchClasses) {
                 let chordRoot = chordPC.0
                 //There are 3 possibilities: white key, sharp, or flat.
-                let chordRootAsString = (chordRoot.isBlackKey && !collectionUsesSharps) ? chordRoot.possibleSpellings[1] : chordRoot.possibleSpellings[0]
+                let chordRootAsString = (chordRoot.isBlackKey && !usingSharps) ? chordRoot.possibleSpellings[1] : chordRoot.possibleSpellings[0]
                 let chordQualityAsString = chordPC.1.rawValue
                 chordText = chordRootAsString + chordQualityAsString
             } else {

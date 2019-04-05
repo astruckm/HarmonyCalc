@@ -80,11 +80,21 @@ public enum Octave: Int, Equatable, CaseIterable {
     case one = 1
 }
 
-public struct Note: Comparable {
+public struct Note: Comparable, CustomStringConvertible {
     let pitchClass: PitchClass
     let noteLetter: NoteLetter
     let octave: Octave?
     
+    public var description: String {
+        for spelling in pitchClass.possibleSpellings {
+            if spelling.contains(noteLetter.rawValue) {
+                return spelling
+            }
+        }
+        print("Incongruity between pitchClass and noteLetter")
+        return pitchClass.possibleSpellings[0]
+    }
+        
     init?(pitchClass: PitchClass, noteLetter: NoteLetter, octave: Octave?) {
         guard pitchClass.possibleLetterNames.contains(noteLetter) else {
             print("Note is not possible: pitch class and note letter do not match")
@@ -103,7 +113,6 @@ public struct Note: Comparable {
             return lhs.pitchClass.rawValue < rhs.pitchClass.rawValue
         }
         return keyValue(pitch: (lhs.pitchClass, lhsOctave)) < keyValue(pitch: (rhs.pitchClass, rhsOctave))
-
     }
 
 }
