@@ -41,7 +41,13 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     let colors = Colors()
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     var collectionUsesSharps = true
-    var collectionShouldUseSharps: Bool { return wellSpelledNotes.map{$0.description}.contains("♯") }
+    var collectionShouldUseSharps: Bool {
+        let noteDescriptions = wellSpelledNotes.map{$0.description}
+        for description in noteDescriptions {
+            if description.contains("♯") { return true }
+        }
+        return false
+    }
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
@@ -72,7 +78,6 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         collectionUsesSharps = collectionShouldUseSharps
         updateCollectionLabels(usingSharps: collectionUsesSharps)
         updateNoteNames(usingSharps: collectionUsesSharps)
-        //TODO: @IBAction for sharp/flat button should be updateNoteNames(usingSharps: collectionUsesSharps)
     }
     private func updateNoteNames(usingSharps: Bool) {
         if usingSharps {

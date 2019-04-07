@@ -34,17 +34,14 @@ extension BestEnharmonicSpellingDelegate {
                 if pairIsSpelledSuboptimally((note, pairNote)) { subOptimallySpelledPairs.append((note, pairNote)) }
             }
         }
-        print("sub optimally spelled pairs: \(subOptimallySpelledPairs)")
         return subOptimallySpelledPairs
     }
     
     private func pairIsSpelledSuboptimally(_ pair: (Note, Note)) -> Bool {
         let rawStepsAway = abs(pair.0.noteLetter.abstractTonalScaleDegree - pair.1.noteLetter.abstractTonalScaleDegree)
         let minimumStepsAway = rawStepsAway <= 3 ? rawStepsAway : 7 - rawStepsAway ///i.e. how close the two notes COULD be
-        print("minimum steps away: \(minimumStepsAway)")
         let semitonesAway = abs(pair.0.pitchClass.rawValue - pair.1.pitchClass.rawValue)
         let intervalClass = semitonesAway <= 6 ? semitonesAway : (12 - semitonesAway)
-        print("interval class: \(intervalClass)")
         
         switch minimumStepsAway {
         case 0: return true
@@ -84,17 +81,14 @@ struct BestEnharmonicSpelling {
                 if pairIsSpelledSuboptimally((note, pairNote)) { subOptimallySpelledPairs.append((note, pairNote)) }
             }
         }
-        print("sub optimally spelled pairs: \(subOptimallySpelledPairs)")
         return subOptimallySpelledPairs
     }
     
     func pairIsSpelledSuboptimally(_ pair: (Note, Note)) -> Bool {
         let rawStepsAway = abs(pair.0.noteLetter.abstractTonalScaleDegree - pair.1.noteLetter.abstractTonalScaleDegree)
         let minimumStepsAway = rawStepsAway <= 3 ? rawStepsAway : 7 - rawStepsAway ///i.e. how close the two notes COULD be
-        print("minimum steps away: \(minimumStepsAway)")
         let semitonesAway = abs(pair.0.pitchClass.rawValue - pair.1.pitchClass.rawValue)
         let intervalClass = semitonesAway <= 6 ? semitonesAway : (12 - semitonesAway)
-        print("interval class: \(intervalClass)")
         
         switch minimumStepsAway {
         case 0: return true
