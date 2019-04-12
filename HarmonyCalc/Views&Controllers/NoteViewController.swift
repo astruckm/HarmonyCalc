@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, DisplaysNotes, PlaysNotes, BestEnharmonicSpellingDelegate, UIPopoverPresentationControllerDelegate {
+class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, DisplaysNotes, PlaysNotes, UIPopoverPresentationControllerDelegate {
     //*****************************************
     //MARK: Outlets
     //*****************************************
@@ -41,13 +41,6 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     let colors = Colors()
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     var collectionUsesSharps = true
-    var collectionShouldUseSharps: Bool {
-        let noteDescriptions = wellSpelledNotes.map{$0.description}
-        for description in noteDescriptions {
-            if description.contains("♯") { return true }
-        }
-        return false
-    }
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
@@ -64,7 +57,6 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     var touchedKeys: [(PitchClass, Octave)] = []
     var pitchClasses: [PitchClass] { return Array(Set(touchedKeys.map{$0.0})).sorted(by: <) }
-    var wellSpelledNotes: [Note] { return bestSpelling(of: pitchClasses) }
     var possibleNoteNames: [[String]] { return pitchClasses.map{$0.possibleSpellings} }
     var noteNames: String {
         get {
@@ -75,7 +67,6 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         }
     }
     func noteDisplayNeedsUpdate() {
-        collectionUsesSharps = collectionShouldUseSharps
         updateCollectionLabels(usingSharps: collectionUsesSharps)
         updateNoteNames(usingSharps: collectionUsesSharps)
     }
@@ -262,7 +253,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         audioEngine.players = [:]
         noteName.text = " "
         self.touchedKeys = []
-        updateCollectionLabels(usingSharps: collectionShouldUseSharps)
+        updateCollectionLabels(usingSharps: collectionUsesSharps)
     }
     
     //*****************************************

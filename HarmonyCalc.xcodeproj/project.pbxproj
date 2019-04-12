@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7200AC5921EF1E85006B778D /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200AC5821EF1E85006B778D /* Conversions.swift */; };
 		7213F59320AB07D000090B75 /* G4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57B20AB07CE00090B75 /* G4.m4a */; };
 		7213F59420AB07D000090B75 /* D♭4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57C20AB07CE00090B75 /* D♭4.m4a */; };
 		7213F59520AB07D000090B75 /* B♭5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57D20AB07CE00090B75 /* B♭5.m4a */; };
@@ -39,7 +38,6 @@
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
-		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
@@ -63,7 +61,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7200AC5821EF1E85006B778D /* Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversions.swift; sourceTree = "<group>"; };
 		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G4.m4a; path = "../../../../../Asset Creation/Audio Files/G4.m4a"; sourceTree = "<group>"; };
 		7213F57C20AB07CE00090B75 /* D♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "D♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/D♭4.m4a"; sourceTree = "<group>"; };
 		7213F57D20AB07CE00090B75 /* B♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "B♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/B♭5.m4a"; sourceTree = "<group>"; };
@@ -97,7 +94,6 @@
 		722E46F92042593100DAF987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E471C2042598D00DAF987 /* HarmonyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModel.swift; sourceTree = "<group>"; };
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
-		724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSpelling.swift; sourceTree = "<group>"; };
 		725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
 		725A2FBA212B715800B64C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725A2FC1212B94BE00B64C21 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
@@ -219,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */,
-				7200AC5821EF1E85006B778D /* Conversions.swift */,
 				72C71978206144D50055C742 /* NoteTypes.swift */,
 			);
 			path = "Custom Types";
@@ -229,7 +224,6 @@
 			isa = PBXGroup;
 			children = (
 				728AEA3420AA51E000CBB974 /* Audio.swift */,
-				724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */,
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
 				72A5E61121262F0600C52D45 /* NoteTransforms.swift */,
 			);
@@ -411,10 +405,8 @@
 				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
-				7200AC5921EF1E85006B778D /* Conversions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
-				724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */,
 				72C71979206144D50055C742 /* NoteTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
