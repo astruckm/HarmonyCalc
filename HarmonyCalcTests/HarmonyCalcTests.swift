@@ -14,10 +14,6 @@ class HarmonyCalcTests: XCTestCase {
     //Mocks
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     let bestHarmonicSpelling = BestEnharmonicSpelling()
-    let conversions = Conversions()
-    
-    //Items under test
-    
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -132,15 +128,35 @@ extension HarmonyCalcTests {
         XCTAssert(tritone2?.quality == .augmented)
         XCTAssert(undefinedInterval == nil)
     }
+    
 }
 
 //Test conversions between types
 extension HarmonyCalcTests {
     func testPitchIntervalClassBetweenNotes() {
+        guard let note1 = Note(pitchClass: .aSharp, noteLetter: .b, octave: Octave(rawValue: 1)) else { return }
+        guard let note2 = Note(pitchClass: .g, noteLetter: .g, octave: Octave(rawValue: 1)) else { return }
+        guard let note3 = Note(pitchClass: .fSharp, noteLetter: .f, octave: Octave(rawValue: 0)) else { return }
+        guard let note4 = Note(pitchClass: .dSharp, noteLetter: .e, octave: Octave(rawValue: 2)) else { return }
         
+        XCTAssert(pitchIntervalClass(between: note1, and: note2) == .three)
+        XCTAssert(pitchIntervalClass(between: note3, and: note4) == .three)
+        XCTAssert(pitchIntervalClass(between: note2, and: note3) == .one)
+        XCTAssert(pitchIntervalClass(between: note3, and: note2) == .one)
     }
     
     func testIntervalDiatonicSizeBetweenNotes() {
-        
+        guard let note1 = Note(pitchClass: .aSharp, noteLetter: .b, octave: Octave(rawValue: 1)) else { return }
+        guard let note2 = Note(pitchClass: .g, noteLetter: .g, octave: Octave(rawValue: 1)) else { return }
+        guard let note3 = Note(pitchClass: .fSharp, noteLetter: .f, octave: Octave(rawValue: 0)) else { return }
+        guard let note4 = Note(pitchClass: .f, noteLetter: .e, octave: Octave(rawValue: 2)) else { return } ///note4 should have octave beyond range
+        guard let note5 = Note(pitchClass: .fSharp, noteLetter: .f, octave: Octave(rawValue: 1)) else { return }
+
+        XCTAssert(intervalDiatonicSize(between: note1, and: note2) == .third)
+        XCTAssert(intervalDiatonicSize(between: note3, and: note4) == .second)
+        XCTAssert(intervalDiatonicSize(between: note1, and: note4) == .fifth)
+        XCTAssert(intervalDiatonicSize(between: note3, and: note2) == .second)
+        XCTAssert(intervalDiatonicSize(between: note3, and: note5) == .octave)
+        XCTAssert(intervalDiatonicSize(between: note1, and: note1) == .unison)
     }
 }

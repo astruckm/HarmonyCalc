@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7200AC5921EF1E85006B778D /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200AC5821EF1E85006B778D /* Conversions.swift */; };
+		7200AC5921EF1E85006B778D /* TypeConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200AC5821EF1E85006B778D /* TypeConversions.swift */; };
 		7213F59320AB07D000090B75 /* G4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57B20AB07CE00090B75 /* G4.m4a */; };
 		7213F59420AB07D000090B75 /* D♭4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57C20AB07CE00090B75 /* D♭4.m4a */; };
 		7213F59520AB07D000090B75 /* B♭5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57D20AB07CE00090B75 /* B♭5.m4a */; };
@@ -44,7 +44,7 @@
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
-		72A10F4821DA09FC0091861C /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */; };
+		728D2E1B2266F360006A03ED /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
@@ -63,7 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7200AC5821EF1E85006B778D /* Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversions.swift; sourceTree = "<group>"; };
+		7200AC5821EF1E85006B778D /* TypeConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeConversions.swift; sourceTree = "<group>"; };
 		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G4.m4a; path = "../../../../../Asset Creation/Audio Files/G4.m4a"; sourceTree = "<group>"; };
 		7213F57C20AB07CE00090B75 /* D♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "D♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/D♭4.m4a"; sourceTree = "<group>"; };
 		7213F57D20AB07CE00090B75 /* B♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "B♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/B♭5.m4a"; sourceTree = "<group>"; };
@@ -105,8 +105,6 @@
 		728230FC212AEE1300397FDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarmonyCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
-		72A10F4921DA09FC0091861C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
 		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 			children = (
 				722E46E92042593100DAF987 /* HarmonyCalc */,
 				725A2FB7212B715800B64C21 /* HarmonyCalcTests */,
-				72A10F4621DA09FC0091861C /* HarmonyCalcTests */,
 				722E46E82042593100DAF987 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -206,20 +203,11 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		72A10F4621DA09FC0091861C /* HarmonyCalcTests */ = {
-			isa = PBXGroup;
-			children = (
-				72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */,
-				72A10F4921DA09FC0091861C /* Info.plist */,
-			);
-			path = HarmonyCalcTests;
-			sourceTree = "<group>";
-		};
 		72A5E60E2124DEF600C52D45 /* Custom Types */ = {
 			isa = PBXGroup;
 			children = (
 				72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */,
-				7200AC5821EF1E85006B778D /* Conversions.swift */,
+				7200AC5821EF1E85006B778D /* TypeConversions.swift */,
 				72C71978206144D50055C742 /* NoteTypes.swift */,
 			);
 			path = "Custom Types";
@@ -411,7 +399,7 @@
 				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
-				7200AC5921EF1E85006B778D /* Conversions.swift in Sources */,
+				7200AC5921EF1E85006B778D /* TypeConversions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
 				724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */,
@@ -423,7 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A10F4821DA09FC0091861C /* HarmonyCalcTests.swift in Sources */,
+				728D2E1B2266F360006A03ED /* HarmonyCalcTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

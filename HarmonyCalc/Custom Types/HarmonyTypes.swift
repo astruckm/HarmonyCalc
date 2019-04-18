@@ -93,8 +93,7 @@ public struct Interval: CustomStringConvertible {
     init?(quality: IntervalQuality, size: IntervalDiatonicSize) {
         for (index, possibleQuality) in size.possibleQualities.enumerated() {
             if possibleQuality == quality {
-                let indexOfPIClass = index
-                self.pitchIntervalClass = size.possiblePitchIntervalClass[indexOfPIClass]
+                self.pitchIntervalClass = size.possiblePitchIntervalClass[index]
                 self.quality = quality
                 self.size = size
                 return
@@ -115,13 +114,14 @@ public struct Interval: CustomStringConvertible {
         }
         print("Interval is not possible: pitch interval class and interval size combination not possible")
         return nil
-    }
+    }    
 }
 
 
 //MARK: Chords
-public enum TonalChordType: String {
+public enum TonalChordType: String, CaseIterable {
     case major = "Maj", minor = "min", diminished = "o", augmented = "+", suspended = "Sus", dominantSeventh = "⁷", minorSeventh = "min⁷", majorSeventh = "Maj⁷", diminishedSeventh = "o⁷", halfDiminishedSeventh = "ø⁷"
+    //TODO: add other seventh chords? augmented, suspended4, suspended2? (and suspended 2 chord)
     
     var orderedIntervalsInNormalForm: [Interval] {
         guard let minorSecond = Interval(quality: .minor, size: .second) else { return [] }
@@ -159,10 +159,18 @@ public struct TonalChord {
     let chordType: TonalChordType?
     let extensions: [ChordalExtensions]?
     
-    //TODO: Init? methods from: collection of Notes, collection of just PitchIntervalClasses
+    /*
+    init?(root: Note, third: Note?, fifth: Note?, sixth: Note? = nil, seventh: Note? = nil, nineth: Note? = nil, eleventh: Note? = nil, thirteenth: Note? = nil) {
+        self.root = root
+        self.third = third
+        self.fifth = fifth
+        
+        
+    }*/
+    
+    //TODO: Init? methods from: collection of just PitchIntervalClasses
 }
 
-//TODO: make all chord types, derived from interval types
 
 
 

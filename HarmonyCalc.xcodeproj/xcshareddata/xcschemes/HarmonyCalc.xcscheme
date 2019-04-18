@@ -32,7 +32,17 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "725A2FB5212B715800B64C21"
+               BlueprintIdentifier = "72A10F4421DA09FC0091861C"
+               BuildableName = "HarmonyCalcTests.xctest"
+               BlueprintName = "HarmonyCalcTests"
+               ReferencedContainer = "container:HarmonyCalc.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "72C1F6522266F13100E597DF"
                BuildableName = "HarmonyCalcTests.xctest"
                BlueprintName = "HarmonyCalcTests"
                ReferencedContainer = "container:HarmonyCalc.xcodeproj">
