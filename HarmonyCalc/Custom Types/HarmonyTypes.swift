@@ -14,7 +14,7 @@ typealias IntervalComponents = (quality: IntervalQuality, size: IntervalDiatonic
 public enum PitchIntervalClass: Int, Hashable, Equatable {
     case zero = 0, one, two, three, four, five, six, seven, eight, nine, ten, eleven
     
-    var possibleIntervals: [IntervalComponents] {
+    var possibleIntervalComponents: [IntervalComponents] {
         switch self {
         case .zero: return [(.perfect, .unison)]
         case .one: return [(.minor, .second), (.augmented, .unison)]
@@ -81,7 +81,7 @@ public enum IntervalDiatonicSize: String, CaseIterable {
     }
 }
 
-public struct Interval: CustomStringConvertible {
+public struct Interval: CustomStringConvertible, Equatable {
     let pitchIntervalClass: PitchIntervalClass
     let quality: IntervalQuality
     let size: IntervalDiatonicSize
@@ -104,7 +104,7 @@ public struct Interval: CustomStringConvertible {
     }
     
     init?(intervalClass: PitchIntervalClass, size: IntervalDiatonicSize) {
-        for possibleInterval in intervalClass.possibleIntervals {
+        for possibleInterval in intervalClass.possibleIntervalComponents {
             if possibleInterval.size == size {
                 self.pitchIntervalClass = intervalClass
                 self.quality = possibleInterval.quality

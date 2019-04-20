@@ -159,4 +159,23 @@ extension HarmonyCalcTests {
         XCTAssert(intervalDiatonicSize(between: note3, and: note5) == .octave)
         XCTAssert(intervalDiatonicSize(between: note1, and: note1) == .unison)
     }
+    
+    func testIntervalBetweenNotes() {
+        guard let note1 = Note(pitchClass: .aSharp, noteLetter: .b, octave: Octave(rawValue: 1)) else { return }
+        guard let note2 = Note(pitchClass: .g, noteLetter: .g, octave: Octave(rawValue: 1)) else { return }
+        guard let note3 = Note(pitchClass: .fSharp, noteLetter: .f, octave: Octave(rawValue: 0)) else { return }
+        guard let note4 = Note(pitchClass: .f, noteLetter: .e, octave: Octave(rawValue: 2)) else { return } ///note4 should have octave beyond range
+        
+        let interval1 = interval(between: note1, and: note2)
+        let interval2 = interval(between: note2, and: note3)
+        let interval3 = interval(between: note3, and: note4)
+        let interval4 = interval(between: note1, and: note3)
+        let interval5 = interval(between: note3, and: note3)
+
+        XCTAssert(interval1.pitchIntervalClass == .three && interval1.quality == .minor && interval1.size == .third)
+        XCTAssert(interval2.pitchIntervalClass == .one && interval2.quality == .minor && interval2.size == .second)
+        XCTAssert(interval3.pitchIntervalClass == .one && interval3.quality == .minor && interval3.size == .second)
+        XCTAssert(interval4.pitchIntervalClass == .four && interval4.quality == .diminished && interval4.size == .fourth)
+        XCTAssert(interval5.pitchIntervalClass == .zero && interval5.quality == .perfect && interval5.size == .unison)
+    }
 }

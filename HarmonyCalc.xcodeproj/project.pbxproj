@@ -44,12 +44,12 @@
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
-		728D2E1B2266F360006A03ED /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
+		72E87D052268D59100E5A5B5 /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -411,7 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				728D2E1B2266F360006A03ED /* HarmonyCalcTests.swift in Sources */,
+				72E87D052268D59100E5A5B5 /* HarmonyCalcTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

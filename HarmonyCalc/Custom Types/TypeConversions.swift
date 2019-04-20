@@ -8,7 +8,7 @@
 
 import Foundation
 
-//TODO: (Note, Note) -> Interval
+
 
 func pitchIntervalClass(between note1: Note, and note2: Note) -> PitchIntervalClass {
     //when you don't know the octave, assume they're in the same octave
@@ -33,5 +33,20 @@ func intervalDiatonicSize(between note1: Note, and note2: Note) -> IntervalDiato
     }
     print("Error deriving interval's within-octave diatonic size")
     return IntervalDiatonicSize.unison
+}
+
+func interval(between note1: Note, and note2: Note) -> Interval {
+    let intervalClass = pitchIntervalClass(between: note1, and: note2)
+    let diatonicSize = intervalDiatonicSize(between: note1, and: note2)
+    if let interval = Interval(intervalClass: intervalClass, size: diatonicSize) {
+        return interval
+    }
+    for possibleComponent in intervalClass.possibleIntervalComponents {
+        let possibleQuality = possibleComponent.quality
+        if let interval = Interval(quality: possibleQuality, size: diatonicSize) {
+            return interval
+        }
+    }
+    return Interval(intervalClass: .zero, quality: .perfect, size: .unison)
 }
 
