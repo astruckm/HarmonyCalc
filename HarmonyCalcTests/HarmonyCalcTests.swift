@@ -166,11 +166,11 @@ extension HarmonyCalcTests {
         guard let note3 = Note(pitchClass: .fSharp, noteLetter: .f, octave: Octave(rawValue: 0)) else { return }
         guard let note4 = Note(pitchClass: .f, noteLetter: .e, octave: Octave(rawValue: 2)) else { return } ///note4 should have octave beyond range
         
-        let interval1 = interval(between: note1, and: note2)
-        let interval2 = interval(between: note2, and: note3)
-        let interval3 = interval(between: note3, and: note4)
-        let interval4 = interval(between: note1, and: note3)
-        let interval5 = interval(between: note3, and: note3)
+        guard let interval1 = interval(between: note1, and: note2) else { return }
+        guard let interval2 = interval(between: note2, and: note3) else { return }
+        guard let interval3 = interval(between: note3, and: note4) else { return }
+        guard let interval4 = interval(between: note1, and: note3) else { return }
+        guard let interval5 = interval(between: note3, and: note3) else { return }
 
         XCTAssert(interval1.pitchIntervalClass == .three && interval1.quality == .minor && interval1.size == .third)
         XCTAssert(interval2.pitchIntervalClass == .one && interval2.quality == .minor && interval2.size == .second)

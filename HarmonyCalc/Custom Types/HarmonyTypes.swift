@@ -114,7 +114,8 @@ public struct Interval: CustomStringConvertible, Equatable {
         }
         print("Interval is not possible: pitch interval class and interval size combination not possible")
         return nil
-    }    
+    }
+    
 }
 
 

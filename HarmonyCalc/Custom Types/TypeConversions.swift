@@ -35,7 +35,7 @@ func intervalDiatonicSize(between note1: Note, and note2: Note) -> IntervalDiato
     return IntervalDiatonicSize.unison
 }
 
-func interval(between note1: Note, and note2: Note) -> Interval {
+func interval(between note1: Note, and note2: Note) -> Interval? {
     let intervalClass = pitchIntervalClass(between: note1, and: note2)
     let diatonicSize = intervalDiatonicSize(between: note1, and: note2)
     if let interval = Interval(intervalClass: intervalClass, size: diatonicSize) {
@@ -47,6 +47,6 @@ func interval(between note1: Note, and note2: Note) -> Interval {
             return interval
         }
     }
-    return Interval(intervalClass: .zero, quality: .perfect, size: .unison)
+    return nil
 }
 
