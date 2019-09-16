@@ -81,7 +81,7 @@ public enum IntervalDiatonicSize: String, CaseIterable {
     }
 }
 
-public struct Interval: CustomStringConvertible, Equatable {
+public struct Interval: CustomStringConvertible, Equatable, Comparable {
     let pitchIntervalClass: PitchIntervalClass
     let quality: IntervalQuality
     let size: IntervalDiatonicSize
@@ -116,6 +116,10 @@ public struct Interval: CustomStringConvertible, Equatable {
         return nil
     }
     
+    public static func < (lhs: Interval, rhs: Interval) -> Bool {
+        return lhs.pitchIntervalClass.rawValue < rhs.pitchIntervalClass.rawValue
+    }
+
 }
 
 
@@ -124,31 +128,47 @@ public enum TonalChordType: String, CaseIterable {
     case major = "Maj", minor = "min", diminished = "o", augmented = "+", suspended = "Sus", dominantSeventh = "⁷", minorSeventh = "min⁷", majorSeventh = "Maj⁷", diminishedSeventh = "o⁷", halfDiminishedSeventh = "ø⁷"
     //TODO: add other seventh chords? augmented, suspended4, suspended2? (and suspended 2 chord)
     
-    var orderedIntervalsInNormalForm: [Interval] {
+    //TODO: Make these in normal form instead?
+    var orderedIntervalsInRootPosition: [Interval] {
         guard let minorSecond = Interval(quality: .minor, size: .second) else { return [] }
         guard let majorSecond = Interval(quality: .major, size: .second) else { return [] }
+        guard let augmentedSecond = Interval(quality: .augmented, size: .second) else { return [] }
         guard let minorThird = Interval(quality: .minor, size: .third) else { return [] }
         guard let majorThird = Interval(quality: .major, size: .third) else { return [] }
+        guard let diminishedFourth = Interval(quality: .augmented, size: .fourth) else { return [] }
         guard let perfectFourth = Interval(quality: .perfect, size: .fourth) else { return [] }
+        guard let augmentedFourth = Interval(quality: .augmented, size: .fourth) else { return [] }
         
+        //Includes all possible intervals
         switch self {
-        case .major: return [majorThird, minorThird]
-        case .minor: return [minorThird, majorThird]
-        case .diminished: return [minorThird, minorThird]
-        case .augmented: return [majorThird, majorThird]
-        case .suspended: return [perfectFourth, majorSecond]
-        case .dominantSeventh: return [majorSecond, majorThird, majorThird]
-        case .minorSeventh: return [majorSecond, minorThird, majorThird]
-        case .majorSeventh: return [minorSecond, majorThird, minorThird]
-        case .diminishedSeventh: return [minorThird, minorThird, minorThird]
-        case .halfDiminishedSeventh: return [majorSecond, minorThird, minorThird]
+        case .major: return [majorThird, minorThird, perfectFourth]
+        case .minor: return [minorThird, majorThird, perfectFourth]
+        case .diminished: return [minorThird, minorThird, augmentedFourth]
+        case .augmented: return [majorThird, majorThird, diminishedFourth]
+        case .suspended: return [perfectFourth, majorSecond, perfectFourth]
+        case .dominantSeventh: return [majorThird, majorThird, minorThird, majorSecond]
+        case .minorSeventh: return [minorThird, majorThird, minorThird, majorSecond]
+        case .majorSeventh: return [majorThird, minorThird, majorThird, minorSecond]
+        case .diminishedSeventh: return [minorThird, minorThird, minorThird, augmentedSecond]
+        case .halfDiminishedSeventh: return [minorThird, minorThird, majorThird, majorSecond]
         }
     }
 }
 
-public enum ChordalExtensions: String {
-    case second = "2", fourth = "4", sixth = "6", seventh = "⁷", nineth = "9", eleventh = "11", thirteenth = "13"
+public enum ChordalExtensions: String, CaseIterable {
+    case second = "2", four = "4", six = "6", seven = "⁷", nine = "9", eleven = "11", thirteen = "13"
     
+    var intervalSizeFromRoot: IntervalDiatonicSize {
+        switch self {
+        case .second: return IntervalDiatonicSize.second
+        case .four: return IntervalDiatonicSize.fourth
+        case .six: return IntervalDiatonicSize.sixth
+        case .seven: return IntervalDiatonicSize.seventh
+        case .nine: return IntervalDiatonicSize.second
+        case .eleven: return IntervalDiatonicSize.fourth
+        case .thirteen: return IntervalDiatonicSize.sixth
+        }
+    }
     
 }
 
@@ -158,16 +178,63 @@ public struct TonalChord {
     let fifth: Note?
     
     let chordType: TonalChordType?
-    let extensions: [ChordalExtensions]?
+    let extensions: [ChordalExtensions]
     
-    /*
-    init?(root: Note, third: Note?, fifth: Note?, sixth: Note? = nil, seventh: Note? = nil, nineth: Note? = nil, eleventh: Note? = nil, thirteenth: Note? = nil) {
+    //TODO: init? method with only [Note]
+    init?(root: Note, otherNotes: [Note]) {
+        guard !otherNotes.isEmpty else { return nil }
+        
         self.root = root
+        //Eliminate duplicates then sort into root position
+        var allNotes = [root] + otherNotes
+        allNotes = Array(Set<Note>(otherNotes))
+        allNotes.sort { (note0, note1) -> Bool in
+            let note0RelativePC = (note0.pitchClass.rawValue - root.pitchClass.rawValue + PitchClass.allCases.count) % PitchClass.allCases.count
+            let note1RelativePC = (note1.pitchClass.rawValue - root.pitchClass.rawValue + PitchClass.allCases.count) % PitchClass.allCases.count
+            return note0RelativePC < note1RelativePC
+        }
+        print("allNotes sorted: ", allNotes)
+        
+        var third: Note? = nil
+        var fifth: Note? = nil
+        var chordType: TonalChordType? = nil
+        var extensions: [ChordalExtensions] = []
+        var intervalsFromRoot: [Interval] = []
+        //TODO:
+        //1. Loop through each pair of notes and get [Interval] from root
+        for note in otherNotes {
+            if let intervalFromRoot = interval(between: root, and: note) {
+                //2. While doing that, for each note, assign it to third, fifth, or chordal extensions
+                switch intervalFromRoot.size {
+                case .third:
+                    if third != nil { third = note } //TODO: handle duplicates
+                case .fifth:
+                    if fifth != nil { fifth = note } //TODO: handle duplicates
+                default:
+                    for chordalExtension in ChordalExtensions.allCases {
+                        if intervalFromRoot.size == chordalExtension.intervalSizeFromRoot {
+                            extensions.append(chordalExtension)
+                        }
+                    }
+                }
+                intervalsFromRoot.append(intervalFromRoot)
+            }
+        }
+        //3. Try to match the [Interval] to one of TonalChordType.allCases.orderIntervalsInRootPosition
+        intervalsFromRoot.sort(by: {$0 < $1})
+        for tonalChordType in TonalChordType.allCases {
+            if tonalChordType.orderedIntervalsInRootPosition == intervalsFromRoot {
+                chordType = tonalChordType
+            }
+        }
+        
         self.third = third
         self.fifth = fifth
-        
-        
-    }*/
+        self.chordType = chordType
+        self.extensions = extensions
+    }
+    
+    
     
     //TODO: Init? methods from: collection of just PitchIntervalClasses
 }

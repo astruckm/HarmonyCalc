@@ -6,6 +6,7 @@
 //  Copyright © 2018 ASM. All rights reserved.
 //
 
+
 import XCTest
 @testable import HarmonyCalc
 
@@ -14,6 +15,7 @@ class HarmonyCalcTests: XCTestCase {
     //Mocks
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     let bestHarmonicSpelling = BestEnharmonicSpelling()
+    let bestEnharmonicSpellingDelegate: BestEnharmonicSpellingDelegate? = nil
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -59,7 +61,7 @@ extension HarmonyCalcTests {
         guard let fSharp = Note(pitchClass: .fSharp, noteLetter: .f, octave: nil) else { return }
         guard let gSharp = Note(pitchClass: .gSharp, noteLetter: .g, octave: nil) else { return }
         guard let aFlat = Note(pitchClass: .gSharp, noteLetter: .a, octave: nil) else { return }
-
+        
         XCTAssert(!bestHarmonicSpelling.pairIsSpelledSuboptimally((eNatural, fSharp)))
         XCTAssert(bestHarmonicSpelling.pairIsSpelledSuboptimally((eNatural, dFlat)))
         XCTAssert(bestHarmonicSpelling.pairIsSpelledSuboptimally((cSharp, dFlat)))
@@ -129,6 +131,28 @@ extension HarmonyCalcTests {
         XCTAssert(undefinedInterval == nil)
     }
     
+    func testChordFromNotes() {
+        guard harmonyModel.maxNotes < 0 else { return }
+        guard let note1 = Note(pitchClass: .aSharp, noteLetter: .b, octave: Octave(rawValue: 1)) else { return }
+        guard let note2 = Note(pitchClass: .g, noteLetter: .g, octave: Octave(rawValue: 1)) else { return }
+        guard let note3 = Note(pitchClass: .fSharp, noteLetter: .f, octave: Octave(rawValue: 0)) else { return }
+        guard let note4 = Note(pitchClass: .d, noteLetter: .d, octave: Octave(rawValue: 1)) else { return } ///note4 should have octave beyond range
+        guard let note5 = Note(pitchClass: .fSharp, noteLetter: .f, octave: Octave(rawValue: 1)) else { return }
+        guard let note6 = Note(pitchClass: .b, noteLetter: .b, octave: Octave(rawValue: 1)) else { return }
+        guard let note7 = Note(pitchClass: .f, noteLetter: .f, octave: nil) else { return }
+        guard let note8 = Note(pitchClass: .a, noteLetter: .a, octave: Octave(rawValue: 0)) else { return }
+        //TODO: some note that is outside of octave range
+        
+        guard let tonalChord1 = TonalChord(root: note2, otherNotes: [note4, note1]) else { return }
+        guard let tonalChord2 = TonalChord(root: note1, otherNotes: [note5, note4, note3]) else { return }
+        guard let tonalChord3 = TonalChord(root: note2, otherNotes: [note3, note4, note6]) else { return }
+        guard let tonalChord4 = TonalChord(root: note6, otherNotes: [note4, note7, note8]) else { return }
+        
+        XCTAssert(tonalChord1.chordType == .minor && tonalChord1.extensions.isEmpty)
+        XCTAssert(tonalChord2.chordType == .augmented && tonalChord2.extensions.isEmpty)
+        XCTAssert(tonalChord3.chordType == .majorSeventh && tonalChord3.extensions == [.seventh])
+        XCTAssert(tonalChord4.chordType == .halfDiminishedSeventh && tonalChord4.extensions == [.seventh])
+    }
 }
 
 //Test conversions between types

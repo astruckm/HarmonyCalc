@@ -58,7 +58,7 @@ public enum PitchClass: Int, Comparable, Hashable, CaseIterable {
     }
 }
 
-public enum NoteLetter: String, Equatable, CaseIterable {
+public enum NoteLetter: String, Equatable, CaseIterable, Hashable {
     case c = "C", d = "D", e = "E", f = "F", g = "G", a = "A", b = "B"
     
     //To compare scale degrees in a diatonic scale
@@ -75,12 +75,12 @@ public enum NoteLetter: String, Equatable, CaseIterable {
     }
 }
 
-public enum Octave: Int, Equatable, CaseIterable {
+public enum Octave: Int, Equatable, CaseIterable, Hashable {
     case zero = 0
     case one = 1
 }
 
-public struct Note: Comparable, CustomStringConvertible {
+public struct Note: Comparable, CustomStringConvertible, Hashable {
     let pitchClass: PitchClass
     let noteLetter: NoteLetter
     let octave: Octave?
@@ -107,7 +107,7 @@ public struct Note: Comparable, CustomStringConvertible {
     }
     
     //Higher pitched note is greater
-    public static func < (lhs: Note, rhs: Note) -> Bool {
+    public static func <(lhs: Note, rhs: Note) -> Bool {
         guard let lhsOctave = lhs.octave, let rhsOctave = rhs.octave else {
             //If octave is nil (i.e. unknown), have to assume they are in the same octave
             return lhs.pitchClass.rawValue < rhs.pitchClass.rawValue

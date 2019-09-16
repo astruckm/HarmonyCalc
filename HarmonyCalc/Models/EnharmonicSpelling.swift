@@ -5,6 +5,8 @@
 //  Created by ASM on 4/24/18.
 //  Copyright © 2018 ASM. All rights reserved.
 //
+//  Currently it takes notes as spelled in all flats or all sharps, and finds the number of "suboptimal" pairs (i.e. badly spelled, such as E-Ab when should be E-G#). Whichever has fewer is the best spelling
+
 
 import Foundation
 
@@ -23,7 +25,7 @@ extension BestEnharmonicSpellingDelegate {
     }
     
     //Compares each possible pair, assumes there are no duplicate notes
-    private func pairsWithSuboptimalSpellings(among notes: [Note]) -> [(Note, Note)] {
+    /*private*/ func pairsWithSuboptimalSpellings(among notes: [Note]) -> [(Note, Note)] {
         guard notes.count >= 2 else { return [] }
         var subOptimallySpelledPairs: [(Note, Note)] = []
         for noteIndex in 0..<(notes.count-1) {
@@ -37,7 +39,7 @@ extension BestEnharmonicSpellingDelegate {
         return subOptimallySpelledPairs
     }
     
-    private func pairIsSpelledSuboptimally(_ pair: (Note, Note)) -> Bool {
+    /*private*/ func pairIsSpelledSuboptimally(_ pair: (Note, Note)) -> Bool {
         let rawStepsAway = abs(pair.0.noteLetter.abstractTonalScaleDegree - pair.1.noteLetter.abstractTonalScaleDegree)
         let minimumStepsAway = rawStepsAway <= 3 ? rawStepsAway : 7 - rawStepsAway ///i.e. how close the two notes COULD be
         let semitonesAway = abs(pair.0.pitchClass.rawValue - pair.1.pitchClass.rawValue)
