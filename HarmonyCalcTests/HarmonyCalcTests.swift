@@ -150,8 +150,8 @@ extension HarmonyCalcTests {
         
         XCTAssert(tonalChord1.chordType == .minor && tonalChord1.extensions.isEmpty)
         XCTAssert(tonalChord2.chordType == .augmented && tonalChord2.extensions.isEmpty)
-        XCTAssert(tonalChord3.chordType == .majorSeventh && tonalChord3.extensions == [.seventh])
-        XCTAssert(tonalChord4.chordType == .halfDiminishedSeventh && tonalChord4.extensions == [.seventh])
+        XCTAssert(tonalChord3.chordType == .majorSeventh && tonalChord3.extensions == [.seven])
+        XCTAssert(tonalChord4.chordType == .halfDiminishedSeventh && tonalChord4.extensions == [.seven])
     }
 }
 
