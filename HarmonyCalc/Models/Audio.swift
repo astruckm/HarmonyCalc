@@ -50,6 +50,7 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     func playSounds(soundFileNames: [String]) {
         for player in players.values {
             player.stop()
+//            player.delegate = self
             player.prepareToPlay()
         }
         for player in players.values {

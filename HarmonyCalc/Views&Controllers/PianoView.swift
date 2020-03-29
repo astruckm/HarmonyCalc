@@ -17,8 +17,8 @@ class PianoView: UIView {
     //***************************************************
     //MARK: Layout observers
     //***************************************************
-    private var isCompactHeight = false
-    private var isCompactWidth = false
+    private var isCompactHeight = UIScreen.main.traitCollection.verticalSizeClass == .compact
+    private var isCompactWidth = UIScreen.main.traitCollection.horizontalSizeClass == .compact
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         isCompactHeight = traitCollection.verticalSizeClass == .compact ? true : false
