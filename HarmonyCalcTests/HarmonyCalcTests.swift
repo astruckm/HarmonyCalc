@@ -14,7 +14,7 @@ class HarmonyCalcTests: XCTestCase {
     //Mocks
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
 //    let bestHarmonicSpelling = BestEnharmonicSpelling()
-    let conversions = Conversions()
+//    let conversions = Conversions()
         
 
     override func setUp() {
