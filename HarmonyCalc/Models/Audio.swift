@@ -33,7 +33,7 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     //Audio player
     func playSound(soundFileName: String) {
         if let url = urlLookUp(of: soundFileName) {
-            do {
+            do {    
                 let player = try AVAudioPlayer(contentsOf: url)
                 players[url] = player
                 player.delegate = self
@@ -50,7 +50,6 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     func playSounds(soundFileNames: [String]) {
         for player in players.values {
             player.stop()
-//            player.delegate = self
             player.prepareToPlay()
         }
         for player in players.values {
