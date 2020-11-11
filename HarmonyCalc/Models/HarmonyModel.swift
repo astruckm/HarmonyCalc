@@ -65,7 +65,7 @@ public struct HarmonyModel {
         let pitchCollectionInversions = allInversions(of: pcNoDuplicates)
         
         //Find inversion(s) with shortest first to last distance
-        var shortestCollections = findShortestCollections(of: pitchCollectionInversions)
+        let shortestCollections = findShortestCollections(of: pitchCollectionInversions)
         
         if shortestCollections.count == 1 {
             return shortestCollections[0]
@@ -210,7 +210,7 @@ public struct HarmonyModel {
                 let bassNote = putInRange(keyValue: bassNoteKeyValue)
                 let pcNormalForm = normalForm(of: pitchClasses)
                 //See where bassNote's index is in normal form
-                if let bassNoteIndex = pcNormalForm.index(of: bassNote), let rootIndex = tonalChordRootIndexInNormalForm[chordIdentity.1.rawValue] {
+                if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote), let rootIndex = tonalChordRootIndexInNormalForm[chordIdentity.1.rawValue] {
                     var distanceFromRoot = Int(bassNoteIndex) - rootIndex!
                     if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
                     switch distanceFromRoot {
