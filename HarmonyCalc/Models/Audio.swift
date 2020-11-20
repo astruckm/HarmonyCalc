@@ -10,15 +10,19 @@ import AVFoundation
 
 //TODO: Implement sampler using AudioKit
 
-class Audio: NSObject, AVAudioPlayerDelegate {
+class Audio: NSObject {
     static let sharedInstance = Audio()
     
     var players = [URL: AVAudioPlayer]()
+    var numPlayersPlaying = 0
+    
+    private override init() { }
     
     //Load sound files if audio is not on
     func loadSound(at url: URL) {
         do {
             let player = try AVAudioPlayer(contentsOf: url)
+            player.prepareToPlay()
             players[url] = player
         } catch let error as NSError {
             print(error.description)
@@ -28,6 +32,10 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     //Remove sound file if colored key is re-tapped
     func removeSound(at url: URL) {
         players.removeValue(forKey: url)
+        if let player = players[url] {
+            player.stop()
+            player.currentTime = 0
+        }
     }
     
     //Audio player
@@ -39,6 +47,7 @@ class Audio: NSObject, AVAudioPlayerDelegate {
                 player.delegate = self
                 player.prepareToPlay()
                 player.play()
+                numPlayersPlaying += 1
             } catch let error as NSError {
                 print(error.description)
             }
@@ -48,11 +57,17 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     }
     
     func playSounds(soundFileNames: [String]) {
-        for player in players.values {
-            player.stop()
-            player.prepareToPlay()
+        if numPlayersPlaying != 0 {
+            for player in players.values {
+                if player.isPlaying {
+                    player.stop()
+                    player.currentTime = 0
+                    player.prepareToPlay()
+                }
+            }
         }
         for player in players.values {
+            numPlayersPlaying += 1
             player.play()
         }
     }
@@ -64,4 +79,13 @@ class Audio: NSObject, AVAudioPlayerDelegate {
     }
 
 
+}
+
+extension Audio: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag {
+            numPlayersPlaying -= 1
+            player.prepareToPlay()
+        }
+    }
 }

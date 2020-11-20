@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -57,7 +58,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="02s-ZX-FS6" userLabel="Chord Stack">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="33"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krz-QI-bBq">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krz-QI-bBq">
                                                                 <rect key="frame" x="0.0" y="0.0" width="137.5" height="33"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                 <state key="normal" title="Chord:">
@@ -94,7 +95,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dmp-2C-zPx" userLabel="Inversion Stack">
                                                         <rect key="frame" x="0.0" y="36" width="280" height="33.5"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNn-ZL-4a0">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNn-ZL-4a0">
                                                                 <rect key="frame" x="0.0" y="0.0" width="137.5" height="33.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                 <state key="normal" title="Inversion:">
@@ -137,7 +138,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pK7-vq-Tr5" userLabel="NormalForm Stack">
                                                         <rect key="frame" x="0.0" y="0.0" width="280" height="33"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC5-Ve-bTh">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iC5-Ve-bTh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="33"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                 <state key="normal" title="Normal:">
@@ -173,7 +174,7 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="44F-ca-jLk" userLabel="PrimeForm Stack">
                                                         <rect key="frame" x="0.0" y="36" width="280" height="33"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-WX-x2H">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNE-WX-x2H">
                                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="33"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                                 <state key="normal" title="Prime:">
@@ -228,8 +229,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CfP-pG-ZRs" userLabel="Controls Stack">
                                 <rect key="frame" x="20" y="518" width="280" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-03-Zgx">
-                                        <rect key="frame" x="0.0" y="0.0" width="59" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-03-Zgx">
+                                        <rect key="frame" x="0.0" y="0.0" width="55" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         <inset key="contentEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
                                         <state key="normal" title="♯ / ♭">
@@ -243,7 +244,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQp-rm-Jab">
-                                        <rect key="frame" x="74" y="0.0" width="55" height="40"/>
+                                        <rect key="frame" x="72" y="0.0" width="55" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="55" id="O1R-9I-GKM">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="75"/>
@@ -254,8 +255,8 @@
                                             <action selector="audioOnOff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NWK-b8-vz1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcr-xe-GHC" userLabel="Play">
-                                        <rect key="frame" x="153" y="0.0" width="40" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcr-xe-GHC" userLabel="Play">
+                                        <rect key="frame" x="152" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="40" id="nXD-AU-VvR">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="55"/>
@@ -292,7 +293,8 @@
                                 <variation key="heightClass=regular-widthClass=compact" spacing="15"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CfP-pG-ZRs" secondAttribute="trailing" constant="20" id="1oU-mA-eyV">
                                 <variation key="heightClass=compact" constant="40"/>
@@ -322,7 +324,6 @@
                                 <variation key="heightClass=regular-widthClass=regular" constant="40"/>
                             </constraint>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="audioOnOff" destination="CQp-rm-Jab" id="Uok-ms-I3m"/>
@@ -359,6 +360,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="SKn-j6-y7q"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="icH-zZ-V1q" firstAttribute="bottom" secondItem="SKn-j6-y7q" secondAttribute="bottom" id="CEn-Qk-T2I"/>
@@ -366,7 +368,6 @@
                             <constraint firstItem="icH-zZ-V1q" firstAttribute="leading" secondItem="SKn-j6-y7q" secondAttribute="leading" id="csW-o9-6r6"/>
                             <constraint firstItem="SKn-j6-y7q" firstAttribute="trailing" secondItem="icH-zZ-V1q" secondAttribute="trailing" id="lsb-g9-R8E"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="SKn-j6-y7q"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="240" height="240"/>
                     <connections>
@@ -378,11 +379,14 @@
             <point key="canvasLocation" x="868" y="125.61576354679804"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Black Play Button 1x" width="595" height="688"/>
-        <image name="audio off black" width="650" height="500"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="i9g-mx-zwL"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="Black Play Button 1x" width="595" height="688"/>
+        <image name="audio off black" width="650" height="500"/>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

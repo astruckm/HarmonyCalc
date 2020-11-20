@@ -124,11 +124,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
             audioEngine.removeSound(at: url)
         }
     }
-    
-    func allNotesOff(keysOff: [(PitchClass, Octave)]) {
-        return
-    }
-    
+        
     private func getSoundFileName(ofKey key: (PitchClass, Octave)) -> String {
         let pitchClass = key.0
         let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]

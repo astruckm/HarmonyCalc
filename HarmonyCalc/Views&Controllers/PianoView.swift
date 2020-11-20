@@ -90,19 +90,7 @@ class PianoView: UIView {
             checkIfPathContains(location)
         }
     }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-    }
-    
+        
     //Check if touched area is within a key
     private func checkIfPathContains(_ location: CGPoint) {
         for path in keyByPathArea.keys {

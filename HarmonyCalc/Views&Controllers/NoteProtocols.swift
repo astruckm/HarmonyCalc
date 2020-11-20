@@ -17,7 +17,6 @@ protocol DisplaysNotes {
 protocol PlaysNotes {
     func noteOn(keyPressed: (PitchClass, Octave))
     func noteOff(keyOff: (PitchClass, Octave))
-    func allNotesOff(keysOff: [(PitchClass, Octave)])
 }
 
 protocol NoteCollectionConstraintsDelegate {
