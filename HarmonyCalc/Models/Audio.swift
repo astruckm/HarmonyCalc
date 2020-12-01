@@ -15,7 +15,16 @@ class Audio: NSObject {
     var players = [URL: AVAudioPlayer]()
     var numPlayersPlaying = 0
     
-    private override init() { }
+    private override init() {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setCategory(.playback, mode: .default)
+            try session.setActive(true, options: .notifyOthersOnDeactivation)
+            print("activated audio session")
+        } catch let error {
+            print("error setting up audio session: \(error.localizedDescription)")
+        }
+    }
     
     //Load sound files if audio is not on
     func loadSound(at url: URL) {
