@@ -8,7 +8,6 @@
 import Foundation
 import AVFoundation
 
-//TODO: Implement sampler using AudioKit
 
 class Audio: NSObject {
     static let sharedInstance = Audio()
@@ -27,6 +26,7 @@ class Audio: NSObject {
         } catch let error as NSError {
             print(error.description)
         }
+        
     }
     
     //Remove sound file if colored key is re-tapped
@@ -43,6 +43,8 @@ class Audio: NSObject {
         if let url = urlLookUp(of: soundFileName) {
             do {    
                 let player = try AVAudioPlayer(contentsOf: url)
+//                let data = try Data(contentsOf: url)
+//                let player = try AVAudioPlayer(data: data)
                 players[url] = player
                 player.delegate = self
                 player.prepareToPlay()
