@@ -37,6 +37,7 @@
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
+		723974AA2581F7D500E036F5 /* B5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 723974A92581F7D500E036F5 /* B5.m4a */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
@@ -93,6 +94,7 @@
 		722E46F72042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722E46F92042593100DAF987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E471C2042598D00DAF987 /* HarmonyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModel.swift; sourceTree = "<group>"; };
+		723974A92581F7D500E036F5 /* B5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = B5.m4a; sourceTree = "<group>"; };
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
 		725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
 		725A2FBA212B715800B64C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				7213F58D20AB07CF00090B75 /* F4.m4a */,
 				7213F58820AB07CF00090B75 /* G♭4.m4a */,
 				7213F57B20AB07CE00090B75 /* G4.m4a */,
+				723974A92581F7D500E036F5 /* B5.m4a */,
 				7213F57E20AB07CE00090B75 /* A♭4.m4a */,
 				7213F58020AB07CE00090B75 /* A4.m4a */,
 				7213F58F20AB07CF00090B75 /* B♭4.m4a */,
@@ -369,6 +372,7 @@
 				722E46F52042593100DAF987 /* Assets.xcassets in Resources */,
 				7213F59820AB07D000090B75 /* A4.m4a in Resources */,
 				7213F5A320AB07D000090B75 /* E♭4.m4a in Resources */,
+				723974AA2581F7D500E036F5 /* B5.m4a in Resources */,
 				7213F5A520AB07D000090B75 /* F4.m4a in Resources */,
 				7213F5A420AB07D000090B75 /* F5.m4a in Resources */,
 				7213F5A120AB07D000090B75 /* G♭5.m4a in Resources */,
@@ -577,6 +581,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalc;
 				PRODUCT_NAME = HarmonyCalc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -598,6 +603,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalc;
 				PRODUCT_NAME = HarmonyCalc;
 				PROVISIONING_PROFILE_SPECIFIER = "";

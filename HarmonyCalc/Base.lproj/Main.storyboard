@@ -208,7 +208,7 @@
                                                         <variation key="heightClass=regular-widthClass=compact" spacingType="standard"/>
                                                     </stackView>
                                                 </subviews>
-                                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
+                                                <variation key="heightClass=regular-widthClass=regular"/>
                                             </stackView>
                                         </subviews>
                                         <constraints>
