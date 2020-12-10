@@ -22,3 +22,4 @@ protocol PlaysNotes {
 protocol NoteCollectionConstraintsDelegate {
     var maxTouchableNotes: Int { get }
 }
+

@@ -19,13 +19,17 @@ class Audio: NSObject {
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setCategory(.playback, mode: .default)
-            try session.setActive(true, options: .notifyOthersOnDeactivation)
-            print("activated audio session")
         } catch let error {
-            print("error setting up audio session: \(error.localizedDescription)")
+            print("error setting audio session category: \(error.localizedDescription)")
+        }
+        
+        do {
+            try session.setActive(true, options: .notifyOthersOnDeactivation)
+        } catch let error {
+            print("error activating audio session: \(error.localizedDescription)")
         }
     }
-    
+        
     //Load sound files if audio is not on
     func loadSound(at url: URL) {
         do {
@@ -77,9 +81,14 @@ class Audio: NSObject {
                 }
             }
         }
+        var timeLeftToPlay: TimeInterval = 0.1
+        let queue = DispatchQueue(label: "playSounds", attributes: .concurrent)
         for player in players.values {
-            numPlayersPlaying += 1
-            player.play()
+            queue.asyncAfter(deadline: .now() + timeLeftToPlay) { [weak self] in
+                self?.numPlayersPlaying += 1
+                player.play()
+                timeLeftToPlay -= Date().timeIntervalSince1970
+            }
         }
     }
     

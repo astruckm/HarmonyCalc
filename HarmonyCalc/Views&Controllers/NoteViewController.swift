@@ -164,7 +164,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         flatSharp.layer.borderWidth = 2.0
         flatSharp.layer.cornerRadius = 5
     }
-    
+        
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         view.layer.sublayers?.first?.frame = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height) //TODO: Perhaps there is some less hacky-y way to get what view.bounds WILL BE
         super.viewWillTransition(to: size, with: coordinator)

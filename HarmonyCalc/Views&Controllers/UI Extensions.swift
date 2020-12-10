@@ -29,3 +29,5 @@ struct Colors {
     let silverPurple = UIColor(red: 121/255, green: 124/255, blue: 167/255, alpha: 1.0)
     let someGray = UIColor(red: 133/255, green: 124/255, blue: 137/255, alpha: 1.0)
 }
+
+
