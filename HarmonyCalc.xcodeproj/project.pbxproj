@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7200AC5921EF1E85006B778D /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7200AC5821EF1E85006B778D /* Conversions.swift */; };
 		7213F59320AB07D000090B75 /* G4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57B20AB07CE00090B75 /* G4.m4a */; };
 		7213F59420AB07D000090B75 /* D♭4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57C20AB07CE00090B75 /* D♭4.m4a */; };
 		7213F59520AB07D000090B75 /* B♭5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F57D20AB07CE00090B75 /* B♭5.m4a */; };
@@ -38,8 +37,8 @@
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
+		723974AA2581F7D500E036F5 /* B5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 723974A92581F7D500E036F5 /* B5.m4a */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
-		724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
@@ -63,31 +62,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7200AC5821EF1E85006B778D /* Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversions.swift; sourceTree = "<group>"; };
-		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G4.m4a; path = "../../../../../Asset Creation/Audio Files/G4.m4a"; sourceTree = "<group>"; };
-		7213F57C20AB07CE00090B75 /* D♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "D♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/D♭4.m4a"; sourceTree = "<group>"; };
-		7213F57D20AB07CE00090B75 /* B♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "B♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/B♭5.m4a"; sourceTree = "<group>"; };
-		7213F57E20AB07CE00090B75 /* A♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "A♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/A♭4.m4a"; sourceTree = "<group>"; };
-		7213F57F20AB07CE00090B75 /* B4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = B4.m4a; path = "../../../../../Asset Creation/Audio Files/B4.m4a"; sourceTree = "<group>"; };
-		7213F58020AB07CE00090B75 /* A4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = A4.m4a; path = "../../../../../Asset Creation/Audio Files/A4.m4a"; sourceTree = "<group>"; };
-		7213F58120AB07CE00090B75 /* C5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = C5.m4a; path = "../../../../../Asset Creation/Audio Files/C5.m4a"; sourceTree = "<group>"; };
-		7213F58220AB07CE00090B75 /* A♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "A♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/A♭5.m4a"; sourceTree = "<group>"; };
-		7213F58320AB07CE00090B75 /* A5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = A5.m4a; path = "../../../../../Asset Creation/Audio Files/A5.m4a"; sourceTree = "<group>"; };
-		7213F58420AB07CE00090B75 /* D♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "D♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/D♭5.m4a"; sourceTree = "<group>"; };
-		7213F58520AB07CF00090B75 /* D4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = D4.m4a; path = "../../../../../Asset Creation/Audio Files/D4.m4a"; sourceTree = "<group>"; };
-		7213F58620AB07CF00090B75 /* E♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "E♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/E♭5.m4a"; sourceTree = "<group>"; };
-		7213F58720AB07CF00090B75 /* B5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = B5.m4a; path = "../../../../../Asset Creation/Audio Files/B5.m4a"; sourceTree = "<group>"; };
-		7213F58820AB07CF00090B75 /* G♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "G♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/G♭4.m4a"; sourceTree = "<group>"; };
-		7213F58920AB07CF00090B75 /* G♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "G♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/G♭5.m4a"; sourceTree = "<group>"; };
-		7213F58A20AB07CF00090B75 /* G5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G5.m4a; path = "../../../../../Asset Creation/Audio Files/G5.m4a"; sourceTree = "<group>"; };
-		7213F58B20AB07CF00090B75 /* E♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "E♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/E♭4.m4a"; sourceTree = "<group>"; };
-		7213F58C20AB07CF00090B75 /* F5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = F5.m4a; path = "../../../../../Asset Creation/Audio Files/F5.m4a"; sourceTree = "<group>"; };
-		7213F58D20AB07CF00090B75 /* F4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = F4.m4a; path = "../../../../../Asset Creation/Audio Files/F4.m4a"; sourceTree = "<group>"; };
-		7213F58E20AB07CF00090B75 /* E4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = E4.m4a; path = "../../../../../Asset Creation/Audio Files/E4.m4a"; sourceTree = "<group>"; };
-		7213F58F20AB07CF00090B75 /* B♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "B♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/B♭4.m4a"; sourceTree = "<group>"; };
-		7213F59020AB07CF00090B75 /* D5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = D5.m4a; path = "../../../../../Asset Creation/Audio Files/D5.m4a"; sourceTree = "<group>"; };
-		7213F59120AB07D000090B75 /* E5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = E5.m4a; path = "../../../../../Asset Creation/Audio Files/E5.m4a"; sourceTree = "<group>"; };
-		7213F59220AB07D000090B75 /* C4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = C4.m4a; path = "../../../../../Asset Creation/Audio Files/C4.m4a"; sourceTree = "<group>"; };
+		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = G4.m4a; sourceTree = "<group>"; };
+		7213F57C20AB07CE00090B75 /* D♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "D♭4.m4a"; sourceTree = "<group>"; };
+		7213F57D20AB07CE00090B75 /* B♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "B♭5.m4a"; sourceTree = "<group>"; };
+		7213F57E20AB07CE00090B75 /* A♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A♭4.m4a"; sourceTree = "<group>"; };
+		7213F57F20AB07CE00090B75 /* B4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = B4.m4a; sourceTree = "<group>"; };
+		7213F58020AB07CE00090B75 /* A4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = A4.m4a; sourceTree = "<group>"; };
+		7213F58120AB07CE00090B75 /* C5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = C5.m4a; sourceTree = "<group>"; };
+		7213F58220AB07CE00090B75 /* A♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A♭5.m4a"; sourceTree = "<group>"; };
+		7213F58320AB07CE00090B75 /* A5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = A5.m4a; sourceTree = "<group>"; };
+		7213F58420AB07CE00090B75 /* D♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "D♭5.m4a"; sourceTree = "<group>"; };
+		7213F58520AB07CF00090B75 /* D4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = D4.m4a; sourceTree = "<group>"; };
+		7213F58620AB07CF00090B75 /* E♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "E♭5.m4a"; sourceTree = "<group>"; };
+		7213F58720AB07CF00090B75 /* B5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = B5.m4a; sourceTree = "<group>"; };
+		7213F58820AB07CF00090B75 /* G♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G♭4.m4a"; sourceTree = "<group>"; };
+		7213F58920AB07CF00090B75 /* G♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G♭5.m4a"; sourceTree = "<group>"; };
+		7213F58A20AB07CF00090B75 /* G5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = G5.m4a; sourceTree = "<group>"; };
+		7213F58B20AB07CF00090B75 /* E♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "E♭4.m4a"; sourceTree = "<group>"; };
+		7213F58C20AB07CF00090B75 /* F5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = F5.m4a; sourceTree = "<group>"; };
+		7213F58D20AB07CF00090B75 /* F4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = F4.m4a; sourceTree = "<group>"; };
+		7213F58E20AB07CF00090B75 /* E4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = E4.m4a; sourceTree = "<group>"; };
+		7213F58F20AB07CF00090B75 /* B♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "B♭4.m4a"; sourceTree = "<group>"; };
+		7213F59020AB07CF00090B75 /* D5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = D5.m4a; sourceTree = "<group>"; };
+		7213F59120AB07D000090B75 /* E5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = E5.m4a; sourceTree = "<group>"; };
+		7213F59220AB07D000090B75 /* C4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4.m4a; sourceTree = "<group>"; };
 		722E46E72042593100DAF987 /* HarmonyCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonyCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		722E46EA2042593100DAF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		722E46EC2042593100DAF987 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
@@ -96,8 +94,8 @@
 		722E46F72042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722E46F92042593100DAF987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E471C2042598D00DAF987 /* HarmonyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModel.swift; sourceTree = "<group>"; };
+		723974A92581F7D500E036F5 /* B5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = B5.m4a; sourceTree = "<group>"; };
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
-		724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnharmonicSpelling.swift; sourceTree = "<group>"; };
 		725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
 		725A2FBA212B715800B64C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725A2FC1212B94BE00B64C21 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */,
-				7200AC5821EF1E85006B778D /* Conversions.swift */,
 				72C71978206144D50055C742 /* NoteTypes.swift */,
 			);
 			path = "Custom Types";
@@ -229,7 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				728AEA3420AA51E000CBB974 /* Audio.swift */,
-				724B2AAD208F3A490048FA35 /* EnharmonicSpelling.swift */,
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
 				72A5E61121262F0600C52D45 /* NoteTransforms.swift */,
 			);
@@ -247,6 +243,7 @@
 				7213F58D20AB07CF00090B75 /* F4.m4a */,
 				7213F58820AB07CF00090B75 /* G♭4.m4a */,
 				7213F57B20AB07CE00090B75 /* G4.m4a */,
+				723974A92581F7D500E036F5 /* B5.m4a */,
 				7213F57E20AB07CE00090B75 /* A♭4.m4a */,
 				7213F58020AB07CE00090B75 /* A4.m4a */,
 				7213F58F20AB07CF00090B75 /* B♭4.m4a */,
@@ -320,15 +317,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = ASM;
 				TargetAttributes = {
 					722E46E62042593100DAF987 = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1200;
 					};
 					72A10F4421DA09FC0091861C = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1200;
 						TestTargetID = 722E46E62042593100DAF987;
 					};
 				};
@@ -374,6 +372,7 @@
 				722E46F52042593100DAF987 /* Assets.xcassets in Resources */,
 				7213F59820AB07D000090B75 /* A4.m4a in Resources */,
 				7213F5A320AB07D000090B75 /* E♭4.m4a in Resources */,
+				723974AA2581F7D500E036F5 /* B5.m4a in Resources */,
 				7213F5A520AB07D000090B75 /* F4.m4a in Resources */,
 				7213F5A420AB07D000090B75 /* F5.m4a in Resources */,
 				7213F5A120AB07D000090B75 /* G♭5.m4a in Resources */,
@@ -411,10 +410,8 @@
 				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
-				7200AC5921EF1E85006B778D /* Conversions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
-				724B2AAE208F3A490048FA35 /* EnharmonicSpelling.swift in Sources */,
 				72C71979206144D50055C742 /* NoteTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +479,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -507,7 +505,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -541,6 +539,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -560,7 +559,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -575,17 +574,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalc;
 				PRODUCT_NAME = HarmonyCalc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -596,17 +597,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalc;
 				PRODUCT_NAME = HarmonyCalc;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -629,7 +632,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalcTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HarmonyCalc.app/HarmonyCalc";
 			};
@@ -652,7 +655,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.POTO.HarmonyCalcTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HarmonyCalc.app/HarmonyCalc";
 			};
