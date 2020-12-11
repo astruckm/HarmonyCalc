@@ -208,14 +208,13 @@
                                                         <variation key="heightClass=regular-widthClass=compact" spacingType="standard"/>
                                                     </stackView>
                                                 </subviews>
-                                                <variation key="heightClass=regular-widthClass=regular"/>
                                             </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="6sQ-os-gOA" firstAttribute="height" secondItem="cYC-3W-bG4" secondAttribute="height" id="iYX-YQ-swG"/>
                                         </constraints>
                                         <variation key="heightClass=compact" axis="horizontal" distribution="equalSpacing"/>
-                                        <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
+                                        <variation key="heightClass=regular-widthClass=regular"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
