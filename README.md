@@ -11,3 +11,7 @@ Play the keys and get the chord! HarmonyCalc is a simple tool for learning harmo
 *Hear the entire chord you've picked out
 
 Use HarmonyCalc to aid your music theory studies, check your work, or as a supplement to other theory resources.
+
+PRIVACY POLICY:
+
+HarmonyCalc does not collect, store, or in any way make use of user data.
