@@ -14,55 +14,33 @@ public enum TonalChordType: String, CaseIterable {
     //TODO: add other seventh chords? augmented, suspended4, suspended2? (and suspended 2 chord)
     
     init?(fromOrderedIntervalsInRootPosition intervals: [Interval]) {
-        guard let minorSecond = Interval(quality: .minor, size: .second) else { return nil }
-        guard let majorSecond = Interval(quality: .major, size: .second) else { return nil }
-        guard let augmentedSecond = Interval(quality: .augmented, size: .second) else { return nil }
-        guard let minorThird = Interval(quality: .minor, size: .third) else { return nil }
-        guard let majorThird = Interval(quality: .major, size: .third) else { return nil }
-        guard let diminishedFourth = Interval(quality: .augmented, size: .fourth) else { return nil }
-        guard let perfectFourth = Interval(quality: .perfect, size: .fourth) else { return nil }
-        guard let augmentedFourth = Interval(quality: .augmented, size: .fourth) else { return nil }
+        let icrIntervals = Interval.ValidIntervalsWithinIntervalClassRange()
         
         switch intervals {
-        case [majorThird, minorThird, perfectFourth]: self = .major
-        case [minorThird, majorThird, perfectFourth]: self = .minor
-        case [minorThird, minorThird, augmentedFourth]: self = .diminished
-        case [majorThird, majorThird, diminishedFourth]: self = .augmented
-        case [perfectFourth, majorSecond, perfectFourth]: self = .suspended
-        case [majorThird, majorThird, minorThird, majorSecond]: self = .dominantSeventh
-        case [minorThird, majorThird, minorThird, majorSecond]: self = .minorSeventh
-        case [majorThird, minorThird, majorThird, minorSecond]: self = .majorSeventh
-        case [minorThird, minorThird, minorThird, augmentedSecond]: self = .diminishedSeventh
-        case [minorThird, minorThird, majorThird, majorSecond]: self = .halfDiminishedSeventh
+        case [icrIntervals.majorThird, icrIntervals.minorThird, icrIntervals.perfectFourth]:
+            self = .major
+        case [icrIntervals.minorThird, icrIntervals.majorThird, icrIntervals.perfectFourth]:
+            self = .minor
+        case [icrIntervals.minorThird, icrIntervals.minorThird, icrIntervals.augmentedFourth]:
+            self = .diminished
+        case [icrIntervals.majorThird, icrIntervals.majorThird, icrIntervals.diminishedFourth]:
+            self = .augmented
+        case [icrIntervals.perfectFourth, icrIntervals.majorSecond, icrIntervals.perfectFourth]:
+            self = .suspended
+        case [icrIntervals.majorThird, icrIntervals.majorThird, icrIntervals.minorThird, icrIntervals.majorSecond]:
+            self = .dominantSeventh
+        case [icrIntervals.minorThird, icrIntervals.majorThird, icrIntervals.minorThird, icrIntervals.majorSecond]:
+            self = .minorSeventh
+        case [icrIntervals.majorThird, icrIntervals.minorThird, icrIntervals.majorThird, icrIntervals.minorSecond]:
+            self = .majorSeventh
+        case [icrIntervals.minorThird, icrIntervals.minorThird, icrIntervals.minorThird, icrIntervals.augmentedSecond]:
+            self = .diminishedSeventh
+        case [icrIntervals.minorThird, icrIntervals.minorThird, icrIntervals.majorThird, icrIntervals.majorSecond]:
+            self = .halfDiminishedSeventh
         default: return nil
         }
     }
     
-    //TODO: delete this--redundant now?
-    var orderedIntervalsInRootPosition: [Interval] {
-        guard let minorSecond = Interval(quality: .minor, size: .second) else { return [] }
-        guard let majorSecond = Interval(quality: .major, size: .second) else { return [] }
-        guard let augmentedSecond = Interval(quality: .augmented, size: .second) else { return [] }
-        guard let minorThird = Interval(quality: .minor, size: .third) else { return [] }
-        guard let majorThird = Interval(quality: .major, size: .third) else { return [] }
-        guard let diminishedFourth = Interval(quality: .augmented, size: .fourth) else { return [] }
-        guard let perfectFourth = Interval(quality: .perfect, size: .fourth) else { return [] }
-        guard let augmentedFourth = Interval(quality: .augmented, size: .fourth) else { return [] }
-        
-        //Includes all possible intervals
-        switch self {
-        case .major: return [majorThird, minorThird, perfectFourth]
-        case .minor: return [minorThird, majorThird, perfectFourth]
-        case .diminished: return [minorThird, minorThird, augmentedFourth]
-        case .augmented: return [majorThird, majorThird, diminishedFourth]
-        case .suspended: return [perfectFourth, majorSecond, perfectFourth]
-        case .dominantSeventh: return [majorThird, majorThird, minorThird, majorSecond]
-        case .minorSeventh: return [minorThird, majorThird, minorThird, majorSecond]
-        case .majorSeventh: return [majorThird, minorThird, majorThird, minorSecond]
-        case .diminishedSeventh: return [minorThird, minorThird, minorThird, augmentedSecond]
-        case .halfDiminishedSeventh: return [minorThird, minorThird, majorThird, majorSecond]
-        }
-    }
 }
 
 public enum ChordalExtensions: String, CaseIterable {
@@ -127,16 +105,9 @@ public struct TonalChord {
                 intervalsFromRoot.append(intervalFromRoot)
             }
         }
-        //3. Try to match the [Interval] to one of TonalChordType.allCases.orderIntervalsInRootPosition
-        //        intervalsFromRoot.sort(by: {$0 < $1})
-//        for tonalChordType in TonalChordType.allCases {
-//            if tonalChordType.orderedIntervalsInRootPosition == intervalsFromRoot {
-//                chordType = tonalChordType
-//            }
-//        }
-        
         self.third = third
         self.fifth = fifth
+        //3. Try to match the [Interval] to one of TonalChordType.allCases.orderIntervalsInRootPosition
         self.chordType = TonalChordType(fromOrderedIntervalsInRootPosition: intervalsFromRoot)
         self.extensions = extensions
     }

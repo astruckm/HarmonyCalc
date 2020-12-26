@@ -34,7 +34,7 @@ public enum PitchIntervalClass: Int, Hashable, Equatable {
 
 public enum IntervalQuality: String, CaseIterable, Comparable, Equatable {
     case diminished, minor, perfect, major, augmented
-
+    
     public static func < (lhs: IntervalQuality, rhs: IntervalQuality) -> Bool {
         let lhsIndex = IntervalQuality.allCases.firstIndex(of: lhs)!
         let rhsIndex = IntervalQuality.allCases.firstIndex(of: rhs)!
@@ -81,13 +81,35 @@ public enum IntervalDiatonicSize: String, CaseIterable {
     }
 }
 
-public struct Interval: CustomStringConvertible, Equatable, Comparable {
+public struct Interval: Equatable {
     let pitchIntervalClass: PitchIntervalClass
     let quality: IntervalQuality
     let size: IntervalDiatonicSize
     
-    public var description: String {
-        return quality.rawValue + " " + size.rawValue
+    //TODO: apply these to  ScaleName
+    public struct ValidIntervalsWithinIntervalClassRange {
+        let minorSecond = Interval(quality: .minor, validSize: .second)
+        let majorSecond = Interval(quality: .major, validSize: .second)
+        let augmentedSecond = Interval(quality: .augmented, validSize: .second)
+        let minorThird = Interval(quality: .minor, validSize: .third)
+        let majorThird = Interval(quality: .major, validSize: .third)
+        let diminishedFourth = Interval(quality: .augmented, validSize: .fourth)
+        let perfectFourth = Interval(quality: .perfect, validSize: .fourth)
+        let augmentedFourth = Interval(quality: .augmented, validSize: .fourth)
+    }
+    
+    //For quality-size combos guaranteed to be valid
+    fileprivate init(quality: IntervalQuality, validSize size: IntervalDiatonicSize) {
+        var piClass: PitchIntervalClass? = nil
+        for (index, possibleQuality) in size.possibleQualities.enumerated() {
+            if possibleQuality == quality {
+                piClass = size.possiblePitchIntervalClass[index]
+                break
+            }
+        }
+        self.pitchIntervalClass = piClass ?? PitchIntervalClass(rawValue: 0)!
+        self.quality = quality
+        self.size = size
     }
     
     init?(quality: IntervalQuality, size: IntervalDiatonicSize) {
@@ -116,10 +138,19 @@ public struct Interval: CustomStringConvertible, Equatable, Comparable {
         return nil
     }
     
+    
+}
+
+extension Interval: Comparable {
     public static func < (lhs: Interval, rhs: Interval) -> Bool {
         return lhs.pitchIntervalClass.rawValue < rhs.pitchIntervalClass.rawValue
     }
+}
 
+extension Interval: CustomStringConvertible {
+    public var description: String {
+        return quality.rawValue + " " + size.rawValue
+    }
 }
 
 

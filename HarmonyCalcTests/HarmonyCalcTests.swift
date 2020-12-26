@@ -153,6 +153,8 @@ extension HarmonyCalcTests {
         XCTAssert(tonalChord3.chordType == .majorSeventh && tonalChord3.extensions == [.seven])
         XCTAssert(tonalChord4.chordType == .halfDiminishedSeventh && tonalChord4.extensions == [.seven])
     }
+    
+    
 }
 
 //Test conversions between types

@@ -66,30 +66,30 @@
 
 /* Begin PBXFileReference section */
 		7200AC5821EF1E85006B778D /* TypeConversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeConversions.swift; sourceTree = "<group>"; };
-		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G4.m4a; path = "../../../../../Asset Creation/Audio Files/G4.m4a"; sourceTree = "<group>"; };
-		7213F57C20AB07CE00090B75 /* D♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "D♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/D♭4.m4a"; sourceTree = "<group>"; };
-		7213F57D20AB07CE00090B75 /* B♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "B♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/B♭5.m4a"; sourceTree = "<group>"; };
-		7213F57E20AB07CE00090B75 /* A♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "A♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/A♭4.m4a"; sourceTree = "<group>"; };
-		7213F57F20AB07CE00090B75 /* B4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = B4.m4a; path = "../../../../../Asset Creation/Audio Files/B4.m4a"; sourceTree = "<group>"; };
-		7213F58020AB07CE00090B75 /* A4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = A4.m4a; path = "../../../../../Asset Creation/Audio Files/A4.m4a"; sourceTree = "<group>"; };
-		7213F58120AB07CE00090B75 /* C5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = C5.m4a; path = "../../../../../Asset Creation/Audio Files/C5.m4a"; sourceTree = "<group>"; };
-		7213F58220AB07CE00090B75 /* A♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "A♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/A♭5.m4a"; sourceTree = "<group>"; };
-		7213F58320AB07CE00090B75 /* A5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = A5.m4a; path = "../../../../../Asset Creation/Audio Files/A5.m4a"; sourceTree = "<group>"; };
-		7213F58420AB07CE00090B75 /* D♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "D♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/D♭5.m4a"; sourceTree = "<group>"; };
-		7213F58520AB07CF00090B75 /* D4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = D4.m4a; path = "../../../../../Asset Creation/Audio Files/D4.m4a"; sourceTree = "<group>"; };
-		7213F58620AB07CF00090B75 /* E♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "E♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/E♭5.m4a"; sourceTree = "<group>"; };
-		7213F58720AB07CF00090B75 /* B5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = B5.m4a; path = "../../../../../Asset Creation/Audio Files/B5.m4a"; sourceTree = "<group>"; };
-		7213F58820AB07CF00090B75 /* G♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "G♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/G♭4.m4a"; sourceTree = "<group>"; };
-		7213F58920AB07CF00090B75 /* G♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "G♭5.m4a"; path = "../../../../../Asset Creation/Audio Files/G♭5.m4a"; sourceTree = "<group>"; };
-		7213F58A20AB07CF00090B75 /* G5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = G5.m4a; path = "../../../../../Asset Creation/Audio Files/G5.m4a"; sourceTree = "<group>"; };
-		7213F58B20AB07CF00090B75 /* E♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "E♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/E♭4.m4a"; sourceTree = "<group>"; };
-		7213F58C20AB07CF00090B75 /* F5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = F5.m4a; path = "../../../../../Asset Creation/Audio Files/F5.m4a"; sourceTree = "<group>"; };
-		7213F58D20AB07CF00090B75 /* F4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = F4.m4a; path = "../../../../../Asset Creation/Audio Files/F4.m4a"; sourceTree = "<group>"; };
-		7213F58E20AB07CF00090B75 /* E4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = E4.m4a; path = "../../../../../Asset Creation/Audio Files/E4.m4a"; sourceTree = "<group>"; };
-		7213F58F20AB07CF00090B75 /* B♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "B♭4.m4a"; path = "../../../../../Asset Creation/Audio Files/B♭4.m4a"; sourceTree = "<group>"; };
-		7213F59020AB07CF00090B75 /* D5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = D5.m4a; path = "../../../../../Asset Creation/Audio Files/D5.m4a"; sourceTree = "<group>"; };
-		7213F59120AB07D000090B75 /* E5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = E5.m4a; path = "../../../../../Asset Creation/Audio Files/E5.m4a"; sourceTree = "<group>"; };
-		7213F59220AB07D000090B75 /* C4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = C4.m4a; path = "../../../../../Asset Creation/Audio Files/C4.m4a"; sourceTree = "<group>"; };
+		7213F57B20AB07CE00090B75 /* G4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = G4.m4a; sourceTree = "<group>"; };
+		7213F57C20AB07CE00090B75 /* D♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "D♭4.m4a"; sourceTree = "<group>"; };
+		7213F57D20AB07CE00090B75 /* B♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "B♭5.m4a"; sourceTree = "<group>"; };
+		7213F57E20AB07CE00090B75 /* A♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A♭4.m4a"; sourceTree = "<group>"; };
+		7213F57F20AB07CE00090B75 /* B4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = B4.m4a; sourceTree = "<group>"; };
+		7213F58020AB07CE00090B75 /* A4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = A4.m4a; sourceTree = "<group>"; };
+		7213F58120AB07CE00090B75 /* C5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = C5.m4a; sourceTree = "<group>"; };
+		7213F58220AB07CE00090B75 /* A♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "A♭5.m4a"; sourceTree = "<group>"; };
+		7213F58320AB07CE00090B75 /* A5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = A5.m4a; sourceTree = "<group>"; };
+		7213F58420AB07CE00090B75 /* D♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "D♭5.m4a"; sourceTree = "<group>"; };
+		7213F58520AB07CF00090B75 /* D4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = D4.m4a; sourceTree = "<group>"; };
+		7213F58620AB07CF00090B75 /* E♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "E♭5.m4a"; sourceTree = "<group>"; };
+		7213F58720AB07CF00090B75 /* B5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = B5.m4a; sourceTree = "<group>"; };
+		7213F58820AB07CF00090B75 /* G♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G♭4.m4a"; sourceTree = "<group>"; };
+		7213F58920AB07CF00090B75 /* G♭5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G♭5.m4a"; sourceTree = "<group>"; };
+		7213F58A20AB07CF00090B75 /* G5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = G5.m4a; sourceTree = "<group>"; };
+		7213F58B20AB07CF00090B75 /* E♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "E♭4.m4a"; sourceTree = "<group>"; };
+		7213F58C20AB07CF00090B75 /* F5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = F5.m4a; sourceTree = "<group>"; };
+		7213F58D20AB07CF00090B75 /* F4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = F4.m4a; sourceTree = "<group>"; };
+		7213F58E20AB07CF00090B75 /* E4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = E4.m4a; sourceTree = "<group>"; };
+		7213F58F20AB07CF00090B75 /* B♭4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "B♭4.m4a"; sourceTree = "<group>"; };
+		7213F59020AB07CF00090B75 /* D5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = D5.m4a; sourceTree = "<group>"; };
+		7213F59120AB07D000090B75 /* E5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = E5.m4a; sourceTree = "<group>"; };
+		7213F59220AB07D000090B75 /* C4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4.m4a; sourceTree = "<group>"; };
 		722E46E72042593100DAF987 /* HarmonyCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonyCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		722E46EA2042593100DAF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		722E46EC2042593100DAF987 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
@@ -573,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -594,7 +594,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = "$(SRCROOT)/HarmonyCalc/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -615,7 +615,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = HarmonyCalcTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -639,7 +639,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 48535654Y7;
 				INFOPLIST_FILE = HarmonyCalcTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
