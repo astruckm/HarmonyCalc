@@ -75,6 +75,14 @@ public enum NoteLetter: String, Equatable, CaseIterable, Hashable {
     }
 }
 
+public enum Accidental: String {
+    case flat = "♭"
+    case natural = "♮"
+    case sharp = "♯"
+    case doubleSharp = "𝄪"
+    case doubleFlat = "𝄫"
+}
+
 public enum Octave: Int, Equatable, CaseIterable, Hashable {
     case zero = 0
     case one = 1

@@ -36,8 +36,18 @@ public struct Scale {
     let tonic: Note
     let name: ScaleName
     
+//    var possibleTriads: [TonalChord] {}
     
-    //TODO: computed var possibleTriads: [TonalChord]
+    init(tonic: Note, name: ScaleName) {
+        self.tonic = tonic
+        self.name = name
+        var notes: [Note] = [tonic]
+        for interval in name.orderedIntervalsFromRoot {
+            //TODO: function to convert one Note and Interval to another Note
+        }
+        
+        self.notes = notes
+    }
     
-    //TODO: init
+    //TODO: init? from just notes, init from tonic and name
 }

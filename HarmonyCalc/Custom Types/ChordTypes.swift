@@ -14,7 +14,7 @@ public enum TonalChordType: String, CaseIterable {
     //TODO: add other seventh chords? augmented, suspended4, suspended2? (and suspended 2 chord)
     
     init?(fromOrderedIntervalsInRootPosition intervals: [Interval]) {
-        let icrIntervals = Interval.ValidIntervalsWithinIntervalClassRange()
+        let icrIntervals = Interval.IntervalsWithinIntervalClassRange()
         
         switch intervals {
         case [icrIntervals.majorThird, icrIntervals.minorThird, icrIntervals.perfectFourth]:

@@ -8,7 +8,22 @@
 
 import Foundation
 
-
+/*
+func note(fromNote note1: Note, andIntervalAbove interval: Interval) -> Note {
+    let note1KeyValue = keyValue(pitch: (note1.pitchClass, note1.octave ?? .zero))
+    let note2KeyValue = note1KeyValue + interval.pitchIntervalClass.rawValue
+    let note2PC = putInRange(keyValue: note2KeyValue)
+    
+    var octave2: Octave? = nil
+    if let octave1 = note1.octave {
+        let octave2Value = octave1.rawValue + (note2KeyValue/PitchClass.allCases.count - note1KeyValue/PitchClass.allCases.count)
+        octave2 = Octave(rawValue: octave2Value)
+    }
+    
+    let possibleLetterNames = note2PC.possibleLetterNames
+    
+    return Note(pitchClass: note2PC, noteLetter: <#T##NoteLetter#>, octave: octave2)!
+}*/
 
 func pitchIntervalClass(between note1: Note, and note2: Note) -> PitchIntervalClass {
     //when you don't know the octave, assume they're in the same octave
