@@ -38,7 +38,6 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     //MARK: Properties
     //*****************************************
-    let colors = Colors()
     var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
     var collectionUsesSharps = true
     var audioIsOn = true
@@ -140,7 +139,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addGradientBackground(colorOne: colors.heavy, colorTwo: colors.rain)
+        view.addGradientBackground(colorOne: Colors.heavy, colorTwo: Colors.rain)
         view.addSubview(piano)
         view.isMultipleTouchEnabled = true
         piano.isUserInteractionEnabled = true

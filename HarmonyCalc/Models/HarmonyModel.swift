@@ -7,7 +7,7 @@
 //
 //  This struct is the brain of the calculator, taking in notes and outputting tonal and atonal collections
 
-//TODO: break this up into smaller files: atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC (takes come NoteVC code too)
+//TODO: break this up into smaller files: atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC (takes some NoteVC code too)
 
 import Foundation
 

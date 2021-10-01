@@ -79,7 +79,6 @@ class PianoView: UIView {
     
     var touchedKeys: [(PitchClass, Octave)] = [] { didSet { setNeedsDisplay() } }
     var keyWasTouched = false
-    let colors = Colors()
     
     //***************************************************
     //MARK: Touch events
@@ -185,7 +184,7 @@ class PianoView: UIView {
         path.close()
         currentPath = path
         
-        if keyWasTouched { colors.blueBlue.setFill() } else { UIColor.black.setFill() }
+        if keyWasTouched { Colors.blueBlue.setFill() } else { UIColor.black.setFill() }
         
         path.fill()
     }
@@ -247,7 +246,7 @@ class PianoView: UIView {
     private func strokeAndFillPath(_ path: UIBezierPath) {
         path.lineWidth = 0.3
         UIColor.black.setStroke()
-        if keyWasTouched { colors.blueBlue.setFill() } else { UIColor.white.setFill() }
+        if keyWasTouched { Colors.blueBlue.setFill() } else { UIColor.white.setFill() }
         path.fill()
         path.stroke()
     }
