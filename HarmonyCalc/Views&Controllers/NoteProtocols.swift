@@ -1,6 +1,6 @@
 //
 //  NoteProtocols.swift
-//  Chord Calculator
+//  HarmonyCalc
 //
 //  Created by ASM on 8/15/18.
 //  Copyright © 2018 ASM. All rights reserved.

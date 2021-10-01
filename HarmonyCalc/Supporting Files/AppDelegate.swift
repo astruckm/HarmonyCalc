@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Chord Connections
+//  HarmonyCalc
 //
 //  Created by ASM on 2/24/18.
 //  Copyright © 2018 ASM. All rights reserved.

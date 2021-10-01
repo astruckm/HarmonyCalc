@@ -1,6 +1,6 @@
 //
 //  PianoView.swift
-//  Chord Calculator
+//  HarmonyCalc
 //
 //  Created by ASM on 3/4/18.
 //  Copyright © 2018 ASM. All rights reserved.

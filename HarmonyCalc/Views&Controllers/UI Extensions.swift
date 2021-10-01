@@ -1,6 +1,6 @@
 //
 //  Gradients.swift
-//  Chord Calculator
+//  HarmonyCalc
 //
 //  Created by ASM on 5/5/18.
 //  Copyright © 2018 ASM. All rights reserved.

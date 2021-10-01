@@ -1,6 +1,6 @@
 //
 //  Note Transforms.swift
-//  Chord Calculator
+//  HarmonyCalc
 //
 //  Created by ASM on 8/16/18.
 //  Copyright © 2018 ASM. All rights reserved.
@@ -21,7 +21,6 @@ func allInversions(of collection: [PitchClass]) -> [[(PitchClass)]] {
 }
 
 //Abstract Int value for a key, starting from 0 for lowest C possible/known
-//TODO: add func for MIDI note number
 func keyValue(pitch: PianoKey) -> Int {
     return pitch.pitchClass.rawValue + (pitch.octave.rawValue * PitchClass.allCases.count)
 }

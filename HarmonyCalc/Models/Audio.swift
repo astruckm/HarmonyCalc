@@ -1,6 +1,6 @@
 //
 //  AudioEngine.swift
-//  Chord Calculator
+//  HarmonyCalc
 //
 //  Created by ASM on 5/14/18.
 //  Copyright © 2018 ASM. All rights reserved.
@@ -56,8 +56,6 @@ class Audio: NSObject {
         if let url = urlLookUp(of: soundFileName) {
             do {    
                 let player = try AVAudioPlayer(contentsOf: url)
-//                let data = try Data(contentsOf: url)
-//                let player = try AVAudioPlayer(data: data)
                 players[url] = player
                 player.delegate = self
                 player.prepareToPlay()
