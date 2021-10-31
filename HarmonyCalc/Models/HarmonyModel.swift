@@ -18,38 +18,26 @@ public struct HarmonyModel {
     
     let maxNotesInCollection: Int
     var maxNotes: Int { return maxNotesInCollection % 12 }
-    
+        
     //TODO: Add more chords
-    //TODO: These 2 dictionaries should be one data structure [String: [String: Int?]]
-    //In normal form
-    private let tonalChordIntervalsInNormalForm: [String: String] = [
-        "[4, 3]": "Maj",
-        "[3, 4]": "min",
-        "[3, 3]": "o",
-        "[4, 4]": "+",
-        "[2, 5]": "Sus",
-        "[3, 3, 2]": "⁷",
-        "[3, 2, 3]": "min⁷",
-        "[1, 4, 3]": "Maj⁷",
-        "[3, 3, 3]": "o⁷",
-        "[2, 3, 3]": "ø⁷"
-    ]
+    
+    // Placeholder values for ambiguous chords: fully dim, aug, sus
     //The index here = ([PitchClass].count of the chord) - intLiteralOfInversionName
     //I.e. how many index "steps" to go through to get to the root
-    //(index of bassNote in normal form) - (value here) gives inversion; if < 0, add [PitchClass].count
-    private let tonalChordRootIndexInNormalForm: [String: Int?] = [
-        "Maj": 0,
-        "min": 0,
-        "o": 0,
-        "+": 0, //placeholder value; will need enharmonic info to determine
-        "Sus": 2, //placeholder value
-        "⁷": 3,
-        "min⁷": 2,
-        "Maj⁷": 1,
-        "o⁷": 0, //placeholder value; will need enharmonic info to determine
-        "ø⁷": 1
+    private let chordSymbolsRootByIntervalsInNormalForm: [String: (chordSymbol: String, rootIndex: Int)] = [
+        "[4, 3]": ("Maj", 0),
+        "[3, 4]": ("min", 0),
+        "[3, 3]": ("o", 0),
+        "[4, 4]": ("+", 0),
+        "[2, 5]": ("Sus", 2),
+        "[3, 3, 2]": ("⁷", 3),
+        "[3, 2, 3]": ("min⁷", 2),
+        "[1, 4, 3]": ("Maj⁷", 1),
+        "[3, 3, 3]": ("o⁷", 0),
+        "[2, 3, 3]": ("ø⁷", 1)
     ]
-            
+    
+    
     //**********************************************************
     //MARK: Set Theory
     //Using Joseph N. Straus' "Introduction to Post-Tonal Theory"
@@ -167,14 +155,14 @@ public struct HarmonyModel {
         
         //if inversion and uninverted are equally packed left
         return transposedToZero
-
+        
     }
     
     
     //**********************************************************
     //MARK: Tonal collections
     //**********************************************************
-
+    
     //Helper func, use on collections that are in normal form already
     private mutating func intervalsBetweenPitches(pitchCollection: [PitchClass]) -> [Int] {
         guard pitchCollection.count >= 2 else { return [] }
@@ -192,48 +180,57 @@ public struct HarmonyModel {
         let pcNoDuplicates = Array(Set(pitchCollection))
         let pcNormalForm = normalForm(of: pcNoDuplicates)
         let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
-        //TODO: This chordType String is actually what I want to send to ViewController
-        if let chordType = tonalChordIntervalsInNormalForm[intervals.description] {
-            if let rootIndex = tonalChordRootIndexInNormalForm[chordType], let tonalChordType = TonalChordType(rawValue: chordType)  {
-                let rootPitchClass = pcNormalForm[rootIndex!]
-                return (rootPitchClass, tonalChordType)
-            }
+        if let chordSymbolIndex = chordSymbolsRootByIntervalsInNormalForm[intervals.description],
+           let tonalChordType = TonalChordType(rawValue: chordSymbolIndex.chordSymbol),
+           chordSymbolIndex.rootIndex < pcNormalForm.count
+           {
+            let rootPitchClass = pcNormalForm[chordSymbolIndex.rootIndex]
+            return (rootPitchClass, tonalChordType)
         }
+//        if let chordType = tonalChordIntervalsInNormalForm[intervals.description] {
+//            if let rootIndex = tonalChordRootIndexInNormalForm[chordType], let tonalChordType = TonalChordType(rawValue: chordType)  {
+//                let rootPitchClass = pcNormalForm[rootIndex!]
+//                return (rootPitchClass, tonalChordType)
+//            }
+//        }
         return nil
     }
     
     mutating func getChordInversion(of pitchCollection: [(PitchClass, Octave)]) -> String? {
         guard pitchCollection.count >= 2 else { return nil }
         let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
-        if let chordIdentity = getChordIdentity(of: pitchClasses) {
-            if let bassNoteKeyValue = pitchCollection.map({ pc in keyValue(pitch: pc) }).min() {
-                let bassNote = putInRange(keyValue: bassNoteKeyValue)
-                let pcNormalForm = normalForm(of: pitchClasses)
-                //See where bassNote's index is in normal form
-                if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote), let rootIndex = tonalChordRootIndexInNormalForm[chordIdentity.1.rawValue] {
-                    var distanceFromRoot = Int(bassNoteIndex) - rootIndex!
-                    if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
-                    switch distanceFromRoot {
-                    case 0: return "Root"
-                    case 1: return "1st"
-                    case 2: return "2nd"
-                    case 3: return "3rd"
-                    default: return nil
-                    }
+        if let bassNoteKeyValue = pitchCollection.map({ pc in keyValue(pitch: pc) }).min() {
+            let bassNote = putInRange(keyValue: bassNoteKeyValue)
+            let pcNormalForm = normalForm(of: pitchClasses)
+            let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
+            
+            // Find where bassNote's index is in normal form
+            if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote),
+               let chordSymbolIndex = chordSymbolsRootByIntervalsInNormalForm[intervals.description] {
+                let rootIndex = chordSymbolIndex.rootIndex
+                var distanceFromRoot = Int(bassNoteIndex) - rootIndex
+                if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
+                switch distanceFromRoot {
+                case 0: return "Root"
+                case 1: return "1st"
+                case 2: return "2nd"
+                case 3: return "3rd"
+                default: return nil
                 }
             }
         }
+        
         return nil
     }
     
     //TODO: Chord (i.e. root + type/quality), inversion (i.e. root's index), normal form, prime form should all be called by func with massive output that is tuple of every chord form you would want, as Strings. ViewController shouldn't have to type convert.
     mutating func getHarmonyValuesForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
         guard pitchCollection.count >= 2 else { return ("", "", nil, nil) }
-//        let normalForm = self.normalForm(of: pitchCollection.map { $0.0 } )
-            
-            //2. Use it to get prime form and chord type
-            //3. Use chord type to get inversion
-            //4. Convert everything to Strings
+        //        let normalForm = self.normalForm(of: pitchCollection.map { $0.0 } )
+        
+        //2. Use it to get prime form and chord type
+        //3. Use chord type to get inversion
+        //4. Convert everything to Strings
         
         return ("", "", nil, nil)
     }
