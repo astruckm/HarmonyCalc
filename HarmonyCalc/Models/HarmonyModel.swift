@@ -24,17 +24,34 @@ public struct HarmonyModel {
     // Placeholder values for ambiguous chords: fully dim, aug, sus
     //The index here = ([PitchClass].count of the chord) - intLiteralOfInversionName
     //I.e. how many index "steps" to go through to get to the root
-    private let chordSymbolsRootByIntervalsInNormalForm: [String: (chordSymbol: String, rootIndex: Int)] = [
+    private let chordSymbolsRootInNormalFormByIntervals: [String: (chordSymbol: String, rootIndex: Int)] = [
         "[4, 3]": ("Maj", 0),
         "[3, 4]": ("min", 0),
         "[3, 3]": ("o", 0),
         "[4, 4]": ("+", 0),
-        "[2, 5]": ("Sus", 2),
+        "[2, 5]": ("Sus⁴", 2),
+        
         "[3, 3, 2]": ("⁷", 3),
         "[3, 2, 3]": ("min⁷", 2),
         "[1, 4, 3]": ("Maj⁷", 1),
         "[3, 3, 3]": ("o⁷", 0),
-        "[2, 3, 3]": ("ø⁷", 1)
+        "[2, 3, 3]": ("ø⁷", 1),
+        "[2, 2, 4]": ("+⁷", 2),
+        "[3, 1, 4]": ("+Maj⁷", 2),
+        
+        "[3, 2, 2, 2]": ("⁹", 2),
+        "[1, 2, 2, 3]": ("Maj⁹", 1),
+        "[3, 2, 2, 1]": ("min⁹", 2),
+        "[2, 1, 3, 3]": ("⁷♭⁹", 1),
+        "[3, 3, 2, 1]": ("⁷♯⁹", 3),
+        
+        "[2, 2, 2, 1, 2]": ("¹¹", 1),
+        "[1, 2, 2, 1, 2]": ("Maj¹¹", 1),
+        "[2, 2, 1, 2, 2]": ("min¹¹", 1),
+        "[2, 2, 2, 2, 1]": ("⁷♯¹¹", 1),
+        
+        "[2, 2, 2, 2, 1, 2]": ("⁷♭¹³", 2),
+        "[1, 2, 2, 1, 2, 2]": ("¹³", 5)
     ]
     
     
@@ -180,7 +197,7 @@ public struct HarmonyModel {
         let pcNoDuplicates = Array(Set(pitchCollection))
         let pcNormalForm = normalForm(of: pcNoDuplicates)
         let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
-        if let chordSymbolIndex = chordSymbolsRootByIntervalsInNormalForm[intervals.description],
+        if let chordSymbolIndex = chordSymbolsRootInNormalFormByIntervals[intervals.description],
            let tonalChordType = TonalChordType(rawValue: chordSymbolIndex.chordSymbol),
            chordSymbolIndex.rootIndex < pcNormalForm.count
            {
@@ -206,7 +223,7 @@ public struct HarmonyModel {
             
             // Find where bassNote's index is in normal form
             if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote),
-               let chordSymbolIndex = chordSymbolsRootByIntervalsInNormalForm[intervals.description] {
+               let chordSymbolIndex = chordSymbolsRootInNormalFormByIntervals[intervals.description] {
                 let rootIndex = chordSymbolIndex.rootIndex
                 var distanceFromRoot = Int(bassNoteIndex) - rootIndex
                 if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
