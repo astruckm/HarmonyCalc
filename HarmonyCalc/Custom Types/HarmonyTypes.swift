@@ -27,5 +27,14 @@ public enum IntervalQuality: String, CaseIterable, Comparable, Equatable {
 }
 
 public enum TonalChordType: String {
-case major = "Maj", minor = "min", diminished = "o", augmented = "+", suspended = "Sus", dominantSeventh = "⁷", minorSeventh = "min⁷", majorSeventh = "Maj⁷", diminishedSeventh = "o⁷", halfDiminishedSeventh = "ø⁷"
+    case major = "Maj"
+    case minor = "min"
+    case diminished = "o"
+    case augmented = "+"
+    case suspended = "Sus"
+    case dominantSeventh = "⁷"
+    case minorSeventh = "min⁷"
+    case majorSeventh = "Maj⁷"
+    case diminishedSeventh = "o⁷"
+    case halfDiminishedSeventh = "ø⁷"
 }

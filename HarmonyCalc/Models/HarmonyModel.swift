@@ -23,17 +23,17 @@ public struct HarmonyModel {
     //The index here = ([PitchClass].count of the chord) - intLiteralOfInversionName
     //I.e. how many index "steps" to go through to get to the root
     private let chordSymbolsRootInNormalFormByIntervals: [String: (chordSymbol: String, rootIndex: Int)] = [
-        "[4, 3]": ("Maj", 0),
-        "[3, 4]": ("min", 0),
-        "[3, 3]": ("o", 0),
-        "[4, 4]": ("+", 0),
-        "[2, 5]": ("Sus⁴", 2),
+        "[4, 3]": (TonalChordType.major.rawValue, 0),
+        "[3, 4]": (TonalChordType.minor.rawValue, 0),
+        "[3, 3]": (TonalChordType.diminished.rawValue, 0),
+        "[4, 4]": (TonalChordType.augmented.rawValue, 0),
+        "[2, 5]": (TonalChordType.suspended.rawValue, 2),
         
-        "[3, 3, 2]": ("⁷", 3),
-        "[3, 2, 3]": ("min⁷", 2),
-        "[1, 4, 3]": ("Maj⁷", 1),
-        "[3, 3, 3]": ("o⁷", 0),
-        "[2, 3, 3]": ("ø⁷", 1),
+        "[3, 3, 2]": (TonalChordType.dominantSeventh.rawValue, 3),
+        "[3, 2, 3]": (TonalChordType.minorSeventh.rawValue, 2),
+        "[1, 4, 3]": (TonalChordType.majorSeventh.rawValue, 1),
+        "[3, 3, 3]": (TonalChordType.diminishedSeventh.rawValue, 0),
+        "[2, 3, 3]": (TonalChordType.halfDiminishedSeventh.rawValue, 1),
         "[2, 2, 4]": ("+⁷", 2),
         "[3, 1, 4]": ("+Maj⁷", 2),
         
