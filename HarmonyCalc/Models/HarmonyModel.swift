@@ -18,9 +18,7 @@ public struct HarmonyModel {
     
     let maxNotesInCollection: Int
     var maxNotes: Int { return maxNotesInCollection % 12 }
-        
-    //TODO: Add more chords
-    
+            
     // Placeholder values for ambiguous chords: fully dim, aug, sus
     //The index here = ([PitchClass].count of the chord) - intLiteralOfInversionName
     //I.e. how many index "steps" to go through to get to the root
