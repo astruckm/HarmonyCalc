@@ -32,9 +32,26 @@ public enum TonalChordType: String {
     case diminished = "o"
     case augmented = "+"
     case suspended = "Sus"
-    case dominantSeventh = "⁷"
-    case minorSeventh = "min⁷"
-    case majorSeventh = "Maj⁷"
-    case diminishedSeventh = "o⁷"
-    case halfDiminishedSeventh = "ø⁷"
+    
+    case dominantSeven = "⁷"
+    case minorSeven = "min⁷"
+    case majorSeven = "Maj⁷"
+    case diminishedSeven = "o⁷"
+    case halfDiminishedSeven = "ø⁷"
+    case augmentedSeven = "+⁷"
+    case augmentedMajorSeven = "+Maj⁷"
+    
+    case dominantNine = "⁹"
+    case majorNine = "Maj⁹"
+    case minorNine = "min⁹"
+    case flatNine = "⁷♭⁹"
+    case sharpNine = "⁷♯⁹"
+    
+    case eleven = "¹¹"
+    case majorEleven = "Maj¹¹"
+    case minorEleven = "min¹¹"
+    case sharpEleven = "⁷♯¹¹"
+    
+    case sharpThirteen = "⁷♭¹³"
+    case thirteen = "¹³"
 }

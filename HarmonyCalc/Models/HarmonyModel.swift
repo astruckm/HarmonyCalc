@@ -29,27 +29,27 @@ public struct HarmonyModel {
         "[4, 4]": (TonalChordType.augmented.rawValue, 0),
         "[2, 5]": (TonalChordType.suspended.rawValue, 2),
         
-        "[3, 3, 2]": (TonalChordType.dominantSeventh.rawValue, 3),
-        "[3, 2, 3]": (TonalChordType.minorSeventh.rawValue, 2),
-        "[1, 4, 3]": (TonalChordType.majorSeventh.rawValue, 1),
-        "[3, 3, 3]": (TonalChordType.diminishedSeventh.rawValue, 0),
-        "[2, 3, 3]": (TonalChordType.halfDiminishedSeventh.rawValue, 1),
-        "[2, 2, 4]": ("+⁷", 2),
-        "[3, 1, 4]": ("+Maj⁷", 2),
+        "[3, 3, 2]": (TonalChordType.dominantSeven.rawValue, 3),
+        "[3, 2, 3]": (TonalChordType.minorSeven.rawValue, 2),
+        "[1, 4, 3]": (TonalChordType.majorSeven.rawValue, 1),
+        "[3, 3, 3]": (TonalChordType.diminishedSeven.rawValue, 0),
+        "[2, 3, 3]": (TonalChordType.halfDiminishedSeven.rawValue, 1),
+        "[2, 2, 4]": (TonalChordType.augmentedSeven.rawValue, 2),
+        "[3, 1, 4]": (TonalChordType.augmentedMajorSeven.rawValue, 2),
         
-        "[3, 2, 2, 2]": ("⁹", 2),
-        "[1, 2, 2, 3]": ("Maj⁹", 1),
-        "[3, 2, 2, 1]": ("min⁹", 2),
-        "[2, 1, 3, 3]": ("⁷♭⁹", 1),
-        "[3, 3, 2, 1]": ("⁷♯⁹", 3),
+        "[3, 2, 2, 2]": (TonalChordType.dominantNine.rawValue, 2),
+        "[1, 2, 2, 3]": (TonalChordType.majorNine.rawValue, 1),
+        "[3, 2, 2, 1]": (TonalChordType.minorNine.rawValue, 2),
+        "[2, 1, 3, 3]": (TonalChordType.flatNine.rawValue, 1),
+        "[3, 3, 2, 1]": (TonalChordType.sharpNine.rawValue, 3),
         
-        "[2, 2, 2, 1, 2]": ("¹¹", 1),
-        "[1, 2, 2, 1, 2]": ("Maj¹¹", 1),
-        "[2, 2, 1, 2, 2]": ("min¹¹", 1),
-        "[2, 2, 2, 2, 1]": ("⁷♯¹¹", 1),
+        "[2, 2, 2, 1, 2]": (TonalChordType.eleven.rawValue, 1),
+        "[1, 2, 2, 1, 2]": (TonalChordType.majorEleven.rawValue, 1),
+        "[2, 2, 1, 2, 2]": (TonalChordType.minorEleven.rawValue, 1),
+        "[2, 2, 2, 2, 1]": (TonalChordType.sharpEleven.rawValue, 1),
         
-        "[2, 2, 2, 2, 1, 2]": ("⁷♭¹³", 2),
-        "[1, 2, 2, 1, 2, 2]": ("¹³", 5)
+        "[2, 2, 2, 2, 1, 2]": (TonalChordType.sharpThirteen.rawValue, 2),
+        "[1, 2, 2, 1, 2, 2]": (TonalChordType.thirteen.rawValue, 5)
     ]
     
     

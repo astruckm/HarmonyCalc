@@ -114,7 +114,7 @@ class HarmonyCalcTests: XCTestCase {
         let normalFormDom7: [PitchClass] = harmonyModel.normalForm(of: PitchCollections.fSharpDominant7)
         XCTAssert(normalFormDom7 == [.aSharp, .cSharp, .e, .fSharp])
         XCTAssert(harmonyModel.primeForm(ofCollectionInNormalForm: normalFormDom7) == [0, 2, 5, 8])
-        XCTAssert(harmonyModel.getChordIdentity(of: PitchCollections.fSharpDominant7)! == (.fSharp, .dominantSeventh))
+        XCTAssert(harmonyModel.getChordIdentity(of: PitchCollections.fSharpDominant7)! == (.fSharp, .dominantSeven))
         let normalFormDom7Keys: [(PitchClass, Octave)] = [(.fSharp, .zero), (.cSharp, .one), (.aSharp, .one), (.e, .one)]
         XCTAssert(harmonyModel.getChordInversion(of: normalFormDom7Keys)! == "Root")
         
