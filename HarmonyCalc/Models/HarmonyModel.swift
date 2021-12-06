@@ -37,11 +37,11 @@ public struct HarmonyModel {
         "[2, 2, 4]": (TonalChordType.augmentedSeven.rawValue, 2),
         "[3, 1, 4]": (TonalChordType.augmentedMajorSeven.rawValue, 2),
         
-        "[3, 2, 2, 2]": (TonalChordType.dominantNine.rawValue, 2),
+        "[2, 2, 2, 3]": (TonalChordType.dominantNine.rawValue, 1),
         "[1, 2, 2, 3]": (TonalChordType.majorNine.rawValue, 1),
         "[3, 2, 2, 1]": (TonalChordType.minorNine.rawValue, 2),
         "[2, 1, 3, 3]": (TonalChordType.flatNine.rawValue, 1),
-        "[3, 3, 2, 1]": (TonalChordType.sharpNine.rawValue, 3),
+        "[2, 3, 1, 3]": (TonalChordType.sharpNine.rawValue, 1),
         
         "[2, 2, 2, 1, 2]": (TonalChordType.eleven.rawValue, 1),
         "[1, 2, 2, 1, 2]": (TonalChordType.majorEleven.rawValue, 1),
@@ -202,12 +202,6 @@ public struct HarmonyModel {
             let rootPitchClass = pcNormalForm[chordSymbolIndex.rootIndex]
             return (rootPitchClass, tonalChordType)
         }
-//        if let chordType = tonalChordIntervalsInNormalForm[intervals.description] {
-//            if let rootIndex = tonalChordRootIndexInNormalForm[chordType], let tonalChordType = TonalChordType(rawValue: chordType)  {
-//                let rootPitchClass = pcNormalForm[rootIndex!]
-//                return (rootPitchClass, tonalChordType)
-//            }
-//        }
         return nil
     }
     
@@ -230,6 +224,9 @@ public struct HarmonyModel {
                 case 1: return "1st"
                 case 2: return "2nd"
                 case 3: return "3rd"
+                case 4: return "4th"
+                case 5: return "5th"
+                case 6: return "6th"
                 default: return nil
                 }
             }
