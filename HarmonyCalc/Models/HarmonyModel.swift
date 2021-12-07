@@ -208,7 +208,7 @@ public struct HarmonyModel {
     mutating func getChordInversion(of pitchCollection: [(PitchClass, Octave)]) -> String? {
         guard pitchCollection.count >= 2 else { return nil }
         let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
-        if let bassNoteKeyValue = pitchCollection.map({ pc in keyValue(pitch: pc) }).min() {
+        if let bassNoteKeyValue = pitchCollection.map({ keyValue(pitch: $0) }).min() {
             let bassNote = putInRange(keyValue: bassNoteKeyValue)
             let pcNormalForm = normalForm(of: pitchClasses)
             let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
