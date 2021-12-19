@@ -55,6 +55,7 @@ public enum TonalChordType: String {
     case thirteen = "¹³"
     case sharpThirteen = "⁷♭¹³"
     
+    /// Ascending intervals when the chord is in normal form
     var intervalsInNormalForm: [Int] {
         switch self {
         case .major: return [4, 3]
@@ -80,6 +81,34 @@ public enum TonalChordType: String {
         case .sharpEleven: return [2, 2, 2, 2, 1]
         case .thirteen: return [1, 2, 2, 1, 2, 2]
         case .sharpThirteen: return [2, 2, 2, 2, 1, 2]
+        }
+    }
+    
+    var rootIndexInNormalForm: Int {
+        switch self {
+        case .major: return 0
+        case .minor: return 0
+        case .diminished: return 0
+        case .augmented: return 0
+        case .suspended: return 2
+        case .dominantSeven: return 3
+        case .minorSeven: return 2
+        case .majorSeven: return 1
+        case .diminishedSeven: return 0
+        case .halfDiminishedSeven: return 1
+        case .augmentedSeven: return 2
+        case .augmentedMajorSeven: return 2
+        case .dominantNine: return 1
+        case .majorNine: return 1
+        case .minorNine: return 2
+        case .flatNine: return 1
+        case .sharpNine: return 1
+        case .eleven: return 1
+        case .majorEleven: return 1
+        case .minorEleven: return 1
+        case .sharpEleven: return 1
+        case .thirteen: return 5
+        case .sharpThirteen: return 2
         }
     }
     
