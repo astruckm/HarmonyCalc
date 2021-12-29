@@ -48,7 +48,6 @@ public struct HarmonyModel {
         "[2, 2, 1, 2, 2]": (TonalChordType.minorEleven.rawValue, 1),
         "[2, 2, 2, 2, 1]": (TonalChordType.sharpEleven.rawValue, 1),
         
-        "[2, 2, 2, 2, 1, 2]": (TonalChordType.sharpThirteen.rawValue, 2),
         "[1, 2, 2, 1, 2, 2]": (TonalChordType.thirteen.rawValue, 5)
     ]
     

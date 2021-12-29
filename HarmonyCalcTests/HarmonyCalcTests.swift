@@ -38,11 +38,10 @@ class HarmonyCalcTests: XCTestCase {
         
         static let eFlatDominant11: [PianoKey] = [(.dSharp, .one), (.cSharp, .one), (.g, .one), (.aSharp, .one), (.f, .one), (.gSharp, .zero)] // 5th inversion
         static let cMaj11: [PianoKey] = [(.e, .zero), (.c, .zero), (.b, .zero), (.g, .zero), (.f, .zero), (.d, .zero)] // root position
-        static let eMin11: [PianoKey] = [(.e, .one), (.b, .one), (.g, .zero), (.d, .one), (.f, .zero), (.a, .zero)] // 4th inversion
+        static let eMin11: [PianoKey] = [(.e, .one), (.b, .one), (.g, .zero), (.d, .one), (.fSharp, .zero), (.a, .zero)] // 4th inversion
         static let a7Sharp11: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .zero), (.a, .zero), (.dSharp, .zero), (.b, .one)] // 2nd inversion
         
-        static let dDominant13: [PianoKey] = [(.e, .one), (.cSharp, .one), (.g, .one), (.a, .zero), (.d, .one), (.fSharp, .one), (.b, .zero)] // 2nd inversion
-        static let d7Flat13: [PianoKey] = [(.e, .one), (.aSharp, .zero), (.cSharp, .one), (.g, .one), (.d, .one), (.a, .one), (.fSharp, .one)] // 6th inversion
+        static let aDominant13: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .one), (.a, .zero), (.d, .one), (.fSharp, .one), (.b, .zero)] // 2nd inversion
         
         // Non-tonal
         static let zeroTwoSix: [PianoKey] = [(.d, .one), (.c, .zero), (.gSharp, .one)] // [0, 2, 6]
