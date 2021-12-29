@@ -190,28 +190,26 @@ class HarmonyCalcTests: XCTestCase {
         XCTAssert(maj11Transforms.inversion == "Root")
         
         let min11Transforms = performCollectionTransforms(PianoKeyCollections.eMin11)
-        XCTAssert(min11Transforms.normalForm == [.d, .e, .f, .g, .a, .b])
-        XCTAssert(min11Transforms.primeForm == [0, 2, 3, 5, 7, 9])
+        XCTAssert(min11Transforms.normalForm == [.d, .e, .fSharp, .g, .a, .b])
+        XCTAssert(min11Transforms.primeForm == [0, 2, 4, 5, 7, 9])
+        XCTAssert(min11Transforms.identity ?? (.c, .major) == (.e, .minorEleven))
+        XCTAssert(min11Transforms.inversion == "4th")
+        
+        let sharp11Transforms = performCollectionTransforms(PianoKeyCollections.a7Sharp11)
+        XCTAssert(sharp11Transforms.normalForm == [.g, .a, .b, .cSharp, .dSharp, .e])
+        XCTAssert(sharp11Transforms.primeForm == [0, 1, 3, 5, 7, 9])
+        XCTAssert(sharp11Transforms.identity ?? (.c, .major) == (.a, .sharpEleven))
+        XCTAssert(sharp11Transforms.inversion == "2nd")
     }
     
-    // TODO: test all:
-    /*
-     "[2, 2, 1, 2, 2]": ("min¹¹", 1),
-     "[2, 2, 2, 2, 1]": ("⁷♯¹¹", 1),
-     
-     "[2, 2, 2, 2, 1, 2]": ("⁷♭¹³", 2),
-     "[1, 2, 2, 1, 2, 2]": ("¹³", 5)
-     
-     static let eMin11: [PianoKey] = [(.e, .one), (.b, .one), (.g, .zero), (.d, .one), (.f, .zero), (.a, .zero)] // 4th inversion
-     static let a7Sharp11: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .zero), (.a, .zero), (.dSharp, .zero), (.b, .one)] // 2nd inversion
-     
-     static let dDominant13: [PianoKey] = [(.e, .one), (.cSharp, .one), (.g, .one), (.a, .zero), (.d, .one), (.fSharp, .one), (.b, .zero)] // 2nd inversion
-     static let d7Flat13: [PianoKey] = [(.e, .one), (.aSharp, .zero), (.cSharp, .one), (.g, .one), (.d, .one), (.a, .one), (.fSharp, .one)] // 6th inversion
-
-*/
-
-
-    
+    func testThirteenChords() {
+        let dom13Transforms = performCollectionTransforms(PianoKeyCollections.aDominant13)
+        XCTAssert(dom13Transforms.normalForm == [.cSharp, .d, .e, .fSharp, .g, .a, .b])
+        XCTAssert(dom13Transforms.primeForm == [0, 1, 3, 5, 6, 8, 10])
+        XCTAssert(dom13Transforms.identity ?? (.c, .major) == (.a, .thirteen))
+        XCTAssert(dom13Transforms.inversion == "2nd")
+    }
+        
     private func performCollectionTransforms(_ keys: [PianoKey]) -> (normalForm: [PitchClass],
                                                                                   primeForm: [Int],
                                                                                   identity: (root: PitchClass, chordQuality: TonalChordType)?,
