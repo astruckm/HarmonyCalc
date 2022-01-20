@@ -26,7 +26,7 @@ public enum IntervalQuality: String, CaseIterable, Comparable, Equatable {
     
 }
 
-public enum TonalChordType: String {
+public enum TonalChordType: String, CaseIterable {
     case major = "Maj"
     case minor = "min"
     case diminished = "o"
@@ -111,7 +111,7 @@ public enum TonalChordType: String {
     
 }
 
-enum TonalChordInversion: String {
+enum TonalChordInversion: String, CaseIterable {
     case root = "Root"
     case first = "1st"
     case second = "2nd"
@@ -120,4 +120,8 @@ enum TonalChordInversion: String {
     case fifth = "5th"
     case sixth = "6th"
 
+    init(numThirdsAboveRoot: Int) {
+        let numThirds = numThirdsAboveRoot % TonalChordInversion.allCases.count
+        self = TonalChordInversion.allCases[numThirds]
+    }
 }

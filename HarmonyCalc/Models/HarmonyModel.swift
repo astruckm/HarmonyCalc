@@ -51,6 +51,9 @@ public struct HarmonyModel {
         "[1, 2, 2, 1, 2, 2]": (TonalChordType.thirteen.rawValue, 5)
     ]
     
+    private var allTonalChordsByIntervalsInNormalForm: [[Int]: TonalChordType] {
+        return Dictionary(uniqueKeysWithValues: TonalChordType.allCases.map { ($0.intervalsInNormalForm, $0) })
+    }
     
     //**********************************************************
     //MARK: Set Theory
@@ -216,9 +219,11 @@ public struct HarmonyModel {
             if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote),
                let chordSymbolIndex = chordSymbolsRootInNormalFormByIntervals[intervals.description] {
                 let rootIndex = chordSymbolIndex.rootIndex
+                // old way, incorrect for 9s, 11s, 13s
                 var distanceFromRoot = Int(bassNoteIndex) - rootIndex
                 if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
-                switch distanceFromRoot {
+                
+                switch distanceFromRoot /*Should be thirdsAboveRoot */ {
                 case 0: return "Root"
                 case 1: return "1st"
                 case 2: return "2nd"
@@ -234,15 +239,26 @@ public struct HarmonyModel {
         return nil
     }
     
-    //TODO: Chord (i.e. root + type/quality), inversion (i.e. root's index), normal form, prime form should all be called by func with massive output that is tuple of every chord form you would want, as Strings. ViewController shouldn't have to type convert.
-    mutating func getHarmonyValuesForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
-        guard pitchCollection.count >= 2 else { return ("", "", nil, nil) }
-        //        let normalForm = self.normalForm(of: pitchCollection.map { $0.0 } )
+    private func getInversionFromThirdsAboveRoot(for bassIndex: Int, inIntervalsInNormalForm intervals: [Int]) -> TonalChordInversion? {
+        guard let chordType = allTonalChordsByIntervalsInNormalForm[intervals] else { return nil }
+        let rootIndex = chordType.rootIndexInNormalForm
+        let normalFormZeroBasedPC: [Int] = intervals.reduce(into: [Int]()) { $0.append(($0.last ?? 0) + $1) }
+        // traverse array "circle" by thirds from bassIndex until get to rootIndex, count steps
+        var currentThirds = 0
+        var currentIndex = bassIndex
+        repeat {
+            if currentIndex == rootIndex { break }
+            let nextIndex = ((currentIndex + normalFormZeroBasedPC.count) - 1) % normalFormZeroBasedPC.count
+            let nextDiff = ((normalFormZeroBasedPC[currentIndex] + 12) - normalFormZeroBasedPC[nextIndex]) % 12
+            currentIndex = nextIndex
+            if nextDiff < 3 {
+                // Only traversed a 2nd, go one more left to get a 3rd
+                currentIndex = ((currentIndex + normalFormZeroBasedPC.count) - 1) % normalFormZeroBasedPC.count
+            }
+            currentThirds += 1
+        } while currentIndex != bassIndex
         
-        //2. Use it to get prime form and chord type
-        //3. Use chord type to get inversion
-        //4. Convert everything to Strings
-        
-        return ("", "", nil, nil)
+        return TonalChordInversion(numThirdsAboveRoot: currentThirds)
     }
+        
 }
