@@ -50,9 +50,9 @@ public struct HarmonyModel {
         
         "[1, 2, 2, 1, 2, 2]": (TonalChordType.thirteen.rawValue, 5)
     ]
-    
-    private var allTonalChordsByIntervalsInNormalForm: [[Int]: TonalChordType] {
-        return Dictionary(uniqueKeysWithValues: TonalChordType.allCases.map { ($0.intervalsInNormalForm, $0) })
+        
+    private var allTonalChordsByZeroBasedNormalForm: [[Int]: TonalChordType] {
+        return Dictionary(uniqueKeysWithValues: TonalChordType.allCases.map { ($0.zeroBasedNormalForm, $0) })
     }
     
     //**********************************************************
