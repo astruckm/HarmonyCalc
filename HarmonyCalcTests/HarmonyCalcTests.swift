@@ -39,7 +39,7 @@ class HarmonyCalcTests: XCTestCase {
         static let eFlatDominant11: [PianoKey] = [(.dSharp, .one), (.cSharp, .one), (.g, .one), (.aSharp, .one), (.f, .one), (.gSharp, .zero)] // 5th inversion
         static let cMaj11: [PianoKey] = [(.e, .zero), (.c, .zero), (.b, .zero), (.g, .zero), (.f, .zero), (.d, .zero)] // root position
         static let eMin11: [PianoKey] = [(.e, .one), (.b, .one), (.g, .zero), (.d, .one), (.fSharp, .zero), (.a, .zero)] // 4th inversion
-        static let a7Sharp11: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .zero), (.a, .zero), (.dSharp, .zero), (.b, .one)] // 2nd inversion
+        static let a7Sharp11: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .zero), (.a, .zero), (.dSharp, .zero), (.b, .one)] // 5th inversion
         
         static let aDominant13: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .one), (.a, .zero), (.d, .one), (.fSharp, .one), (.b, .zero)] // 2nd inversion
         
@@ -148,7 +148,7 @@ class HarmonyCalcTests: XCTestCase {
         XCTAssert(dom9Transforms.normalForm == [.dSharp, .f, .g, .a, .c])
         XCTAssert(dom9Transforms.primeForm == [0, 2, 4, 6, 9])
         XCTAssert(dom9Transforms.identity ?? (.c, .major) == (.f, .dominantNine))
-        XCTAssert(dom9Transforms.inversion == "4th")
+        XCTAssert(dom9Transforms.inversion == "3rd")
         
         let maj9Transforms = performCollectionTransforms(PianoKeyCollections.gMaj9)
         XCTAssert(maj9Transforms.normalForm == [.fSharp, .g, .a, .b, .d])
@@ -166,7 +166,7 @@ class HarmonyCalcTests: XCTestCase {
         XCTAssert(flat9Transforms.normalForm == [.f, .g, .gSharp, .b, .d])
         XCTAssert(flat9Transforms.primeForm == [0, 2, 3, 6, 9])
         XCTAssert(flat9Transforms.identity ?? (.c, .major) == (.g, .flatNine))
-        XCTAssert(flat9Transforms.inversion == "1st")
+        XCTAssert(flat9Transforms.inversion == "2nd")
         
         let sharp9Transforms = performCollectionTransforms(PianoKeyCollections.b7Sharp9)
         XCTAssert(sharp9Transforms.normalForm == [.a, .b, .d, .dSharp, .fSharp])
@@ -198,7 +198,7 @@ class HarmonyCalcTests: XCTestCase {
         XCTAssert(sharp11Transforms.normalForm == [.g, .a, .b, .cSharp, .dSharp, .e])
         XCTAssert(sharp11Transforms.primeForm == [0, 1, 3, 5, 7, 9])
         XCTAssert(sharp11Transforms.identity ?? (.c, .major) == (.a, .sharpEleven))
-        XCTAssert(sharp11Transforms.inversion == "2nd")
+        XCTAssert(sharp11Transforms.inversion == "5th")
     }
     
     func testThirteenChords() {
