@@ -253,15 +253,15 @@ public struct HarmonyModel {
         return nil
     }
     
-    // Possible new approach: transform intervals array into diatonic steps
+    // Transform intervals array into diatonic steps. Use that to calculate number of thirds up from root.
     private func getInversionFromThirdsAboveRoot(for bassIndex: Int, pitchCollectionInNormalForm pc: [Int]) -> TonalChordInversion? {
         guard let pcFirst = pc.first, pc.count > 2 else { return nil }
         let zeroBasedPC = pc.map { ($0 - pcFirst + 12) % 12 }
         guard let chordType = allTonalChordsByZeroBasedNormalForm[zeroBasedPC] else { return nil }
         let rootIndex = chordType.rootIndexInNormalForm
         let zeroBasedDiatonicStepsDiffs = diatonicIntervals(fromZeroBasedNormalFormPC: zeroBasedPC)
-        let numIntervalsFromRoot = (zeroBasedDiatonicStepsDiffs[bassIndex] - zeroBasedDiatonicStepsDiffs[rootIndex] + 7) % 7
-        let numThirds = (numIntervalsFromRoot / 2) + (numIntervalsFromRoot % 2 * 4)
+        let numStepsFromRoot = (zeroBasedDiatonicStepsDiffs[bassIndex] - zeroBasedDiatonicStepsDiffs[rootIndex] + 7) % 7
+        let numThirds = (numStepsFromRoot / 2) + (numStepsFromRoot % 2 * 4)
         return TonalChordInversion(numThirdsAboveRoot: numThirds)
     }
     
@@ -287,22 +287,4 @@ public struct HarmonyModel {
     }
     
     // [.a, .b, .d, .dSharp, .fSharp] -> [0, 2, 5, 6, 9] -> [0, 2, 3, 1, 3], should be [0, 1, 2, 3, 5]
-}
-
-extension Array {
-    func next(after currentIdx: Int) -> Int {
-        if (currentIdx + 1) < endIndex {
-            return index(after: currentIdx)
-        } else {
-            return 0
-        }
-    }
-    
-    func prev(before currentIdx: Int) -> Int {
-        if currentIdx == 0 {
-            return index(before: endIndex)
-        } else {
-            return index(before: currentIdx)
-        }
-    }
 }
