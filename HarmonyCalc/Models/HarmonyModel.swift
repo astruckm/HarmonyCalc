@@ -207,7 +207,7 @@ public struct HarmonyModel {
         return nil
     }
     
-    mutating func getChordInversion(of pitchCollection: [(PitchClass, Octave)]) -> String? {
+    mutating func getChordInversion_OLD(of pitchCollection: [(PitchClass, Octave)]) -> String? {
         guard pitchCollection.count >= 2 else { return nil }
         let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
         if let bassNoteKeyValue = pitchCollection.map({ keyValue(pitch: $0) }).min() {
@@ -239,26 +239,70 @@ public struct HarmonyModel {
         return nil
     }
     
-    private func getInversionFromThirdsAboveRoot(for bassIndex: Int, inIntervalsInNormalForm intervals: [Int]) -> TonalChordInversion? {
-        guard let chordType = allTonalChordsByIntervalsInNormalForm[intervals] else { return nil }
-        let rootIndex = chordType.rootIndexInNormalForm
-        let normalFormZeroBasedPC: [Int] = intervals.reduce(into: [Int]()) { $0.append(($0.last ?? 0) + $1) }
-        // traverse array "circle" by thirds from bassIndex until get to rootIndex, count steps
-        var currentThirds = 0
-        var currentIndex = bassIndex
-        repeat {
-            if currentIndex == rootIndex { break }
-            let nextIndex = ((currentIndex + normalFormZeroBasedPC.count) - 1) % normalFormZeroBasedPC.count
-            let nextDiff = ((normalFormZeroBasedPC[currentIndex] + 12) - normalFormZeroBasedPC[nextIndex]) % 12
-            currentIndex = nextIndex
-            if nextDiff < 3 {
-                // Only traversed a 2nd, go one more left to get a 3rd
-                currentIndex = ((currentIndex + normalFormZeroBasedPC.count) - 1) % normalFormZeroBasedPC.count
-            }
-            currentThirds += 1
-        } while currentIndex != bassIndex
-        
-        return TonalChordInversion(numThirdsAboveRoot: currentThirds)
+    mutating func getChordInversion(of pitchCollection: [(PitchClass, Octave)]) -> String? {
+        guard pitchCollection.count >= 2 else { return nil }
+        guard let bassNoteKeyValue = pitchCollection.map({ keyValue(pitch: $0) }).min() else { return nil }
+        let bassNote = putInRange(keyValue: bassNoteKeyValue)
+        let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
+        let pcNormalForm = normalForm(of: pitchClasses)
+        let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
+
+        if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote) {
+            return getInversionFromThirdsAboveRoot(for: bassNoteIndex, pitchCollectionInNormalForm: pcNormalForm.map { $0.rawValue })?.rawValue
+        }
+        return nil
     }
-        
+    
+    // Possible new approach: transform intervals array into diatonic steps
+    private func getInversionFromThirdsAboveRoot(for bassIndex: Int, pitchCollectionInNormalForm pc: [Int]) -> TonalChordInversion? {
+        guard let pcFirst = pc.first, pc.count > 2 else { return nil }
+        let zeroBasedPC = pc.map { ($0 - pcFirst + 12) % 12 }
+        guard let chordType = allTonalChordsByZeroBasedNormalForm[zeroBasedPC] else { return nil }
+        let rootIndex = chordType.rootIndexInNormalForm
+        let zeroBasedDiatonicStepsDiffs = diatonicIntervals(fromZeroBasedNormalFormPC: zeroBasedPC)
+        let numIntervalsFromRoot = (zeroBasedDiatonicStepsDiffs[bassIndex] - zeroBasedDiatonicStepsDiffs[rootIndex] + 7) % 7
+        let numThirds = (numIntervalsFromRoot / 2) + (numIntervalsFromRoot % 2 * 4)
+        return TonalChordInversion(numThirdsAboveRoot: numThirds)
+    }
+    
+    private func diatonicIntervals(fromZeroBasedNormalFormPC pc: [Int]) -> [Int] {
+        guard pc.count > 2 else { return [pc.reduce(0, { $1 - $0 })] }
+        let zeroBasedPCDiffs = pc.enumerated().map { $0.offset == 0 ? 0 : ($0.element - pc[$0.offset - 1]) }
+        var zeroBasedNormalFormDiatonicIntervals: [Int] = [0]
+        for idx in 1..<pc.count {
+            let semitonesUp = zeroBasedPCDiffs[idx]
+            let prevSemitonesUp = zeroBasedPCDiffs[zeroBasedPCDiffs.prev(before: idx)]
+            let nextSemitonesUp = zeroBasedPCDiffs[zeroBasedPCDiffs.next(after: idx)]
+            if semitonesUp == 3 && (prevSemitonesUp == 1 || nextSemitonesUp == 1) {
+                let stepsUp = 1
+                let prev = zeroBasedNormalFormDiatonicIntervals.last ?? 0
+                zeroBasedNormalFormDiatonicIntervals.append(prev + stepsUp)
+            } else {
+                let stepsUp = (semitonesUp / 2) + (semitonesUp % 2)
+                let prev = zeroBasedNormalFormDiatonicIntervals.last ?? 0
+                zeroBasedNormalFormDiatonicIntervals.append(prev + stepsUp)
+            }
+        }
+        return zeroBasedNormalFormDiatonicIntervals
+    }
+    
+    // [.a, .b, .d, .dSharp, .fSharp] -> [0, 2, 5, 6, 9] -> [0, 2, 3, 1, 3], should be [0, 1, 2, 3, 5]
+}
+
+extension Array {
+    func next(after currentIdx: Int) -> Int {
+        if (currentIdx + 1) < endIndex {
+            return index(after: currentIdx)
+        } else {
+            return 0
+        }
+    }
+    
+    func prev(before currentIdx: Int) -> Int {
+        if currentIdx == 0 {
+            return index(before: endIndex)
+        } else {
+            return index(before: currentIdx)
+        }
+    }
 }
