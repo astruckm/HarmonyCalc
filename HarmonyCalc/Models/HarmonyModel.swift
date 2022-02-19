@@ -18,40 +18,7 @@ public struct HarmonyModel {
     
     let maxNotesInCollection: Int
     var maxNotes: Int { return maxNotesInCollection % 12 }
-            
-    // Placeholder values for ambiguous chords: fully dim, aug, sus
-    //The index here = ([PitchClass].count of the chord) - intLiteralOfInversionName
-    //I.e. how many index "steps" to go through to get to the root
-    private let chordSymbolsRootInNormalFormByIntervals: [String: (chordSymbol: String, rootIndex: Int)] = [
-        "[4, 3]": (TonalChordType.major.rawValue, 0),
-        "[3, 4]": (TonalChordType.minor.rawValue, 0),
-        "[3, 3]": (TonalChordType.diminished.rawValue, 0),
-        "[4, 4]": (TonalChordType.augmented.rawValue, 0),
-        "[2, 5]": (TonalChordType.suspended.rawValue, 2),
-        
-        "[3, 3, 2]": (TonalChordType.dominantSeven.rawValue, 3),
-        "[3, 2, 3]": (TonalChordType.minorSeven.rawValue, 2),
-        "[1, 4, 3]": (TonalChordType.majorSeven.rawValue, 1),
-        "[3, 3, 3]": (TonalChordType.diminishedSeven.rawValue, 0),
-        "[2, 3, 3]": (TonalChordType.halfDiminishedSeven.rawValue, 1),
-        "[2, 2, 4]": (TonalChordType.augmentedSeven.rawValue, 2),
-        "[3, 1, 4]": (TonalChordType.augmentedMajorSeven.rawValue, 2),
-        
-        "[2, 2, 2, 3]": (TonalChordType.dominantNine.rawValue, 1),
-        "[1, 2, 2, 3]": (TonalChordType.majorNine.rawValue, 1),
-        "[3, 2, 2, 1]": (TonalChordType.minorNine.rawValue, 2),
-        "[2, 1, 3, 3]": (TonalChordType.flatNine.rawValue, 1),
-        "[2, 3, 1, 3]": (TonalChordType.sharpNine.rawValue, 1),
-        
-        "[2, 2, 2, 1, 2]": (TonalChordType.eleven.rawValue, 1),
-        "[1, 2, 2, 1, 2]": (TonalChordType.majorEleven.rawValue, 1),
-        "[2, 2, 1, 2, 2]": (TonalChordType.minorEleven.rawValue, 1),
-        "[2, 2, 2, 2, 1]": (TonalChordType.sharpEleven.rawValue, 1),
-        
-        "[1, 2, 2, 1, 2, 2]": (TonalChordType.thirteen.rawValue, 5)
-    ]
-        
-    private var allTonalChordsByZeroBasedNormalForm: [[Int]: TonalChordType] {
+    var allTonalChordsByZeroBasedNormalForm: [[Int]: TonalChordType] {
         return Dictionary(uniqueKeysWithValues: TonalChordType.allCases.map { ($0.zeroBasedNormalForm, $0) })
     }
     
@@ -196,56 +163,21 @@ public struct HarmonyModel {
         guard pitchCollection.count >= 2 else { return nil }
         let pcNoDuplicates = Array(Set(pitchCollection))
         let pcNormalForm = normalForm(of: pcNoDuplicates)
-        let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
-        if let chordSymbolIndex = chordSymbolsRootInNormalFormByIntervals[intervals.description],
-           let tonalChordType = TonalChordType(rawValue: chordSymbolIndex.chordSymbol),
-           chordSymbolIndex.rootIndex < pcNormalForm.count
-           {
-            let rootPitchClass = pcNormalForm[chordSymbolIndex.rootIndex]
+        let zeroBasedNormalForm = pcNormalForm.map { ($0.rawValue - pcNormalForm[0].rawValue + 12) % 12 }
+        if let tonalChordType = allTonalChordsByZeroBasedNormalForm[zeroBasedNormalForm], tonalChordType.rootIndexInNormalForm < pcNormalForm.count {
+            let rootIndex = tonalChordType.rootIndexInNormalForm
+            let rootPitchClass = pcNormalForm[rootIndex]
             return (rootPitchClass, tonalChordType)
         }
         return nil
     }
-    
-    mutating func getChordInversion_OLD(of pitchCollection: [(PitchClass, Octave)]) -> String? {
-        guard pitchCollection.count >= 2 else { return nil }
-        let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
-        if let bassNoteKeyValue = pitchCollection.map({ keyValue(pitch: $0) }).min() {
-            let bassNote = putInRange(keyValue: bassNoteKeyValue)
-            let pcNormalForm = normalForm(of: pitchClasses)
-            let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
-            
-            // Find where bassNote's index is in normal form
-            if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote),
-               let chordSymbolIndex = chordSymbolsRootInNormalFormByIntervals[intervals.description] {
-                let rootIndex = chordSymbolIndex.rootIndex
-                // old way, incorrect for 9s, 11s, 13s
-                var distanceFromRoot = Int(bassNoteIndex) - rootIndex
-                if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
-                
-                switch distanceFromRoot /*Should be thirdsAboveRoot */ {
-                case 0: return "Root"
-                case 1: return "1st"
-                case 2: return "2nd"
-                case 3: return "3rd"
-                case 4: return "4th"
-                case 5: return "5th"
-                case 6: return "6th"
-                default: return nil
-                }
-            }
-        }
         
-        return nil
-    }
-    
     mutating func getChordInversion(of pitchCollection: [(PitchClass, Octave)]) -> String? {
         guard pitchCollection.count >= 2 else { return nil }
         guard let bassNoteKeyValue = pitchCollection.map({ keyValue(pitch: $0) }).min() else { return nil }
         let bassNote = putInRange(keyValue: bassNoteKeyValue)
         let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
         let pcNormalForm = normalForm(of: pitchClasses)
-        let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
 
         if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote) {
             return getInversionFromThirdsAboveRoot(for: bassNoteIndex, pitchCollectionInNormalForm: pcNormalForm.map { $0.rawValue })?.rawValue
@@ -265,6 +197,7 @@ public struct HarmonyModel {
         return TonalChordInversion(numThirdsAboveRoot: numThirds)
     }
     
+    // e.g. [.a, .b, .d, .dSharp, .fSharp] -> [0, 2, 5, 6, 9] -> [0, 2, 3, 1, 3], should be [0, 1, 2, 3, 5]
     private func diatonicIntervals(fromZeroBasedNormalFormPC pc: [Int]) -> [Int] {
         guard pc.count > 2 else { return [pc.reduce(0, { $1 - $0 })] }
         let zeroBasedPCDiffs = pc.enumerated().map { $0.offset == 0 ? 0 : ($0.element - pc[$0.offset - 1]) }
@@ -286,5 +219,4 @@ public struct HarmonyModel {
         return zeroBasedNormalFormDiatonicIntervals
     }
     
-    // [.a, .b, .d, .dSharp, .fSharp] -> [0, 2, 5, 6, 9] -> [0, 2, 3, 1, 3], should be [0, 1, 2, 3, 5]
 }

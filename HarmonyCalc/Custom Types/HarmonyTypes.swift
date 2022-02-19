@@ -53,35 +53,7 @@ public enum TonalChordType: String, CaseIterable {
     case sharpEleven = "♯¹¹"
     
     case thirteen = "¹³"
-    
-    /// Ascending intervals when the chord is in normal form
-    var intervalsInNormalForm: [Int] {
-        switch self {
-        case .major: return [4, 3] // e.g. [g, b, d]
-        case .minor: return [3, 4]
-        case .diminished: return [3, 3]
-        case .augmented: return [4, 4]
-        case .suspended: return [2, 5]
-        case .dominantSeven: return [3, 3, 2] // e.g. [b, d, f, g] -> [0, 3, 6, 8]
-        case .minorSeven: return [3, 2, 3]
-        case .majorSeven: return [1, 4, 3]
-        case .diminishedSeven: return [3, 3, 3]
-        case .halfDiminishedSeven: return [2, 3, 3]
-        case .augmentedSeven: return [2, 2, 4]
-        case .augmentedMajorSeven: return [3, 1, 4]
-        case .dominantNine: return [2, 2, 2, 3] // e.g. [f, g, a, b, d] -> [0, 2, 4, 6, 9]
-        case .majorNine: return [1, 2, 2, 3]
-        case .minorNine: return [3, 2, 2, 1]
-        case .flatNine: return [2, 1, 3, 3]
-        case .sharpNine: return [2, 3, 1, 3]
-        case .eleven: return [2, 2, 2, 1, 2] // e.g. [f, g, a, b, c, d]
-        case .majorEleven: return [1, 2, 2, 1, 2]
-        case .minorEleven: return [2, 2, 1, 2, 2]
-        case .sharpEleven: return [2, 2, 2, 2, 1]
-        case .thirteen: return [1, 2, 2, 1, 2, 2] // e.g. [b, c, d, e, f, g, a], root is g
-        }
-    }
-    
+        
     /// The normal form of the chord with 0 / C as the lowest note
     var zeroBasedNormalForm: [Int] {
         switch self {
@@ -137,7 +109,6 @@ public enum TonalChordType: String, CaseIterable {
         case .thirteen: return 5
         }
     }
-    
 }
 
 enum TonalChordInversion: String, CaseIterable {
