@@ -9,6 +9,9 @@
 import Foundation
 
 extension Array {
+    /// Get the next element in an array as if it were a circular array.
+    /// - Parameter currentIdx: The index from which to get the next one.
+    /// - Returns: The index after the current index, or 0 if the current index is the last element.
     func next(after currentIdx: Int) -> Int {
         if (currentIdx + 1) < endIndex {
             return index(after: currentIdx)
@@ -17,6 +20,9 @@ extension Array {
         }
     }
     
+    /// Get the previous element in an array as if it were a circular array.
+    /// - Parameter currentIdx: The index from which to get the previous one.
+    /// - Returns: The index before the current index, or 0 if the current index is the last element.
     func prev(before currentIdx: Int) -> Int {
         if currentIdx == 0 {
             return index(before: endIndex)
