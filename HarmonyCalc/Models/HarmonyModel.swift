@@ -7,8 +7,6 @@
 //
 //  This struct is the brain of the calculator, taking in pitch classes and outputting tonal and atonal collections
 
-//TODO: break this up into smaller files: atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC (takes some NoteVC code too)
-
 import Foundation
 
 public struct HarmonyModel {
@@ -146,18 +144,6 @@ public struct HarmonyModel {
     //**********************************************************
     //MARK: Tonal collections
     //**********************************************************
-    
-    //Helper func, use on collections that are in normal form already
-    private mutating func intervalsBetweenPitches(pitchCollection: [PitchClass]) -> [Int] {
-        guard pitchCollection.count >= 2 else { return [] }
-        var intervalCollection: [Int] = []
-        for index in 0..<pitchCollection.count-1 {
-            let rawInterval = pitchCollection[index+1].rawValue - pitchCollection[index].rawValue
-            let interval = rawInterval >= 0 ? rawInterval : (rawInterval+12)
-            intervalCollection.append(interval)
-        }
-        return intervalCollection
-    }
     
     mutating func getChordIdentity(of pitchCollection: [PitchClass]) -> (root: PitchClass, chordQuality: TonalChordType)? {
         guard pitchCollection.count >= 2 else { return nil }

@@ -44,8 +44,8 @@ public enum TonalChordType: String, CaseIterable {
     case dominantNine = "⁹"
     case majorNine = "Maj⁹"
     case minorNine = "min⁹"
-    case flatNine = "⁷♭⁹"
-    case sharpNine = "⁷♯⁹"
+    case flatNine = "♭⁹"
+    case sharpNine = "♯⁹"
     
     case eleven = "¹¹"
     case majorEleven = "Maj¹¹"
