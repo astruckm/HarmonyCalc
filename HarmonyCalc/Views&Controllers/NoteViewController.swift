@@ -38,7 +38,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     //MARK: Properties
     //*****************************************
-    var harmonyModel = HarmonyModel(maxNotesInCollection: 6)
+    var harmonyModel = HarmonyModel(maxNotesInCollection: 7)
     var collectionUsesSharps = true
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")

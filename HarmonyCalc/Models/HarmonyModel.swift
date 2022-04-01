@@ -7,8 +7,6 @@
 //
 //  This struct is the brain of the calculator, taking in pitch classes and outputting tonal and atonal collections
 
-//TODO: break this up into smaller files: atonal harmony, tonal harmony, some all-harmonies class that stores outputs and converts everything to strings for VC (takes some NoteVC code too)
-
 import Foundation
 
 public struct HarmonyModel {
@@ -18,38 +16,10 @@ public struct HarmonyModel {
     
     let maxNotesInCollection: Int
     var maxNotes: Int { return maxNotesInCollection % 12 }
+    var allTonalChordsByZeroBasedNormalForm: [[Int]: TonalChordType] {
+        return Dictionary(uniqueKeysWithValues: TonalChordType.allCases.map { ($0.zeroBasedNormalForm, $0) })
+    }
     
-    //TODO: Add more chords
-    //TODO: These 2 dictionaries should be one data structure [String: [String: Int?]]
-    //In normal form
-    private let tonalChordIntervalsInNormalForm: [String: String] = [
-        "[4, 3]": "Maj",
-        "[3, 4]": "min",
-        "[3, 3]": "o",
-        "[4, 4]": "+",
-        "[2, 5]": "Sus",
-        "[3, 3, 2]": "⁷",
-        "[3, 2, 3]": "min⁷",
-        "[1, 4, 3]": "Maj⁷",
-        "[3, 3, 3]": "o⁷",
-        "[2, 3, 3]": "ø⁷"
-    ]
-    //The index here = ([PitchClass].count of the chord) - intLiteralOfInversionName
-    //I.e. how many index "steps" to go through to get to the root
-    //(index of bassNote in normal form) - (value here) gives inversion; if < 0, add [PitchClass].count
-    private let tonalChordRootIndexInNormalForm: [String: Int?] = [
-        "Maj": 0,
-        "min": 0,
-        "o": 0,
-        "+": 0, //placeholder value; will need enharmonic info to determine
-        "Sus": 2, //placeholder value
-        "⁷": 3,
-        "min⁷": 2,
-        "Maj⁷": 1,
-        "o⁷": 0, //placeholder value; will need enharmonic info to determine
-        "ø⁷": 1
-    ]
-            
     //**********************************************************
     //MARK: Set Theory
     //Using Joseph N. Straus' "Introduction to Post-Tonal Theory"
@@ -167,74 +137,72 @@ public struct HarmonyModel {
         
         //if inversion and uninverted are equally packed left
         return transposedToZero
-
+        
     }
     
     
     //**********************************************************
     //MARK: Tonal collections
     //**********************************************************
-
-    //Helper func, use on collections that are in normal form already
-    private mutating func intervalsBetweenPitches(pitchCollection: [PitchClass]) -> [Int] {
-        guard pitchCollection.count >= 2 else { return [] }
-        var intervalCollection: [Int] = []
-        for index in 0..<pitchCollection.count-1 {
-            let rawInterval = pitchCollection[index+1].rawValue - pitchCollection[index].rawValue
-            let interval = rawInterval >= 0 ? rawInterval : (rawInterval+12)
-            intervalCollection.append(interval)
-        }
-        return intervalCollection
-    }
     
     mutating func getChordIdentity(of pitchCollection: [PitchClass]) -> (root: PitchClass, chordQuality: TonalChordType)? {
         guard pitchCollection.count >= 2 else { return nil }
         let pcNoDuplicates = Array(Set(pitchCollection))
         let pcNormalForm = normalForm(of: pcNoDuplicates)
-        let intervals = intervalsBetweenPitches(pitchCollection: pcNormalForm)
-        //TODO: This chordType String is actually what I want to send to ViewController
-        if let chordType = tonalChordIntervalsInNormalForm[intervals.description] {
-            if let rootIndex = tonalChordRootIndexInNormalForm[chordType], let tonalChordType = TonalChordType(rawValue: chordType)  {
-                let rootPitchClass = pcNormalForm[rootIndex!]
-                return (rootPitchClass, tonalChordType)
-            }
+        let zeroBasedNormalForm = pcNormalForm.map { ($0.rawValue - pcNormalForm[0].rawValue + 12) % 12 }
+        if let tonalChordType = allTonalChordsByZeroBasedNormalForm[zeroBasedNormalForm], tonalChordType.rootIndexInNormalForm < pcNormalForm.count {
+            let rootIndex = tonalChordType.rootIndexInNormalForm
+            let rootPitchClass = pcNormalForm[rootIndex]
+            return (rootPitchClass, tonalChordType)
         }
         return nil
     }
-    
+        
     mutating func getChordInversion(of pitchCollection: [(PitchClass, Octave)]) -> String? {
         guard pitchCollection.count >= 2 else { return nil }
+        guard let bassNoteKeyValue = pitchCollection.map({ keyValue(pitch: $0) }).min() else { return nil }
+        let bassNote = putInRange(keyValue: bassNoteKeyValue)
         let pitchClasses: [PitchClass] = pitchCollection.map { $0.0 }
-        if let chordIdentity = getChordIdentity(of: pitchClasses) {
-            if let bassNoteKeyValue = pitchCollection.map({ pc in keyValue(pitch: pc) }).min() {
-                let bassNote = putInRange(keyValue: bassNoteKeyValue)
-                let pcNormalForm = normalForm(of: pitchClasses)
-                //See where bassNote's index is in normal form
-                if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote), let rootIndex = tonalChordRootIndexInNormalForm[chordIdentity.1.rawValue] {
-                    var distanceFromRoot = Int(bassNoteIndex) - rootIndex!
-                    if distanceFromRoot < 0 { distanceFromRoot += pcNormalForm.count }
-                    switch distanceFromRoot {
-                    case 0: return "Root"
-                    case 1: return "1st"
-                    case 2: return "2nd"
-                    case 3: return "3rd"
-                    default: return nil
-                    }
-                }
-            }
+        let pcNormalForm = normalForm(of: pitchClasses)
+
+        if let bassNoteIndex = pcNormalForm.firstIndex(of: bassNote) {
+            return getInversionFromThirdsAboveRoot(for: bassNoteIndex, pitchCollectionInNormalForm: pcNormalForm.map { $0.rawValue })?.rawValue
         }
         return nil
     }
     
-    //TODO: Chord (i.e. root + type/quality), inversion (i.e. root's index), normal form, prime form should all be called by func with massive output that is tuple of every chord form you would want, as Strings. ViewController shouldn't have to type convert.
-    mutating func getHarmonyValuesForDisplay(of pitchCollection: [(PitchClass, Octave)]) -> (normalForm: String, primeForm: String, chordIdentity: String?, chordInversion: String?) {
-        guard pitchCollection.count >= 2 else { return ("", "", nil, nil) }
-//        let normalForm = self.normalForm(of: pitchCollection.map { $0.0 } )
-            
-            //2. Use it to get prime form and chord type
-            //3. Use chord type to get inversion
-            //4. Convert everything to Strings
-        
-        return ("", "", nil, nil)
+    // Transform intervals array into diatonic steps. Use that to calculate number of thirds up from root.
+    private func getInversionFromThirdsAboveRoot(for bassIndex: Int, pitchCollectionInNormalForm pc: [Int]) -> TonalChordInversion? {
+        guard let pcFirst = pc.first, pc.count > 2 else { return nil }
+        let zeroBasedPC = pc.map { ($0 - pcFirst + 12) % 12 }
+        guard let chordType = allTonalChordsByZeroBasedNormalForm[zeroBasedPC] else { return nil }
+        let rootIndex = chordType.rootIndexInNormalForm
+        let zeroBasedDiatonicStepsDiffs = diatonicIntervals(fromZeroBasedNormalFormPC: zeroBasedPC)
+        let numStepsFromRoot = (zeroBasedDiatonicStepsDiffs[bassIndex] - zeroBasedDiatonicStepsDiffs[rootIndex] + 7) % 7
+        let numThirds = (numStepsFromRoot / 2) + (numStepsFromRoot % 2 * 4)
+        return TonalChordInversion(numThirdsAboveRoot: numThirds)
     }
+    
+    // e.g. [.a, .b, .d, .dSharp, .fSharp] -> [0, 2, 5, 6, 9] -> [0, 2, 3, 1, 3], should be [0, 1, 2, 3, 5]
+    private func diatonicIntervals(fromZeroBasedNormalFormPC pc: [Int]) -> [Int] {
+        guard pc.count > 2 else { return [pc.reduce(0, { $1 - $0 })] }
+        let zeroBasedPCDiffs = pc.enumerated().map { $0.offset == 0 ? 0 : ($0.element - pc[$0.offset - 1]) }
+        var zeroBasedNormalFormDiatonicIntervals: [Int] = [0]
+        for idx in 1..<pc.count {
+            let semitonesUp = zeroBasedPCDiffs[idx]
+            let prevSemitonesUp = zeroBasedPCDiffs[zeroBasedPCDiffs.prev(before: idx)]
+            let nextSemitonesUp = zeroBasedPCDiffs[zeroBasedPCDiffs.next(after: idx)]
+            if semitonesUp == 3 && (prevSemitonesUp == 1 || nextSemitonesUp == 1) {
+                let stepsUp = 1
+                let prev = zeroBasedNormalFormDiatonicIntervals.last ?? 0
+                zeroBasedNormalFormDiatonicIntervals.append(prev + stepsUp)
+            } else {
+                let stepsUp = (semitonesUp / 2) + (semitonesUp % 2)
+                let prev = zeroBasedNormalFormDiatonicIntervals.last ?? 0
+                zeroBasedNormalFormDiatonicIntervals.append(prev + stepsUp)
+            }
+        }
+        return zeroBasedNormalFormDiatonicIntervals
+    }
+    
 }
