@@ -70,23 +70,18 @@ class Audio: NSObject {
     }
     
     func playSounds(soundFileNames: [String]) {
-        if numPlayersPlaying != 0 {
-            for player in players.values {
-                if player.isPlaying {
-                    player.stop()
-                    player.currentTime = 0
-                    player.prepareToPlay()
-                }
+        guard let firstPlayer = players.first?.value else { return }
+        for player in players.values {
+            if player.isPlaying {
+                player.stop()
+                player.currentTime = 0
+                player.prepareToPlay()
             }
         }
-        var timeLeftToPlay: TimeInterval = 0.1
-        let queue = DispatchQueue(label: "playSounds", attributes: .concurrent)
+        let timeToPlay = firstPlayer.deviceCurrentTime + 0.05
         for player in players.values {
-            queue.asyncAfter(deadline: .now() + timeLeftToPlay) { [weak self] in
-                self?.numPlayersPlaying += 1
-                player.play()
-                timeLeftToPlay -= Date().timeIntervalSince1970
-            }
+            numPlayersPlaying += 1
+            player.play(atTime: timeToPlay)
         }
     }
     
