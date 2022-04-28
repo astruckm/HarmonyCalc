@@ -9,6 +9,7 @@ import Foundation
 import AVFoundation
 
 
+/// Uses a singleton instance for sound playback
 class Audio: NSObject {
     static let sharedInstance = Audio()
     
@@ -30,7 +31,8 @@ class Audio: NSObject {
         }
     }
         
-    //Load sound files if audio is not on
+    /// Load sound file into AVAudioPlayer object and add it to store of players
+    /// - Parameter url: Path of the audio file
     func loadSound(at url: URL) {
         do {
             let player = try AVAudioPlayer(contentsOf: url)
@@ -42,16 +44,18 @@ class Audio: NSObject {
         
     }
     
-    //Remove sound file if colored key is re-tapped
+    /// Use to remove the audio player if colored key is re-tapped
+    /// - Parameter url: Path of the
     func removeSound(at url: URL) {
-        players.removeValue(forKey: url)
         if let player = players[url] {
             player.stop()
             player.currentTime = 0
         }
+        players.removeValue(forKey: url)
     }
     
-    //Audio player
+    /// Play a single audio file, creating an AVAudioPlayer to do so
+    /// - Parameter soundFileName: The audio filename
     func playSound(soundFileName: String) {
         if let url = urlLookUp(of: soundFileName) {
             do {    
@@ -69,6 +73,8 @@ class Audio: NSObject {
         }
     }
     
+    /// Play multiple sounds at the same time
+    /// - Parameter soundFileNames: <#soundFileNames description#>
     func playSounds(soundFileNames: [String]) {
         guard let firstPlayer = players.first?.value else { return }
         for player in players.values {
