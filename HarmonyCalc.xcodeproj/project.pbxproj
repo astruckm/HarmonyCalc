@@ -42,6 +42,7 @@
 		724DE73227BE9D5F002ECF66 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
+		727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E794D2829585F00471A55 /* OSLog+Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
 		72A10F4821DA09FC0091861C /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */; };
@@ -102,6 +103,7 @@
 		725A2FBA212B715800B64C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		725A2FC1212B94BE00B64C21 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
+		727E794D2829585F00471A55 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		728230FC212AEE1300397FDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarmonyCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +171,7 @@
 			children = (
 				72F6210520A90D1300DBBE13 /* Sounds */,
 				724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */,
+				727E794D2829585F00471A55 /* OSLog+Extensions.swift */,
 				722E46EA2042593100DAF987 /* AppDelegate.swift */,
 				722E46F42042593100DAF987 /* Assets.xcassets */,
 				722E46F62042593100DAF987 /* LaunchScreen.storyboard */,
@@ -414,6 +417,7 @@
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
 				724DE73227BE9D5F002ECF66 /* Array+Extensions.swift in Sources */,
+				727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
 				72C71979206144D50055C742 /* NoteTypes.swift in Sources */,

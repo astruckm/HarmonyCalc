@@ -7,7 +7,7 @@
 
 import Foundation
 import AVFoundation
-
+import os.log
 
 /// Uses a singleton instance for sound playback
 class Audio: NSObject {
@@ -20,14 +20,14 @@ class Audio: NSObject {
         let session = AVAudioSession.sharedInstance()
         do {
             try session.setCategory(.playback, mode: .default)
-        } catch let error {
-            print("error setting audio session category: \(error.localizedDescription)")
+        } catch {
+            os_log("Error setting audio session category: %{public}@", log: OSLog.audioPlayback, type: .error, error.localizedDescription)
         }
         
         do {
             try session.setActive(true, options: .notifyOthersOnDeactivation)
-        } catch let error {
-            print("error activating audio session: \(error.localizedDescription)")
+        } catch {
+            os_log("Error activating audio session: %{public}@", log: OSLog.audioPlayback, type: .error, error.localizedDescription)
         }
     }
         
@@ -38,8 +38,8 @@ class Audio: NSObject {
             let player = try AVAudioPlayer(contentsOf: url)
             player.prepareToPlay()
             players[url] = player
-        } catch let error as NSError {
-            print(error.description)
+        } catch {
+            os_log("Error initializing audio player from url: : %{public}@", log: OSLog.audioPlayback, type: .error, error.localizedDescription)
         }
         
     }
@@ -65,11 +65,11 @@ class Audio: NSObject {
                 player.prepareToPlay()
                 player.play()
                 numPlayersPlaying += 1
-            } catch let error as NSError {
-                print(error.description)
+            } catch {
+                os_log("Could not initialize audio player with url %{public}@", log: OSLog.audioPlayback, type: .error, url.absoluteString)
             }
         } else {
-            print("Couldn't load audio file")
+            os_log("Couldn't load audio file, no sound file with name %{public}@ in app bundle", log: OSLog.audioPlayback, type: .error, soundFileName)
         }
     }
     
@@ -92,9 +92,7 @@ class Audio: NSObject {
     }
     
     func urlLookUp(of soundFileName: String) -> URL? {
-        if let url = Bundle.main.url(forResource: soundFileName, withExtension: "m4a") {
-            return url
-        } else { return nil }
+        return Bundle.main.url(forResource: soundFileName, withExtension: "m4a")
     }
 
 
