@@ -112,7 +112,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
             soundFileNames.append(soundFileName)
         }
         if audioIsOn {
-            audioEngine.playSounds(soundFileNames: soundFileNames)
+            audioEngine.playSounds()
         }
     }
     

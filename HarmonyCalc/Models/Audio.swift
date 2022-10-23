@@ -74,8 +74,7 @@ class Audio: NSObject {
     }
     
     /// Play multiple sounds at the same time
-    /// - Parameter soundFileNames: <#soundFileNames description#>
-    func playSounds(soundFileNames: [String]) {
+    func playSounds() {
         guard let firstPlayer = players.first?.value else { return }
         for player in players.values {
             if player.isPlaying {
