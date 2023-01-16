@@ -127,7 +127,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     private func getSoundFileName(ofKey key: (PitchClass, Octave)) -> String {
         let pitchClass = key.0
         let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
-        let keysValue = keyValue(pitch: key)
+        let keysValue = keyValue(key)
         let octave = String((keysValue / 12) + 4) ///+4 b/c C0 is C4 (i.e. middle C)
         let soundFileName = note + octave
         

@@ -112,7 +112,7 @@ public struct Note: Comparable, CustomStringConvertible {
             //If octave is nil (i.e. unknown), have to assume they are in the same octave
             return lhs.pitchClass.rawValue < rhs.pitchClass.rawValue
         }
-        return keyValue(pitch: (lhs.pitchClass, lhsOctave)) < keyValue(pitch: (rhs.pitchClass, rhsOctave))
+        return keyValue((lhs.pitchClass, lhsOctave)) < keyValue((rhs.pitchClass, rhsOctave))
     }
 
 }
