@@ -11,8 +11,8 @@ import XCTest
 
 final class NoteTransformsTests: XCTestCase {
     enum MockData {
-        static let octaveZero = Octave(rawValue: 0)!
-        static let octaveOne = Octave(rawValue: 1)!
+        static let octaveZero: Octave = .zero
+        static let octaveOne: Octave = .one
 
         static var cZero: PianoKey { (.c, octaveZero) }
         static var cSharpZero: PianoKey { (.cSharp, octaveZero) }
