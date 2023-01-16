@@ -10,9 +10,10 @@ import Foundation
 
 //input notes in a chord, output all possible inversions
 func allInversions(of collection: [PitchClass]) -> [[(PitchClass)]] {
+    guard !collection.isEmpty else { return [] }
     var allInversionsOfCollection = [[PitchClass]]()
     var inversion = collection.sorted(by: <)
-    for _ in 0...(collection.count-1) {
+    for _ in 0..<collection.count {
         allInversionsOfCollection.append(inversion)
         let firstNote = inversion.remove(at: 0)
         inversion.append(firstNote)

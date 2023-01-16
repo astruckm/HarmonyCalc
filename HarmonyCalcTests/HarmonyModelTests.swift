@@ -1,5 +1,5 @@
 //
-//  HarmonyCalcTests.swift
+//  HarmonyModelTests.swift
 //  HarmonyCalcTests
 //
 //  Created by ASM on 12/31/18.
@@ -9,8 +9,7 @@
 import XCTest
 @testable import HarmonyCalc
 
-class HarmonyCalcTests: XCTestCase {
-    
+class HarmonyModelTests: XCTestCase {
     //Mocks
     var harmonyModel = HarmonyModel(maxNotesInCollection: 88)
     
@@ -48,14 +47,6 @@ class HarmonyCalcTests: XCTestCase {
         static let allIntervalTetrachord: [PianoKey] = [(.g, .one), (.cSharp, .one), (.gSharp, .zero), (.b, .one)] // [0, 1, 4, 6]
     }
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-    
     func testNontonal() {
         let pitchCollection1: [PitchClass] = PianoKeyCollections.zeroTwoSix.map { $0.pitchClass }
         let normalFormPC: [PitchClass] = harmonyModel.normalForm(of: pitchCollection1)

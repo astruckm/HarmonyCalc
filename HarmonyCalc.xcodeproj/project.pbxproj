@@ -37,7 +37,7 @@
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
-		723974AA2581F7D500E036F5 /* B5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 723974A92581F7D500E036F5 /* B5.m4a */; };
+		7249BD2E29751672002DFD3E /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7249BD2D29751672002DFD3E /* ExtensionsTests.swift */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		724DE73227BE9D5F002ECF66 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
@@ -45,12 +45,14 @@
 		727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E794D2829585F00471A55 /* OSLog+Extensions.swift */; };
 		728230FD212AEE1300397FDE /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 728230FC212AEE1300397FDE /* Default-568h@2x.png */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
-		72A10F4821DA09FC0091861C /* HarmonyCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
+		72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */; };
+		72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B911B7297514C900D7D1BF /* NoteTypesTests.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
+		72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,7 @@
 		7213F59020AB07CF00090B75 /* D5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = D5.m4a; sourceTree = "<group>"; };
 		7213F59120AB07D000090B75 /* E5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = E5.m4a; sourceTree = "<group>"; };
 		7213F59220AB07D000090B75 /* C4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4.m4a; sourceTree = "<group>"; };
+		722C8B6B29751AB800F8549B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E46E72042593100DAF987 /* HarmonyCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonyCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		722E46EA2042593100DAF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		722E46EC2042593100DAF987 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
@@ -96,24 +99,23 @@
 		722E46F72042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722E46F92042593100DAF987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E471C2042598D00DAF987 /* HarmonyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModel.swift; sourceTree = "<group>"; };
-		723974A92581F7D500E036F5 /* B5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = B5.m4a; sourceTree = "<group>"; };
+		7249BD2D29751672002DFD3E /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
 		724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
-		725A2FBA212B715800B64C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModelTests.swift; sourceTree = "<group>"; };
 		725A2FC1212B94BE00B64C21 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		727E794D2829585F00471A55 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		728230FC212AEE1300397FDE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarmonyCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyCalcTests.swift; sourceTree = "<group>"; };
-		72A10F4921DA09FC0091861C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
 		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
+		72B911B7297514C900D7D1BF /* NoteTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypesTests.swift; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
+		72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransformsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +141,6 @@
 			children = (
 				722E46E92042593100DAF987 /* HarmonyCalc */,
 				725A2FB7212B715800B64C21 /* HarmonyCalcTests */,
-				72A10F4621DA09FC0091861C /* HarmonyCalcTests */,
 				722E46E82042593100DAF987 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -196,8 +197,11 @@
 		725A2FB7212B715800B64C21 /* HarmonyCalcTests */ = {
 			isa = PBXGroup;
 			children = (
-				725A2FB8212B715800B64C21 /* HarmonyCalcTests.swift */,
-				725A2FBA212B715800B64C21 /* Info.plist */,
+				7249BD2D29751672002DFD3E /* ExtensionsTests.swift */,
+				725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */,
+				72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */,
+				72B911B7297514C900D7D1BF /* NoteTypesTests.swift */,
+				722C8B6B29751AB800F8549B /* Info.plist */,
 			);
 			path = HarmonyCalcTests;
 			sourceTree = "<group>";
@@ -208,15 +212,6 @@
 				725A2FC1212B94BE00B64C21 /* Defaults.swift */,
 			);
 			path = Persistence;
-			sourceTree = "<group>";
-		};
-		72A10F4621DA09FC0091861C /* HarmonyCalcTests */ = {
-			isa = PBXGroup;
-			children = (
-				72A10F4721DA09FC0091861C /* HarmonyCalcTests.swift */,
-				72A10F4921DA09FC0091861C /* Info.plist */,
-			);
-			path = HarmonyCalcTests;
 			sourceTree = "<group>";
 		};
 		72A5E60E2124DEF600C52D45 /* Custom Types */ = {
@@ -249,7 +244,6 @@
 				7213F58D20AB07CF00090B75 /* F4.m4a */,
 				7213F58820AB07CF00090B75 /* G♭4.m4a */,
 				7213F57B20AB07CE00090B75 /* G4.m4a */,
-				723974A92581F7D500E036F5 /* B5.m4a */,
 				7213F57E20AB07CE00090B75 /* A♭4.m4a */,
 				7213F58020AB07CE00090B75 /* A4.m4a */,
 				7213F58F20AB07CF00090B75 /* B♭4.m4a */,
@@ -378,7 +372,6 @@
 				722E46F52042593100DAF987 /* Assets.xcassets in Resources */,
 				7213F59820AB07D000090B75 /* A4.m4a in Resources */,
 				7213F5A320AB07D000090B75 /* E♭4.m4a in Resources */,
-				723974AA2581F7D500E036F5 /* B5.m4a in Resources */,
 				7213F5A520AB07D000090B75 /* F4.m4a in Resources */,
 				7213F5A420AB07D000090B75 /* F5.m4a in Resources */,
 				7213F5A120AB07D000090B75 /* G♭5.m4a in Resources */,
@@ -428,7 +421,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A10F4821DA09FC0091861C /* HarmonyCalcTests.swift in Sources */,
+				72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */,
+				72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */,
+				7249BD2E29751672002DFD3E /* ExtensionsTests.swift in Sources */,
+				72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
