@@ -9,7 +9,7 @@
 import UIKit
 
 class DefinitionsViewController: UIViewController {
-    @IBOutlet weak var definition: UITextView!
+    @IBOutlet weak private(set) var definition: UITextView!
     
     let definitions: [String: String] = [
         "Chord": """
@@ -41,6 +41,4 @@ class DefinitionsViewController: UIViewController {
             definition.text = definitionsText
         }
     }
-    
-    //TODO: Dismiss button?
 }

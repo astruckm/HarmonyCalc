@@ -13,21 +13,21 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     //MARK: Outlets
     //*****************************************
-    @IBOutlet weak var chordButton: UIButton!
-    @IBOutlet weak var inversionButton: UIButton!
-    @IBOutlet weak var normalFormButton: UIButton!
-    @IBOutlet weak var primeFormButton: UIButton!
+    @IBOutlet weak private(set) var chordButton: UIButton!
+    @IBOutlet weak private(set) var inversionButton: UIButton!
+    @IBOutlet weak private(set) var normalFormButton: UIButton!
+    @IBOutlet weak private(set) var primeFormButton: UIButton!
     
-    @IBOutlet weak var noteName: UILabel!
-    @IBOutlet weak var chord: UILabel!
-    @IBOutlet weak var inversion: UILabel!
-    @IBOutlet weak var normalForm: UILabel!
-    @IBOutlet weak var primeForm: UILabel!
+    @IBOutlet weak private(set) var noteName: UILabel!
+    @IBOutlet weak private(set) var chord: UILabel!
+    @IBOutlet weak private(set) var inversion: UILabel!
+    @IBOutlet weak private(set) var normalForm: UILabel!
+    @IBOutlet weak private(set) var primeForm: UILabel!
     
-    @IBOutlet weak var flatSharp: UIButton!
-    @IBOutlet weak var audioOnOff: UIButton!
-    @IBOutlet weak var reset: UIButton!
-    @IBOutlet weak var piano: PianoView! {
+    @IBOutlet weak private(set) var flatSharp: UIButton!
+    @IBOutlet weak private(set) var audioOnOff: UIButton!
+    @IBOutlet weak private(set) var reset: UIButton!
+    @IBOutlet weak private(set) var piano: PianoView! {
         didSet {
             piano.noteCollectionDelegate = self
             piano.noteNameDelegate = self

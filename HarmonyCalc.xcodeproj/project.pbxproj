@@ -31,6 +31,7 @@
 		7213F5A820AB07D000090B75 /* D5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F59020AB07CF00090B75 /* D5.m4a */; };
 		7213F5A920AB07D000090B75 /* E5.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F59120AB07D000090B75 /* E5.m4a */; };
 		7213F5AA20AB07D000090B75 /* C4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F59220AB07D000090B75 /* C4.m4a */; };
+		721E3A3E297AA72E006B0292 /* NoteVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721E3A3D297AA72E006B0292 /* NoteVCTests.swift */; };
 		722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E46EA2042593100DAF987 /* AppDelegate.swift */; };
 		722E46ED2042593100DAF987 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E46EC2042593100DAF987 /* NoteViewController.swift */; };
 		722E46F02042593100DAF987 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46EE2042593100DAF987 /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
 		72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */; };
+		72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */; };
 		72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B911B7297514C900D7D1BF /* NoteTypesTests.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
@@ -90,6 +92,7 @@
 		7213F59020AB07CF00090B75 /* D5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = D5.m4a; sourceTree = "<group>"; };
 		7213F59120AB07D000090B75 /* E5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = E5.m4a; sourceTree = "<group>"; };
 		7213F59220AB07D000090B75 /* C4.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = C4.m4a; sourceTree = "<group>"; };
+		721E3A3D297AA72E006B0292 /* NoteVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteVCTests.swift; sourceTree = "<group>"; };
 		722C8B6B29751AB800F8549B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E46E72042593100DAF987 /* HarmonyCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonyCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		722E46EA2042593100DAF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
 		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
+		72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsVCTests.swift; sourceTree = "<group>"; };
 		72B911B7297514C900D7D1BF /* NoteTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypesTests.swift; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
@@ -197,6 +201,8 @@
 		725A2FB7212B715800B64C21 /* HarmonyCalcTests */ = {
 			isa = PBXGroup;
 			children = (
+				72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */,
+				721E3A3D297AA72E006B0292 /* NoteVCTests.swift */,
 				7249BD2D29751672002DFD3E /* ExtensionsTests.swift */,
 				725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */,
 				72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */,
@@ -423,7 +429,9 @@
 			files = (
 				72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */,
 				72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */,
+				721E3A3E297AA72E006B0292 /* NoteVCTests.swift in Sources */,
 				7249BD2E29751672002DFD3E /* ExtensionsTests.swift in Sources */,
+				72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */,
 				72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
