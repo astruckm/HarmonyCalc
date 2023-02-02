@@ -147,8 +147,8 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         piano.backgroundColor = .darkGray
         reset.setTitle("Clear", for: .normal)
         
-        audioIsOn = defaults.userDefaults.bool(forKey: defaults.audioIsOn)
-        collectionUsesSharps = defaults.userDefaults.bool(forKey: defaults.collectionUsesSharps)
+        audioIsOn = defaults.readAudioSetting()
+        collectionUsesSharps = defaults.readCollectionUsesSharps()
 
         let audioImage: UIImage? = audioIsOn ? audioOn : audioOff
         audioOnOff.setImage(audioImage, for: .normal)        
