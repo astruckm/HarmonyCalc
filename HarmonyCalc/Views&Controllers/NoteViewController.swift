@@ -43,7 +43,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
-    let defaults = Defaults()
+    var defaults: Defaults = Defaults()
     
     //*****************************************
     //NoteCollectionConstraints

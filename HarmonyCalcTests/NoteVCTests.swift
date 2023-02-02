@@ -4,7 +4,9 @@ import XCTest
 final class NoteVCTests: XCTestCase {
     func makeNoteVC() -> NoteViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        return sb.instantiateViewController(withIdentifier: String(describing: NoteViewController.self)) as! NoteViewController
+        let noteVC = sb.instantiateViewController(withIdentifier: String(describing: NoteViewController.self)) as! NoteViewController
+        noteVC.defaults = Defaults(defaultsObj: FakeUserDefaults())
+        return noteVC
     }
 
     func testLoadOutlets() throws {
@@ -29,6 +31,41 @@ final class NoteVCTests: XCTestCase {
         XCTAssertNotNil(sut.piano, "piano outlet is disconnected")
     }
 
+    func testPropertiesDefaultsAfterLoadingView() {
+        let sut = makeNoteVC()
+
+        sut.loadViewIfNeeded()
+
+        XCTAssertNotNil(sut.audioOn)
+        XCTAssertNotNil(sut.audioOff)
+        XCTAssertEqual(sut.reset.currentTitle, "Clear")
+
+        XCTAssertFalse(sut.audioIsOn)
+        XCTAssertEqual(sut.audioOnOff.imageView?.image, sut.audioOff)
+
+        XCTAssertFalse(sut.collectionUsesSharps)
+
+        XCTAssertTrue(sut.piano.keyByPathArea.isEmpty)
+    }
+
+    func testPropertiesLoadedFromUserDefaultsAfterLoadingView() {
+        let sut = makeNoteVC()
+        let newFakeUserDefaults = FakeUserDefaults()
+        let newDefaults = Defaults(defaultsObj: newFakeUserDefaults)
+        newFakeUserDefaults.settings = [
+            newDefaults.audioIsOn: true,
+            newDefaults.collectionUsesSharps: true
+        ]
+        sut.defaults = newDefaults
+
+        sut.loadViewIfNeeded()
+
+        XCTAssertTrue(sut.audioIsOn)
+        XCTAssertEqual(sut.audioOnOff.imageView?.image, sut.audioOn)
+
+        XCTAssertTrue(sut.collectionUsesSharps)
+    }
+
     func testResetIBActionButtonTap() {
         let sut = makeNoteVC()
 
@@ -50,8 +87,43 @@ final class NoteVCTests: XCTestCase {
         XCTAssertEqual(sut.chord.text, " ")
         XCTAssertEqual(sut.inversion.text, " ")
     }
+
+    func testAudioOnOffTapped() {
+        let sut = makeNoteVC()
+        sut.defaults.writeAudioSetting(true)
+
+        sut.loadViewIfNeeded()
+
+        XCTAssertTrue(sut.audioIsOn)
+        XCTAssertEqual(sut.audioOnOff.imageView?.image, sut.audioOn)
+
+        tap(sut.audioOnOff)
+
+        XCTAssertFalse(sut.audioIsOn)
+        XCTAssertEqual(sut.audioOnOff.imageView?.image, sut.audioOff)
+        XCTAssertFalse(sut.defaults.readAudioSetting())
+
+        tap(sut.audioOnOff)
+
+        XCTAssertTrue(sut.audioIsOn)
+        XCTAssertEqual(sut.audioOnOff.imageView?.image, sut.audioOn)
+        XCTAssertTrue(sut.defaults.readAudioSetting())
+    }
+
+    func testFlatSharpTappedChangesCollectionUsesSharps() {
+        let sut = makeNoteVC()
+        sut.defaults.writeCollectionUsesSharps(true)
+
+        sut.loadViewIfNeeded()
+
+        XCTAssertTrue(sut.collectionUsesSharps)
+        XCTAssertEqual(sut.flatSharp.titleLabel?.text, "♯ / ♭")
+
+        tap(sut.flatSharp)
+
+        XCTAssertFalse(sut.collectionUsesSharps)
+    }
+
+    // TODO: testFlatSharpTapped changes all the chord labels text
 }
 
-func tap(_ button: UIButton) {
-    button.sendActions(for: .touchUpInside)
-}
