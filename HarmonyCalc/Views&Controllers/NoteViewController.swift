@@ -272,20 +272,14 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
             let primeFormAsString = primeFormPC.map({String($0)})
             primeFormText = "(" + primeFormAsString.joined() + ")"
             
-            if let chordPC = harmonyModel.getChordIdentity(of: pitchClasses) {
-                let chordRoot = chordPC.0
+            if let chordInfo = harmonyModel.chord(from: touchedKeys) {
+                let chordRoot = chordInfo.root
                 //There are 3 possibilities: white key, sharp, or flat.
                 let chordRootAsString = (chordRoot.isBlackKey && !usingSharps) ? chordRoot.possibleSpellings[1] : chordRoot.possibleSpellings[0]
-                let chordQualityAsString = chordPC.1.rawValue
-                chordText = chordRootAsString + chordQualityAsString
+                chordText = chordRootAsString + chordInfo.quality
+                inversionText = chordInfo.inversion
             } else {
                 chordText = " "
-                chord.text = chordText
-            }
-            
-            if let chordInversion = harmonyModel.getChordInversion(of: touchedKeys) {
-                inversionText = chordInversion
-            } else {
                 inversionText = " "
             }
         } else {

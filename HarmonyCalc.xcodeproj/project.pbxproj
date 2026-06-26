@@ -60,6 +60,7 @@
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
 		72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */; };
+		72B1C0DE2FEC060000000002 /* PitchClassSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
 		72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransformsTests.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchClassSetTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 				7249BD2D29751672002DFD3E /* ExtensionsTests.swift */,
 				725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */,
 				72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */,
+				72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */,
 				72B911B7297514C900D7D1BF /* NoteTypesTests.swift */,
 				721E3A3D297AA72E006B0292 /* NoteVCTests.swift */,
 				724C6673298B5438003EBB58 /* TestHelpers.swift */,
@@ -455,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */,
+				72B1C0DE2FEC060000000002 /* PitchClassSetTests.swift in Sources */,
 				72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */,
 				721E3A3E297AA72E006B0292 /* NoteVCTests.swift in Sources */,
 				7249BD2E29751672002DFD3E /* ExtensionsTests.swift in Sources */,
