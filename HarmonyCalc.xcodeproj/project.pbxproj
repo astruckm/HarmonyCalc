@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -51,8 +51,11 @@
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
+		72B1C0DE2FEC050000000002 /* PitchClassSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC050000000001 /* PitchClassSet.swift */; };
 		72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */; };
 		72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */; };
+		72B108852FED65A600C6DE89 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 72B108842FED65A600C6DE89 /* Tonic */; };
+		72B1C0DE2FEC040000000002 /* TonicBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC040000000001 /* TonicBridge.swift */; };
 		72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B911B7297514C900D7D1BF /* NoteTypesTests.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
@@ -119,7 +122,9 @@
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
 		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
 		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC050000000001 /* PitchClassSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchClassSet.swift; sourceTree = "<group>"; };
 		72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsVCTests.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC040000000001 /* TonicBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonicBridge.swift; sourceTree = "<group>"; };
 		72B911B7297514C900D7D1BF /* NoteTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypesTests.swift; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
@@ -131,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B108852FED65A600C6DE89 /* Tonic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +155,7 @@
 			children = (
 				722E46E92042593100DAF987 /* HarmonyCalc */,
 				725A2FB7212B715800B64C21 /* HarmonyCalcTests */,
+				72B108832FED65A600C6DE89 /* Frameworks */,
 				722E46E82042593100DAF987 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -235,12 +242,21 @@
 			path = "Custom Types";
 			sourceTree = "<group>";
 		};
+		72B108832FED65A600C6DE89 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		72C7197A206145400055C742 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				728AEA3420AA51E000CBB974 /* Audio.swift */,
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
+				72B1C0DE2FEC040000000001 /* TonicBridge.swift */,
 				72A5E61121262F0600C52D45 /* NoteTransforms.swift */,
+				72B1C0DE2FEC050000000001 /* PitchClassSet.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -352,6 +368,9 @@
 				Base,
 			);
 			mainGroup = 722E46DE2042593100DAF987;
+			packageReferences = (
+				72B108822FEC035B00C6DE89 /* XCRemoteSwiftPackageReference "Tonic" */,
+			);
 			productRefGroup = 722E46E82042593100DAF987 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -419,8 +438,10 @@
 				725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */,
 				72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */,
 				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
+				72B1C0DE2FEC050000000002 /* PitchClassSet.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
+				72B1C0DE2FEC040000000002 /* TonicBridge.swift in Sources */,
 				724DE73227BE9D5F002ECF66 /* Array+Extensions.swift in Sources */,
 				727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
@@ -712,6 +733,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		72B108822FEC035B00C6DE89 /* XCRemoteSwiftPackageReference "Tonic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/Tonic";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72B108842FED65A600C6DE89 /* Tonic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 72B108822FEC035B00C6DE89 /* XCRemoteSwiftPackageReference "Tonic" */;
+			productName = Tonic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 722E46DF2042593100DAF987 /* Project object */;
 }
