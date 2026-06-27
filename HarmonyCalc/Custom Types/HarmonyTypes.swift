@@ -34,8 +34,8 @@ enum TonalChordInversion: String, CaseIterable {
     case fifth = "5th"
     case sixth = "6th"
 
-    init(numThirdsAboveRoot: Int) {
-        let numThirds = numThirdsAboveRoot % TonalChordInversion.allCases.count
-        self = TonalChordInversion.allCases[numThirds]
+    init(inversionIndex: Int) {
+        let index = inversionIndex % TonalChordInversion.allCases.count
+        self = TonalChordInversion.allCases[index]
     }
 }

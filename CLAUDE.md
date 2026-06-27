@@ -18,7 +18,7 @@ Try to ensure your diff contains minimal whitespace changes, especially to blank
 See `.claude/rules/git.md` for details.
 
 ### Building
-Do not run `xcodebuild` unless explicitly asked. Use `HarmonyCalc.xcodeproj` for all development.
+In this project, you can run `xcodebuild` after a user prompt to implement a diff. In particular, please run the unit tests in the project after implementing such diffs. Use `HarmonyCalc.xcodeproj` for all development.
 
 ## Code Quality
 

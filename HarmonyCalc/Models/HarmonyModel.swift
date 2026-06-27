@@ -17,6 +17,28 @@ public struct HarmonyModel {
     let maxNotesInCollection: Int
     var maxNotes: Int { return maxNotesInCollection % 12 }
 
+    // Index tonal chords once by absolute pitch-class set for O(1) lookup.
+    private static let chordsByPitchClassMask: [Int: [Chord]] = {
+        let accidentals: [Accidental] = Accidental.allCases
+        var table: [Int: [Chord]] = [:]
+        for type in ChordType.allCases {
+            for accidental in accidentals {
+                for letter in Letter.allCases {
+                    let chord = Chord(NoteClass(letter, accidental: accidental), type: type)
+                    guard chord.noteClasses.count > type.intervals.count else { continue }
+                    let mask = HarmonyModel.pitchClassMask(of: chord.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) })
+                    table[mask, default: []].append(chord)
+                }
+            }
+        }
+        // Prefer the simplest chord type when several match the same pitch-class set.
+        let typeRank = Dictionary(uniqueKeysWithValues: ChordType.allCases.enumerated().map { ($1, $0) })
+        for mask in table.keys {
+            table[mask]?.sort { (typeRank[$0.type] ?? 0, $0.root.intValue) < (typeRank[$1.type] ?? 0, $1.root.intValue) }
+        }
+        return table
+    }()
+
     init(maxNotesInCollection: Int) {
         self.maxNotesInCollection = maxNotesInCollection
         _ = HarmonyModel.chordsByPitchClassMask
@@ -39,28 +61,6 @@ public struct HarmonyModel {
     //**********************************************************
     //MARK: Tonal collections
     //**********************************************************
-    
-    // Index Tonic's chord vocabulary once by absolute pitch-class set for O(1) lookup.
-    private static let chordsByPitchClassMask: [Int: [Chord]] = {
-        let accidentals: [Accidental] = [.natural, .flat, .sharp, .doubleFlat, .doubleSharp]
-        var table: [Int: [Chord]] = [:]
-        for type in ChordType.allCases {
-            for accidental in accidentals {
-                for letter in Letter.allCases {
-                    let chord = Chord(NoteClass(letter, accidental: accidental), type: type)
-                    guard chord.noteClasses.count > type.intervals.count else { continue }
-                    let mask = HarmonyModel.pitchClassMask(of: chord.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) })
-                    table[mask, default: []].append(chord)
-                }
-            }
-        }
-        // Prefer the simplest chord type when several match the same pitch-class set.
-        let typeRank = Dictionary(uniqueKeysWithValues: ChordType.allCases.enumerated().map { ($1, $0) })
-        for mask in table.keys {
-            table[mask]?.sort { (typeRank[$0.type] ?? 0, $0.root.intValue) < (typeRank[$1.type] ?? 0, $1.root.intValue) }
-        }
-        return table
-    }()
 
     func chord(from keys: [PianoKey]) -> (root: PitchClass, quality: String, inversion: String)? {
         guard keys.count >= 2 else { return nil }
@@ -74,7 +74,7 @@ public struct HarmonyModel {
         guard let root = pitchClass(from: chosen.root) else { return nil }
         let chordPitchClasses = chosen.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) }
         let inversionIndex = chordPitchClasses.firstIndex(of: bassPitchClass) ?? 0
-        let inversion = TonalChordInversion(numThirdsAboveRoot: inversionIndex).rawValue
+        let inversion = TonalChordInversion(inversionIndex: inversionIndex).rawValue
         return (root, chosen.type.description, inversion)
     }
 
