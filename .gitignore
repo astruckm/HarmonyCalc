@@ -92,3 +92,13 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# AI coding assistants
+.claude/
+.codex/
+.mcp.json
+AGENTS.md
+CLAUDE.md
+
+# Legacy launch image, superseded by LaunchScreen.storyboard
+/Default-568h@2x.png
