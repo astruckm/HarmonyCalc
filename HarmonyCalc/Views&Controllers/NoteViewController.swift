@@ -13,21 +13,21 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     //MARK: Outlets
     //*****************************************
-    @IBOutlet weak var chordButton: UIButton!
-    @IBOutlet weak var inversionButton: UIButton!
-    @IBOutlet weak var normalFormButton: UIButton!
-    @IBOutlet weak var primeFormButton: UIButton!
+    @IBOutlet weak private(set) var chordButton: UIButton!
+    @IBOutlet weak private(set) var inversionButton: UIButton!
+    @IBOutlet weak private(set) var normalFormButton: UIButton!
+    @IBOutlet weak private(set) var primeFormButton: UIButton!
     
-    @IBOutlet weak var noteName: UILabel!
-    @IBOutlet weak var chord: UILabel!
-    @IBOutlet weak var inversion: UILabel!
-    @IBOutlet weak var normalForm: UILabel!
-    @IBOutlet weak var primeForm: UILabel!
+    @IBOutlet weak private(set) var noteName: UILabel!
+    @IBOutlet weak private(set) var chord: UILabel!
+    @IBOutlet weak private(set) var inversion: UILabel!
+    @IBOutlet weak private(set) var normalForm: UILabel!
+    @IBOutlet weak private(set) var primeForm: UILabel!
     
-    @IBOutlet weak var flatSharp: UIButton!
-    @IBOutlet weak var audioOnOff: UIButton!
-    @IBOutlet weak var reset: UIButton!
-    @IBOutlet weak var piano: PianoView! {
+    @IBOutlet weak private(set) var flatSharp: UIButton!
+    @IBOutlet weak private(set) var audioOnOff: UIButton!
+    @IBOutlet weak private(set) var reset: UIButton!
+    @IBOutlet weak private(set) var piano: PianoView! {
         didSet {
             piano.noteCollectionDelegate = self
             piano.noteNameDelegate = self
@@ -43,7 +43,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
-    let defaults = Defaults()
+    var defaults: Defaults = Defaults()
     
     //*****************************************
     //NoteCollectionConstraints
@@ -127,7 +127,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     private func getSoundFileName(ofKey key: (PitchClass, Octave)) -> String {
         let pitchClass = key.0
         let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
-        let keysValue = keyValue(pitch: key)
+        let keysValue = keyValue(key)
         let octave = String((keysValue / 12) + 4) ///+4 b/c C0 is C4 (i.e. middle C)
         let soundFileName = note + octave
         
@@ -147,8 +147,8 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         piano.backgroundColor = .darkGray
         reset.setTitle("Clear", for: .normal)
         
-        audioIsOn = defaults.userDefaults.bool(forKey: defaults.audioIsOn)
-        collectionUsesSharps = defaults.userDefaults.bool(forKey: defaults.collectionUsesSharps)
+        audioIsOn = defaults.readAudioSetting()
+        collectionUsesSharps = defaults.readCollectionUsesSharps()
 
         let audioImage: UIImage? = audioIsOn ? audioOn : audioOff
         audioOnOff.setImage(audioImage, for: .normal)        
@@ -272,20 +272,14 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
             let primeFormAsString = primeFormPC.map({String($0)})
             primeFormText = "(" + primeFormAsString.joined() + ")"
             
-            if let chordPC = harmonyModel.getChordIdentity(of: pitchClasses) {
-                let chordRoot = chordPC.0
+            if let chordInfo = harmonyModel.chord(from: touchedKeys) {
+                let chordRoot = chordInfo.root
                 //There are 3 possibilities: white key, sharp, or flat.
                 let chordRootAsString = (chordRoot.isBlackKey && !usingSharps) ? chordRoot.possibleSpellings[1] : chordRoot.possibleSpellings[0]
-                let chordQualityAsString = chordPC.1.rawValue
-                chordText = chordRootAsString + chordQualityAsString
+                chordText = chordRootAsString + chordInfo.quality
+                inversionText = chordInfo.inversion
             } else {
                 chordText = " "
-                chord.text = chordText
-            }
-            
-            if let chordInversion = harmonyModel.getChordInversion(of: touchedKeys) {
-                inversionText = chordInversion
-            } else {
                 inversionText = " "
             }
         } else {

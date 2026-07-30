@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,7 +13,7 @@
         <!--Note View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="NoteViewController" customModule="HarmonyCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NoteViewController" id="BYZ-38-t0r" customClass="NoteViewController" customModule="HarmonyCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -214,7 +214,6 @@
                                             <constraint firstItem="6sQ-os-gOA" firstAttribute="height" secondItem="cYC-3W-bG4" secondAttribute="height" id="iYX-YQ-swG"/>
                                         </constraints>
                                         <variation key="heightClass=compact" axis="horizontal" distribution="equalSpacing"/>
-                                        <variation key="heightClass=regular-widthClass=regular"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
@@ -347,7 +346,7 @@
         <!--Definitions View Controller-->
         <scene sceneID="5H3-Sf-wSK">
             <objects>
-                <viewController modalPresentationStyle="currentContext" id="SiE-2d-NtS" userLabel="Definitions View Controller" customClass="DefinitionsViewController" customModule="HarmonyCalc" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefinitionsViewController" modalPresentationStyle="currentContext" id="SiE-2d-NtS" userLabel="Definitions View Controller" customClass="DefinitionsViewController" customModule="HarmonyCalc" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S4p-8A-Nl8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

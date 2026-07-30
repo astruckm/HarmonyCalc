@@ -1,5 +1,5 @@
 //
-//  HarmonyCalcTests.swift
+//  HarmonyModelTests.swift
 //  HarmonyCalcTests
 //
 //  Created by ASM on 12/31/18.
@@ -9,10 +9,9 @@
 import XCTest
 @testable import HarmonyCalc
 
-class HarmonyCalcTests: XCTestCase {
-    
+class HarmonyModelTests: XCTestCase {
     //Mocks
-    var harmonyModel = HarmonyModel(maxNotesInCollection: 88)
+    let harmonyModel = HarmonyModel(maxNotesInCollection: 88)
     
     enum PianoKeyCollections {
         // Tonal
@@ -48,177 +47,152 @@ class HarmonyCalcTests: XCTestCase {
         static let allIntervalTetrachord: [PianoKey] = [(.g, .one), (.cSharp, .one), (.gSharp, .zero), (.b, .one)] // [0, 1, 4, 6]
     }
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-    
     func testNontonal() {
         let pitchCollection1: [PitchClass] = PianoKeyCollections.zeroTwoSix.map { $0.pitchClass }
         let normalFormPC: [PitchClass] = harmonyModel.normalForm(of: pitchCollection1)
         
         XCTAssert(normalFormPC == [.gSharp, .c, .d])
         XCTAssert(harmonyModel.primeForm(ofCollectionInNormalForm: normalFormPC) == [0,2,6])
-        XCTAssert(harmonyModel.getChordIdentity(of: pitchCollection1) == nil)
-        let keys1 = pitchCollection1.map { ($0, Octave.zero) }
-        XCTAssert(harmonyModel.getChordInversion(of: keys1) == nil)
+        assertChord(harmonyModel.chord(from: PianoKeyCollections.zeroTwoSix), .gSharp, "(♭5)", "1st")
+        XCTAssertNil(harmonyModel.chord(from: PianoKeyCollections.allIntervalTetrachord))
     }
     
     func testTriads() {
         let majorTransforms = performCollectionTransforms(PianoKeyCollections.dMaj)
         XCTAssert(majorTransforms.normalForm == [.d, .fSharp, .a])
         XCTAssert(majorTransforms.primeForm == [0, 3, 7])
-        XCTAssert(majorTransforms.identity ?? (.c, .major) == (.d, .major))
-        XCTAssert(majorTransforms.inversion == "Root")
+        assertChord(majorTransforms.chord, .d, "", "Root")
 
         let minorTransforms = performCollectionTransforms(PianoKeyCollections.fMin)
         XCTAssert(minorTransforms.normalForm == [.f, .gSharp, .c])
         XCTAssert(minorTransforms.primeForm == [0, 3, 7])
-        XCTAssert(minorTransforms.identity ?? (.c, .major) == (.f, .minor))
-        XCTAssert(minorTransforms.inversion == "1st")
+        assertChord(minorTransforms.chord, .f, "m", "1st")
 
         let dimTransforms = performCollectionTransforms(PianoKeyCollections.cSharpDim)
         XCTAssert(dimTransforms.normalForm == [.cSharp, .e, .g])
         XCTAssert(dimTransforms.primeForm == [0, 3, 6])
-        XCTAssert(dimTransforms.identity ?? (.c, .major) == (.cSharp, .diminished))
-        XCTAssert(dimTransforms.inversion == "Root")
+        assertChord(dimTransforms.chord, .cSharp, "°", "Root")
         
         let augTransforms = performCollectionTransforms(PianoKeyCollections.cAug)
         XCTAssert(augTransforms.normalForm == [.c, .e, .gSharp])
         XCTAssert(augTransforms.primeForm == [0, 4, 8])
-        XCTAssert(augTransforms.identity ?? (.c, .major) == (.c, .augmented))
-        XCTAssert(augTransforms.inversion == "1st")
+        assertChord(augTransforms.chord, .e, "⁺", "Root")
         
         let sus4Transforms = performCollectionTransforms(PianoKeyCollections.esus4)
         XCTAssert(sus4Transforms.normalForm == [.a, .b, .e])
         XCTAssert(sus4Transforms.primeForm == [0, 2, 7])
-        XCTAssert(sus4Transforms.identity ?? (.c, .major) == (.e, .suspended))
-        XCTAssert(sus4Transforms.inversion == "Root")
+        assertChord(sus4Transforms.chord, .e, "sus4", "Root")
     }
     
     func testSevenChords() {
         let dom7Transforms = performCollectionTransforms(PianoKeyCollections.fSharpDominant7)
         XCTAssert(dom7Transforms.normalForm == [.aSharp, .cSharp, .e, .fSharp])
         XCTAssert(dom7Transforms.primeForm == [0, 2, 5, 8])
-        XCTAssert(dom7Transforms.identity ?? (.c, .major) == (.fSharp, .dominantSeven))
-        XCTAssert(dom7Transforms.inversion == "Root")
+        assertChord(dom7Transforms.chord, .fSharp, "7", "Root")
         
         let maj7Transforms = performCollectionTransforms(PianoKeyCollections.eMaj7)
         XCTAssert(maj7Transforms.normalForm == [.dSharp, .e, .gSharp, .b])
         XCTAssert(maj7Transforms.primeForm == [0, 1, 5, 8])
-        XCTAssert(maj7Transforms.identity ?? (.c, .major) == (.e, .majorSeven))
-        XCTAssert(maj7Transforms.inversion == "3rd")
+        assertChord(maj7Transforms.chord, .e, "maj7", "3rd")
 
         let min7Transforms = performCollectionTransforms(PianoKeyCollections.eMin7)
         XCTAssert(min7Transforms.normalForm == [.b, .d, .e, .g])
         XCTAssert(min7Transforms.primeForm == [0, 3, 5, 8])
-        XCTAssert(min7Transforms.identity ?? (.c, .major) == (.e, .minorSeven))
-        XCTAssert(min7Transforms.inversion == "Root")
+        assertChord(min7Transforms.chord, .e, "m7", "Root")
         
         let fullyDim7Transforms = performCollectionTransforms(PianoKeyCollections.gSharpFullyDim7)
         XCTAssert(fullyDim7Transforms.normalForm == [.b, .d, .f, .gSharp])
         XCTAssert(fullyDim7Transforms.primeForm == [0, 3, 6, 9])
-        XCTAssert(fullyDim7Transforms.identity ?? (.c, .major) == (.b, .diminishedSeven))
-        XCTAssert(fullyDim7Transforms.inversion == "3rd")
+        assertChord(fullyDim7Transforms.chord, .d, "°7", "Root")
 
         let halfDim7Transforms = performCollectionTransforms(PianoKeyCollections.bHalfDim7)
         XCTAssert(halfDim7Transforms.normalForm == [.a, .b, .d, .f])
         XCTAssert(halfDim7Transforms.primeForm == [0, 2, 5, 8])
-        XCTAssert(halfDim7Transforms.identity ?? (.c, .major) == (.b, .halfDiminishedSeven))
-        XCTAssert(halfDim7Transforms.inversion == "3rd")
+        assertChord(halfDim7Transforms.chord, .b, "ø7", "3rd")
         
         let aug7Transforms = performCollectionTransforms(PianoKeyCollections.cAug7)
         XCTAssert(aug7Transforms.normalForm == [.gSharp, .aSharp, .c, .e])
         XCTAssert(aug7Transforms.primeForm == [0, 2, 4, 8])
-        XCTAssert(aug7Transforms.identity ?? (.c, .major) == (.c, .augmentedSeven))
-        XCTAssert(aug7Transforms.inversion == "1st")
+        assertChord(aug7Transforms.chord, .c, "7(♯5)", "1st")
         
         let augMaj7Transforms = performCollectionTransforms(PianoKeyCollections.dAugMaj7)
         XCTAssert(augMaj7Transforms.normalForm == [.aSharp, .cSharp, .d, .fSharp])
         XCTAssert(augMaj7Transforms.primeForm == [0, 3, 4, 8])
-        XCTAssert(augMaj7Transforms.identity ?? (.c, .major) == (.d, .augmentedMajorSeven))
-        XCTAssert(augMaj7Transforms.inversion == "1st")
+        assertChord(augMaj7Transforms.chord, .d, "maj7(♯5)", "1st")
     }
     
     func testNineChords() {
         let dom9Transforms = performCollectionTransforms(PianoKeyCollections.fDominant9)
         XCTAssert(dom9Transforms.normalForm == [.dSharp, .f, .g, .a, .c])
         XCTAssert(dom9Transforms.primeForm == [0, 2, 4, 6, 9])
-        XCTAssert(dom9Transforms.identity ?? (.c, .major) == (.f, .dominantNine))
-        XCTAssert(dom9Transforms.inversion == "3rd")
+        assertChord(dom9Transforms.chord, .f, "9", "3rd")
         
         let maj9Transforms = performCollectionTransforms(PianoKeyCollections.gMaj9)
         XCTAssert(maj9Transforms.normalForm == [.fSharp, .g, .a, .b, .d])
         XCTAssert(maj9Transforms.primeForm == [0, 1, 3, 5, 8])
-        XCTAssert(maj9Transforms.identity ?? (.c, .major) == (.g, .majorNine))
-        XCTAssert(maj9Transforms.inversion == "3rd")
+        assertChord(maj9Transforms.chord, .g, "maj9", "3rd")
         
         let min9Transforms = performCollectionTransforms(PianoKeyCollections.aMin9)
         XCTAssert(min9Transforms.normalForm == [.e, .g, .a, .b, .c])
         XCTAssert(min9Transforms.primeForm == [0, 1, 3, 5, 8])
-        XCTAssert(min9Transforms.identity ?? (.c, .major) == (.a, .minorNine))
-        XCTAssert(min9Transforms.inversion == "Root")
+        assertChord(min9Transforms.chord, .a, "m9", "Root")
         
         let flat9Transforms = performCollectionTransforms(PianoKeyCollections.g7Flat9)
         XCTAssert(flat9Transforms.normalForm == [.f, .g, .gSharp, .b, .d])
         XCTAssert(flat9Transforms.primeForm == [0, 2, 3, 6, 9])
-        XCTAssert(flat9Transforms.identity ?? (.c, .major) == (.g, .flatNine))
-        XCTAssert(flat9Transforms.inversion == "2nd")
+        assertChord(flat9Transforms.chord, .f, "°9", "3rd")
         
         let sharp9Transforms = performCollectionTransforms(PianoKeyCollections.b7Sharp9)
         XCTAssert(sharp9Transforms.normalForm == [.a, .b, .d, .dSharp, .fSharp])
         XCTAssert(sharp9Transforms.primeForm == [0, 2, 5, 6, 9])
-        XCTAssert(sharp9Transforms.identity ?? (.c, .major) == (.b, .sharpNine))
-        XCTAssert(sharp9Transforms.inversion == "4th")
+        assertChord(sharp9Transforms.chord, .b, "7(♯9)", "4th")
     }
     
     func testElevenChords() {
         let dom11Transforms = performCollectionTransforms(PianoKeyCollections.eFlatDominant11)
         XCTAssert(dom11Transforms.normalForm == [.cSharp, .dSharp, .f, .g, .gSharp, .aSharp])
         XCTAssert(dom11Transforms.primeForm == [0, 2, 3, 5, 7, 9])
-        XCTAssert(dom11Transforms.identity ?? (.c, .major) == (.dSharp, .eleven))
-        XCTAssert(dom11Transforms.inversion == "5th")
+        assertChord(dom11Transforms.chord, .gSharp, "maj13sus2", "Root")
         
         let maj11Transforms = performCollectionTransforms(PianoKeyCollections.cMaj11)
         XCTAssert(maj11Transforms.normalForm == [.b, .c, .d, .e, .f, .g])
         XCTAssert(maj11Transforms.primeForm == [0, 1, 3, 5, 6, 8])
-        XCTAssert(maj11Transforms.identity ?? (.c, .major) == (.c, .majorEleven))
-        XCTAssert(maj11Transforms.inversion == "Root")
+        assertChord(maj11Transforms.chord, .c, "maj11", "Root")
         
         let min11Transforms = performCollectionTransforms(PianoKeyCollections.eMin11)
         XCTAssert(min11Transforms.normalForm == [.d, .e, .fSharp, .g, .a, .b])
         XCTAssert(min11Transforms.primeForm == [0, 2, 4, 5, 7, 9])
-        XCTAssert(min11Transforms.identity ?? (.c, .major) == (.e, .minorEleven))
-        XCTAssert(min11Transforms.inversion == "4th")
+        assertChord(min11Transforms.chord, .e, "m11", "4th")
         
         let sharp11Transforms = performCollectionTransforms(PianoKeyCollections.a7Sharp11)
         XCTAssert(sharp11Transforms.normalForm == [.g, .a, .b, .cSharp, .dSharp, .e])
         XCTAssert(sharp11Transforms.primeForm == [0, 1, 3, 5, 7, 9])
-        XCTAssert(sharp11Transforms.identity ?? (.c, .major) == (.a, .sharpEleven))
-        XCTAssert(sharp11Transforms.inversion == "5th")
+        assertChord(sharp11Transforms.chord, .b, "11(♯5)", "1st")
     }
     
     func testThirteenChords() {
         let dom13Transforms = performCollectionTransforms(PianoKeyCollections.aDominant13)
         XCTAssert(dom13Transforms.normalForm == [.cSharp, .d, .e, .fSharp, .g, .a, .b])
         XCTAssert(dom13Transforms.primeForm == [0, 1, 3, 5, 6, 8, 10])
-        XCTAssert(dom13Transforms.identity ?? (.c, .major) == (.a, .thirteen))
-        XCTAssert(dom13Transforms.inversion == "2nd")
+        assertChord(dom13Transforms.chord, .e, "m13", "Root")
     }
         
+    private func assertChord(_ chord: (root: PitchClass, quality: String, inversion: String)?,
+                             _ root: PitchClass, _ quality: String, _ inversion: String,
+                             file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(chord?.root, root, file: file, line: line)
+        XCTAssertEqual(chord?.quality, quality, file: file, line: line)
+        XCTAssertEqual(chord?.inversion, inversion, file: file, line: line)
+    }
+    
     private func performCollectionTransforms(_ keys: [PianoKey]) -> (normalForm: [PitchClass],
                                                                                   primeForm: [Int],
-                                                                                  identity: (root: PitchClass, chordQuality: TonalChordType)?,
-                                                                                  inversion: String?) {
+                                                                                  chord: (root: PitchClass, quality: String, inversion: String)?) {
         let pitchCollection = keys.map { $0.pitchClass }
         let normalForm = harmonyModel.normalForm(of: pitchCollection)
         let primeForm = harmonyModel.primeForm(ofCollectionInNormalForm: normalForm)
-        let chordIdentity = harmonyModel.getChordIdentity(of: pitchCollection)
-        let inversion = harmonyModel.getChordInversion(of: keys)
-        return (normalForm: normalForm, primeForm: primeForm, identity: chordIdentity, inversion: inversion)
+        let chord = harmonyModel.chord(from: keys)
+        return (normalForm: normalForm, primeForm: primeForm, chord: chord)
     }
     
 }
