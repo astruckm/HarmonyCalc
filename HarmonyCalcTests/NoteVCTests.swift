@@ -3,8 +3,7 @@ import XCTest
 
 final class NoteVCTests: XCTestCase {
     func makeNoteVC() -> NoteViewController {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let noteVC = sb.instantiateViewController(withIdentifier: String(describing: NoteViewController.self)) as! NoteViewController
+        let noteVC = NoteViewController()
         noteVC.defaults = Defaults(defaultsObj: FakeUserDefaults())
         return noteVC
     }
