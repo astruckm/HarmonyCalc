@@ -184,7 +184,6 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layer.sublayers?.first?.frame = view.bounds
-        piano.keyByPathArea = [:]
         piano.setNeedsDisplay()
         reset.layer.borderWidth = 2.0
         reset.layer.cornerRadius = 5
@@ -442,7 +441,6 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     }
     
     func resetNotes() {
-        piano.keyByPathArea = [:]
         piano.touchedKeys = []
         audioEngine.players = [:]
         noteName.text = " "

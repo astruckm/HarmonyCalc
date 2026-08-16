@@ -24,7 +24,7 @@ class PianoView: UIView {
         isCompactHeight = traitCollection.verticalSizeClass == .compact ? true : false
         isCompactWidth = traitCollection.horizontalSizeClass == .compact ? true : false
         touchedKeys = []
-        keyByPathArea = [:]
+        setNeedsLayout()
     }
     
     //***************************************************
@@ -71,14 +71,12 @@ class PianoView: UIView {
         return keysArray
     }
     //To map a touch's area in layer to its note
-    private var currentPath: UIBezierPath? = nil
-    var keyByPathArea = [UIBezierPath: (PitchClass, Octave)]()
+    var keyAreas: [(path: UIBezierPath, key: (PitchClass, Octave))] = []
     var noteCollectionDelegate: NoteCollectionConstraintsDelegate?
     var noteNameDelegate: DisplaysNotes?
     var playNoteDelegate: PlaysNotes?
     
     var touchedKeys: [(PitchClass, Octave)] = [] { didSet { setNeedsDisplay() } }
-    var keyWasTouched = false
     
     //***************************************************
     //MARK: Touch events
@@ -92,31 +90,29 @@ class PianoView: UIView {
         
     //Check if touched area is within a key
     private func checkIfPathContains(_ location: CGPoint) {
-        for path in keyByPathArea.keys {
-            if path.contains(location) {
-                checkTouchedKeys(for: path)
+        for keyArea in keyAreas {
+            if keyArea.path.contains(location) {
+                checkTouchedKeys(for: keyArea.key)
                 break
             }
         }
     }
     
     //Remove key if already touched, otherwise add it to chord
-    private func checkTouchedKeys(for path: UIBezierPath) {
-        if let key = keyByPathArea[path] {
-            for (index, touchedKey) in touchedKeys.enumerated() {
-                if touchedKey == key {
-                    touchedKeys.remove(at: index)
-                    updateNoteNameDelegate()
-                    playNoteDelegate?.noteOff(keyOff: key)
-                    return
-                }
+    private func checkTouchedKeys(for key: (PitchClass, Octave)) {
+        for (index, touchedKey) in touchedKeys.enumerated() {
+            if touchedKey == key {
+                touchedKeys.remove(at: index)
+                updateNoteNameDelegate()
+                playNoteDelegate?.noteOff(keyOff: key)
+                return
             }
-            if let maxNotes = noteCollectionDelegate?.maxTouchableNotes, touchedKeys.count < maxNotes {
-                touchedKeys.append(key)
-            }
-            updateNoteNameDelegate()
-            playNoteDelegate?.noteOn(keyPressed: key)
         }
+        if let maxNotes = noteCollectionDelegate?.maxTouchableNotes, touchedKeys.count < maxNotes {
+            touchedKeys.append(key)
+        }
+        updateNoteNameDelegate()
+        playNoteDelegate?.noteOn(keyPressed: key)
     }
     
     private func updateNoteNameDelegate() {
@@ -125,17 +121,23 @@ class PianoView: UIView {
     }
     
     //***************************************************
-    //MARK: Draw all the keys
+    //MARK: Build key geometry
     //***************************************************
-    override func draw(_ rect: CGRect) {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        rebuildKeyAreas()
+        setNeedsDisplay()
+    }
+    
+    private func rebuildKeyAreas() {
+        keyAreas = []
         var numberOfWhiteKeysDrawn = 0
         var startingXValue: CGFloat = bounds.minX + spaceBetweenKeys
         var incrementer: CGFloat = 0.0
         var leftMostX: CGFloat = 0.0
         
-        for key in arrayOfKeys[0..<(arrayOfKeys.count)] {
-            keyWasTouched = touchedKeys.contains(where: {$0 == key}) ? true : false
-            currentPath = nil
+        for key in arrayOfKeys {
+            let path: UIBezierPath
             switch key.0 {
             case .c, .f:
                 //Ensure first .c startingXValue isn't 0
@@ -144,35 +146,47 @@ class PianoView: UIView {
                     startingXValue = leftMostX //Align it back with bottom of keyboard counter
                 }
                 let topWidth = key.0 == .c ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
-                drawWhiteKeysCF(startingX: startingXValue, topWidth: topWidth)
+                path = whiteKeyPathCF(startingX: startingXValue, topWidth: topWidth)
                 numberOfWhiteKeysDrawn += 1
                 incrementer = topWidth + spaceBetweenKeys
             case .d, .g, .a:
                 let topWidth = key.0 == .d ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
                 leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
-                drawWhiteKeysDGA(startingX: startingXValue, topWidth: topWidth, leftMostX: leftMostX)
+                path = whiteKeyPathDGA(startingX: startingXValue, topWidth: topWidth, leftMostX: leftMostX)
                 numberOfWhiteKeysDrawn += 1
                 incrementer = topWidth + spaceBetweenKeys
             case .e, .b:
                 let topWidth = key.0 == .e ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
                 leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
-                drawWhiteKeysEB(startingX: startingXValue, topWidth: topWidth, leftMostX: leftMostX)
+                path = whiteKeyPathEB(startingX: startingXValue, topWidth: topWidth, leftMostX: leftMostX)
                 numberOfWhiteKeysDrawn += 1
                 incrementer = topWidth + spaceBetweenKeys
             default:
-                drawBlackKey(startingX: startingXValue)
+                path = blackKeyPath(startingX: startingXValue)
                 incrementer = blackKeyWidth + spaceBetweenKeys
             }
-            if let path = currentPath {
-                keyByPathArea[path] = key
-            }
+            keyAreas.append((path: path, key: key))
             startingXValue += incrementer
         }
     }
     
+    //***************************************************
+    //MARK: Draw all the keys
+    //***************************************************
+    override func draw(_ rect: CGRect) {
+        for keyArea in keyAreas {
+            let keyWasTouched = touchedKeys.contains(where: {$0 == keyArea.key})
+            if keyArea.key.0.isBlackKey {
+                fillBlackKey(keyArea.path, keyWasTouched: keyWasTouched)
+            } else {
+                strokeAndFillPath(keyArea.path, keyWasTouched: keyWasTouched)
+            }
+        }
+    }
     
-    //Drawing helper functions
-    private func drawBlackKey(startingX: CGFloat) {
+    
+    //Path-building helper functions
+    private func blackKeyPath(startingX: CGFloat) -> UIBezierPath {
         let startingPoint = CGPoint(x: startingX, y: bounds.minY)
         let path = UIBezierPath()
         
@@ -182,14 +196,10 @@ class PianoView: UIView {
         path.addLine(to: CGPoint(x: startingPoint.x + blackKeyWidth, y: startingPoint.y))
         path.addLine(to: startingPoint)
         path.close()
-        currentPath = path
-        
-        if keyWasTouched { Colors.blueBlue.setFill() } else { UIColor.black.setFill() }
-        
-        path.fill()
+        return path
     }
     
-    private func drawWhiteKeysCF(startingX: CGFloat, topWidth: CGFloat) {
+    private func whiteKeyPathCF(startingX: CGFloat, topWidth: CGFloat) -> UIBezierPath {
         let startingPoint = CGPoint(x: startingX, y: bounds.minY)
         let path = UIBezierPath()
         
@@ -201,12 +211,10 @@ class PianoView: UIView {
         path.addLine(to: CGPoint(x: startingPoint.x + topWidth, y: startingPoint.y))
         path.addLine(to: startingPoint)
         path.close()
-        currentPath = path
-        
-        strokeAndFillPath(path)
+        return path
     }
     
-    private func drawWhiteKeysDGA(startingX: CGFloat, topWidth: CGFloat, leftMostX: CGFloat) {
+    private func whiteKeyPathDGA(startingX: CGFloat, topWidth: CGFloat, leftMostX: CGFloat) -> UIBezierPath {
         let startingPoint = CGPoint(x: startingX, y: bounds.minY)
         let path = UIBezierPath()
         
@@ -220,12 +228,10 @@ class PianoView: UIView {
         path.addLine(to: CGPoint(x: startingPoint.x + topWidth, y: startingPoint.y))
         path.addLine(to: startingPoint)
         path.close()
-        currentPath = path
-        
-        strokeAndFillPath(path)
+        return path
     }
     
-    private func drawWhiteKeysEB(startingX: CGFloat, topWidth: CGFloat, leftMostX: CGFloat) {
+    private func whiteKeyPathEB(startingX: CGFloat, topWidth: CGFloat, leftMostX: CGFloat) -> UIBezierPath {
         let startingPoint = CGPoint(x: startingX, y: bounds.minY)
         let path = UIBezierPath()
         
@@ -237,13 +243,16 @@ class PianoView: UIView {
         path.addLine(to: CGPoint(x: leftMostX + whiteKeyBottomWidth, y: startingPoint.y))
         path.addLine(to: startingPoint)
         path.close()
-        currentPath = path
-        
-        strokeAndFillPath(path)
+        return path
     }
     
-    //Helper function for drawing subfunctions
-    private func strokeAndFillPath(_ path: UIBezierPath) {
+    //Rendering helper functions
+    private func fillBlackKey(_ path: UIBezierPath, keyWasTouched: Bool) {
+        if keyWasTouched { Colors.blueBlue.setFill() } else { UIColor.black.setFill() }
+        path.fill()
+    }
+    
+    private func strokeAndFillPath(_ path: UIBezierPath, keyWasTouched: Bool) {
         path.lineWidth = 0.3
         UIColor.black.setStroke()
         if keyWasTouched { Colors.blueBlue.setFill() } else { UIColor.white.setFill() }

@@ -44,7 +44,7 @@ final class NoteVCTests: XCTestCase {
 
         XCTAssertFalse(sut.collectionUsesSharps)
 
-        XCTAssertTrue(sut.piano.keyByPathArea.isEmpty)
+        XCTAssertTrue(sut.piano.keyAreas.isEmpty)
     }
 
     func testPropertiesLoadedFromUserDefaultsAfterLoadingView() {
@@ -75,7 +75,7 @@ final class NoteVCTests: XCTestCase {
 
         tap(sut.reset)
 
-        XCTAssertTrue(sut.piano.keyByPathArea.isEmpty)
+        XCTAssertTrue(sut.piano.keyAreas.isEmpty)
         XCTAssertTrue(sut.piano.touchedKeys.isEmpty)
         XCTAssertTrue(sut.audioEngine.players.isEmpty)
         XCTAssertEqual(sut.noteName.text, " ")
