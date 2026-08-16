@@ -10,12 +10,12 @@ import XCTest
 @testable import HarmonyCalc
 
 final class DefinitionsVCTests: XCTestCase {
-    func testLoadOutlets() {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let sut = sb.instantiateViewController(withIdentifier: String(describing: DefinitionsViewController.self)) as! DefinitionsViewController
-        // Set chordType here
+    func testLoadsDefinitionIntoViewHierarchy() {
+        let sut = DefinitionsViewController()
+        sut.topic = .chord
         sut.loadViewIfNeeded()
 
-        XCTAssertNotNil(sut.definition)
+        XCTAssertTrue(sut.definition.isDescendant(of: sut.view))
+        XCTAssertEqual(sut.definition.text, DefinitionsViewController.Topic.chord.text)
     }
 }

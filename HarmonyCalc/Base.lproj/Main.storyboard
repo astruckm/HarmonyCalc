@@ -70,11 +70,6 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="52"/>
                                                                 </variation>
-                                                                <connections>
-                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Chord" popoverAnchorView="krz-QI-bBq" id="0cb-gh-vys">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
-                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dE-FG-M2I">
                                                                 <rect key="frame" x="142.5" y="0.0" width="137.5" height="33"/>
@@ -107,11 +102,6 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="52"/>
                                                                 </variation>
-                                                                <connections>
-                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Inversion" popoverAnchorView="bNn-ZL-4a0" id="Zzm-Rm-unX">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
-                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35I-2z-3RM" userLabel="Inversion">
                                                                 <rect key="frame" x="142.5" y="0.0" width="137.5" height="33.5"/>
@@ -150,11 +140,6 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="52"/>
                                                                 </variation>
-                                                                <connections>
-                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Normal Form" popoverAnchorView="iC5-Ve-bTh" id="i9g-mx-zwL">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
-                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="tvv-Cz-r8K" userLabel="Normal Form">
                                                                 <rect key="frame" x="144" y="0.0" width="136" height="33"/>
@@ -186,11 +171,6 @@
                                                                 <variation key="heightClass=regular-widthClass=regular">
                                                                     <fontDescription key="fontDescription" type="system" pointSize="52"/>
                                                                 </variation>
-                                                                <connections>
-                                                                    <segue destination="SiE-2d-NtS" kind="popoverPresentation" identifier="Prime Form" popoverAnchorView="CNE-WX-x2H" id="a88-48-qbT">
-                                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                                                    </segue>
-                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="fPs-zH-CSu" userLabel="Prime Form">
                                                                 <rect key="frame" x="144" y="0.0" width="136" height="33"/>
@@ -343,43 +323,7 @@
             </objects>
             <point key="canvasLocation" x="135.19999999999999" y="131.78410794602701"/>
         </scene>
-        <!--Definitions View Controller-->
-        <scene sceneID="5H3-Sf-wSK">
-            <objects>
-                <viewController storyboardIdentifier="DefinitionsViewController" modalPresentationStyle="currentContext" id="SiE-2d-NtS" userLabel="Definitions View Controller" customClass="DefinitionsViewController" customModule="HarmonyCalc" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="S4p-8A-Nl8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="icH-zZ-V1q">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="SKn-j6-y7q"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="icH-zZ-V1q" firstAttribute="bottom" secondItem="SKn-j6-y7q" secondAttribute="bottom" id="CEn-Qk-T2I"/>
-                            <constraint firstItem="icH-zZ-V1q" firstAttribute="top" secondItem="SKn-j6-y7q" secondAttribute="top" id="WAS-g4-3tD"/>
-                            <constraint firstItem="icH-zZ-V1q" firstAttribute="leading" secondItem="SKn-j6-y7q" secondAttribute="leading" id="csW-o9-6r6"/>
-                            <constraint firstItem="SKn-j6-y7q" firstAttribute="trailing" secondItem="icH-zZ-V1q" secondAttribute="trailing" id="lsb-g9-R8E"/>
-                        </constraints>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="240" height="240"/>
-                    <connections>
-                        <outlet property="definition" destination="icH-zZ-V1q" id="G8g-uq-j2l"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ecs-VE-Yhd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="868" y="125.61576354679804"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="i9g-mx-zwL"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="Black Play Button 1x" width="595" height="688"/>
         <image name="audio off black" width="650" height="500"/>

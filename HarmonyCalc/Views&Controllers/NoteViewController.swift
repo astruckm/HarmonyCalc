@@ -151,7 +151,12 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         collectionUsesSharps = defaults.readCollectionUsesSharps()
 
         let audioImage: UIImage? = audioIsOn ? audioOn : audioOff
-        audioOnOff.setImage(audioImage, for: .normal)        
+        audioOnOff.setImage(audioImage, for: .normal)
+
+        chordButton.addTarget(self, action: #selector(showChordDefinition), for: .touchUpInside)
+        inversionButton.addTarget(self, action: #selector(showInversionDefinition), for: .touchUpInside)
+        normalFormButton.addTarget(self, action: #selector(showNormalFormDefinition), for: .touchUpInside)
+        primeFormButton.addTarget(self, action: #selector(showPrimeFormDefinition), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -177,40 +182,46 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     //MARK: Navigation (Popovers)
     //*****************************************
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? DefinitionsViewController {
-            let identifier = segue.identifier
-            vc.chordType = identifier
-            
-            var popOverSize = CGSize(width: view.bounds.width/2, height: view.bounds.height/2)
-            let sizeClass = self.sizeClass()
-            popOverSize = changePopoverSize(popOverWidth: popOverSize.width, popOverHeight: popOverSize.height, sizeClass: sizeClass)
-            
-            let controller = vc.popoverPresentationController
-            controller?.delegate = self
-            controller?.permittedArrowDirections = .down
-            switch identifier {
-            case "Chord":
-                assignPopOverSource(to: controller, with: chordButton)
-                popOverSize.height = view.bounds.height / 2.1
-            case "Inversion":
-                assignPopOverSource(to: controller, with: inversionButton)
-                popOverSize.height = view.bounds.height / 4.6
-            case "Normal Form":
-                assignPopOverSource(to: controller, with: normalFormButton)
-                popOverSize.height = view.bounds.height / 1.4
-            case "Prime Form":
-                assignPopOverSource(to: controller, with: primeFormButton)
-                popOverSize.height = view.bounds.height / 1.5
-            default: break
-            }
-            vc.preferredContentSize = popOverSize
-        }
+    @objc private func showChordDefinition() {
+        showDefinition(for: .chord, from: chordButton)
     }
-    
-    private func assignPopOverSource(to controller: UIPopoverPresentationController?, with button: UIButton) {
+
+    @objc private func showInversionDefinition() {
+        showDefinition(for: .inversion, from: inversionButton)
+    }
+
+    @objc private func showNormalFormDefinition() {
+        showDefinition(for: .normalForm, from: normalFormButton)
+    }
+
+    @objc private func showPrimeFormDefinition() {
+        showDefinition(for: .primeForm, from: primeFormButton)
+    }
+
+    private func showDefinition(for topic: DefinitionsViewController.Topic, from button: UIButton) {
+        let vc = DefinitionsViewController()
+        vc.topic = topic
+        vc.modalPresentationStyle = .popover
+
+        var popOverSize = CGSize(width: view.bounds.width/2, height: view.bounds.height/2)
+        let sizeClass = self.sizeClass()
+        popOverSize = changePopoverSize(popOverWidth: popOverSize.width, popOverHeight: popOverSize.height, sizeClass: sizeClass)
+
+        switch topic {
+        case .chord: popOverSize.height = view.bounds.height / 2.1
+        case .inversion: popOverSize.height = view.bounds.height / 4.6
+        case .normalForm: popOverSize.height = view.bounds.height / 1.4
+        case .primeForm: popOverSize.height = view.bounds.height / 1.5
+        }
+        vc.preferredContentSize = popOverSize
+
+        let controller = vc.popoverPresentationController
+        controller?.delegate = self
+        controller?.permittedArrowDirections = .down
         controller?.sourceView = button
-        controller?.sourceRect = button.frame
+        controller?.sourceRect = button.bounds
+
+        present(vc, animated: true)
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
