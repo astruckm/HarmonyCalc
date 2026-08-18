@@ -10,81 +10,63 @@ import XCTest
 @testable import HarmonyCalc
 
 final class NoteTypesTests: XCTestCase {
-    func testOctaveInit() {
-        let negative = Octave(rawValue: -1)
-        let zero = Octave(rawValue: 0)
-        let ninetyNine = Octave(rawValue: 99)
-
-        XCTAssertNil(negative)
-        XCTAssertNotNil(zero)
-        XCTAssertEqual(zero, Octave.zero)
-        XCTAssertNil(ninetyNine)
+    func testNoteInitMidiRange() {
+        XCTAssertNil(Note(midiNoteNumber: -1))
+        XCTAssertNil(Note(midiNoteNumber: 128))
+        XCTAssertNotNil(Note(midiNoteNumber: 0))
+        XCTAssertNotNil(Note(midiNoteNumber: 60))
+        XCTAssertNotNil(Note(midiNoteNumber: 127))
     }
 
-    func testNoteInit() {
-        let impossibleNote = Note(pitchClass: .c, noteLetter: .g, octave: .one)
-        let aSharp = Note(pitchClass: .aSharp, noteLetter: .a, octave: .zero)
-        let aSharpOctaveNil = Note(pitchClass: .aSharp, noteLetter: .a, octave: nil)
+    func testNoteInitSpelling() {
+        let impossibleNote = Note(pitchClass: .c, octave: 5, preferredSpelling: .g)
+        let aSharp = Note(pitchClass: .aSharp, octave: 4, preferredSpelling: .a)
+        let aSharpNoSpelling = Note(pitchClass: .aSharp, octave: 4)
 
         XCTAssertNil(impossibleNote)
         XCTAssertNotNil(aSharp)
-        XCTAssertNotNil(aSharpOctaveNil)
+        XCTAssertNotNil(aSharpNoSpelling)
+    }
+
+    func testMidiDerivesPitchClassAndOctave() {
+        XCTAssertEqual(Note(midiNoteNumber: 60)?.pitchClass, .c)
+        XCTAssertEqual(Note(midiNoteNumber: 60)?.octave, 4)
+        XCTAssertEqual(Note(midiNoteNumber: 61)?.pitchClass, .cSharp)
+        XCTAssertEqual(Note(midiNoteNumber: 72)?.pitchClass, .c)
+        XCTAssertEqual(Note(midiNoteNumber: 72)?.octave, 5)
+        XCTAssertEqual(Note(pitchClass: .a, octave: 4)?.midiNoteNumber, 69)
+    }
+
+    func testDescriptionUsesPreferredSpelling() {
+        XCTAssertEqual(Note(midiNoteNumber: 61)?.description, "C♯")
+        XCTAssertEqual(Note(pitchClass: .cSharp, octave: 4, preferredSpelling: .d)?.description, "D♭")
+        XCTAssertEqual(Note(pitchClass: .aSharp, octave: 4, preferredSpelling: .b)?.description, "B♭")
+        XCTAssertEqual(Note(pitchClass: .e, octave: 4, preferredSpelling: .f)?.description, "F♭")
     }
 
     func testNoteComparableDifferentOctavesSamePC() {
-        guard let cSharpZero = Note(pitchClass: .cSharp, noteLetter: .c, octave: .zero),
-              let cSharpOne = Note(pitchClass: .cSharp, noteLetter: .c, octave: .one) else {
+        guard let cSharpFour = Note(pitchClass: .cSharp, octave: 4),
+              let cSharpFive = Note(pitchClass: .cSharp, octave: 5) else {
             XCTFail("Could not init Notes")
             return
         }
 
-        XCTAssertLessThan(cSharpZero, cSharpOne)
+        XCTAssertLessThan(cSharpFour, cSharpFive)
     }
 
     func testNoteComparableSameOctaveDifferentPC() {
-        guard let cSharpZero = Note(pitchClass: .cSharp, noteLetter: .c, octave: .zero),
-              let bFlatZero = Note(pitchClass: .aSharp, noteLetter: .b, octave: .zero) else {
-                  XCTFail("Could not init Notes")
-                  return
-              }
-
-        XCTAssertLessThan(cSharpZero, bFlatZero)
-    }
-
-    func testNoteComparableOneOctaveNil() {
-        guard let cSharpZero = Note(pitchClass: .cSharp, noteLetter: .c, octave: .zero),
-              let bFlat = Note(pitchClass: .aSharp, noteLetter: .b, octave: nil) else {
+        guard let cSharpFour = Note(pitchClass: .cSharp, octave: 4),
+              let bFlatFour = Note(pitchClass: .aSharp, octave: 4, preferredSpelling: .b) else {
             XCTFail("Could not init Notes")
             return
         }
 
-        XCTAssertLessThan(cSharpZero, bFlat)
-    }
-
-    func testNoteComparableBothOctavesNil() {
-        guard let cNatural = Note(pitchClass: .c, noteLetter: .c, octave: nil),
-              let bFlat = Note(pitchClass: .aSharp, noteLetter: .b, octave: nil) else {
-            XCTFail("Could not init Notes")
-            return
-        }
-
-        // TODO: enharmonically equal, weird enharmonic where lower note letter is greater
-        XCTAssertLessThan(cNatural, bFlat)
-    }
-
-    func testNoteComparableEnharmonicallyEqual() {
-        guard let aSharp = Note(pitchClass: .aSharp, noteLetter: .a, octave: nil),
-              let bFlat = Note(pitchClass: .aSharp, noteLetter: .b, octave: nil) else {
-            XCTFail("Could not init Notes when both octaves are nil")
-            return
-        }
-
-        XCTAssertGreaterThanOrEqual(aSharp, bFlat)
+        XCTAssertLessThan(cSharpFour, bFlatFour)
     }
 
     func testNoteComparableEnharmonicReversal() {
-        guard let fFlat = Note(pitchClass: .e, noteLetter: .f, octave: .one),
-              let eSharp = Note(pitchClass: .f, noteLetter: .e, octave: .one) else {
+        guard let fFlat = Note(pitchClass: .e, octave: 5, preferredSpelling: .f),
+              let eSharp = Note(pitchClass: .f, octave: 5, preferredSpelling: .e) else {
             XCTFail("Could not init Notes for unusual enharmonic spellings")
             return
         }
@@ -92,4 +74,15 @@ final class NoteTypesTests: XCTestCase {
         XCTAssertLessThan(fFlat, eSharp)
     }
 
+    func testEnharmonicNotesAreEqualButNamedDifferently() {
+        guard let aSharp = Note(pitchClass: .aSharp, octave: 4, preferredSpelling: .a),
+              let bFlat = Note(pitchClass: .aSharp, octave: 4, preferredSpelling: .b) else {
+            XCTFail("Could not init Notes")
+            return
+        }
+
+        XCTAssertEqual(aSharp, bFlat)
+        XCTAssertEqual(aSharp.description, "A♯")
+        XCTAssertEqual(bFlat.description, "B♭")
+    }
 }

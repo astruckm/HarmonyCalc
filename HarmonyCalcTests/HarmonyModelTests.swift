@@ -15,36 +15,36 @@ class HarmonyModelTests: XCTestCase {
     
     enum PianoKeyCollections {
         // Tonal
-        static let dMaj: [PianoKey] = [(.d, .zero), (.a, .zero), (.fSharp, .one)] // root position
-        static let fMin: [PianoKey] = [(.gSharp, .zero), (.f, .one), (.c, .one)] // 2nd inversion
-        static let cSharpDim: [PianoKey] = [(.cSharp, .zero), (.g, .zero), (.e, .one)] // root position
-        static let cAug: [PianoKey] = [(.e, .zero), (.c, .one), (.gSharp, .one)] // 1st inversion
-        static let esus4: [PianoKey] = [(.e, .zero), (.a, .zero), (.b, .zero)] // root position
-        
-        static let fSharpDominant7: [PianoKey] = [(.fSharp, .zero), (.cSharp, .one), (.aSharp, .one), (.e, .one)] // root position
-        static let eMin7: [PianoKey] = [(.e, .zero), (.d, .one), (.g, .one), (.b, .one)] // root position
-        static let eMaj7: [PianoKey] = [(.e, .zero), (.dSharp, .zero), (.b, .one), (.gSharp, .zero)] // 3rd inversion
-        static let gSharpFullyDim7: [PianoKey] = [(.gSharp, .one), (.b, .one), (.f, .one), (.d, .zero)] // 1st inversion (has to actually be b natural fully dim 7 due to no scale / spelling context)
-        static let bHalfDim7: [PianoKey] = [(.a, .zero), (.b, .zero), (.f, .one), (.d, .one)] // 3rd inversion
-        static let cAug7: [PianoKey] = [(.c, .one), (.e, .zero), (.gSharp, .one), (.aSharp, .one)] // 1st inversion
-        static let dAugMaj7: [PianoKey] = [(.d, .one), (.fSharp, .zero), (.cSharp, .one), (.aSharp, .zero)] // 1st inversion
-        
-        static let fDominant9: [PianoKey] = [(.dSharp, .zero), (.f, .zero), (.g, .zero), (.a, .zero), (.c, .one)] // 3rd inversion
-        static let gMaj9: [PianoKey] = [(.fSharp, .zero), (.a, .zero), (.g, .one), (.b, .one), (.d, .one)] // 3rd inversion
-        static let aMin9: [PianoKey] = [(.e, .one), (.c, .one), (.g, .one), (.a, .zero), (.b, .one)] // root position
-        static let g7Flat9: [PianoKey] = [(.b, .one), (.g, .one), (.d, .zero), (.gSharp, .one), (.f, .one)] // 2nd inversion
-        static let b7Sharp9: [PianoKey] = [(.b, .zero), (.d, .zero), (.dSharp, .one), (.fSharp, .one), (.a, .one)] // 4th inversion
-        
-        static let eFlatDominant11: [PianoKey] = [(.dSharp, .one), (.cSharp, .one), (.g, .one), (.aSharp, .one), (.f, .one), (.gSharp, .zero)] // 5th inversion
-        static let cMaj11: [PianoKey] = [(.e, .zero), (.c, .zero), (.b, .zero), (.g, .zero), (.f, .zero), (.d, .zero)] // root position
-        static let eMin11: [PianoKey] = [(.e, .one), (.b, .one), (.g, .zero), (.d, .one), (.fSharp, .zero), (.a, .zero)] // 4th inversion
-        static let a7Sharp11: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .zero), (.a, .zero), (.dSharp, .zero), (.b, .one)] // 5th inversion
-        
-        static let aDominant13: [PianoKey] = [(.e, .zero), (.cSharp, .one), (.g, .one), (.a, .zero), (.d, .one), (.fSharp, .one), (.b, .zero)] // 2nd inversion
-        
+        static let dMaj: [Note] = [makeNote(.d, 4), makeNote(.a, 4), makeNote(.fSharp, 5)] // root position
+        static let fMin: [Note] = [makeNote(.gSharp, 4), makeNote(.f, 5), makeNote(.c, 5)] // 2nd inversion
+        static let cSharpDim: [Note] = [makeNote(.cSharp, 4), makeNote(.g, 4), makeNote(.e, 5)] // root position
+        static let cAug: [Note] = [makeNote(.e, 4), makeNote(.c, 5), makeNote(.gSharp, 5)] // 1st inversion
+        static let esus4: [Note] = [makeNote(.e, 4), makeNote(.a, 4), makeNote(.b, 4)] // root position
+
+        static let fSharpDominant7: [Note] = [makeNote(.fSharp, 4), makeNote(.cSharp, 5), makeNote(.aSharp, 5), makeNote(.e, 5)] // root position
+        static let eMin7: [Note] = [makeNote(.e, 4), makeNote(.d, 5), makeNote(.g, 5), makeNote(.b, 5)] // root position
+        static let eMaj7: [Note] = [makeNote(.e, 4), makeNote(.dSharp, 4), makeNote(.b, 5), makeNote(.gSharp, 4)] // 3rd inversion
+        static let gSharpFullyDim7: [Note] = [makeNote(.gSharp, 5), makeNote(.b, 5), makeNote(.f, 5), makeNote(.d, 4)] // 1st inversion (has to actually be b natural fully dim 7 due to no scale / spelling context)
+        static let bHalfDim7: [Note] = [makeNote(.a, 4), makeNote(.b, 4), makeNote(.f, 5), makeNote(.d, 5)] // 3rd inversion
+        static let cAug7: [Note] = [makeNote(.c, 5), makeNote(.e, 4), makeNote(.gSharp, 5), makeNote(.aSharp, 5)] // 1st inversion
+        static let dAugMaj7: [Note] = [makeNote(.d, 5), makeNote(.fSharp, 4), makeNote(.cSharp, 5), makeNote(.aSharp, 4)] // 1st inversion
+
+        static let fDominant9: [Note] = [makeNote(.dSharp, 4), makeNote(.f, 4), makeNote(.g, 4), makeNote(.a, 4), makeNote(.c, 5)] // 3rd inversion
+        static let gMaj9: [Note] = [makeNote(.fSharp, 4), makeNote(.a, 4), makeNote(.g, 5), makeNote(.b, 5), makeNote(.d, 5)] // 3rd inversion
+        static let aMin9: [Note] = [makeNote(.e, 5), makeNote(.c, 5), makeNote(.g, 5), makeNote(.a, 4), makeNote(.b, 5)] // root position
+        static let g7Flat9: [Note] = [makeNote(.b, 5), makeNote(.g, 5), makeNote(.d, 4), makeNote(.gSharp, 5), makeNote(.f, 5)] // 2nd inversion
+        static let b7Sharp9: [Note] = [makeNote(.b, 4), makeNote(.d, 4), makeNote(.dSharp, 5), makeNote(.fSharp, 5), makeNote(.a, 5)] // 4th inversion
+
+        static let eFlatDominant11: [Note] = [makeNote(.dSharp, 5), makeNote(.cSharp, 5), makeNote(.g, 5), makeNote(.aSharp, 5), makeNote(.f, 5), makeNote(.gSharp, 4)] // 5th inversion
+        static let cMaj11: [Note] = [makeNote(.e, 4), makeNote(.c, 4), makeNote(.b, 4), makeNote(.g, 4), makeNote(.f, 4), makeNote(.d, 4)] // root position
+        static let eMin11: [Note] = [makeNote(.e, 5), makeNote(.b, 5), makeNote(.g, 4), makeNote(.d, 5), makeNote(.fSharp, 4), makeNote(.a, 4)] // 4th inversion
+        static let a7Sharp11: [Note] = [makeNote(.e, 4), makeNote(.cSharp, 5), makeNote(.g, 4), makeNote(.a, 4), makeNote(.dSharp, 4), makeNote(.b, 5)] // 5th inversion
+
+        static let aDominant13: [Note] = [makeNote(.e, 4), makeNote(.cSharp, 5), makeNote(.g, 5), makeNote(.a, 4), makeNote(.d, 5), makeNote(.fSharp, 5), makeNote(.b, 4)] // 2nd inversion
+
         // Non-tonal
-        static let zeroTwoSix: [PianoKey] = [(.d, .one), (.c, .zero), (.gSharp, .one)] // [0, 2, 6]
-        static let allIntervalTetrachord: [PianoKey] = [(.g, .one), (.cSharp, .one), (.gSharp, .zero), (.b, .one)] // [0, 1, 4, 6]
+        static let zeroTwoSix: [Note] = [makeNote(.d, 5), makeNote(.c, 4), makeNote(.gSharp, 5)] // [0, 2, 6]
+        static let allIntervalTetrachord: [Note] = [makeNote(.g, 5), makeNote(.cSharp, 5), makeNote(.gSharp, 4), makeNote(.b, 5)] // [0, 1, 4, 6]
     }
 
     func testNontonal() {
@@ -185,13 +185,13 @@ class HarmonyModelTests: XCTestCase {
         XCTAssertEqual(chord?.inversion, inversion, file: file, line: line)
     }
     
-    private func performCollectionTransforms(_ keys: [PianoKey]) -> (normalForm: [PitchClass],
+    private func performCollectionTransforms(_ notes: [Note]) -> (normalForm: [PitchClass],
                                                                                   primeForm: [Int],
                                                                                   chord: (root: PitchClass, quality: String, inversion: String)?) {
-        let pitchCollection = keys.map { $0.pitchClass }
+        let pitchCollection = notes.map { $0.pitchClass }
         let normalForm = harmonyModel.normalForm(of: pitchCollection)
         let primeForm = harmonyModel.primeForm(ofCollectionInNormalForm: normalForm)
-        let chord = harmonyModel.chord(from: keys)
+        let chord = harmonyModel.chord(from: notes)
         return (normalForm: normalForm, primeForm: primeForm, chord: chord)
     }
     

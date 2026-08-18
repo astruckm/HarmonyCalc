@@ -9,8 +9,6 @@
 import Foundation
 
 
-typealias PianoKey = (pitchClass: PitchClass, octave: Octave) ///i.e. a key on the piano
-
 public enum PitchClass: Int, Comparable, Hashable, CaseIterable {
     case c = 0, cSharp, d, dSharp, e, f, fSharp, g, gSharp, a, aSharp, b
     
@@ -52,7 +50,13 @@ public enum PitchClass: Int, Comparable, Hashable, CaseIterable {
         case .b: return [.b, .c]
         }
     }
-    
+
+    //Default spelling for the collection's sharps/flats preference
+    func spelling(usingSharps: Bool) -> String {
+        if isBlackKey && !usingSharps { return possibleSpellings[1] }
+        return possibleSpellings[0]
+    }
+
     public static func <(lhs: PitchClass, rhs: PitchClass) -> Bool {
         return lhs.rawValue < rhs.rawValue
     }
@@ -75,44 +79,59 @@ public enum NoteLetter: String, Equatable, CaseIterable {
     }
 }
 
-public enum Octave: Int, Equatable, CaseIterable {
-    case zero = 0
-    case one = 1
-}
+/// A single sounding note, identified by its MIDI note number (0...127).
+/// Middle C is MIDI 60. `preferredSpelling` optionally pins an enharmonic name (e.g. E♯ vs F); it never affects pitch, ordering, or set membership.
+public struct Note: Comparable, Hashable, CustomStringConvertible {
+    let midiNoteNumber: Int
+    let preferredSpelling: NoteLetter?
 
-public struct Note: Comparable, CustomStringConvertible {
-    let pitchClass: PitchClass
-    let noteLetter: NoteLetter
-    let octave: Octave?
-    
+    var pitchClass: PitchClass {
+        return PitchClass.allCases[((midiNoteNumber % 12) + 12) % 12]
+    }
+
+    // MIDI 60 (middle C) is octave 4
+    var octave: Int {
+        return (midiNoteNumber / 12) - 1
+    }
+
     public var description: String {
-        for spelling in pitchClass.possibleSpellings {
-            if spelling.contains(noteLetter.rawValue) {
-                return spelling
-            }
+        if let preferredSpelling = preferredSpelling,
+           let spelling = pitchClass.possibleSpellings.first(where: { $0.hasPrefix(preferredSpelling.rawValue) }) {
+            return spelling
         }
-        print("Incongruity between pitchClass and noteLetter")
         return pitchClass.possibleSpellings[0]
     }
-        
-    init?(pitchClass: PitchClass, noteLetter: NoteLetter, octave: Octave?) {
-        guard pitchClass.possibleLetterNames.contains(noteLetter) else {
-            print("Note is not possible: pitch class and note letter do not match")
+
+    init?(midiNoteNumber: Int, preferredSpelling: NoteLetter? = nil) {
+        guard (0...127).contains(midiNoteNumber) else {
+            print("Note is not possible: MIDI note number out of range")
             return nil
         }
-        
-        self.pitchClass = pitchClass
-        self.noteLetter = noteLetter
-        self.octave = octave
-    }
-    
-    //Higher pitched note is greater
-    public static func < (lhs: Note, rhs: Note) -> Bool {
-        guard let lhsOctave = lhs.octave, let rhsOctave = rhs.octave else {
-            //If octave is nil (i.e. unknown), have to assume they are in the same octave
-            return lhs.pitchClass.rawValue < rhs.pitchClass.rawValue
+        if let preferredSpelling = preferredSpelling {
+            let pitchClass = PitchClass.allCases[midiNoteNumber % 12]
+            guard pitchClass.possibleLetterNames.contains(preferredSpelling) else {
+                print("Note is not possible: pitch class and preferred spelling do not match")
+                return nil
+            }
         }
-        return keyValue((lhs.pitchClass, lhsOctave)) < keyValue((rhs.pitchClass, rhsOctave))
+        self.midiNoteNumber = midiNoteNumber
+        self.preferredSpelling = preferredSpelling
     }
 
+    init?(pitchClass: PitchClass, octave: Int, preferredSpelling: NoteLetter? = nil) {
+        self.init(midiNoteNumber: (octave + 1) * 12 + pitchClass.rawValue, preferredSpelling: preferredSpelling)
+    }
+
+    //Ordering and identity follow pitch alone; enharmonic spellings are equal.
+    public static func < (lhs: Note, rhs: Note) -> Bool {
+        return lhs.midiNoteNumber < rhs.midiNoteNumber
+    }
+
+    public static func == (lhs: Note, rhs: Note) -> Bool {
+        return lhs.midiNoteNumber == rhs.midiNoteNumber
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(midiNoteNumber)
+    }
 }

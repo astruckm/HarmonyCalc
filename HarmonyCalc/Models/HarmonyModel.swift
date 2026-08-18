@@ -62,13 +62,13 @@ public struct HarmonyModel {
     //MARK: Tonal collections
     //**********************************************************
 
-    func chord(from keys: [PianoKey]) -> (root: PitchClass, quality: String, inversion: String)? {
-        guard keys.count >= 2 else { return nil }
-        let pitchClasses = keys.map { $0.pitchClass.rawValue }
+    func chord(from notes: [Note]) -> (root: PitchClass, quality: String, inversion: String)? {
+        guard notes.count >= 2 else { return nil }
+        let pitchClasses = notes.map { $0.pitchClass.rawValue }
         guard Set(pitchClasses).count >= 2 else { return nil }
         let mask = HarmonyModel.pitchClassMask(of: pitchClasses)
         guard let candidates = HarmonyModel.chordsByPitchClassMask[mask], !candidates.isEmpty else { return nil }
-        guard let bassValue = keys.map({ keyValue($0) }).min() else { return nil }
+        guard let bassValue = notes.map({ $0.midiNoteNumber }).min() else { return nil }
         let bassPitchClass = bassValue % 12
         let chosen = candidates.first { Int($0.root.canonicalNote.pitch.pitchClass) == bassPitchClass } ?? candidates[0]
         guard let root = pitchClass(from: chosen.root) else { return nil }

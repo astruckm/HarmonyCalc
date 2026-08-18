@@ -1,5 +1,5 @@
 //
-//  NoteViewController.swift
+//  MainViewController.swift
 //  HarmonyCalc
 //
 //  Created by ASM on 2/24/18.
@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import AVFoundation
 
-class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, DisplaysNotes, PlaysNotes, UIPopoverPresentationControllerDelegate {
+class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObserver, UIPopoverPresentationControllerDelegate {
     //*****************************************
     //MARK: Views
     //*****************************************
@@ -56,63 +55,47 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     //*****************************************
     //MARK: Properties
     //*****************************************
-    var harmonyModel = HarmonyModel(maxNotesInCollection: 7)
+    let session = HarmonySession(harmonyModel: HarmonyModel(maxNotesInCollection: 7))
     var collectionUsesSharps = true
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
     var defaults: Defaults = Defaults()
-    
-    //*****************************************
-    //NoteCollectionConstraints
-    //*****************************************
 
-    var maxTouchableNotes: Int { return harmonyModel.maxNotes }
-    
     //*****************************************
-    //DisplaysNotes
-    //*****************************************
-    var touchedKeys: [(PitchClass, Octave)] = []
-    var pitchClasses: [PitchClass] { return Array(Set(touchedKeys.map{$0.0})).sorted(by: <) }
-    var possibleNoteNames: [[String]] { return pitchClasses.map{$0.possibleSpellings} }
-    var noteNames: String {
-        get {
-            return noteName.text ?? " "
-        }
-        set {
-            noteName.text = newValue
-        }
-    }
-    func noteDisplayNeedsUpdate() {
-        updateCollectionLabels(usingSharps: collectionUsesSharps)
-        updateNoteNames(usingSharps: collectionUsesSharps)
-    }
-    private func updateNoteNames(usingSharps: Bool) {
-        if usingSharps {
-            let arrayOfNoteNames = possibleNoteNames.map{$0[0]}
-            noteNames = arrayOfNoteNames.joined(separator: ", ")
-        } else {
-            var arrayOfNoteNames = [String]()
-            for pitchClass in pitchClasses {
-                if pitchClass.isBlackKey {
-                    arrayOfNoteNames.append(pitchClass.possibleSpellings[1])
-                } else {
-                    arrayOfNoteNames.append(pitchClass.possibleSpellings[0])
-                }
-            }
-            noteNames = arrayOfNoteNames.joined(separator: ", ")
-        }
-    }
-    
-    //*****************************************
-    //PlaysNotes
+    //NoteInputDelegate
     //*****************************************
     let audioEngine = Audio.sharedInstance
-    var player: AVAudioPlayer?
-    
-    func noteOn(keyPressed: (PitchClass, Octave)) {
-        let soundFileName = getSoundFileName(ofKey: keyPressed)
-        
+
+    func noteInput(_ source: NoteInputSource, noteOn note: Note) {
+        playNote(note)
+        session.add(note)
+    }
+
+    func noteInput(_ source: NoteInputSource, noteOff note: Note) {
+        stopNote(note)
+        session.remove(note)
+    }
+
+    func noteInputDidClear(_ source: NoteInputSource) {
+        session.clear()
+    }
+
+    //*****************************************
+    //HarmonySessionObserver
+    //*****************************************
+    func harmonySessionDidChange(_ session: HarmonySession) {
+        piano.touchedNotes = session.sortedNotes
+        noteName.text = session.noteNames(usingSharps: collectionUsesSharps)
+        updateCollectionLabels(usingSharps: collectionUsesSharps)
+    }
+
+    //*****************************************
+    //MARK: Audio
+    //*****************************************
+    private func playNote(_ note: Note) {
+        let soundFileName = getSoundFileName(of: note)
+
         if audioIsOn {
             audioEngine.playSound(soundFileName: soundFileName)
         } else {
@@ -122,36 +105,30 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
             }
         }
     }
-    
+
     func playAllNotes() {
-        var soundFileNames = [String]()
-        for touchedKey in touchedKeys {
-            let soundFileName = getSoundFileName(ofKey: touchedKey)
-            soundFileNames.append(soundFileName)
-        }
         if audioIsOn {
             audioEngine.playSounds()
         }
     }
-    
-    func noteOff(keyOff: (PitchClass, Octave)) {
-        let soundFileName = getSoundFileName(ofKey: keyOff)
+
+    private func stopNote(_ note: Note) {
+        let soundFileName = getSoundFileName(of: note)
         let url = audioEngine.urlLookUp(of: soundFileName)
         if let url = url {
             audioEngine.removeSound(at: url)
         }
     }
-        
-    private func getSoundFileName(ofKey key: (PitchClass, Octave)) -> String {
-        let pitchClass = key.0
-        let note = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
-        let keysValue = keyValue(key)
-        let octave = String((keysValue / 12) + 4) ///+4 b/c C0 is C4 (i.e. middle C)
-        let soundFileName = note + octave
-        
+
+    private func getSoundFileName(of note: Note) -> String {
+        let pitchClass = note.pitchClass
+        let spelling = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
+        let octave = String(note.octave) ///Middle C (MIDI 60) is octave 4
+        let soundFileName = spelling + octave
+
         return soundFileName
     }
-    
+
     //*****************************************
     //MARK: ViewController lifecycle
     //*****************************************
@@ -161,9 +138,8 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         buildViewHierarchy()
         activateConstraints()
         wireActions()
-        piano.noteCollectionDelegate = self
-        piano.noteNameDelegate = self
-        piano.playNoteDelegate = self
+        piano.inputDelegate = self
+        session.observer = self
 
         view.addGradientBackground(colorOne: Colors.heavy, colorTwo: Colors.rain)
         view.isMultipleTouchEnabled = true
@@ -171,7 +147,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         piano.isMultipleTouchEnabled = true
         piano.backgroundColor = .darkGray
         reset.setTitle("Clear", for: .normal)
-        
+
         audioIsOn = defaults.readAudioSetting()
         collectionUsesSharps = defaults.readCollectionUsesSharps()
 
@@ -180,7 +156,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
 
         applyTraitBasedLayout()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.layer.sublayers?.first?.frame = view.bounds
@@ -190,12 +166,12 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         flatSharp.layer.borderWidth = 2.0
         flatSharp.layer.cornerRadius = 5
     }
-        
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         view.layer.sublayers?.first?.frame = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height) //TODO: Perhaps there is some less hacky-y way to get what view.bounds WILL BE
         super.viewWillTransition(to: size, with: coordinator)
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         applyTraitBasedLayout()
@@ -410,11 +386,11 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
 
         present(vc, animated: true)
     }
-    
+
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
-    
+
     //*****************************************
     //MARK: Actions
     //*****************************************
@@ -436,18 +412,18 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
     @objc func switchFlatSharp(_ sender: UIButton) {
         collectionUsesSharps.toggle()
         defaults.writeCollectionUsesSharps(collectionUsesSharps)
+        noteName.text = session.noteNames(usingSharps: collectionUsesSharps)
         updateCollectionLabels(usingSharps: collectionUsesSharps)
-        updateNoteNames(usingSharps: collectionUsesSharps)
     }
-    
+
     func resetNotes() {
-        piano.touchedKeys = []
+        session.clear()
+        piano.touchedNotes = []
         audioEngine.players = [:]
         noteName.text = " "
-        self.touchedKeys = []
         updateCollectionLabels(usingSharps: collectionUsesSharps)
     }
-    
+
     //*****************************************
     //MARK: Get chords/collections
     //*****************************************
@@ -456,23 +432,23 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
         let primeFormText: String
         let chordText: String
         let inversionText: String
-        
-        if pitchClasses.count > 1 {
-            let normalFormPC = harmonyModel.normalForm(of: pitchClasses)
+
+        if session.pitchClasses.count > 1 {
+            let normalFormPC = session.normalForm
             let normalFormAsString = normalFormPC.map { element -> String in
                 if element.rawValue == 10 { return "t" }
                 else if element.rawValue == 11 { return "e" }
                 else { return String(element.rawValue) } }
             normalFormText = "[" + normalFormAsString.joined(separator: ",") + "]"
-            
-            let primeFormPC = harmonyModel.primeForm(ofCollectionInNormalForm: normalFormPC)
+
+            let primeFormPC = session.primeForm
             let primeFormAsString = primeFormPC.map({String($0)})
             primeFormText = "(" + primeFormAsString.joined() + ")"
-            
-            if let chordInfo = harmonyModel.chord(from: touchedKeys) {
+
+            if let chordInfo = session.chord() {
                 let chordRoot = chordInfo.root
                 //There are 3 possibilities: white key, sharp, or flat.
-                let chordRootAsString = (chordRoot.isBlackKey && !usingSharps) ? chordRoot.possibleSpellings[1] : chordRoot.possibleSpellings[0]
+                let chordRootAsString = chordRoot.spelling(usingSharps: usingSharps)
                 chordText = chordRootAsString + chordInfo.quality
                 inversionText = chordInfo.inversion
             } else {
@@ -485,7 +461,7 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
             chordText = " "
             inversionText = " "
         }
-        
+
         normalForm.text = normalFormText
         primeForm.text = primeFormText
         chord.text = chordText
@@ -494,11 +470,11 @@ class NoteViewController: UIViewController, NoteCollectionConstraintsDelegate, D
 }
 
 
-extension NoteViewController {
+extension MainViewController {
     func sizeClass() -> (UIUserInterfaceSizeClass, UIUserInterfaceSizeClass) {
         return (self.traitCollection.horizontalSizeClass, self.traitCollection.verticalSizeClass)
     }
-    
+
     func changePopoverSize(popOverWidth: CGFloat, popOverHeight: CGFloat, sizeClass: (UIUserInterfaceSizeClass, UIUserInterfaceSizeClass)) -> CGSize {
         let newPopOverSize: CGSize
         switch sizeClass {
@@ -513,11 +489,7 @@ extension NoteViewController {
         default:
             newPopOverSize = CGSize(width: popOverWidth, height: popOverHeight)
         }
-        
+
         return newPopOverSize
     }
 }
-
-
-
-

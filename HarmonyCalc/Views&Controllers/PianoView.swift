@@ -13,7 +13,7 @@
 import UIKit
 
 
-class PianoView: UIView {
+class PianoView: UIView, NoteInputSource {
     //***************************************************
     //MARK: Layout observers
     //***************************************************
@@ -23,7 +23,7 @@ class PianoView: UIView {
         super.traitCollectionDidChange(previousTraitCollection)
         isCompactHeight = traitCollection.verticalSizeClass == .compact ? true : false
         isCompactWidth = traitCollection.horizontalSizeClass == .compact ? true : false
-        touchedKeys = []
+        touchedNotes = []
         setNeedsLayout()
     }
     
@@ -51,33 +51,27 @@ class PianoView: UIView {
     private var whiteKeyTopWidthFGAB: CGFloat { return whiteKeyBottomWidth - (blackKeyWidth * 3 / 4) }
     private var blackKeyWidth: CGFloat { return whiteKeyBottomWidth / whiteKeyBottomWidthToBlackKeyWidthRatio }
     
-    //Generate all keys based on numberOfWhiteKeys
-    private var arrayOfKeys: [(PitchClass, Octave)] {
-        var decrementer = numberOfWhiteKeys
-        var keysArray: [(PitchClass, Octave)] = []
-        var noteValue = 0
-        var octave: Octave = .zero
-        while decrementer > 0 {
-            if noteValue == 12 {
-                noteValue -= 12
-                octave = .one
+    //Generate all keys based on numberOfWhiteKeys, starting at middle C (MIDI 60)
+    private var arrayOfKeys: [Note] {
+        var keysArray: [Note] = []
+        var whiteKeysDrawn = 0
+        var midiNoteNumber = 60
+        while whiteKeysDrawn < numberOfWhiteKeys {
+            if let note = Note(midiNoteNumber: midiNoteNumber) {
+                keysArray.append(note)
+                if !note.pitchClass.isBlackKey { whiteKeysDrawn += 1 }
             }
-            if let pitchClass = PitchClass(rawValue: noteValue) {
-                noteValue += 1
-                keysArray.append((pitchClass, octave))
-                if !pitchClass.isBlackKey { decrementer -= 1 }
-            }
+            midiNoteNumber += 1
         }
         return keysArray
     }
     //To map a touch's area in layer to its note
-    var keyAreas: [(path: UIBezierPath, key: (PitchClass, Octave))] = []
-    var noteCollectionDelegate: NoteCollectionConstraintsDelegate?
-    var noteNameDelegate: DisplaysNotes?
-    var playNoteDelegate: PlaysNotes?
-    
-    var touchedKeys: [(PitchClass, Octave)] = [] { didSet { setNeedsDisplay() } }
-    
+    var keyAreas: [(path: UIBezierPath, key: Note)] = []
+    weak var inputDelegate: NoteInputDelegate?
+
+    //Presentational highlight set, driven by the state owner (HarmonySession)
+    var touchedNotes: [Note] = [] { didSet { setNeedsDisplay() } }
+
     //***************************************************
     //MARK: Touch events
     //***************************************************
@@ -92,34 +86,21 @@ class PianoView: UIView {
     private func checkIfPathContains(_ location: CGPoint) {
         for keyArea in keyAreas {
             if keyArea.path.contains(location) {
-                checkTouchedKeys(for: keyArea.key)
+                reportTouch(for: keyArea.key)
                 break
             }
         }
     }
-    
-    //Remove key if already touched, otherwise add it to chord
-    private func checkTouchedKeys(for key: (PitchClass, Octave)) {
-        for (index, touchedKey) in touchedKeys.enumerated() {
-            if touchedKey == key {
-                touchedKeys.remove(at: index)
-                updateNoteNameDelegate()
-                playNoteDelegate?.noteOff(keyOff: key)
-                return
-            }
+
+    //Emit note off if already held, otherwise note on; the delegate owns the held set
+    private func reportTouch(for note: Note) {
+        if touchedNotes.contains(note) {
+            inputDelegate?.noteInput(self, noteOff: note)
+        } else {
+            inputDelegate?.noteInput(self, noteOn: note)
         }
-        if let maxNotes = noteCollectionDelegate?.maxTouchableNotes, touchedKeys.count < maxNotes {
-            touchedKeys.append(key)
-        }
-        updateNoteNameDelegate()
-        playNoteDelegate?.noteOn(keyPressed: key)
     }
-    
-    private func updateNoteNameDelegate() {
-        noteNameDelegate?.touchedKeys = touchedKeys
-        noteNameDelegate?.noteDisplayNeedsUpdate()
-    }
-    
+
     //***************************************************
     //MARK: Build key geometry
     //***************************************************
@@ -138,25 +119,25 @@ class PianoView: UIView {
         
         for key in arrayOfKeys {
             let path: UIBezierPath
-            switch key.0 {
+            switch key.pitchClass {
             case .c, .f:
                 //Ensure first .c startingXValue isn't 0
                 if numberOfWhiteKeysDrawn != 0 {
                     leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
                     startingXValue = leftMostX //Align it back with bottom of keyboard counter
                 }
-                let topWidth = key.0 == .c ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
+                let topWidth = key.pitchClass == .c ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
                 path = whiteKeyPathCF(startingX: startingXValue, topWidth: topWidth)
                 numberOfWhiteKeysDrawn += 1
                 incrementer = topWidth + spaceBetweenKeys
             case .d, .g, .a:
-                let topWidth = key.0 == .d ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
+                let topWidth = key.pitchClass == .d ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
                 leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
                 path = whiteKeyPathDGA(startingX: startingXValue, topWidth: topWidth, leftMostX: leftMostX)
                 numberOfWhiteKeysDrawn += 1
                 incrementer = topWidth + spaceBetweenKeys
             case .e, .b:
-                let topWidth = key.0 == .e ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
+                let topWidth = key.pitchClass == .e ? whiteKeyTopWidthCDE : whiteKeyTopWidthFGAB
                 leftMostX = CGFloat(numberOfWhiteKeysDrawn) * (whiteKeyBottomWidth + CGFloat(spaceBetweenKeys))
                 path = whiteKeyPathEB(startingX: startingXValue, topWidth: topWidth, leftMostX: leftMostX)
                 numberOfWhiteKeysDrawn += 1
@@ -175,8 +156,8 @@ class PianoView: UIView {
     //***************************************************
     override func draw(_ rect: CGRect) {
         for keyArea in keyAreas {
-            let keyWasTouched = touchedKeys.contains(where: {$0 == keyArea.key})
-            if keyArea.key.0.isBlackKey {
+            let keyWasTouched = touchedNotes.contains(where: {$0 == keyArea.key})
+            if keyArea.key.pitchClass.isBlackKey {
                 fillBlackKey(keyArea.path, keyWasTouched: keyWasTouched)
             } else {
                 strokeAndFillPath(keyArea.path, keyWasTouched: keyWasTouched)

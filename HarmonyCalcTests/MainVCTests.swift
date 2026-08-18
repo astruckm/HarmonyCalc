@@ -1,15 +1,15 @@
 @testable import HarmonyCalc
 import XCTest
 
-final class NoteVCTests: XCTestCase {
-    func makeNoteVC() -> NoteViewController {
-        let noteVC = NoteViewController()
-        noteVC.defaults = Defaults(defaultsObj: FakeUserDefaults())
-        return noteVC
+final class MainVCTests: XCTestCase {
+    func makeMainVC() -> MainViewController {
+        let mainVC = MainViewController()
+        mainVC.defaults = Defaults(defaultsObj: FakeUserDefaults())
+        return mainVC
     }
 
     func testLoadOutlets() throws {
-        let sut = makeNoteVC()
+        let sut = makeMainVC()
 
         sut.loadViewIfNeeded()
 
@@ -31,7 +31,7 @@ final class NoteVCTests: XCTestCase {
     }
 
     func testPropertiesDefaultsAfterLoadingView() {
-        let sut = makeNoteVC()
+        let sut = makeMainVC()
 
         sut.loadViewIfNeeded()
 
@@ -48,7 +48,7 @@ final class NoteVCTests: XCTestCase {
     }
 
     func testPropertiesLoadedFromUserDefaultsAfterLoadingView() {
-        let sut = makeNoteVC()
+        let sut = makeMainVC()
         let newFakeUserDefaults = FakeUserDefaults()
         let newDefaults = Defaults(defaultsObj: newFakeUserDefaults)
         newFakeUserDefaults.settings = [
@@ -66,7 +66,7 @@ final class NoteVCTests: XCTestCase {
     }
 
     func testResetIBActionButtonTap() {
-        let sut = makeNoteVC()
+        let sut = makeMainVC()
 
         sut.loadViewIfNeeded()
 
@@ -76,10 +76,10 @@ final class NoteVCTests: XCTestCase {
         tap(sut.reset)
 
         XCTAssertTrue(sut.piano.keyAreas.isEmpty)
-        XCTAssertTrue(sut.piano.touchedKeys.isEmpty)
+        XCTAssertTrue(sut.piano.touchedNotes.isEmpty)
         XCTAssertTrue(sut.audioEngine.players.isEmpty)
         XCTAssertEqual(sut.noteName.text, " ")
-        XCTAssertTrue(sut.touchedKeys.isEmpty)
+        XCTAssertTrue(sut.session.heldNotes.isEmpty)
 
         XCTAssertEqual(sut.normalForm.text, " ")
         XCTAssertEqual(sut.primeForm.text, " ")
@@ -88,7 +88,7 @@ final class NoteVCTests: XCTestCase {
     }
 
     func testAudioOnOffTapped() {
-        let sut = makeNoteVC()
+        let sut = makeMainVC()
         sut.defaults.writeAudioSetting(true)
 
         sut.loadViewIfNeeded()
@@ -110,7 +110,7 @@ final class NoteVCTests: XCTestCase {
     }
 
     func testFlatSharpTappedChangesCollectionUsesSharps() {
-        let sut = makeNoteVC()
+        let sut = makeMainVC()
         sut.defaults.writeCollectionUsesSharps(true)
 
         sut.loadViewIfNeeded()

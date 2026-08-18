@@ -8,18 +8,14 @@
 
 import Foundation
 
-protocol DisplaysNotes {
-    var noteNames: String { get set }
-    var touchedKeys: [(PitchClass, Octave)] { get set }
-    func noteDisplayNeedsUpdate()
+/// A source of note-on/note-off events (a piano, fretboard, MIDI keyboard, etc.).
+protocol NoteInputSource: AnyObject {
+    var inputDelegate: NoteInputDelegate? { get set }
 }
 
-protocol PlaysNotes {
-    func noteOn(keyPressed: (PitchClass, Octave))
-    func noteOff(keyOff: (PitchClass, Octave))
+/// Receives note events from a `NoteInputSource`.
+protocol NoteInputDelegate: AnyObject {
+    func noteInput(_ source: NoteInputSource, noteOn note: Note)
+    func noteInput(_ source: NoteInputSource, noteOff note: Note)
+    func noteInputDidClear(_ source: NoteInputSource)
 }
-
-protocol NoteCollectionConstraintsDelegate {
-    var maxTouchableNotes: Int { get }
-}
-

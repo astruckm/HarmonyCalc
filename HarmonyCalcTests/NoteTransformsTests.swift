@@ -11,13 +11,10 @@ import XCTest
 
 final class NoteTransformsTests: XCTestCase {
     enum MockData {
-        static let octaveZero: Octave = .zero
-        static let octaveOne: Octave = .one
-
-        static var cZero: PianoKey { (.c, octaveZero) }
-        static var cSharpZero: PianoKey { (.cSharp, octaveZero) }
-        static var aZero: PianoKey { (.a, octaveZero) }
-        static var cSharpOne: PianoKey { (.cSharp, octaveOne) }
+        static var cZero: Note { makeNote(.c, 4) }
+        static var cSharpZero: Note { makeNote(.cSharp, 4) }
+        static var aZero: Note { makeNote(.a, 4) }
+        static var cSharpOne: Note { makeNote(.cSharp, 5) }
     }
     
     func testAllInversionsOfEmptyPCollection() {
@@ -57,13 +54,6 @@ final class NoteTransformsTests: XCTestCase {
         XCTAssertEqual(allInversions10PCsFirstPCs, [.b, .aSharp, .gSharp, .g, .fSharp, .f, .e, .dSharp, .d, .c])
     }
 
-    func testKeyValue() {
-        let pc: PitchClass = .aSharp
-        let keyValue = keyValue((pitchClass: pc, octave: MockData.octaveOne))
-
-        XCTAssertEqual(keyValue, 22)
-    }
-
     func testPutInRangeWithNegativeKeyValues() {
         let negativeOne: PitchClass = putInRange(keyValue: -1)
         let negativeTwentyFour: PitchClass = putInRange(keyValue: -24)
@@ -90,24 +80,24 @@ final class NoteTransformsTests: XCTestCase {
         XCTAssertEqual(oneHundred, .e)
     }
 
-    func testIntervalNumberBetweenKeysSameOctave() {
-        let interval = intervalNumberBetweenKeys(keyOne: MockData.cSharpZero, keyTwo: MockData.aZero)
+    func testIntervalNumberBetweenNotesSameOctave() {
+        let interval = intervalNumberBetweenNotes(noteOne: MockData.cSharpZero, noteTwo: MockData.aZero)
 
         XCTAssertEqual(interval, 8)
     }
 
-    func testIntervalNumberBetweenKeysDifferentOctaves() {
-        let intervalGreaterThanOctave = intervalNumberBetweenKeys(keyOne: MockData.cZero, keyTwo: MockData.cSharpOne)
-        let intervalLessThanOctave = intervalNumberBetweenKeys(keyOne: MockData.aZero, keyTwo: MockData.cSharpOne)
+    func testIntervalNumberBetweenNotesDifferentOctaves() {
+        let intervalGreaterThanOctave = intervalNumberBetweenNotes(noteOne: MockData.cZero, noteTwo: MockData.cSharpOne)
+        let intervalLessThanOctave = intervalNumberBetweenNotes(noteOne: MockData.aZero, noteTwo: MockData.cSharpOne)
 
         XCTAssertEqual(intervalGreaterThanOctave, 1)
         XCTAssertEqual(intervalLessThanOctave, 4)
     }
 
-    func testIntervalNumberBetweenKeysDifferentKeyOrder() {
-        let intervalSameKey = intervalNumberBetweenKeys(keyOne: MockData.aZero, keyTwo: MockData.aZero)
-        let interval = intervalNumberBetweenKeys(keyOne: MockData.aZero, keyTwo: MockData.cSharpOne)
-        let intervalReverse = intervalNumberBetweenKeys(keyOne: MockData.cSharpOne, keyTwo: MockData.aZero)
+    func testIntervalNumberBetweenNotesDifferentKeyOrder() {
+        let intervalSameKey = intervalNumberBetweenNotes(noteOne: MockData.aZero, noteTwo: MockData.aZero)
+        let interval = intervalNumberBetweenNotes(noteOne: MockData.aZero, noteTwo: MockData.cSharpOne)
+        let intervalReverse = intervalNumberBetweenNotes(noteOne: MockData.cSharpOne, noteTwo: MockData.aZero)
 
         XCTAssertEqual(intervalSameKey, 0)
         XCTAssertEqual(interval, 4)
