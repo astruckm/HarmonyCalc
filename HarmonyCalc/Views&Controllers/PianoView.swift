@@ -19,10 +19,15 @@ class PianoView: UIView, NoteInputSource {
     //***************************************************
     private var isCompactHeight = UIScreen.main.traitCollection.verticalSizeClass == .compact
     private var isCompactWidth = UIScreen.main.traitCollection.horizontalSizeClass == .compact
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        isCompactHeight = traitCollection.verticalSizeClass == .compact ? true : false
-        isCompactWidth = traitCollection.horizontalSizeClass == .compact ? true : false
+        let newIsCompactHeight = traitCollection.verticalSizeClass == .compact
+        let newIsCompactWidth = traitCollection.horizontalSizeClass == .compact
+        // Only the size class changes the key count/layout.
+        guard newIsCompactHeight != isCompactHeight || newIsCompactWidth != isCompactWidth else { return }
+        isCompactHeight = newIsCompactHeight
+        isCompactWidth = newIsCompactWidth
         touchedNotes = []
         setNeedsLayout()
     }

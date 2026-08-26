@@ -174,6 +174,11 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        let sizeClassChanged = traitCollection.horizontalSizeClass != previousTraitCollection?.horizontalSizeClass
+            || traitCollection.verticalSizeClass != previousTraitCollection?.verticalSizeClass
+        //Layout and note state only depend on the size class. Don't tear down the
+        //user's selection on unrelated trait changes (appearance, Dynamic Type, etc.).
+        guard sizeClassChanged else { return }
         applyTraitBasedLayout()
         resetNotes()
     }
