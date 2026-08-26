@@ -43,6 +43,7 @@ class DefinitionsViewController: UIViewController {
         let textView = UITextView()
         textView.isEditable = false
         textView.backgroundColor = .white
+        textView.textColor = .black
         textView.font = UIFont.systemFont(ofSize: 20)
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView

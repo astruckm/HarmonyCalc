@@ -193,6 +193,9 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         }
 
         noteName.textAlignment = .center
+        for label in [noteName, chord, inversion, normalForm, primeForm] {
+            label.textColor = .black
+        }
 
         flatSharp.setTitle("♯ / ♭", for: .normal)
         reset.setTitle("Clear", for: .normal)
