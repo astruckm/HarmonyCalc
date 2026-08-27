@@ -39,17 +39,36 @@ class DefinitionsViewController: UIViewController {
         }
     }
 
+    private enum Layout {
+        static let minWidth: CGFloat = 240
+        /// Roughly what UIKit's `readableContentGuide` targets
+        static let readableMaxWidth: CGFloat = 672
+        /// Target width as a fraction of the space the presenter allows.
+        static let idealWidthFraction: CGFloat = 0.7
+        /// Interior padding.
+        static let textInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+
+        /// A floor of two lines.
+        static func minHeight(for font: UIFont) -> CGFloat {
+            font.lineHeight * 2 + textInsets.top + textInsets.bottom
+        }
+    }
+
     private(set) lazy var definition: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
         textView.backgroundColor = .white
         textView.textColor = .black
         textView.font = UIFont.systemFont(ofSize: 20)
+        textView.textContainerInset = Layout.textInsets
         textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
 
     var topic: Topic?
+
+    /// The largest the popover may become, supplied by the presenter (which knows how much room it has).
+    var maxContentSize = CGSize(width: 320, height: 480)
 
     override func loadView() {
         let rootView = UIView()
@@ -75,5 +94,24 @@ class DefinitionsViewController: UIViewController {
         if let topic = topic {
             definition.text = topic.text
         }
+
+        updatePreferredContentSize()
+    }
+
+    private func updatePreferredContentSize() {
+        let font = definition.font ?? UIFont.systemFont(ofSize: 20)
+        let maxWidth = max(Layout.minWidth, maxContentSize.width)
+        let minHeight = Layout.minHeight(for: font)
+        let maxHeight = max(minHeight, maxContentSize.height)
+
+        let targetWidth = min(Layout.idealWidthFraction * maxContentSize.width,
+                              Layout.readableMaxWidth)
+        let fit = definition.sizeThatFits(CGSize(width: targetWidth,
+                                                 height: .greatestFiniteMagnitude))
+
+        preferredContentSize = CGSize(
+            width: min(max(fit.width, Layout.minWidth), maxWidth),
+            height: min(max(fit.height, minHeight), maxHeight)
+        )
     }
 }

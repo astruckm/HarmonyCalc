@@ -373,18 +373,9 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         let vc = DefinitionsViewController()
         vc.topic = topic
         vc.modalPresentationStyle = .popover
-
-        var popOverSize = CGSize(width: view.bounds.width/2, height: view.bounds.height/2)
-        let sizeClass = self.sizeClass()
-        popOverSize = changePopoverSize(popOverWidth: popOverSize.width, popOverHeight: popOverSize.height, sizeClass: sizeClass)
-
-        switch topic {
-        case .chord: popOverSize.height = view.bounds.height / 2.1
-        case .inversion: popOverSize.height = view.bounds.height / 4.6
-        case .normalForm: popOverSize.height = view.bounds.height / 1.4
-        case .primeForm: popOverSize.height = view.bounds.height / 1.5
-        }
-        vc.preferredContentSize = popOverSize
+        // Hand the popover its ceiling; it sizes itself to its text within these bounds.
+        vc.maxContentSize = CGSize(width: view.bounds.width * 0.9,
+                                   height: view.bounds.height * 0.8)
 
         let controller = vc.popoverPresentationController
         controller?.delegate = self
@@ -474,30 +465,5 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         primeForm.text = primeFormText
         chord.text = chordText
         inversion.text = inversionText
-    }
-}
-
-
-extension MainViewController {
-    func sizeClass() -> (UIUserInterfaceSizeClass, UIUserInterfaceSizeClass) {
-        return (self.traitCollection.horizontalSizeClass, self.traitCollection.verticalSizeClass)
-    }
-
-    func changePopoverSize(popOverWidth: CGFloat, popOverHeight: CGFloat, sizeClass: (UIUserInterfaceSizeClass, UIUserInterfaceSizeClass)) -> CGSize {
-        let newPopOverSize: CGSize
-        switch sizeClass {
-        case (.compact, .compact):
-            newPopOverSize = CGSize(width: popOverWidth / 0.7, height: popOverHeight / 0.8)
-        case (.compact, .regular):
-            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight / 1.2)
-        case (.regular, .compact):
-            newPopOverSize = CGSize(width: popOverWidth / 1.0, height: popOverHeight)
-        case (.regular, .regular):
-            newPopOverSize = CGSize(width: popOverWidth / 0.8, height: popOverHeight / 1.6)
-        default:
-            newPopOverSize = CGSize(width: popOverWidth, height: popOverHeight)
-        }
-
-        return newPopOverSize
     }
 }
