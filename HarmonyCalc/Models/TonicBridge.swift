@@ -11,3 +11,7 @@ import Tonic
 func pitchClass(from noteClass: NoteClass) -> PitchClass? {
     return PitchClass(rawValue: Int(noteClass.canonicalNote.pitch.pitchClass))
 }
+
+func spellingComplexity(of noteClass: NoteClass) -> Int {
+    return abs(Int(noteClass.accidental.rawValue))
+}

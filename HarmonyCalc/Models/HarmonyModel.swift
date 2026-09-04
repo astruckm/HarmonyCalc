@@ -56,8 +56,66 @@ public struct HarmonyModel {
     func primeForm(ofCollectionInNormalForm pitchCollection: [PitchClass]) -> [Int] {
         return PitchClassSet(pitchCollection.map { $0.rawValue }).primeForm
     }
-    
-    
+
+    func intervalVector(of pitchCollection: [PitchClass]) -> [Int] {
+        return PitchClassSet(pitchCollection.map { $0.rawValue }).intervalVector
+    }
+
+    func analyze(_ notes: [Note]) -> HarmonyAnalysis {
+        let pitchClasses = Array(Set(notes.map { $0.pitchClass })).sorted(by: <)
+        guard pitchClasses.count >= 2 else { return .empty }
+
+        let normalForm = self.normalForm(of: pitchClasses)
+        let primeForm = self.primeForm(ofCollectionInNormalForm: normalForm)
+        let intervalVector = self.intervalVector(of: pitchClasses)
+        let forteName = ForteTable.name(forPrimeForm: primeForm)
+        let (primary, alternatives) = rankedCandidates(from: notes)
+
+        return HarmonyAnalysis(primary: primary,
+                               alternatives: alternatives,
+                               normalForm: normalForm,
+                               primeForm: primeForm,
+                               intervalVector: intervalVector,
+                               forteName: forteName)
+    }
+
+    private func rankedCandidates(from notes: [Note]) -> (primary: ChordCandidate?, alternatives: [ChordCandidate]) {
+        guard notes.count >= 2 else { return (nil, []) }
+        let pitchClasses = notes.map { $0.pitchClass.rawValue }
+        guard Set(pitchClasses).count >= 2 else { return (nil, []) }
+        let mask = HarmonyModel.pitchClassMask(of: pitchClasses)
+        guard let tonicChords = HarmonyModel.chordsByPitchClassMask[mask], !tonicChords.isEmpty else { return (nil, []) }
+        guard let bassValue = notes.map({ $0.midiNoteNumber }).min() else { return (nil, []) }
+        let bassPitchClass = bassValue % 12
+
+        var deduped: [Chord] = []
+        for chord in tonicChords {
+            guard let rootPC = pitchClass(from: chord.root) else { continue }
+            if let existing = deduped.firstIndex(where: {
+                $0.type == chord.type && pitchClass(from: $0.root) == rootPC
+            }) {
+                if spellingComplexity(of: chord.root) < spellingComplexity(of: deduped[existing].root) {
+                    deduped[existing] = chord
+                }
+            } else {
+                deduped.append(chord)
+            }
+        }
+
+        let alternatives: [ChordCandidate] = deduped.compactMap { chord in
+            guard let rootPC = pitchClass(from: chord.root) else { return nil }
+            let chordPitchClasses = chord.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) }
+            let inversionIndex = chordPitchClasses.firstIndex(of: bassPitchClass) ?? 0
+            return ChordCandidate(root: rootPC,
+                                  rootSpelling: chord.root.description,
+                                  quality: chord.type.description,
+                                  inversion: TonalChordInversion(inversionIndex: inversionIndex).rawValue)
+        }
+
+        let primary = alternatives.first { $0.root.rawValue == bassPitchClass } ?? alternatives.first
+        return (primary, alternatives)
+    }
+
     //**********************************************************
     //MARK: Tonal collections
     //**********************************************************
