@@ -47,23 +47,22 @@
 		727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E794D2829585F00471A55 /* OSLog+Extensions.swift */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
-		72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
-		72B1C0DE2FEC050000000002 /* PitchClassSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC050000000001 /* PitchClassSet.swift */; };
-		72B1C0DE2FEC080000000002 /* HarmonyAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC080000000001 /* HarmonyAnalysis.swift */; };
-		72B1C0DE2FEC090000000002 /* ForteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC090000000001 /* ForteTable.swift */; };
-		72B1C0DE2FEC0A0000000002 /* ForteTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */; };
-		72B1C0DE2FEC0B0000000002 /* HarmonyAnalysisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0B0000000001 /* HarmonyAnalysisTests.swift */; };
 		72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */; };
 		72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */; };
 		72B108852FED65A600C6DE89 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 72B108842FED65A600C6DE89 /* Tonic */; };
 		72B1C0DE2FEC040000000002 /* TonicBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC040000000001 /* TonicBridge.swift */; };
+		72B1C0DE2FEC050000000002 /* PitchClassSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC050000000001 /* PitchClassSet.swift */; };
+		72B1C0DE2FEC060000000002 /* PitchClassSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */; };
 		72B1C0DE2FEC070000000002 /* HarmonySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC070000000001 /* HarmonySession.swift */; };
+		72B1C0DE2FEC080000000002 /* HarmonyAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC080000000001 /* HarmonyAnalysis.swift */; };
+		72B1C0DE2FEC090000000002 /* ForteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC090000000001 /* ForteTable.swift */; };
+		72B1C0DE2FEC0A0000000002 /* ForteTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */; };
+		72B1C0DE2FEC0B0000000002 /* HarmonyAnalysisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0B0000000001 /* HarmonyAnalysisTests.swift */; };
 		72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B911B7297514C900D7D1BF /* NoteTypesTests.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
 		72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */; };
-		72B1C0DE2FEC060000000002 /* PitchClassSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,21 +121,20 @@
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarmonyCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
-		72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyTypes.swift; sourceTree = "<group>"; };
 		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
+		72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsVCTests.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC040000000001 /* TonicBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonicBridge.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC050000000001 /* PitchClassSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchClassSet.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchClassSetTests.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC070000000001 /* HarmonySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonySession.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC080000000001 /* HarmonyAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyAnalysis.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC090000000001 /* ForteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForteTable.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForteTableTests.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC0B0000000001 /* HarmonyAnalysisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyAnalysisTests.swift; sourceTree = "<group>"; };
-		72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsVCTests.swift; sourceTree = "<group>"; };
-		72B1C0DE2FEC040000000001 /* TonicBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonicBridge.swift; sourceTree = "<group>"; };
-		72B1C0DE2FEC070000000001 /* HarmonySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonySession.swift; sourceTree = "<group>"; };
 		72B911B7297514C900D7D1BF /* NoteTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypesTests.swift; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
 		72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransformsTests.swift; sourceTree = "<group>"; };
-		72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchClassSetTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,7 +243,6 @@
 		72A5E60E2124DEF600C52D45 /* Custom Types */ = {
 			isa = PBXGroup;
 			children = (
-				72A5E60C2124DD5B00C52D45 /* HarmonyTypes.swift */,
 				72B1C0DE2FEC080000000001 /* HarmonyAnalysis.swift */,
 				72C71978206144D50055C742 /* NoteTypes.swift */,
 			);
@@ -446,7 +443,6 @@
 				726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */,
 				72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */,
 				725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */,
-				72A5E60D2124DD5B00C52D45 /* HarmonyTypes.swift in Sources */,
 				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
 				72B1C0DE2FEC050000000002 /* PitchClassSet.swift in Sources */,
 				72B1C0DE2FEC080000000002 /* HarmonyAnalysis.swift in Sources */,
