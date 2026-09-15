@@ -435,13 +435,17 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         if session.pitchClasses.count > 1 {
             let normalFormPC = session.normalForm
             let normalFormAsString = normalFormPC.map { element -> String in
-                if element.rawValue == 10 { return "t" }
-                else if element.rawValue == 11 { return "e" }
+                if element.rawValue == 10 { return "T" }
+                else if element.rawValue == 11 { return "E" }
                 else { return String(element.rawValue) } }
             normalFormText = "[" + normalFormAsString.joined(separator: ",") + "]"
 
             let primeFormPC = session.primeForm
-            let primeFormAsString = primeFormPC.map({String($0)})
+            let primeFormAsString = primeFormPC.map { element -> String in
+                if element == 10 { return "T" }
+                else if element == 11 { return "E" }
+                else { return String(element) }
+            }
             primeFormText = "(" + primeFormAsString.joined() + ")"
 
             if let chordInfo = session.chord() {
