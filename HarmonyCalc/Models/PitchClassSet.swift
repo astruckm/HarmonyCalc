@@ -8,6 +8,7 @@
 //  Post-tonal set theory, following Joseph N. Straus' "Introduction to Post-Tonal Theory".
 //  Operates on bare integer pitch classes (0...11) with no spelling context, so it stays
 //  independent of the rest of the app.
+//
 
 import Foundation
 
@@ -18,26 +19,24 @@ struct PitchClassSet {
         self.pitchClasses = pitchClasses
     }
 
-    // The most left-packed rotation of the set (Straus normal form).
+    // The rotation most packed to the left, comparing the interval from the first pitch class out to the last, then if there are ties, from the first to second-to-last, and so on.
+    // A fully symmetric set is broken by choosing the lowest starting pitch class.
     var normalForm: [Int] {
-        let deduped = Array(Set(pitchClasses))
-        guard pitchClasses.count >= 2 else { return [] }
-        let rotations = PitchClassSet.allRotations(of: deduped)
-
-        let shortest = shortestSpanRotations(of: rotations)
-        if shortest.count == 1 { return shortest[0] }
-
-        return mostPackedRotation(of: shortest) ?? rotations[0]
+        let deduped = Array(Set(pitchClasses)).sorted()
+        guard deduped.count >= 2 else { return [] }
+        let allRotations: [[Int]] = Self.allRotations(of: deduped)
+        return allRotations.min(by: PitchClassSet.moreCompact) ?? pitchClasses
     }
 
-    // The prime form (Forte method, packed to the left), transposed to begin on 0.
+    // The prime form (Rahn method): the most left-packed of the normal form or its inversion's normal form, transposed to begin on 0.
     var primeForm: [Int] {
         let normalForm = self.normalForm
         guard normalForm.count >= 2 else { return [] }
 
-        let transposedToZero = normalForm.map { PitchClassSet.mod12($0 - normalForm[0]) }
-        let inversion = inversionTransposedToZero(of: normalForm)
-        return packedToLeft(transposedToZero, inversion)
+        let original = PitchClassSet.transposedToZero(normalForm)
+        let invertedNormalForm = PitchClassSet(normalForm.map { PitchClassSet.mod12(-$0) }).normalForm
+        let inversion = PitchClassSet.transposedToZero(invertedNormalForm)
+        return PitchClassSet.moreLeftPacked(original, inversion)
     }
 
     // The interval-class vector: how many times each interval class (1...6) occurs in the set.
@@ -65,71 +64,38 @@ struct PitchClassSet {
         return semitones <= 6 ? semitones : 12 - semitones
     }
 
-    // Span in semitones, mod 12, from the first to the last pitch class of a rotation.
-    private static func span(of rotation: [Int]) -> Int {
-        guard let first = rotation.first, let last = rotation.last else { return 0 }
-        return mod12(last - first)
-    }
-
-    private static func allRotations(of collection: [Int]) -> [[Int]] {
-        guard !collection.isEmpty else { return [] }
+    private static func allRotations(of sortedCollection: [Int]) -> [[Int]] {
+        guard !sortedCollection.isEmpty else { return [] }
         var rotations = [[Int]]()
-        var rotation = collection.sorted()
-        for _ in 0..<collection.count {
+        var rotation = sortedCollection
+        for _ in 0..<sortedCollection.count {
             rotations.append(rotation)
             rotation.append(rotation.removeFirst())
         }
         return rotations
     }
 
-    private func shortestSpanRotations(of rotations: [[Int]]) -> [[Int]] {
-        var shortestDistance = 12
-        var shortest = [[Int]]()
-        for rotation in rotations {
-            let intervalSpan = PitchClassSet.span(of: rotation)
-            if intervalSpan < shortestDistance {
-                shortest = [rotation]
-                shortestDistance = intervalSpan
-            } else if intervalSpan == shortestDistance {
-                shortest.append(rotation)
-            }
+    // True when `a` is strictly more compact than `b`: compare the span from the first pitch class to the last, then to the second-to-last, etc.; ties among fully symmetric rotations fall back to the lower starting pitch class for a stable ordering.
+    private static func moreCompact(_ a: [Int], _ b: [Int]) -> Bool {
+        for offset in stride(from: a.count - 1, through: 1, by: -1) {
+            let spanA = mod12(a[offset] - a[0])
+            let spanB = mod12(b[offset] - b[0])
+            if spanA != spanB { return spanA < spanB }
         }
-        return shortest
+        return a[0] < b[0]
     }
 
-    // Tie-break by comparing the span to the second-to-last pitch, then third-to-last, etc.
-    private func mostPackedRotation(of rotations: [[Int]]) -> [Int]? {
-        var shortestDistance = 12
-        var shortest = [[Int]]()
-        for offset in 0...(rotations[0].count - 1) {
-            for rotation in rotations {
-                let top = rotation[rotation.count - 1 - offset]
-                let intervalSpan = PitchClassSet.mod12(top - rotation[0])
-                if intervalSpan < shortestDistance {
-                    shortest = [rotation]
-                    shortestDistance = intervalSpan
-                } else if intervalSpan == shortestDistance {
-                    shortest.append(rotation)
-                }
-            }
-            if shortest.count == 1 { return shortest[0] }
-        }
-        return nil
+    private static func transposedToZero(_ set: [Int]) -> [Int] {
+        guard let first = set.first else { return [] }
+        return set.map { mod12($0 - first) }
     }
 
-    private func inversionTransposedToZero(of set: [Int]) -> [Int] {
-        let inverted = set.map { PitchClassSet.mod12(12 - $0) }
-        guard let last = inverted.last else { return [] }
-        return inverted.map { PitchClassSet.mod12($0 - last) }.sorted()
-    }
-
-    private func packedToLeft(_ original: [Int], _ inversion: [Int]) -> [Int] {
-        var index = 1
-        while index < original.count {
-            if original[index] < inversion[index] { return original }
-            if original[index] > inversion[index] { return inversion }
-            index += 1
+    // The more left-packed of two zero-based candidates: the one with the smaller pitch class
+    // at the first position where they differ (Straus' prime form comparison).
+    private static func moreLeftPacked(_ a: [Int], _ b: [Int]) -> [Int] {
+        for index in 1..<a.count {
+            if a[index] != b[index] { return a[index] < b[index] ? a : b }
         }
-        return original
+        return a
     }
 }

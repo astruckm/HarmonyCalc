@@ -117,7 +117,7 @@ class HarmonyModelTests: XCTestCase {
         
         let augMaj7Transforms = performCollectionTransforms(PianoKeyCollections.dAugMaj7)
         XCTAssert(augMaj7Transforms.normalForm == [.aSharp, .cSharp, .d, .fSharp])
-        XCTAssert(augMaj7Transforms.primeForm == [0, 3, 4, 8])
+        XCTAssert(augMaj7Transforms.primeForm == [0, 1, 4, 8]) // 4-19, prime form comes from the inversion
         assertChord(augMaj7Transforms.chord, .d, "maj7(♯5)", "1st")
     }
     
@@ -139,12 +139,12 @@ class HarmonyModelTests: XCTestCase {
         
         let flat9Transforms = performCollectionTransforms(PianoKeyCollections.g7Flat9)
         XCTAssert(flat9Transforms.normalForm == [.f, .g, .gSharp, .b, .d])
-        XCTAssert(flat9Transforms.primeForm == [0, 2, 3, 6, 9])
+        XCTAssert(flat9Transforms.primeForm == [0, 1, 3, 6, 9]) // 5-31, prime form comes from the inversion
         assertChord(flat9Transforms.chord, .f, "°9", "3rd")
         
         let sharp9Transforms = performCollectionTransforms(PianoKeyCollections.b7Sharp9)
         XCTAssert(sharp9Transforms.normalForm == [.a, .b, .d, .dSharp, .fSharp])
-        XCTAssert(sharp9Transforms.primeForm == [0, 2, 5, 6, 9])
+        XCTAssert(sharp9Transforms.primeForm == [0, 1, 4, 6, 9]) // 5-32, prime form comes from the inversion
         assertChord(sharp9Transforms.chord, .b, "7(♯9)", "4th")
     }
     

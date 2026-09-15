@@ -34,7 +34,7 @@ class DefinitionsViewController: UIViewController {
                 0 = C, 1 = C♯/D♭, 2 = D, 3 = D♯/E♭, 4 = E, 5 = F, 6 = F♯/G♭, 7 = G, 8 = G♯/A♭, 9 = A, t(10) = A♯/B♭, e(11) = B
                 """
             case .primeForm:
-                return "Prime form takes the collection's normal form, then transposes it so its first note is 0 and compares it against its inversion to find the most compact version. This classifies the collection in a more general form by its intervals. HarmonyCalc uses the Forte version of prime form."
+                return "Prime form takes the collection's normal form, then transposes it so its first note is 0 and compares it against its inversion to find the most compact version. This classifies the collection in a more general form by its intervals. HarmonyCalc uses the Rahn version of prime form."
             }
         }
     }
