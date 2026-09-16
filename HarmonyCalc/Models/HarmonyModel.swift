@@ -102,7 +102,7 @@ public struct HarmonyModel {
             }
         }
 
-        let alternatives: [ChordCandidate] = deduped.compactMap { chord in
+        let candidates: [ChordCandidate] = deduped.compactMap { chord in
             guard let rootPC = pitchClass(from: chord.root) else { return nil }
             let chordPitchClasses = chord.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) }
             let inversionIndex = chordPitchClasses.firstIndex(of: bassPitchClass) ?? 0
@@ -111,8 +111,13 @@ public struct HarmonyModel {
                                   quality: chord.type.description,
                                   inversion: TonalChordInversion(inversionIndex: inversionIndex).rawValue)
         }
+        guard !candidates.isEmpty else { return (nil, []) }
 
-        let primary = alternatives.first { $0.root.rawValue == bassPitchClass } ?? alternatives.first
+        // Pick the reading rooted on the bass, otherwise the simplest available, then
+        // expose the remaining readings as genuine alternatives to that primary.
+        let primaryIndex = candidates.firstIndex { $0.root.rawValue == bassPitchClass } ?? candidates.startIndex
+        var alternatives = candidates
+        let primary = alternatives.remove(at: primaryIndex)
         return (primary, alternatives)
     }
 

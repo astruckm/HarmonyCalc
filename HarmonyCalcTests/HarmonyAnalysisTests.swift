@@ -28,8 +28,8 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.intervalVector, [0, 0, 1, 1, 1, 0])
         XCTAssertEqual(analysis.forteName, "3-11")
 
-        XCTAssertEqual(analysis.alternatives.count, 1)
-        XCTAssertEqual(analysis.alternatives.first, primary)
+        XCTAssertTrue(analysis.alternatives.isEmpty)
+        XCTAssertFalse(analysis.alternatives.contains(where: { $0 == primary }))
     }
 
     func testMinorTriadSharesSetClassWithMajor() {
@@ -51,8 +51,9 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.quality, "⁺")
         XCTAssertEqual(analysis.primary?.inversion, "Root")
         XCTAssertEqual(analysis.forteName, "3-12")
-        XCTAssertEqual(analysis.alternatives.count, 3)
-        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .e, .gSharp])
+        // Three symmetric readings total; the E-rooted one is primary, leaving two alternatives.
+        XCTAssertEqual(analysis.alternatives.count, 2)
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .gSharp])
     }
 
     func testSuspendedChord() {
@@ -83,10 +84,11 @@ class HarmonyAnalysisTests: XCTestCase {
 
         XCTAssertEqual(analysis.primeForm, [0, 3, 6, 9])
         XCTAssertEqual(analysis.forteName, "4-28")
+        XCTAssertEqual(analysis.primary?.root, .c)
         XCTAssertEqual(analysis.primary?.quality, "°7")
-        XCTAssertEqual(analysis.alternatives.count, 4)
+        XCTAssertEqual(analysis.alternatives.count, 3)
         XCTAssertTrue(analysis.alternatives.allSatisfy { $0.quality == "°7" })
-        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .dSharp, .fSharp, .a])
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.dSharp, .fSharp, .a])
     }
 
     func testDominantNinth() {
@@ -130,7 +132,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(harmonyModel.analyze(octave), .empty)
     }
 
-    func testPrimaryIsContainedInAlternatives() {
+    func testPrimaryIsNotContainedInAlternatives() {
         let inputs: [[Note]] = [
             [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4)],
             [makeNote(.e, 4), makeNote(.c, 5), makeNote(.gSharp, 5)],
@@ -139,7 +141,7 @@ class HarmonyAnalysisTests: XCTestCase {
         for notes in inputs {
             let analysis = harmonyModel.analyze(notes)
             if let primary = analysis.primary {
-                XCTAssertTrue(analysis.alternatives.contains(primary))
+                XCTAssertFalse(analysis.alternatives.contains(primary))
             }
         }
     }
