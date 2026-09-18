@@ -145,4 +145,65 @@ class HarmonyAnalysisTests: XCTestCase {
             }
         }
     }
+
+    func testPhantomEnharmonicExtensionsAreExcluded() {
+        let c9 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4), makeNote(.aSharp, 4), makeNote(.d, 5)]
+        let analysis = harmonyModel.analyze(c9)
+
+        let allCandidates = ([analysis.primary].compactMap { $0 }) + analysis.alternatives
+        for candidate in allCandidates {
+            XCTAssertFalse(candidate.quality.contains("♯9"), "phantom ♯9 in \(candidate.symbol)")
+            XCTAssertFalse(candidate.quality.contains("♯11"), "phantom ♯11 in \(candidate.symbol)")
+        }
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .e && $0.quality.contains("ø7") },
+                      "expected the clean Eø7(add♭13) reading among alternatives")
+    }
+
+    func testAddedSixthPrefersFullerThirdStack() {
+        let notes = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4), makeNote(.a, 4)]
+        let analysis = harmonyModel.analyze(notes)
+
+        XCTAssertEqual(analysis.primary?.root, .a)
+        XCTAssertEqual(analysis.primary?.quality, "m7")
+        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        XCTAssertEqual(analysis.primary?.symbol, "Am7")
+
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .c && $0.quality == "6" })
+    }
+
+    func testSixNoteChordPrefersFullestThirdStack() {
+        let cMaj11 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4),
+                      makeNote(.b, 4), makeNote(.d, 5), makeNote(.f, 5)]
+        let analysis = harmonyModel.analyze(cMaj11)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "maj11")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .g })
+    }
+
+    func testSixNoteChordExcludesPhantomExtensions() {
+        let c13 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4),
+                   makeNote(.aSharp, 4), makeNote(.d, 5), makeNote(.a, 5)]
+        let analysis = harmonyModel.analyze(c13)
+
+        XCTAssertEqual(analysis.primary?.root, .a)
+        XCTAssertTrue(analysis.primary?.quality.contains("m7") ?? false)
+
+        let allCandidates = ([analysis.primary].compactMap { $0 }) + analysis.alternatives
+        for candidate in allCandidates {
+            XCTAssertFalse(candidate.quality.contains("♯9"), "phantom ♯9 in \(candidate.symbol)")
+        }
+    }
+
+    func testSevenNoteDiatonicSetStacksAsThirteenthChord() {
+        let cMajorScale = [makeNote(.c, 4), makeNote(.d, 4), makeNote(.e, 4), makeNote(.f, 4),
+                           makeNote(.g, 4), makeNote(.a, 4), makeNote(.b, 4)]
+        let analysis = harmonyModel.analyze(cMajorScale)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "maj13")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .d && $0.quality == "m13" })
+    }
 }

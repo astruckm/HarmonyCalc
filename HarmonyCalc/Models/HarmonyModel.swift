@@ -102,23 +102,38 @@ public struct HarmonyModel {
             }
         }
 
-        let candidates: [ChordCandidate] = deduped.compactMap { chord in
+        // Drop degenerate over-spellings before ranking. Tonic's vocabulary includes altered types whose upper extensions are enharmonically identical to lower chord tones — e.g. ø7(♭5)(♯9)(♯11) where ♯9 = ♭3 and ♯11 = ♭7 as pitch classes.
+        let distinctPitchClasses = Set(pitchClasses).count
+        let scored = deduped.compactMap { chord -> (chord: Chord, rootPC: PitchClass, thirdsCount: Int, spellingComplexity: Int)? in
             guard let rootPC = pitchClass(from: chord.root) else { return nil }
-            let chordPitchClasses = chord.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) }
+            return (chord, rootPC, tertianThirdCount(of: chord), spellingComplexity(of: chord.root))
+        }
+        let clean = scored.filter { $0.chord.noteClasses.count == distinctPitchClasses }
+        let usable = clean.isEmpty ? scored : clean
+        guard !usable.isEmpty else { return (nil, []) }
+
+        // Rank the surviving readings: first by fullest stack of thirds first — so C-E-G-A reads as Am7 (a four-note stack) rather than C6 (a triad plus an added sixth) — then the reading with the bass as root; then simpler spelling; then the table's own order.
+        let ranked = usable.enumerated().sorted { lhs, rhs in
+            let (l, r) = (lhs.element, rhs.element)
+            if l.thirdsCount != r.thirdsCount { return l.thirdsCount > r.thirdsCount }
+            let lBass = l.rootPC.rawValue == bassPitchClass
+            let rBass = r.rootPC.rawValue == bassPitchClass
+            if lBass != rBass { return lBass }
+            if l.spellingComplexity != r.spellingComplexity { return l.spellingComplexity < r.spellingComplexity }
+            return lhs.offset < rhs.offset
+        }.map { $0.element }
+
+        let candidates: [ChordCandidate] = ranked.map { scored in
+            let chordPitchClasses = scored.chord.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) }
             let inversionIndex = chordPitchClasses.firstIndex(of: bassPitchClass) ?? 0
-            return ChordCandidate(root: rootPC,
-                                  rootSpelling: chord.root.description,
-                                  quality: chord.type.description,
+            return ChordCandidate(root: scored.rootPC,
+                                  rootSpelling: scored.chord.root.description,
+                                  quality: scored.chord.type.description,
                                   inversion: TonalChordInversion(inversionIndex: inversionIndex).rawValue)
         }
-        guard !candidates.isEmpty else { return (nil, []) }
 
-        // Pick the reading rooted on the bass, otherwise the simplest available, then
-        // expose the remaining readings as genuine alternatives to that primary.
-        let primaryIndex = candidates.firstIndex { $0.root.rawValue == bassPitchClass } ?? candidates.startIndex
-        var alternatives = candidates
-        let primary = alternatives.remove(at: primaryIndex)
-        return (primary, alternatives)
+        guard let primary = candidates.first else { return (nil, []) }
+        return (primary, Array(candidates.dropFirst()))
     }
 
     //**********************************************************
