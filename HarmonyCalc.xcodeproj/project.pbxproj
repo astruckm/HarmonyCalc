@@ -48,7 +48,6 @@
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
 		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
-		72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */; };
 		72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */; };
 		72B108852FED65A600C6DE89 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 72B108842FED65A600C6DE89 /* Tonic */; };
 		72B1C0DE2FEC040000000002 /* TonicBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC040000000001 /* TonicBridge.swift */; };
@@ -115,7 +114,6 @@
 		724C6671298B355E003EBB58 /* DefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsTests.swift; sourceTree = "<group>"; };
 		724C6673298B5438003EBB58 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModelTests.swift; sourceTree = "<group>"; };
 		725A2FC1212B94BE00B64C21 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		727E794D2829585F00471A55 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 				72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */,
 				724C6671298B355E003EBB58 /* DefaultsTests.swift */,
 				7249BD2D29751672002DFD3E /* ExtensionsTests.swift */,
-				725A2FB8212B715800B64C21 /* HarmonyModelTests.swift */,
 				72B1C0DE2FEC0B0000000001 /* HarmonyAnalysisTests.swift */,
 				72B1C0DE2FEC0B0000000003 /* TonicBridgeTests.swift */,
 				72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */,
@@ -471,7 +468,6 @@
 				72B1C0DE2FEC0A0000000002 /* ForteTableTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000002 /* HarmonyAnalysisTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000004 /* TonicBridgeTests.swift in Sources */,
-				72AC914F2975193B00D07643 /* HarmonyModelTests.swift in Sources */,
 				721E3A3E297AA72E006B0292 /* MainVCTests.swift in Sources */,
 				7249BD2E29751672002DFD3E /* ExtensionsTests.swift in Sources */,
 				72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */,

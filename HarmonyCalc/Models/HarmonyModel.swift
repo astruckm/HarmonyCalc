@@ -136,28 +136,7 @@ public struct HarmonyModel {
         return (primary, Array(candidates.dropFirst()))
     }
 
-    //**********************************************************
-    //MARK: Tonal collections
-    //**********************************************************
-
-    func chord(from notes: [Note]) -> (root: PitchClass, quality: String, inversion: String)? {
-        guard notes.count >= 2 else { return nil }
-        let pitchClasses = notes.map { $0.pitchClass.rawValue }
-        guard Set(pitchClasses).count >= 2 else { return nil }
-        let mask = HarmonyModel.pitchClassMask(of: pitchClasses)
-        guard let candidates = HarmonyModel.chordsByPitchClassMask[mask], !candidates.isEmpty else { return nil }
-        guard let bassValue = notes.map({ $0.midiNoteNumber }).min() else { return nil }
-        let bassPitchClass = bassValue % 12
-        let chosen = candidates.first { Int($0.root.canonicalNote.pitch.pitchClass) == bassPitchClass } ?? candidates[0]
-        guard let root = pitchClass(from: chosen.root) else { return nil }
-        let chordPitchClasses = chosen.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) }
-        let inversionIndex = chordPitchClasses.firstIndex(of: bassPitchClass) ?? 0
-        let inversion = TonalChordInversion(inversionIndex: inversionIndex).rawValue
-        return (root, chosen.type.description, inversion)
-    }
-
     private static func pitchClassMask(of pitchClasses: [Int]) -> Int {
         return pitchClasses.reduce(0) { $0 | (1 << $1) }
     }
-    
 }
