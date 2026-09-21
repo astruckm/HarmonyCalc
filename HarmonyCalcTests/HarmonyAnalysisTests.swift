@@ -12,105 +12,7 @@ import XCTest
 class HarmonyAnalysisTests: XCTestCase {
     let harmonyModel = HarmonyModel(maxNotesInCollection: 88)
 
-    func testMajorTriadPrimaryAndPostTonal() {
-        let cMajor = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4)]
-        let analysis = harmonyModel.analyze(cMajor)
-
-        let primary = analysis.primary
-        XCTAssertEqual(primary?.root, .c)
-        XCTAssertEqual(primary?.rootSpelling, "C")
-        XCTAssertEqual(primary?.quality, "")
-        XCTAssertEqual(primary?.inversion, "Root")
-        XCTAssertEqual(primary?.symbol, "C")
-
-        XCTAssertEqual(analysis.normalForm, [.c, .e, .g])
-        XCTAssertEqual(analysis.primeForm, [0, 3, 7])
-        XCTAssertEqual(analysis.intervalVector, [0, 0, 1, 1, 1, 0])
-        XCTAssertEqual(analysis.forteName, "3-11")
-
-        XCTAssertTrue(analysis.alternatives.isEmpty)
-        XCTAssertFalse(analysis.alternatives.contains(where: { $0 == primary }))
-    }
-
-    func testMinorTriadSharesSetClassWithMajor() {
-        let cMinor = [makeNote(.c, 4), makeNote(.dSharp, 4), makeNote(.g, 4)]
-        let analysis = harmonyModel.analyze(cMinor)
-
-        XCTAssertEqual(analysis.primary?.root, .c)
-        XCTAssertEqual(analysis.primary?.quality, "m")
-        XCTAssertEqual(analysis.primeForm, [0, 3, 7])
-        XCTAssertEqual(analysis.forteName, "3-11")
-        XCTAssertEqual(analysis.intervalVector, [0, 0, 1, 1, 1, 0])
-    }
-
-    func testAugmentedTriadHasThreeSymmetricReadings() {
-        let augmented = [makeNote(.e, 4), makeNote(.c, 5), makeNote(.gSharp, 5)]
-        let analysis = harmonyModel.analyze(augmented)
-
-        XCTAssertEqual(analysis.primary?.root, .e)
-        XCTAssertEqual(analysis.primary?.quality, "⁺")
-        XCTAssertEqual(analysis.primary?.inversion, "Root")
-        XCTAssertEqual(analysis.forteName, "3-12")
-        // Three symmetric readings total; the E-rooted one is primary, leaving two alternatives.
-        XCTAssertEqual(analysis.alternatives.count, 2)
-        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .gSharp])
-    }
-
-    func testSuspendedChord() {
-        let eSus4 = [makeNote(.e, 4), makeNote(.a, 4), makeNote(.b, 4)]
-        let analysis = harmonyModel.analyze(eSus4)
-
-        XCTAssertEqual(analysis.primary?.root, .e)
-        XCTAssertEqual(analysis.primary?.quality, "sus4")
-        XCTAssertEqual(analysis.primeForm, [0, 2, 7])
-        XCTAssertEqual(analysis.forteName, "3-9")
-    }
-
-    func testDominantSeventh() {
-        let c7 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4), makeNote(.aSharp, 4)]
-        let analysis = harmonyModel.analyze(c7)
-
-        XCTAssertEqual(analysis.primary?.root, .c)
-        XCTAssertEqual(analysis.primary?.quality, "7")
-        XCTAssertEqual(analysis.primary?.inversion, "Root")
-        XCTAssertEqual(analysis.primeForm, [0, 2, 5, 8])
-        XCTAssertEqual(analysis.intervalVector, [0, 1, 2, 1, 1, 1])
-        XCTAssertEqual(analysis.forteName, "4-27")
-    }
-
-    func testFullyDiminishedSeventhReadings() {
-        let dim7 = [makeNote(.c, 4), makeNote(.dSharp, 4), makeNote(.fSharp, 4), makeNote(.a, 4)]
-        let analysis = harmonyModel.analyze(dim7)
-
-        XCTAssertEqual(analysis.primeForm, [0, 3, 6, 9])
-        XCTAssertEqual(analysis.forteName, "4-28")
-        XCTAssertEqual(analysis.primary?.root, .c)
-        XCTAssertEqual(analysis.primary?.quality, "°7")
-        XCTAssertEqual(analysis.alternatives.count, 3)
-        XCTAssertTrue(analysis.alternatives.allSatisfy { $0.quality == "°7" })
-        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.dSharp, .fSharp, .a])
-    }
-
-    func testDominantNinth() {
-        let c9 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4), makeNote(.aSharp, 4), makeNote(.d, 5)]
-        let analysis = harmonyModel.analyze(c9)
-
-        XCTAssertEqual(analysis.primary?.root, .c)
-        XCTAssertEqual(analysis.primary?.quality, "9")
-        XCTAssertEqual(analysis.primeForm, [0, 2, 4, 6, 9])
-        XCTAssertEqual(analysis.forteName, "5-34")
-    }
-
-    func testFlatFiveTriad() {
-        let flatFive = [makeNote(.c, 4), makeNote(.d, 5), makeNote(.gSharp, 5)]
-        let analysis = harmonyModel.analyze(flatFive)
-
-        XCTAssertEqual(analysis.primary?.root, .gSharp)
-        XCTAssertEqual(analysis.primary?.quality, "(♭5)")
-        XCTAssertEqual(analysis.normalForm, [.gSharp, .c, .d])
-        XCTAssertEqual(analysis.primeForm, [0, 2, 6])
-        XCTAssertEqual(analysis.forteName, "3-8")
-    }
+    // MARK: General chord parsing logic
 
     func testAllIntervalTetrachordHasNoChordButFullPostTonal() {
         let atonal = [makeNote(.g, 5), makeNote(.cSharp, 5), makeNote(.gSharp, 4), makeNote(.b, 5)]
@@ -171,6 +73,262 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .c && $0.quality == "6" })
     }
 
+    // MARK: Triads
+
+    func testMajorTriadPrimaryAndPostTonal() {
+        let cMajor = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4)]
+        let analysis = harmonyModel.analyze(cMajor)
+
+        let primary = analysis.primary
+        XCTAssertEqual(primary?.root, .c)
+        XCTAssertEqual(primary?.rootSpelling, "C")
+        XCTAssertEqual(primary?.quality, "")
+        XCTAssertEqual(primary?.inversion, "Root")
+        XCTAssertEqual(primary?.symbol, "C")
+
+        XCTAssertEqual(analysis.normalForm, [.c, .e, .g])
+        XCTAssertEqual(analysis.primeForm, [0, 3, 7])
+        XCTAssertEqual(analysis.intervalVector, [0, 0, 1, 1, 1, 0])
+        XCTAssertEqual(analysis.forteName, "3-11")
+
+        XCTAssertTrue(analysis.alternatives.isEmpty)
+        XCTAssertFalse(analysis.alternatives.contains(where: { $0 == primary }))
+    }
+
+    func testMinorTriadSharesSetClassWithMajor() {
+        let cMinor = [makeNote(.c, 4), makeNote(.dSharp, 4), makeNote(.g, 4)]
+        let analysis = harmonyModel.analyze(cMinor)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "m")
+        XCTAssertEqual(analysis.primeForm, [0, 3, 7])
+        XCTAssertEqual(analysis.forteName, "3-11")
+        XCTAssertEqual(analysis.intervalVector, [0, 0, 1, 1, 1, 0])
+    }
+
+    func testAugmentedTriadHasThreeSymmetricReadings() {
+        let augmented = [makeNote(.e, 4), makeNote(.c, 5), makeNote(.gSharp, 5)]
+        let analysis = harmonyModel.analyze(augmented)
+
+        XCTAssertEqual(analysis.primary?.root, .e)
+        XCTAssertEqual(analysis.primary?.quality, "⁺")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.forteName, "3-12")
+        // Three symmetric readings total; the E-rooted one is primary, leaving two alternatives.
+        XCTAssertEqual(analysis.alternatives.count, 2)
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .gSharp])
+    }
+
+    func testSuspendedChord() {
+        let eSus4 = [makeNote(.e, 4), makeNote(.a, 4), makeNote(.b, 4)]
+        let analysis = harmonyModel.analyze(eSus4)
+
+        XCTAssertEqual(analysis.primary?.root, .e)
+        XCTAssertEqual(analysis.primary?.quality, "sus4")
+        XCTAssertEqual(analysis.primeForm, [0, 2, 7])
+        XCTAssertEqual(analysis.forteName, "3-9")
+    }
+
+    func testFlatFiveTriad() {
+        let flatFive = [makeNote(.c, 4), makeNote(.d, 5), makeNote(.gSharp, 5)]
+        let analysis = harmonyModel.analyze(flatFive)
+
+        XCTAssertEqual(analysis.primary?.root, .gSharp)
+        XCTAssertEqual(analysis.primary?.quality, "(♭5)")
+        XCTAssertEqual(analysis.normalForm, [.gSharp, .c, .d])
+        XCTAssertEqual(analysis.primeForm, [0, 2, 6])
+        XCTAssertEqual(analysis.forteName, "3-8")
+    }
+
+    func testDMajorTriadRootPosition() {
+        let dMaj = [makeNote(.d, 4), makeNote(.a, 4), makeNote(.fSharp, 5)]
+        let analysis = harmonyModel.analyze(dMaj)
+
+        XCTAssertEqual(analysis.primary?.root, .d)
+        XCTAssertEqual(analysis.primary?.quality, "")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.primary?.symbol, "D")
+        XCTAssertEqual(analysis.normalForm, [.d, .fSharp, .a])
+        XCTAssertEqual(analysis.primeForm, [0, 3, 7])
+    }
+
+    func testFMinorTriadFirstInversion() {
+        let fMin = [makeNote(.gSharp, 4), makeNote(.f, 5), makeNote(.c, 5)]
+        let analysis = harmonyModel.analyze(fMin)
+
+        XCTAssertEqual(analysis.primary?.root, .f)
+        XCTAssertEqual(analysis.primary?.quality, "m")
+        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        XCTAssertEqual(analysis.normalForm, [.f, .gSharp, .c])
+        XCTAssertEqual(analysis.primeForm, [0, 3, 7])
+    }
+
+    func testDiminishedTriadRootPosition() {
+        let cSharpDim = [makeNote(.cSharp, 4), makeNote(.g, 4), makeNote(.e, 5)]
+        let analysis = harmonyModel.analyze(cSharpDim)
+
+        XCTAssertEqual(analysis.primary?.root, .cSharp)
+        XCTAssertEqual(analysis.primary?.quality, "°")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.normalForm, [.cSharp, .e, .g])
+        XCTAssertEqual(analysis.primeForm, [0, 3, 6])
+    }
+
+    // MARK: Seven chords
+
+    func testDominantSeventh() {
+        let c7 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4), makeNote(.aSharp, 4)]
+        let analysis = harmonyModel.analyze(c7)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "7")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.primeForm, [0, 2, 5, 8])
+        XCTAssertEqual(analysis.intervalVector, [0, 1, 2, 1, 1, 1])
+        XCTAssertEqual(analysis.forteName, "4-27")
+    }
+
+    func testFullyDiminishedSeventhReadings() {
+        let dim7 = [makeNote(.c, 4), makeNote(.dSharp, 4), makeNote(.fSharp, 4), makeNote(.a, 4)]
+        let analysis = harmonyModel.analyze(dim7)
+
+        XCTAssertEqual(analysis.primeForm, [0, 3, 6, 9])
+        XCTAssertEqual(analysis.forteName, "4-28")
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "°7")
+        XCTAssertEqual(analysis.alternatives.count, 3)
+        XCTAssertTrue(analysis.alternatives.allSatisfy { $0.quality == "°7" })
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.dSharp, .fSharp, .a])
+    }
+
+    func testFSharpDominantSeventhRootPosition() {
+        let fSharp7 = [makeNote(.fSharp, 4), makeNote(.cSharp, 5), makeNote(.aSharp, 5), makeNote(.e, 5)]
+        let analysis = harmonyModel.analyze(fSharp7)
+
+        XCTAssertEqual(analysis.primary?.root, .fSharp)
+        XCTAssertEqual(analysis.primary?.quality, "7")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.normalForm, [.aSharp, .cSharp, .e, .fSharp])
+        XCTAssertEqual(analysis.primeForm, [0, 2, 5, 8])
+    }
+
+    func testMinorSeventhRootPositionPreferredOverAddedSixth() {
+        let eMin7 = [makeNote(.e, 4), makeNote(.d, 5), makeNote(.g, 5), makeNote(.b, 5)]
+        let analysis = harmonyModel.analyze(eMin7)
+
+        XCTAssertEqual(analysis.primary?.root, .e)
+        XCTAssertEqual(analysis.primary?.quality, "m7")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.normalForm, [.b, .d, .e, .g])
+        XCTAssertEqual(analysis.primeForm, [0, 3, 5, 8])
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .g && $0.quality == "6" })
+    }
+
+    func testMajorSeventhThirdInversion() {
+        let eMaj7 = [makeNote(.e, 4), makeNote(.dSharp, 4), makeNote(.b, 5), makeNote(.gSharp, 4)]
+        let analysis = harmonyModel.analyze(eMaj7)
+
+        XCTAssertEqual(analysis.primary?.root, .e)
+        XCTAssertEqual(analysis.primary?.quality, "maj7")
+        XCTAssertEqual(analysis.primary?.inversion, "3rd")
+        XCTAssertEqual(analysis.normalForm, [.dSharp, .e, .gSharp, .b])
+        XCTAssertEqual(analysis.primeForm, [0, 1, 5, 8])
+    }
+
+    func testHalfDiminishedSeventhThirdInversion() {
+        let bHalfDim7 = [makeNote(.a, 4), makeNote(.b, 4), makeNote(.f, 5), makeNote(.d, 5)]
+        let analysis = harmonyModel.analyze(bHalfDim7)
+
+        XCTAssertEqual(analysis.primary?.root, .b)
+        XCTAssertEqual(analysis.primary?.quality, "ø7")
+        XCTAssertEqual(analysis.primary?.inversion, "3rd")
+        XCTAssertEqual(analysis.normalForm, [.a, .b, .d, .f])
+        XCTAssertEqual(analysis.primeForm, [0, 2, 5, 8])
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .d && $0.quality == "m6" })
+    }
+
+    func testDominantSeventhSharpFiveFirstInversion() {
+        let cAug7 = [makeNote(.c, 5), makeNote(.e, 4), makeNote(.gSharp, 5), makeNote(.aSharp, 5)]
+        let analysis = harmonyModel.analyze(cAug7)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "7(♯5)")
+        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        XCTAssertEqual(analysis.normalForm, [.gSharp, .aSharp, .c, .e])
+        XCTAssertEqual(analysis.primeForm, [0, 2, 4, 8])
+    }
+
+    func testAugmentedMajorSeventhFirstInversion() {
+        let dAugMaj7 = [makeNote(.d, 5), makeNote(.fSharp, 4), makeNote(.cSharp, 5), makeNote(.aSharp, 4)]
+        let analysis = harmonyModel.analyze(dAugMaj7)
+
+        XCTAssertEqual(analysis.primary?.root, .d)
+        XCTAssertEqual(analysis.primary?.quality, "maj7(♯5)")
+        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        XCTAssertEqual(analysis.normalForm, [.aSharp, .cSharp, .d, .fSharp])
+        XCTAssertEqual(analysis.primeForm, [0, 1, 4, 8])
+    }
+
+
+    // MARK: Nine chords
+
+    func testDominantNinth() {
+        let c9 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4), makeNote(.aSharp, 4), makeNote(.d, 5)]
+        let analysis = harmonyModel.analyze(c9)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "9")
+        XCTAssertEqual(analysis.primeForm, [0, 2, 4, 6, 9])
+        XCTAssertEqual(analysis.forteName, "5-34")
+    }
+
+    func testDominantNinthThirdInversion() {
+        let fDominant9 = [makeNote(.dSharp, 4), makeNote(.f, 4), makeNote(.g, 4), makeNote(.a, 4), makeNote(.c, 5)]
+        let analysis = harmonyModel.analyze(fDominant9)
+
+        XCTAssertEqual(analysis.primary?.root, .f)
+        XCTAssertEqual(analysis.primary?.quality, "9")
+        XCTAssertEqual(analysis.primary?.inversion, "3rd")
+        XCTAssertEqual(analysis.normalForm, [.dSharp, .f, .g, .a, .c])
+        XCTAssertEqual(analysis.primeForm, [0, 2, 4, 6, 9])
+    }
+
+    func testMajorNinthThirdInversion() {
+        let gMaj9 = [makeNote(.fSharp, 4), makeNote(.a, 4), makeNote(.g, 5), makeNote(.b, 5), makeNote(.d, 5)]
+        let analysis = harmonyModel.analyze(gMaj9)
+
+        XCTAssertEqual(analysis.primary?.root, .g)
+        XCTAssertEqual(analysis.primary?.quality, "maj9")
+        XCTAssertEqual(analysis.primary?.inversion, "3rd")
+        XCTAssertEqual(analysis.normalForm, [.fSharp, .g, .a, .b, .d])
+        XCTAssertEqual(analysis.primeForm, [0, 1, 3, 5, 8])
+    }
+
+    func testMinorNinthRootPosition() {
+        let aMin9 = [makeNote(.e, 5), makeNote(.c, 5), makeNote(.g, 5), makeNote(.a, 4), makeNote(.b, 5)]
+        let analysis = harmonyModel.analyze(aMin9)
+
+        XCTAssertEqual(analysis.primary?.root, .a)
+        XCTAssertEqual(analysis.primary?.quality, "m9")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.normalForm, [.e, .g, .a, .b, .c])
+        XCTAssertEqual(analysis.primeForm, [0, 1, 3, 5, 8])
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .c && $0.quality == "maj7(add13)" })
+    }
+
+    func testDominantSeventhSharpNineFourthInversion() {
+        let b7Sharp9 = [makeNote(.b, 4), makeNote(.d, 4), makeNote(.dSharp, 5), makeNote(.fSharp, 5), makeNote(.a, 5)]
+        let analysis = harmonyModel.analyze(b7Sharp9)
+
+        XCTAssertEqual(analysis.primary?.root, .b)
+        XCTAssertEqual(analysis.primary?.quality, "7(♯9)")
+        XCTAssertEqual(analysis.primary?.inversion, "4th")
+        XCTAssertEqual(analysis.normalForm, [.a, .b, .d, .dSharp, .fSharp])
+        XCTAssertEqual(analysis.primeForm, [0, 1, 4, 6, 9])
+    }
+
+    // MARK: Eleven chords
+
     func testSixNoteChordPrefersFullestThirdStack() {
         let cMaj11 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4),
                       makeNote(.b, 4), makeNote(.d, 5), makeNote(.f, 5)]
@@ -180,6 +338,54 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.quality, "maj11")
         XCTAssertEqual(analysis.primary?.inversion, "Root")
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .g })
+    }
+
+    func testDominantEleventhFifthInversion() {
+        let eFlatDominant11 = [makeNote(.dSharp, 5), makeNote(.cSharp, 5), makeNote(.g, 5),
+                               makeNote(.aSharp, 5), makeNote(.f, 5), makeNote(.gSharp, 4)]
+        let analysis = harmonyModel.analyze(eFlatDominant11)
+
+        XCTAssertEqual(analysis.primary?.root, .dSharp)
+        XCTAssertEqual(analysis.primary?.quality, "11")
+        XCTAssertEqual(analysis.primary?.inversion, "5th")
+        XCTAssertEqual(analysis.normalForm, [.cSharp, .dSharp, .f, .g, .gSharp, .aSharp])
+        XCTAssertEqual(analysis.primeForm, [0, 2, 3, 5, 7, 9])
+    }
+
+    func testMinorEleventhFourthInversion() {
+        let eMin11 = [makeNote(.e, 5), makeNote(.b, 5), makeNote(.g, 4), makeNote(.d, 5), makeNote(.fSharp, 4), makeNote(.a, 4)]
+        let analysis = harmonyModel.analyze(eMin11)
+
+        XCTAssertEqual(analysis.primary?.root, .e)
+        XCTAssertEqual(analysis.primary?.quality, "m11")
+        XCTAssertEqual(analysis.primary?.inversion, "4th")
+        XCTAssertEqual(analysis.normalForm, [.d, .e, .fSharp, .g, .a, .b])
+        XCTAssertEqual(analysis.primeForm, [0, 2, 4, 5, 7, 9])
+    }
+
+    func testSharpEleventhReadsAsEleventhSharpFiveFirstInversion() {
+        let a7Sharp11 = [makeNote(.e, 4), makeNote(.cSharp, 5), makeNote(.g, 4), makeNote(.a, 4), makeNote(.dSharp, 4), makeNote(.b, 5)]
+        let analysis = harmonyModel.analyze(a7Sharp11)
+
+        XCTAssertEqual(analysis.primary?.root, .b)
+        XCTAssertEqual(analysis.primary?.quality, "11(♯5)")
+        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        XCTAssertEqual(analysis.normalForm, [.g, .a, .b, .cSharp, .dSharp, .e])
+        XCTAssertEqual(analysis.primeForm, [0, 1, 3, 5, 7, 9])
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .a && $0.quality == "9(♯11)" })
+    }
+
+    // MARK: Thirteen chords
+
+    func testSevenNoteDiatonicSetStacksAsThirteenthChord() {
+        let cMajorScale = [makeNote(.c, 4), makeNote(.d, 4), makeNote(.e, 4), makeNote(.f, 4),
+                           makeNote(.g, 4), makeNote(.a, 4), makeNote(.b, 4)]
+        let analysis = harmonyModel.analyze(cMajorScale)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "maj13")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .d && $0.quality == "m13" })
     }
 
     func testSixNoteChordExcludesPhantomExtensions() {
@@ -196,14 +402,16 @@ class HarmonyAnalysisTests: XCTestCase {
         }
     }
 
-    func testSevenNoteDiatonicSetStacksAsThirteenthChord() {
-        let cMajorScale = [makeNote(.c, 4), makeNote(.d, 4), makeNote(.e, 4), makeNote(.f, 4),
-                           makeNote(.g, 4), makeNote(.a, 4), makeNote(.b, 4)]
-        let analysis = harmonyModel.analyze(cMajorScale)
+    func testDiatonicSeventhNoteSetRootedOnBassAsMinorThirteenth() {
+        let dMajorSet = [makeNote(.e, 4), makeNote(.cSharp, 5), makeNote(.g, 5), makeNote(.a, 4),
+                         makeNote(.d, 5), makeNote(.fSharp, 5), makeNote(.b, 4)]
+        let analysis = harmonyModel.analyze(dMajorSet)
 
-        XCTAssertEqual(analysis.primary?.root, .c)
-        XCTAssertEqual(analysis.primary?.quality, "maj13")
+        XCTAssertEqual(analysis.primary?.root, .e)
+        XCTAssertEqual(analysis.primary?.quality, "m13")
         XCTAssertEqual(analysis.primary?.inversion, "Root")
-        XCTAssertTrue(analysis.alternatives.contains { $0.root == .d && $0.quality == "m13" })
+        XCTAssertEqual(analysis.normalForm, [.cSharp, .d, .e, .fSharp, .g, .a, .b])
+        XCTAssertEqual(analysis.primeForm, [0, 1, 3, 5, 6, 8, 10])
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .d && $0.quality == "maj13" })
     }
 }

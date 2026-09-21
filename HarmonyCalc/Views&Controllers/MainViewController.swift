@@ -433,27 +433,26 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         let inversionText: String
 
         if session.pitchClasses.count > 1 {
-            let normalFormPC = session.normalForm
-            let normalFormAsString = normalFormPC.map { element -> String in
+            let analysis = session.analysis
+
+            let normalFormAsString = analysis.normalForm.map { element -> String in
                 if element.rawValue == 10 { return "T" }
                 else if element.rawValue == 11 { return "E" }
                 else { return String(element.rawValue) } }
             normalFormText = "[" + normalFormAsString.joined(separator: ",") + "]"
 
-            let primeFormPC = session.primeForm
-            let primeFormAsString = primeFormPC.map { element -> String in
+            let primeFormAsString = analysis.primeForm.map { element -> String in
                 if element == 10 { return "T" }
                 else if element == 11 { return "E" }
                 else { return String(element) }
             }
             primeFormText = "(" + primeFormAsString.joined() + ")"
 
-            if let chordInfo = session.chord() {
-                let chordRoot = chordInfo.root
+            if let primary = analysis.primary {
                 //There are 3 possibilities: white key, sharp, or flat.
-                let chordRootAsString = chordRoot.spelling(usingSharps: usingSharps)
-                chordText = chordRootAsString + chordInfo.quality
-                inversionText = chordInfo.inversion
+                let chordRootAsString = primary.root.spelling(usingSharps: usingSharps)
+                chordText = chordRootAsString + primary.quality
+                inversionText = primary.inversion
             } else {
                 chordText = " "
                 inversionText = " "

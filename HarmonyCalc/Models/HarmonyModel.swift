@@ -43,23 +43,6 @@ public struct HarmonyModel {
         self.maxNotesInCollection = maxNotesInCollection
         _ = HarmonyModel.chordsByPitchClassMask
     }
-    
-    //**********************************************************
-    //MARK: Set Theory
-    //Using Joseph N. Straus' "Introduction to Post-Tonal Theory"
-    //**********************************************************
-    func normalForm(of pitchCollection: [PitchClass]) -> [PitchClass] {
-        let normalForm = PitchClassSet(pitchCollection.map { $0.rawValue }).normalForm
-        return normalForm.compactMap { PitchClass(rawValue: $0) }
-    }
-    
-    func primeForm(ofCollectionInNormalForm pitchCollection: [PitchClass]) -> [Int] {
-        return PitchClassSet(pitchCollection.map { $0.rawValue }).primeForm
-    }
-
-    func intervalVector(of pitchCollection: [PitchClass]) -> [Int] {
-        return PitchClassSet(pitchCollection.map { $0.rawValue }).intervalVector
-    }
 
     func analyze(_ notes: [Note]) -> HarmonyAnalysis {
         let pitchClasses = Array(Set(notes.map { $0.pitchClass })).sorted(by: <)
@@ -77,6 +60,23 @@ public struct HarmonyModel {
                                primeForm: primeForm,
                                intervalVector: intervalVector,
                                forteName: forteName)
+    }
+
+    //**********************************************************
+    //MARK: Set Theory
+    //Using Joseph N. Straus' "Introduction to Post-Tonal Theory"
+    //**********************************************************
+    func normalForm(of pitchCollection: [PitchClass]) -> [PitchClass] {
+        let normalForm = PitchClassSet(pitchCollection.map { $0.rawValue }).normalForm
+        return normalForm.compactMap { PitchClass(rawValue: $0) }
+    }
+    
+    func primeForm(ofCollectionInNormalForm pitchCollection: [PitchClass]) -> [Int] {
+        return PitchClassSet(pitchCollection.map { $0.rawValue }).primeForm
+    }
+
+    func intervalVector(of pitchCollection: [PitchClass]) -> [Int] {
+        return PitchClassSet(pitchCollection.map { $0.rawValue }).intervalVector
     }
 
     private func rankedCandidates(from notes: [Note]) -> (primary: ChordCandidate?, alternatives: [ChordCandidate]) {

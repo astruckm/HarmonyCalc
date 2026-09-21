@@ -12,8 +12,7 @@ protocol HarmonySessionObserver: AnyObject {
     func harmonySessionDidChange(_ session: HarmonySession)
 }
 
-/// Owns the set of currently held notes, runs harmony analysis on them,
-/// and notifies its observer whenever the held set changes.
+/// Owns the set of currently held notes, runs harmony analysis on them, and notifies its observer whenever the held set changes.
 final class HarmonySession {
     private let harmonyModel: HarmonyModel
     private(set) var heldNotes: Set<Note> = []
@@ -27,8 +26,8 @@ final class HarmonySession {
     var sortedNotes: [Note] { return heldNotes.sorted() }
     var pitchClasses: [PitchClass] { return Array(Set(heldNotes.map { $0.pitchClass })).sorted(by: <) }
 
-    var normalForm: [PitchClass] { return harmonyModel.normalForm(of: pitchClasses) }
-    var primeForm: [Int] { return harmonyModel.primeForm(ofCollectionInNormalForm: normalForm) }
+    /// Full harmonic analysis of the held notes: the ranked tonal chord readings plus the post-tonal set-theory data (normal/prime form, interval vector, Forte name).
+    var analysis: HarmonyAnalysis { return harmonyModel.analyze(sortedNotes) }
 
     @discardableResult
     func add(_ note: Note) -> Bool {
@@ -51,9 +50,5 @@ final class HarmonySession {
 
     func noteNames(usingSharps: Bool) -> String {
         return pitchClasses.map { $0.spelling(usingSharps: usingSharps) }.joined(separator: ", ")
-    }
-
-    func chord() -> (root: PitchClass, quality: String, inversion: String)? {
-        return harmonyModel.chord(from: sortedNotes)
     }
 }
