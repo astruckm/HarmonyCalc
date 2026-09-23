@@ -433,7 +433,7 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         let inversionText: String
 
         if session.pitchClasses.count > 1 {
-            let analysis = session.analysis
+            let analysis = session.analysis(usingSharps: usingSharps)
 
             let normalFormAsString = analysis.normalForm.map { element -> String in
                 if element.rawValue == 10 { return "T" }

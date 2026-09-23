@@ -44,7 +44,7 @@ public struct HarmonyModel {
         _ = HarmonyModel.chordsByPitchClassMask
     }
 
-    func analyze(_ notes: [Note]) -> HarmonyAnalysis {
+    func analyze(_ notes: [Note], usingSharps: Bool = true) -> HarmonyAnalysis {
         let pitchClasses = Array(Set(notes.map { $0.pitchClass })).sorted(by: <)
         guard pitchClasses.count >= 2 else { return .empty }
 
@@ -52,7 +52,7 @@ public struct HarmonyModel {
         let primeForm = self.primeForm(ofCollectionInNormalForm: normalForm)
         let intervalVector = self.intervalVector(of: pitchClasses)
         let forteName = ForteTable.name(forPrimeForm: primeForm)
-        let (primary, alternatives) = rankedCandidates(from: notes)
+        let (primary, alternatives) = rankedCandidates(from: notes, usingSharps: usingSharps)
 
         return HarmonyAnalysis(primary: primary,
                                alternatives: alternatives,
@@ -79,7 +79,7 @@ public struct HarmonyModel {
         return PitchClassSet(pitchCollection.map { $0.rawValue }).intervalVector
     }
 
-    private func rankedCandidates(from notes: [Note]) -> (primary: ChordCandidate?, alternatives: [ChordCandidate]) {
+    private func rankedCandidates(from notes: [Note], usingSharps: Bool) -> (primary: ChordCandidate?, alternatives: [ChordCandidate]) {
         guard notes.count >= 2 else { return (nil, []) }
         let pitchClasses = notes.map { $0.pitchClass.rawValue }
         guard Set(pitchClasses).count >= 2 else { return (nil, []) }
@@ -88,13 +88,18 @@ public struct HarmonyModel {
         guard let bassValue = notes.map({ $0.midiNoteNumber }).min() else { return (nil, []) }
         let bassPitchClass = bassValue % 12
 
+        // Among enharmonic spellings of the same root, keep the one that is simplest overall and best matches the collection's accidental direction (sharps vs flats).
+        func spellingRank(_ chord: Chord) -> (Int, Int) {
+            return (spellingComplexity(of: chord), accidentalsAgainstDirection(of: chord, usingSharps: usingSharps))
+        }
+
         var deduped: [Chord] = []
         for chord in tonicChords {
             guard let rootPC = pitchClass(from: chord.root) else { continue }
             if let existing = deduped.firstIndex(where: {
                 $0.type == chord.type && pitchClass(from: $0.root) == rootPC
             }) {
-                if spellingComplexity(of: chord.root) < spellingComplexity(of: deduped[existing].root) {
+                if spellingRank(chord) < spellingRank(deduped[existing]) {
                     deduped[existing] = chord
                 }
             } else {
@@ -104,22 +109,28 @@ public struct HarmonyModel {
 
         // Drop degenerate over-spellings before ranking. Tonic's vocabulary includes altered types whose upper extensions are enharmonically identical to lower chord tones — e.g. ø7(♭5)(♯9)(♯11) where ♯9 = ♭3 and ♯11 = ♭7 as pitch classes.
         let distinctPitchClasses = Set(pitchClasses).count
-        let scored = deduped.compactMap { chord -> (chord: Chord, rootPC: PitchClass, thirdsCount: Int, spellingComplexity: Int)? in
+        let scored = deduped.compactMap { chord -> (chord: Chord, rootPC: PitchClass, thirdsCount: Int, spellingWeight: Int, offDirection: Int)? in
             guard let rootPC = pitchClass(from: chord.root) else { return nil }
-            return (chord, rootPC, tertianThirdCount(of: chord), spellingComplexity(of: chord.root))
+            return (chord, rootPC, tertianThirdCount(of: chord), spellingComplexity(of: chord), accidentalsAgainstDirection(of: chord, usingSharps: usingSharps))
         }
         let clean = scored.filter { $0.chord.noteClasses.count == distinctPitchClasses }
         let usable = clean.isEmpty ? scored : clean
         guard !usable.isEmpty else { return (nil, []) }
 
-        // Rank the surviving readings: first by fullest stack of thirds first — so C-E-G-A reads as Am7 (a four-note stack) rather than C6 (a triad plus an added sixth) — then the reading with the bass as root; then simpler spelling; then the table's own order.
+        // Rank the candidates by, in order by:
+        // 1. Fullest stack of thirds
+        // 2. The simplest overall spelling
+        // 3. The collection's accidental direction
+        // 4. The reading on the bass
+        // 5. The table's own order.
         let ranked = usable.enumerated().sorted { lhs, rhs in
             let (l, r) = (lhs.element, rhs.element)
             if l.thirdsCount != r.thirdsCount { return l.thirdsCount > r.thirdsCount }
+            if l.spellingWeight != r.spellingWeight { return l.spellingWeight < r.spellingWeight }
+            if l.offDirection != r.offDirection { return l.offDirection < r.offDirection }
             let lBass = l.rootPC.rawValue == bassPitchClass
             let rBass = r.rootPC.rawValue == bassPitchClass
             if lBass != rBass { return lBass }
-            if l.spellingComplexity != r.spellingComplexity { return l.spellingComplexity < r.spellingComplexity }
             return lhs.offset < rhs.offset
         }.map { $0.element }
 

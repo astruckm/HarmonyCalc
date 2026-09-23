@@ -106,17 +106,33 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.intervalVector, [0, 0, 1, 1, 1, 0])
     }
 
-    func testAugmentedTriadHasThreeSymmetricReadings() {
+    func testAugmentedTriadResolvesToSimplestSpelling() {
         let augmented = [makeNote(.e, 4), makeNote(.c, 5), makeNote(.gSharp, 5)]
         let analysis = harmonyModel.analyze(augmented)
 
-        XCTAssertEqual(analysis.primary?.root, .e)
+        // Symmetric triad: in sharps mode the simplest spelling C-E-G♯ wins over the
+        // bass-rooted E⁺ (E-G♯-B♯) and A♭⁺, so C⁺ is primary with bass E as its 1st inversion.
+        XCTAssertEqual(analysis.primary?.root, .c)
         XCTAssertEqual(analysis.primary?.quality, "⁺")
-        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        XCTAssertEqual(analysis.primary?.symbol, "C⁺")
         XCTAssertEqual(analysis.forteName, "3-12")
-        // Three symmetric readings total; the E-rooted one is primary, leaving two alternatives.
         XCTAssertEqual(analysis.alternatives.count, 2)
-        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .gSharp])
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.e, .gSharp])
+    }
+
+    func testAugmentedTriadSpellingFollowsFlatsSetting() {
+        let augmented = [makeNote(.e, 4), makeNote(.c, 5), makeNote(.gSharp, 5)]
+        let analysis = harmonyModel.analyze(augmented, usingSharps: false)
+
+        // Same pitches, flats mode: the direction tiebreak flips to A♭⁺ (A♭-C-E) over C⁺.
+        XCTAssertEqual(analysis.primary?.root, .gSharp)   // pitch class 8, spelled A♭
+        XCTAssertEqual(analysis.primary?.symbol, "A♭⁺")
+        XCTAssertEqual(analysis.primary?.inversion, "2nd")
+        XCTAssertEqual(analysis.forteName, "3-12")
+        XCTAssertEqual(analysis.alternatives.count, 2)
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .e])
+
     }
 
     func testSuspendedChord() {
@@ -194,11 +210,28 @@ class HarmonyAnalysisTests: XCTestCase {
 
         XCTAssertEqual(analysis.primeForm, [0, 3, 6, 9])
         XCTAssertEqual(analysis.forteName, "4-28")
-        XCTAssertEqual(analysis.primary?.root, .c)
+        // Symmetric 7th: in sharps mode the all-sharp spelling D♯-F♯-A-C wins over C°7
+        // (whose diminished 7th is a double-flat B𝄫); bass C is D♯°7's 7th ⇒ 3rd inversion.
+        XCTAssertEqual(analysis.primary?.root, .dSharp)
         XCTAssertEqual(analysis.primary?.quality, "°7")
+        XCTAssertEqual(analysis.primary?.inversion, "3rd")
         XCTAssertEqual(analysis.alternatives.count, 3)
         XCTAssertTrue(analysis.alternatives.allSatisfy { $0.quality == "°7" })
-        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.dSharp, .fSharp, .a])
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.fSharp, .a, .c])
+    }
+
+    func testFullyDiminishedSpellingFollowsFlatsSetting() {
+        let dim7 = [makeNote(.c, 4), makeNote(.dSharp, 4), makeNote(.fSharp, 4), makeNote(.a, 4)]
+        let analysis = harmonyModel.analyze(dim7, usingSharps: false)
+
+        // Same pitches, flats mode: the flat-leaning A°7 (A-C-E♭-G♭) wins instead of D♯°7.
+        XCTAssertEqual(analysis.primary?.root, .a)
+        XCTAssertEqual(analysis.primary?.symbol, "A°7")
+        XCTAssertEqual(analysis.primary?.quality, "°7")
+        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        XCTAssertEqual(analysis.alternatives.count, 3)
+        XCTAssertTrue(analysis.alternatives.allSatisfy { $0.quality == "°7" })
+        XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.c, .dSharp, .fSharp])
     }
 
     func testFSharpDominantSeventhRootPosition() {
@@ -363,16 +396,17 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primeForm, [0, 2, 4, 5, 7, 9])
     }
 
-    func testSharpEleventhReadsAsEleventhSharpFiveFirstInversion() {
+    func testSharpEleventhReadsAsDominantNinthSharpEleven() {
         let a7Sharp11 = [makeNote(.e, 4), makeNote(.cSharp, 5), makeNote(.g, 4), makeNote(.a, 4), makeNote(.dSharp, 4), makeNote(.b, 5)]
         let analysis = harmonyModel.analyze(a7Sharp11)
 
-        XCTAssertEqual(analysis.primary?.root, .b)
-        XCTAssertEqual(analysis.primary?.quality, "11(♯5)")
-        XCTAssertEqual(analysis.primary?.inversion, "1st")
+        // The clean all-sharp reading A-C♯-E-G-B-D♯ wins over B11(♯5), whose ♯5 needs a double sharp.
+        XCTAssertEqual(analysis.primary?.root, .a)
+        XCTAssertEqual(analysis.primary?.quality, "9(♯11)")
+        XCTAssertEqual(analysis.primary?.inversion, "5th")
         XCTAssertEqual(analysis.normalForm, [.g, .a, .b, .cSharp, .dSharp, .e])
         XCTAssertEqual(analysis.primeForm, [0, 1, 3, 5, 7, 9])
-        XCTAssertTrue(analysis.alternatives.contains { $0.root == .a && $0.quality == "9(♯11)" })
+        XCTAssertTrue(analysis.alternatives.contains { $0.root == .b && $0.quality == "11(♯5)" })
     }
 
     // MARK: Thirteen chords
