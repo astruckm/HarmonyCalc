@@ -15,7 +15,7 @@ public struct HarmonyModel {
     //***************************************************
     
     let maxNotesInCollection: Int
-    var maxNotes: Int { return maxNotesInCollection % 12 }
+    var maxNotes: Int { return min(maxNotesInCollection, 12) }
 
     // Index tonal chords once by absolute pitch-class set for O(1) lookup.
     private static let chordsByPitchClassMask: [Int: [Chord]] = {

@@ -36,6 +36,39 @@ class TonicBridgeTests: XCTestCase {
         XCTAssertEqual(spellingComplexity(of: NoteClass(.C, accidental: .doubleFlat)), 2)
     }
 
+    // MARK: spellingComplexity(of chord:)
+
+    func testChordSpellingComplexitySumsEveryTone() {
+        // Augmented triad readings of one pitch-class set: C-E-G♯ (one sharp) is simpler than E-G♯-B♯ (two sharps); A♭-C-E ties C at one flat.
+        XCTAssertEqual(spellingComplexity(of: Chord(NoteClass(.C, accidental: .natural), type: .aug)), 1)
+        XCTAssertEqual(spellingComplexity(of: Chord(NoteClass(.E, accidental: .natural), type: .aug)), 2)
+        XCTAssertEqual(spellingComplexity(of: Chord(NoteClass(.A, accidental: .flat), type: .aug)), 1)
+        // Diminished 7ths: C°7 has a double-flat 7th (B𝄫), costlier than the all-single spellings.
+        XCTAssertEqual(spellingComplexity(of: Chord(NoteClass(.C, accidental: .natural), type: .dim7)), 4)
+        XCTAssertEqual(spellingComplexity(of: Chord(NoteClass(.D, accidental: .sharp), type: .dim7)), 2)
+        XCTAssertEqual(spellingComplexity(of: Chord(NoteClass(.A, accidental: .natural), type: .dim7)), 2)
+    }
+
+    // MARK: accidentalsAgainstDirection(of:usingSharps:)
+
+    func testAccidentalsAgainstDirectionCountsWrongWaySpellings() {
+        let cAug = Chord(NoteClass(.C, accidental: .natural), type: .aug)
+        XCTAssertEqual(accidentalsAgainstDirection(of: cAug, usingSharps: true), 0)
+        XCTAssertEqual(accidentalsAgainstDirection(of: cAug, usingSharps: false), 1)
+
+        let aFlatAug = Chord(NoteClass(.A, accidental: .flat), type: .aug)
+        XCTAssertEqual(accidentalsAgainstDirection(of: aFlatAug, usingSharps: true), 1)
+        XCTAssertEqual(accidentalsAgainstDirection(of: aFlatAug, usingSharps: false), 0)
+
+        let dSharpDim7 = Chord(NoteClass(.D, accidental: .sharp), type: .dim7)
+        XCTAssertEqual(accidentalsAgainstDirection(of: dSharpDim7, usingSharps: true), 0)
+        XCTAssertEqual(accidentalsAgainstDirection(of: dSharpDim7, usingSharps: false), 2)
+
+        let aDim7 = Chord(NoteClass(.A, accidental: .natural), type: .dim7)
+        XCTAssertEqual(accidentalsAgainstDirection(of: aDim7, usingSharps: true), 2)
+        XCTAssertEqual(accidentalsAgainstDirection(of: aDim7, usingSharps: false), 0)
+    }
+
     // MARK: tertianThirdCount(of:)
 
     func testTertianThirdCountCountsUnbrokenStack() {

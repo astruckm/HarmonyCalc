@@ -73,6 +73,33 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .c && $0.quality == "6" })
     }
 
+    func testPerfectFifthDyadHasNoChordButPostTonal() {
+        let dyad = [makeNote(.c, 4), makeNote(.g, 4)]
+        let analysis = harmonyModel.analyze(dyad)
+
+        // Two notes clear the >= 2 pitch-class bar, so post-tonal data is computed even though
+        // no tonal chord matches a bare interval.
+        XCTAssertNil(analysis.primary)
+        XCTAssertTrue(analysis.alternatives.isEmpty)
+        XCTAssertEqual(analysis.normalForm, [.g, .c])
+        XCTAssertEqual(analysis.primeForm, [0, 5])
+        XCTAssertEqual(analysis.intervalVector, [0, 0, 0, 0, 1, 0])
+        XCTAssertEqual(analysis.forteName, "2-5")
+    }
+
+    func testOctaveDoublingsCollapseToSameChord() {
+        // A doubled root (C4 + C5) must not perturb the reading: still a plain C major triad.
+        let doubled = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4), makeNote(.c, 5)]
+        let analysis = harmonyModel.analyze(doubled)
+
+        XCTAssertEqual(analysis.primary?.root, .c)
+        XCTAssertEqual(analysis.primary?.quality, "")
+        XCTAssertEqual(analysis.primary?.symbol, "C")
+        XCTAssertEqual(analysis.primary?.inversion, "Root")
+        XCTAssertEqual(analysis.normalForm, [.c, .e, .g])
+        XCTAssertTrue(analysis.alternatives.isEmpty)
+    }
+
     // MARK: Triads
 
     func testMajorTriadPrimaryAndPostTonal() {
