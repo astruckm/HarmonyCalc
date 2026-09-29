@@ -123,6 +123,19 @@ final class MainVCTests: XCTestCase {
         XCTAssertFalse(sut.collectionUsesSharps)
     }
 
+    func testChordLabelShowsAnalysisSpellingOverSharpsSetting() {
+        let sut = makeMainVC()
+        sut.defaults.writeCollectionUsesSharps(true)
+        sut.loadViewIfNeeded()
+
+        // E♭-G-B♭ beats D♯-F𝄪-A♯ on spelling, so the root reads E♭ even in sharps mode.
+        sut.session.add(makeNote(.dSharp, 4))
+        sut.session.add(makeNote(.g, 4))
+        sut.session.add(makeNote(.aSharp, 4))
+
+        XCTAssertEqual(sut.chord.text, "E♭")
+    }
+
     // TODO: testFlatSharpTapped changes all the chord labels text
 }
 

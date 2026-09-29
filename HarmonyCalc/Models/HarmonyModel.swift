@@ -85,8 +85,7 @@ public struct HarmonyModel {
         guard Set(pitchClasses).count >= 2 else { return (nil, []) }
         let mask = HarmonyModel.pitchClassMask(of: pitchClasses)
         guard let tonicChords = HarmonyModel.chordsByPitchClassMask[mask], !tonicChords.isEmpty else { return (nil, []) }
-        guard let bassValue = notes.map({ $0.midiNoteNumber }).min() else { return (nil, []) }
-        let bassPitchClass = bassValue % 12
+        guard let bassPitchClass = notes.min()?.pitchClass else { return (nil, []) }
 
         // Among enharmonic spellings of the same root, keep the one that is simplest overall and best matches the collection's accidental direction (sharps vs flats).
         func spellingRank(_ chord: Chord) -> (Int, Int) {
@@ -128,15 +127,15 @@ public struct HarmonyModel {
             if l.thirdsCount != r.thirdsCount { return l.thirdsCount > r.thirdsCount }
             if l.spellingWeight != r.spellingWeight { return l.spellingWeight < r.spellingWeight }
             if l.offDirection != r.offDirection { return l.offDirection < r.offDirection }
-            let lBass = l.rootPC.rawValue == bassPitchClass
-            let rBass = r.rootPC.rawValue == bassPitchClass
+            let lBass = l.rootPC == bassPitchClass
+            let rBass = r.rootPC == bassPitchClass
             if lBass != rBass { return lBass }
             return lhs.offset < rhs.offset
         }.map { $0.element }
 
         let candidates: [ChordCandidate] = ranked.map { scored in
             let chordPitchClasses = scored.chord.noteClasses.map { Int($0.canonicalNote.pitch.pitchClass) }
-            let inversionIndex = chordPitchClasses.firstIndex(of: bassPitchClass) ?? 0
+            let inversionIndex = chordPitchClasses.firstIndex(of: bassPitchClass.rawValue) ?? 0
             return ChordCandidate(root: scored.rootPC,
                                   rootSpelling: scored.chord.root.description,
                                   quality: scored.chord.type.description,

@@ -121,9 +121,9 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
     }
 
     private func getSoundFileName(of note: Note) -> String {
-        let pitchClass = note.pitchClass
-        let spelling = pitchClass.isBlackKey ? pitchClass.possibleSpellings[1] : pitchClass.possibleSpellings[0]
-        let octave = String(note.octave) ///Middle C (MIDI 60) is octave 4
+        // Sample files are named with flats (e.g. "B♭4")
+        let spelling = note.pitchClass.spelling(usingSharps: false)
+        let octave = String(note.octave)
         let soundFileName = spelling + octave
 
         return soundFileName
@@ -449,9 +449,7 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
             primeFormText = "(" + primeFormAsString.joined() + ")"
 
             if let primary = analysis.primary {
-                //There are 3 possibilities: white key, sharp, or flat.
-                let chordRootAsString = primary.root.spelling(usingSharps: usingSharps)
-                chordText = chordRootAsString + primary.quality
+                chordText = primary.symbol
                 inversionText = primary.inversion
             } else {
                 chordText = " "

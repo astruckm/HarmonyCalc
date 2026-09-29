@@ -34,21 +34,9 @@ public enum PitchClass: Int, Comparable, Hashable, CaseIterable {
         }
     }
     
+    //The letter each possible spelling is written on, in the same order
     var possibleLetterNames: [NoteLetter] {
-        switch self {
-        case .c: return [.c, .b]
-        case .cSharp: return [.c, .d]
-        case .d: return [.d]
-        case .dSharp: return [.d, .e]
-        case .e: return [.e, .f]
-        case .f: return [.f, .e]
-        case .fSharp: return [.f, .g]
-        case .g: return [.g]
-        case .gSharp: return [.g, .a]
-        case .a: return [.a]
-        case .aSharp: return [.a, .b]
-        case .b: return [.b, .c]
-        }
+        return possibleSpellings.compactMap { NoteLetter(rawValue: String($0.prefix(1))) }
     }
 
     //Default spelling for the collection's sharps/flats preference
@@ -66,14 +54,15 @@ public enum NoteLetter: String, Equatable, CaseIterable {
     case c = "C", d = "D", e = "E", f = "F", g = "G", a = "A", b = "B"
 }
 
-/// A single sounding note, identified by its MIDI note number (0...127).
-/// Middle C is MIDI 60. `preferredSpelling` optionally pins an enharmonic name (e.g. E♯ vs F); it never affects pitch, ordering, or set membership.
+/// A single sounding note, identified by its MIDI note number.
+/// `preferredSpelling` optionally pins an enharmonic name (e.g. E♯ vs F); it never affects pitch, ordering, or set membership.
 public struct Note: Comparable, Hashable, CustomStringConvertible {
     let midiNoteNumber: Int
     let preferredSpelling: NoteLetter?
 
     var pitchClass: PitchClass {
-        return PitchClass.allCases[((midiNoteNumber % 12) + 12) % 12]
+        // The initializer guarantees 0...127, so the remainder is never negative
+        return PitchClass(rawValue: midiNoteNumber % 12)!
     }
 
     // MIDI 60 (middle C) is octave 4
@@ -94,15 +83,14 @@ public struct Note: Comparable, Hashable, CustomStringConvertible {
             print("Note is not possible: MIDI note number out of range")
             return nil
         }
+        self.midiNoteNumber = midiNoteNumber
+        self.preferredSpelling = preferredSpelling
         if let preferredSpelling = preferredSpelling {
-            let pitchClass = PitchClass.allCases[midiNoteNumber % 12]
             guard pitchClass.possibleLetterNames.contains(preferredSpelling) else {
                 print("Note is not possible: pitch class and preferred spelling do not match")
                 return nil
             }
         }
-        self.midiNoteNumber = midiNoteNumber
-        self.preferredSpelling = preferredSpelling
     }
 
     init?(pitchClass: PitchClass, octave: Int, preferredSpelling: NoteLetter? = nil) {
