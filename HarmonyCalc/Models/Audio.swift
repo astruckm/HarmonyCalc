@@ -1,5 +1,5 @@
 //
-//  AudioEngine.swift
+//  Audio.swift
 //  HarmonyCalc
 //
 //  Created by ASM on 5/14/18.
@@ -14,7 +14,6 @@ class Audio: NSObject {
     static let sharedInstance = Audio()
     
     var players = [URL: AVAudioPlayer]()
-    var numPlayersPlaying = 0
     
     private override init() {
         let session = AVAudioSession.sharedInstance()
@@ -64,7 +63,6 @@ class Audio: NSObject {
                 player.delegate = self
                 player.prepareToPlay()
                 player.play()
-                numPlayersPlaying += 1
             } catch {
                 os_log("Could not initialize audio player with url %{public}@", log: OSLog.audioPlayback, type: .error, url.absoluteString)
             }
@@ -85,7 +83,6 @@ class Audio: NSObject {
         }
         let timeToPlay = firstPlayer.deviceCurrentTime + 0.05
         for player in players.values {
-            numPlayersPlaying += 1
             player.play(atTime: timeToPlay)
         }
     }
@@ -100,7 +97,6 @@ class Audio: NSObject {
 extension Audio: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if flag {
-            numPlayersPlaying -= 1
             player.prepareToPlay()
         }
     }

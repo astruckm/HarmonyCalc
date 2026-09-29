@@ -64,19 +64,6 @@ public enum PitchClass: Int, Comparable, Hashable, CaseIterable {
 
 public enum NoteLetter: String, Equatable, CaseIterable {
     case c = "C", d = "D", e = "E", f = "F", g = "G", a = "A", b = "B"
-    
-    //To compare scale degrees in a diatonic scale
-    var abstractTonalScaleDegree: Int {
-        switch self {
-        case .c: return 1
-        case .d: return 2
-        case .e: return 3
-        case .f: return 4
-        case .g: return 5
-        case .a: return 6
-        case .b: return 7
-        }
-    }
 }
 
 /// A single sounding note, identified by its MIDI note number (0...127).

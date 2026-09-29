@@ -26,16 +26,6 @@ class TonicBridgeTests: XCTestCase {
         XCTAssertEqual(pitchClass(from: NoteClass(.C, accidental: .flat)), .b)
     }
 
-    // MARK: spellingComplexity(of:)
-
-    func testSpellingComplexityCountsAccidentalDistance() {
-        XCTAssertEqual(spellingComplexity(of: NoteClass(.C, accidental: .natural)), 0)
-        XCTAssertEqual(spellingComplexity(of: NoteClass(.C, accidental: .sharp)), 1)
-        XCTAssertEqual(spellingComplexity(of: NoteClass(.C, accidental: .flat)), 1)
-        XCTAssertEqual(spellingComplexity(of: NoteClass(.C, accidental: .doubleSharp)), 2)
-        XCTAssertEqual(spellingComplexity(of: NoteClass(.C, accidental: .doubleFlat)), 2)
-    }
-
     // MARK: spellingComplexity(of chord:)
 
     func testChordSpellingComplexitySumsEveryTone() {

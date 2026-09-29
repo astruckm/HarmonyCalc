@@ -12,10 +12,6 @@ func pitchClass(from noteClass: NoteClass) -> PitchClass? {
     return PitchClass(rawValue: Int(noteClass.canonicalNote.pitch.pitchClass))
 }
 
-func spellingComplexity(of noteClass: NoteClass) -> Int {
-    return abs(Int(noteClass.accidental.rawValue))
-}
-
 /// The summed accidental distance across all its tones.
 func spellingComplexity(of chord: Chord) -> Int {
     return chord.noteClasses.reduce(0) { $0 + abs(Int($1.accidental.rawValue)) }

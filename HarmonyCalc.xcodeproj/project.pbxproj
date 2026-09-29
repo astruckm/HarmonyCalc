@@ -37,17 +37,14 @@
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
 		722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E471C2042598D00DAF987 /* HarmonyModel.swift */; };
-		7249BD2E29751672002DFD3E /* ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7249BD2D29751672002DFD3E /* ExtensionsTests.swift */; };
 		724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724A3CF3204CD8DE008E5840 /* PianoView.swift */; };
 		724C6672298B355E003EBB58 /* DefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C6671298B355E003EBB58 /* DefaultsTests.swift */; };
 		724C6674298B5438003EBB58 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724C6673298B5438003EBB58 /* TestHelpers.swift */; };
-		724DE73227BE9D5F002ECF66 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */; };
 		725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725A2FC1212B94BE00B64C21 /* Defaults.swift */; };
 		726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726ECD0E209E8A3B000231BF /* UI Extensions.swift */; };
 		727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 727E794D2829585F00471A55 /* OSLog+Extensions.swift */; };
 		728AEA3520AA51E000CBB974 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728AEA3420AA51E000CBB974 /* Audio.swift */; };
 		72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E60A212490F500C52D45 /* NoteProtocols.swift */; };
-		72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A5E61121262F0600C52D45 /* NoteTransforms.swift */; };
 		72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */; };
 		72B108852FED65A600C6DE89 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 72B108842FED65A600C6DE89 /* Tonic */; };
 		72B1C0DE2FEC040000000002 /* TonicBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC040000000001 /* TonicBridge.swift */; };
@@ -63,7 +60,6 @@
 		72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B911B7297514C900D7D1BF /* NoteTypesTests.swift */; };
 		72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */; };
 		72C71979206144D50055C742 /* NoteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C71978206144D50055C742 /* NoteTypes.swift */; };
-		72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,18 +106,15 @@
 		722E46F72042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		722E46F92042593100DAF987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E471C2042598D00DAF987 /* HarmonyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyModel.swift; sourceTree = "<group>"; };
-		7249BD2D29751672002DFD3E /* ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsTests.swift; sourceTree = "<group>"; };
 		724A3CF3204CD8DE008E5840 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
 		724C6671298B355E003EBB58 /* DefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsTests.swift; sourceTree = "<group>"; };
 		724C6673298B5438003EBB58 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
-		724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		725A2FC1212B94BE00B64C21 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		726ECD0E209E8A3B000231BF /* UI Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Extensions.swift"; sourceTree = "<group>"; };
 		727E794D2829585F00471A55 /* OSLog+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Extensions.swift"; sourceTree = "<group>"; };
 		728AEA3420AA51E000CBB974 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		72A10F4521DA09FC0091861C /* HarmonyCalcTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HarmonyCalcTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72A5E60A212490F500C52D45 /* NoteProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteProtocols.swift; sourceTree = "<group>"; };
-		72A5E61121262F0600C52D45 /* NoteTransforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransforms.swift; sourceTree = "<group>"; };
 		72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsVCTests.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC040000000001 /* TonicBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonicBridge.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC050000000001 /* PitchClassSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchClassSet.swift; sourceTree = "<group>"; };
@@ -136,7 +129,6 @@
 		72B911B7297514C900D7D1BF /* NoteTypesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypesTests.swift; sourceTree = "<group>"; };
 		72BE787420AC5AE600991D4F /* DefinitionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionsViewController.swift; sourceTree = "<group>"; };
 		72C71978206144D50055C742 /* NoteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTypes.swift; sourceTree = "<group>"; };
-		72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTransformsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				72F6210520A90D1300DBBE13 /* Sounds */,
-				724DE73127BE9D5F002ECF66 /* Array+Extensions.swift */,
 				727E794D2829585F00471A55 /* OSLog+Extensions.swift */,
 				722E46EA2042593100DAF987 /* AppDelegate.swift */,
 				722E46F42042593100DAF987 /* Assets.xcassets */,
@@ -220,12 +211,10 @@
 			children = (
 				72AED26D29780DF400FE24E2 /* DefinitionsVCTests.swift */,
 				724C6671298B355E003EBB58 /* DefaultsTests.swift */,
-				7249BD2D29751672002DFD3E /* ExtensionsTests.swift */,
 				72B1C0DE2FEC0B0000000001 /* HarmonyAnalysisTests.swift */,
 				72B1C0DE2FEC0B0000000003 /* TonicBridgeTests.swift */,
 				72B1C0DE2FEC0B0000000005 /* HarmonySessionTests.swift */,
 				72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */,
-				72F47B7C29751EFB00AE3C7B /* NoteTransformsTests.swift */,
 				72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */,
 				72B911B7297514C900D7D1BF /* NoteTypesTests.swift */,
 				721E3A3D297AA72E006B0292 /* MainVCTests.swift */,
@@ -266,7 +255,6 @@
 				722E471C2042598D00DAF987 /* HarmonyModel.swift */,
 				72B1C0DE2FEC070000000001 /* HarmonySession.swift */,
 				72B1C0DE2FEC040000000001 /* TonicBridge.swift */,
-				72A5E61121262F0600C52D45 /* NoteTransforms.swift */,
 				72B1C0DE2FEC050000000001 /* PitchClassSet.swift */,
 				72B1C0DE2FEC090000000001 /* ForteTable.swift */,
 			);
@@ -446,7 +434,6 @@
 				726ECD0F209E8A3B000231BF /* UI Extensions.swift in Sources */,
 				72A5E60B212490F500C52D45 /* NoteProtocols.swift in Sources */,
 				725A2FC2212B94BE00B64C21 /* Defaults.swift in Sources */,
-				72A5E61221262F0600C52D45 /* NoteTransforms.swift in Sources */,
 				72B1C0DE2FEC050000000002 /* PitchClassSet.swift in Sources */,
 				72B1C0DE2FEC080000000002 /* HarmonyAnalysis.swift in Sources */,
 				72B1C0DE2FEC090000000002 /* ForteTable.swift in Sources */,
@@ -454,7 +441,6 @@
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
 				72B1C0DE2FEC040000000002 /* TonicBridge.swift in Sources */,
 				72B1C0DE2FEC070000000002 /* HarmonySession.swift in Sources */,
-				724DE73227BE9D5F002ECF66 /* Array+Extensions.swift in Sources */,
 				727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
@@ -466,14 +452,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72F47B7D29751EFB00AE3C7B /* NoteTransformsTests.swift in Sources */,
 				72B1C0DE2FEC060000000002 /* PitchClassSetTests.swift in Sources */,
 				72B1C0DE2FEC0A0000000002 /* ForteTableTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000002 /* HarmonyAnalysisTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000004 /* TonicBridgeTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000006 /* HarmonySessionTests.swift in Sources */,
 				721E3A3E297AA72E006B0292 /* MainVCTests.swift in Sources */,
-				7249BD2E29751672002DFD3E /* ExtensionsTests.swift in Sources */,
 				72AED26E29780DF400FE24E2 /* DefinitionsVCTests.swift in Sources */,
 				724C6672298B355E003EBB58 /* DefaultsTests.swift in Sources */,
 				72B911B8297514C900D7D1BF /* NoteTypesTests.swift in Sources */,
