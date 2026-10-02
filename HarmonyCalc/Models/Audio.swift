@@ -32,15 +32,19 @@ class Audio: NSObject {
         
     /// Load sound file into AVAudioPlayer object and add it to store of players
     /// - Parameter url: Path of the audio file
-    func loadSound(at url: URL) {
+    /// - Returns: The prepared player, or nil if it couldn't be created
+    @discardableResult
+    func loadSound(at url: URL) -> AVAudioPlayer? {
         do {
             let player = try AVAudioPlayer(contentsOf: url)
+            player.delegate = self
             player.prepareToPlay()
             players[url] = player
+            return player
         } catch {
-            os_log("Error initializing audio player from url: : %{public}@", log: OSLog.audioPlayback, type: .error, error.localizedDescription)
+            os_log("Error initializing audio player from url %{public}@: %{public}@", log: OSLog.audioPlayback, type: .error, url.absoluteString, error.localizedDescription)
+            return nil
         }
-        
     }
     
     /// Use to remove the audio player if colored key is re-tapped
@@ -57,15 +61,7 @@ class Audio: NSObject {
     /// - Parameter soundFileName: The audio filename
     func playSound(soundFileName: String) {
         if let url = urlLookUp(of: soundFileName) {
-            do {    
-                let player = try AVAudioPlayer(contentsOf: url)
-                players[url] = player
-                player.delegate = self
-                player.prepareToPlay()
-                player.play()
-            } catch {
-                os_log("Could not initialize audio player with url %{public}@", log: OSLog.audioPlayback, type: .error, url.absoluteString)
-            }
+            loadSound(at: url)?.play()
         } else {
             os_log("Couldn't load audio file, no sound file with name %{public}@ in app bundle", log: OSLog.audioPlayback, type: .error, soundFileName)
         }

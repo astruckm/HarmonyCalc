@@ -14,23 +14,16 @@ import Foundation
 
 struct PitchClassSet {
     let pitchClasses: [Int]
+    // Created on init to ensure it's only computed once
+    let normalForm: [Int]
 
     init(_ pitchClasses: [Int]) {
         self.pitchClasses = pitchClasses
-    }
-
-    // The rotation most packed to the left, comparing the interval from the first pitch class out to the last, then if there are ties, from the first to second-to-last, and so on.
-    // A fully symmetric set is broken by choosing the lowest starting pitch class.
-    var normalForm: [Int] {
-        let deduped = Array(Set(pitchClasses)).sorted()
-        guard deduped.count >= 2 else { return [] }
-        let allRotations: [[Int]] = Self.allRotations(of: deduped)
-        return allRotations.min(by: PitchClassSet.moreCompact) ?? pitchClasses
+        self.normalForm = PitchClassSet.normalForm(of: pitchClasses)
     }
 
     // The prime form (Rahn method): the most left-packed of the normal form or its inversion's normal form, transposed to begin on 0.
     var primeForm: [Int] {
-        let normalForm = self.normalForm
         guard normalForm.count >= 2 else { return [] }
 
         let original = PitchClassSet.transposedToZero(normalForm)
@@ -53,6 +46,14 @@ struct PitchClassSet {
     }
 
     // MARK: - Helpers
+
+    // The rotation most packed to the left, comparing the interval from the first pitch class out to the last, then if there are ties, from the first to second-to-last, and so on.
+    // A fully symmetric set is broken by choosing the lowest starting pitch class.
+    private static func normalForm(of pitchClasses: [Int]) -> [Int] {
+        let deduped = Array(Set(pitchClasses)).sorted()
+        guard deduped.count >= 2 else { return [] }
+        return allRotations(of: deduped).min(by: moreCompact) ?? deduped
+    }
 
     private static func mod12(_ value: Int) -> Int {
         let remainder = value % 12

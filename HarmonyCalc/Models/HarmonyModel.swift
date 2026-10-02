@@ -45,14 +45,15 @@ public struct HarmonyModel {
     }
 
     func analyze(_ notes: [Note], usingSharps: Bool = true) -> HarmonyAnalysis {
-        let pitchClasses = Array(Set(notes.map { $0.pitchClass })).sorted(by: <)
+        let pitchClasses = notes.pitchClasses
         guard pitchClasses.count >= 2 else { return .empty }
 
-        let normalForm = self.normalForm(of: pitchClasses)
-        let primeForm = self.primeForm(ofCollectionInNormalForm: normalForm)
-        let intervalVector = self.intervalVector(of: pitchClasses)
+        let (primary, alternatives) = rankedCandidates(from: notes, pitchClasses: pitchClasses, usingSharps: usingSharps)
+        let pitchClassSet = PitchClassSet(pitchClasses.map { $0.rawValue })
+        let normalForm = pitchClassSet.normalForm.compactMap { PitchClass(rawValue: $0) }
+        let primeForm = pitchClassSet.primeForm
+        let intervalVector = pitchClassSet.intervalVector
         let forteName = ForteTable.name(forPrimeForm: primeForm)
-        let (primary, alternatives) = rankedCandidates(from: notes, usingSharps: usingSharps)
 
         return HarmonyAnalysis(primary: primary,
                                alternatives: alternatives,
@@ -62,56 +63,33 @@ public struct HarmonyModel {
                                forteName: forteName)
     }
 
-    //**********************************************************
-    //MARK: Set Theory
-    //Using Joseph N. Straus' "Introduction to Post-Tonal Theory"
-    //**********************************************************
-    func normalForm(of pitchCollection: [PitchClass]) -> [PitchClass] {
-        let normalForm = PitchClassSet(pitchCollection.map { $0.rawValue }).normalForm
-        return normalForm.compactMap { PitchClass(rawValue: $0) }
-    }
-    
-    func primeForm(ofCollectionInNormalForm pitchCollection: [PitchClass]) -> [Int] {
-        return PitchClassSet(pitchCollection.map { $0.rawValue }).primeForm
-    }
-
-    func intervalVector(of pitchCollection: [PitchClass]) -> [Int] {
-        return PitchClassSet(pitchCollection.map { $0.rawValue }).intervalVector
-    }
-
-    private func rankedCandidates(from notes: [Note], usingSharps: Bool) -> (primary: ChordCandidate?, alternatives: [ChordCandidate]) {
+    /// - Parameter pitchClasses: The notes' distinct pitch classes; `analyze` guarantees there are at least 2.
+    private func rankedCandidates(from notes: [Note], pitchClasses: [PitchClass], usingSharps: Bool) -> (primary: ChordCandidate?, alternatives: [ChordCandidate]) {
         guard notes.count >= 2 else { return (nil, []) }
-        let pitchClasses = notes.map { $0.pitchClass.rawValue }
-        guard Set(pitchClasses).count >= 2 else { return (nil, []) }
-        let mask = HarmonyModel.pitchClassMask(of: pitchClasses)
+        let mask = HarmonyModel.pitchClassMask(of: pitchClasses.map { $0.rawValue })
         guard let tonicChords = HarmonyModel.chordsByPitchClassMask[mask], !tonicChords.isEmpty else { return (nil, []) }
         guard let bassPitchClass = notes.min()?.pitchClass else { return (nil, []) }
 
-        // Among enharmonic spellings of the same root, keep the one that is simplest overall and best matches the collection's accidental direction (sharps vs flats).
-        func spellingRank(_ chord: Chord) -> (Int, Int) {
-            return (spellingComplexity(of: chord), accidentalsAgainstDirection(of: chord, usingSharps: usingSharps))
+        typealias ScoredChord = (chord: Chord, rootPC: PitchClass, thirdsCount: Int, spellingWeight: Int, offDirection: Int)
+        let allSpellings = tonicChords.compactMap { chord -> ScoredChord? in
+            guard let rootPC = pitchClass(from: chord.root) else { return nil }
+            return (chord, rootPC, tertianThirdCount(of: chord), spellingComplexity(of: chord), accidentalsAgainstDirection(of: chord, usingSharps: usingSharps))
         }
 
-        var deduped: [Chord] = []
-        for chord in tonicChords {
-            guard let rootPC = pitchClass(from: chord.root) else { continue }
-            if let existing = deduped.firstIndex(where: {
-                $0.type == chord.type && pitchClass(from: $0.root) == rootPC
-            }) {
-                if spellingRank(chord) < spellingRank(deduped[existing]) {
-                    deduped[existing] = chord
+        // Among enharmonic spellings of the same root, keep the one that is simplest overall and best matches the collection's accidental direction (sharps vs flats).
+        var scored: [ScoredChord] = []
+        for spelling in allSpellings {
+            if let existing = scored.firstIndex(where: { $0.chord.type == spelling.chord.type && $0.rootPC == spelling.rootPC }) {
+                if (spelling.spellingWeight, spelling.offDirection) < (scored[existing].spellingWeight, scored[existing].offDirection) {
+                    scored[existing] = spelling
                 }
             } else {
-                deduped.append(chord)
+                scored.append(spelling)
             }
         }
 
         // Drop degenerate over-spellings before ranking. Tonic's vocabulary includes altered types whose upper extensions are enharmonically identical to lower chord tones — e.g. ø7(♭5)(♯9)(♯11) where ♯9 = ♭3 and ♯11 = ♭7 as pitch classes.
         let distinctPitchClasses = Set(pitchClasses).count
-        let scored = deduped.compactMap { chord -> (chord: Chord, rootPC: PitchClass, thirdsCount: Int, spellingWeight: Int, offDirection: Int)? in
-            guard let rootPC = pitchClass(from: chord.root) else { return nil }
-            return (chord, rootPC, tertianThirdCount(of: chord), spellingComplexity(of: chord), accidentalsAgainstDirection(of: chord, usingSharps: usingSharps))
-        }
         let clean = scored.filter { $0.chord.noteClasses.count == distinctPitchClasses }
         let usable = clean.isEmpty ? scored : clean
         guard !usable.isEmpty else { return (nil, []) }

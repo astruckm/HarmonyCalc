@@ -110,3 +110,10 @@ public struct Note: Comparable, Hashable, CustomStringConvertible {
         hasher.combine(midiNoteNumber)
     }
 }
+
+extension Sequence where Element == Note {
+    /// The distinct pitch classes among these notes, sorted from C up.
+    var pitchClasses: [PitchClass] {
+        return Array(Set(map { $0.pitchClass })).sorted()
+    }
+}

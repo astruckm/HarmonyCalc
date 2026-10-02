@@ -435,17 +435,10 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         if session.pitchClasses.count > 1 {
             let analysis = session.analysis(usingSharps: usingSharps)
 
-            let normalFormAsString = analysis.normalForm.map { element -> String in
-                if element.rawValue == 10 { return "T" }
-                else if element.rawValue == 11 { return "E" }
-                else { return String(element.rawValue) } }
+            let normalFormAsString = analysis.normalForm.map { pitchClassText($0.rawValue) }
             normalFormText = "[" + normalFormAsString.joined(separator: ",") + "]"
 
-            let primeFormAsString = analysis.primeForm.map { element -> String in
-                if element == 10 { return "T" }
-                else if element == 11 { return "E" }
-                else { return String(element) }
-            }
+            let primeFormAsString = analysis.primeForm.map { pitchClassText($0) }
             primeFormText = "(" + primeFormAsString.joined() + ")"
 
             if let primary = analysis.primary {
@@ -466,5 +459,14 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
         primeForm.text = primeFormText
         chord.text = chordText
         inversion.text = inversionText
+    }
+
+    /// A pitch class as a single character, with T for 10 and E for 11
+    private func pitchClassText(_ pitchClass: Int) -> String {
+        switch pitchClass {
+        case 10: return "T"
+        case 11: return "E"
+        default: return String(pitchClass)
+        }
     }
 }

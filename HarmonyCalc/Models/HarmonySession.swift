@@ -24,7 +24,7 @@ final class HarmonySession {
 
     var maxNotes: Int { return harmonyModel.maxNotes }
     var sortedNotes: [Note] { return heldNotes.sorted() }
-    var pitchClasses: [PitchClass] { return Array(Set(heldNotes.map { $0.pitchClass })).sorted(by: <) }
+    var pitchClasses: [PitchClass] { return heldNotes.pitchClasses }
 
     /// Full harmonic analysis of the held notes: the ranked tonal chord readings plus the post-tonal set-theory data (normal/prime form, interval vector, Forte name).
     func analysis(usingSharps: Bool) -> HarmonyAnalysis {
