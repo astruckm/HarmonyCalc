@@ -152,7 +152,7 @@ final class HarmonySessionTests: XCTestCase {
         session.add(makeNote(.c, 5))
         session.add(makeNote(.gSharp, 5))
 
-        XCTAssertEqual(session.analysis(usingSharps: true).primary?.symbol, "C⁺")
-        XCTAssertEqual(session.analysis(usingSharps: false).primary?.symbol, "A♭⁺")
+        XCTAssertEqual(session.analysis(usingSharps: true).primary.map { ChordSymbolFormatter.symbol(for: $0) }, "C⁺")
+        XCTAssertEqual(session.analysis(usingSharps: false).primary.map { ChordSymbolFormatter.symbol(for: $0) }, "A♭⁺")
     }
 }

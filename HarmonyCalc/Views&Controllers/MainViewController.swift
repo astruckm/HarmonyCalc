@@ -57,6 +57,7 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
     //*****************************************
     let session = HarmonySession(harmonyModel: HarmonyModel(maxNotesInCollection: 7))
     var collectionUsesSharps = true
+    var chordSymbolStyle: ChordSymbolStyle = .standard
     var audioIsOn = true
     let audioOn = UIImage(named: "audio on black.png")
     let audioOff = UIImage(named: "audio off black.png")
@@ -442,7 +443,7 @@ class MainViewController: UIViewController, NoteInputDelegate, HarmonySessionObs
             primeFormText = "(" + primeFormAsString.joined() + ")"
 
             if let primary = analysis.primary {
-                chordText = primary.symbol
+                chordText = ChordSymbolFormatter.symbol(for: primary, style: chordSymbolStyle)
                 inversionText = primary.inversion
             } else {
                 chordText = " "

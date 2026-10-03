@@ -54,8 +54,8 @@ class HarmonyAnalysisTests: XCTestCase {
 
         let allCandidates = ([analysis.primary].compactMap { $0 }) + analysis.alternatives
         for candidate in allCandidates {
-            XCTAssertFalse(candidate.quality.contains("♯9"), "phantom ♯9 in \(candidate.symbol)")
-            XCTAssertFalse(candidate.quality.contains("♯11"), "phantom ♯11 in \(candidate.symbol)")
+            XCTAssertFalse(candidate.quality.contains("♯9"), "phantom ♯9 in \(ChordSymbolFormatter.symbol(for: candidate))")
+            XCTAssertFalse(candidate.quality.contains("♯11"), "phantom ♯11 in \(ChordSymbolFormatter.symbol(for: candidate))")
         }
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .e && $0.quality.contains("ø7") },
                       "expected the clean Eø7(add♭13) reading among alternatives")
@@ -68,7 +68,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.root, .a)
         XCTAssertEqual(analysis.primary?.quality, "m7")
         XCTAssertEqual(analysis.primary?.inversion, "1st")
-        XCTAssertEqual(analysis.primary?.symbol, "Am7")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "Am7")
 
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .c && $0.quality == "6" })
     }
@@ -94,7 +94,7 @@ class HarmonyAnalysisTests: XCTestCase {
 
         XCTAssertEqual(analysis.primary?.root, .c)
         XCTAssertEqual(analysis.primary?.quality, "")
-        XCTAssertEqual(analysis.primary?.symbol, "C")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "C")
         XCTAssertEqual(analysis.primary?.inversion, "Root")
         XCTAssertEqual(analysis.normalForm, [.c, .e, .g])
         XCTAssertTrue(analysis.alternatives.isEmpty)
@@ -111,7 +111,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(primary?.rootSpelling, "C")
         XCTAssertEqual(primary?.quality, "")
         XCTAssertEqual(primary?.inversion, "Root")
-        XCTAssertEqual(primary?.symbol, "C")
+        XCTAssertEqual(primary.map { ChordSymbolFormatter.symbol(for: $0) }, "C")
 
         XCTAssertEqual(analysis.normalForm, [.c, .e, .g])
         XCTAssertEqual(analysis.primeForm, [0, 3, 7])
@@ -142,7 +142,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.root, .c)
         XCTAssertEqual(analysis.primary?.quality, "⁺")
         XCTAssertEqual(analysis.primary?.inversion, "1st")
-        XCTAssertEqual(analysis.primary?.symbol, "C⁺")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "C⁺")
         XCTAssertEqual(analysis.forteName, "3-12")
         XCTAssertEqual(analysis.alternatives.count, 2)
         XCTAssertEqual(Set(analysis.alternatives.map { $0.root }), [.e, .gSharp])
@@ -154,7 +154,7 @@ class HarmonyAnalysisTests: XCTestCase {
 
         // Same pitches, flats mode: the direction tiebreak flips to A♭⁺ (A♭-C-E) over C⁺.
         XCTAssertEqual(analysis.primary?.root, .gSharp)   // pitch class 8, spelled A♭
-        XCTAssertEqual(analysis.primary?.symbol, "A♭⁺")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "A♭⁺")
         XCTAssertEqual(analysis.primary?.inversion, "2nd")
         XCTAssertEqual(analysis.forteName, "3-12")
         XCTAssertEqual(analysis.alternatives.count, 2)
@@ -190,7 +190,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.root, .d)
         XCTAssertEqual(analysis.primary?.quality, "")
         XCTAssertEqual(analysis.primary?.inversion, "Root")
-        XCTAssertEqual(analysis.primary?.symbol, "D")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "D")
         XCTAssertEqual(analysis.normalForm, [.d, .fSharp, .a])
         XCTAssertEqual(analysis.primeForm, [0, 3, 7])
     }
@@ -253,7 +253,7 @@ class HarmonyAnalysisTests: XCTestCase {
 
         // Same pitches, flats mode: the flat-leaning A°7 (A-C-E♭-G♭) wins instead of D♯°7.
         XCTAssertEqual(analysis.primary?.root, .a)
-        XCTAssertEqual(analysis.primary?.symbol, "A°7")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "A°7")
         XCTAssertEqual(analysis.primary?.quality, "°7")
         XCTAssertEqual(analysis.primary?.inversion, "1st")
         XCTAssertEqual(analysis.alternatives.count, 3)
@@ -459,7 +459,7 @@ class HarmonyAnalysisTests: XCTestCase {
 
         let allCandidates = ([analysis.primary].compactMap { $0 }) + analysis.alternatives
         for candidate in allCandidates {
-            XCTAssertFalse(candidate.quality.contains("♯9"), "phantom ♯9 in \(candidate.symbol)")
+            XCTAssertFalse(candidate.quality.contains("♯9"), "phantom ♯9 in \(ChordSymbolFormatter.symbol(for: candidate))")
         }
     }
 
@@ -485,7 +485,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.root, .c)
         XCTAssertEqual(analysis.primary?.quality, "(add9)")
         XCTAssertEqual(analysis.primary?.inversion, "Root")
-        XCTAssertEqual(analysis.primary?.symbol, "C(add9)")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "C(add9)")
         XCTAssertEqual(analysis.primeForm, [0, 2, 4, 7])
         XCTAssertEqual(analysis.forteName, "4-22")
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .g && $0.quality == "sus4(add13)" })
@@ -498,7 +498,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.root, .c)
         XCTAssertEqual(analysis.primary?.quality, "m(add9)")
         XCTAssertEqual(analysis.primary?.inversion, "Root")
-        XCTAssertEqual(analysis.primary?.symbol, "Cm(add9)")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "Cm(add9)")
         XCTAssertEqual(analysis.primeForm, [0, 2, 3, 7])
         XCTAssertEqual(analysis.forteName, "4-14")
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .g && $0.quality == "sus4(add♭13)" })
@@ -511,7 +511,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.root, .a)
         XCTAssertEqual(analysis.primary?.quality, "m7(add11)")
         XCTAssertEqual(analysis.primary?.inversion, "1st")
-        XCTAssertEqual(analysis.primary?.symbol, "Am7(add11)")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "Am7(add11)")
         XCTAssertEqual(analysis.primeForm, [0, 2, 4, 7, 9])
         XCTAssertEqual(analysis.forteName, "5-35")
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .c && $0.quality == "6/9" })
@@ -524,7 +524,7 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertEqual(analysis.primary?.root, .a)
         XCTAssertEqual(analysis.primary?.quality, "m9")
         XCTAssertEqual(analysis.primary?.inversion, "1st")
-        XCTAssertEqual(analysis.primary?.symbol, "Am9")
+        XCTAssertEqual(analysis.primary.map { ChordSymbolFormatter.symbol(for: $0) }, "Am9")
         XCTAssertEqual(analysis.primeForm, [0, 1, 3, 5, 8])
         XCTAssertEqual(analysis.forteName, "5-27")
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .c && $0.quality == "maj7(add13)" })

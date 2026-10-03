@@ -11,10 +11,9 @@ import Foundation
 struct ChordCandidate: Equatable {
     let root: PitchClass
     let rootSpelling: String
+    /// Standard-style quality (e.g. `maj7`); render it with `ChordSymbolFormatter`.
     let quality: String
     let inversion: String
-
-    var symbol: String { return rootSpelling + quality }
 }
 
 struct HarmonyAnalysis: Equatable {

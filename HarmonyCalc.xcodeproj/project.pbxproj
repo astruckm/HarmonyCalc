@@ -54,6 +54,8 @@
 		72B1C0DE2FEC080000000002 /* HarmonyAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC080000000001 /* HarmonyAnalysis.swift */; };
 		72B1C0DE2FEC090000000002 /* ForteTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC090000000001 /* ForteTable.swift */; };
 		72B1C0DE2FEC0A0000000002 /* ForteTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */; };
+		72B1C0DE2FEC0D0000000002 /* ChordSymbolFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0D0000000001 /* ChordSymbolFormatter.swift */; };
+		72B1C0DE2FEC0E0000000002 /* ChordSymbolFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0E0000000001 /* ChordSymbolFormatterTests.swift */; };
 		72B1C0DE2FEC0B0000000002 /* HarmonyAnalysisTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0B0000000001 /* HarmonyAnalysisTests.swift */; };
 		72B1C0DE2FEC0B0000000004 /* TonicBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0B0000000003 /* TonicBridgeTests.swift */; };
 		72B1C0DE2FEC0B0000000006 /* HarmonySessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC0B0000000005 /* HarmonySessionTests.swift */; };
@@ -123,6 +125,8 @@
 		72B1C0DE2FEC080000000001 /* HarmonyAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyAnalysis.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC090000000001 /* ForteTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForteTable.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForteTableTests.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC0D0000000001 /* ChordSymbolFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordSymbolFormatter.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC0E0000000001 /* ChordSymbolFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordSymbolFormatterTests.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC0B0000000001 /* HarmonyAnalysisTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonyAnalysisTests.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC0B0000000003 /* TonicBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TonicBridgeTests.swift; sourceTree = "<group>"; };
 		72B1C0DE2FEC0B0000000005 /* HarmonySessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HarmonySessionTests.swift; sourceTree = "<group>"; };
@@ -215,6 +219,7 @@
 				72B1C0DE2FEC0B0000000003 /* TonicBridgeTests.swift */,
 				72B1C0DE2FEC0B0000000005 /* HarmonySessionTests.swift */,
 				72B1C0DE2FEC0A0000000001 /* ForteTableTests.swift */,
+				72B1C0DE2FEC0E0000000001 /* ChordSymbolFormatterTests.swift */,
 				72B1C0DE2FEC060000000001 /* PitchClassSetTests.swift */,
 				72B911B7297514C900D7D1BF /* NoteTypesTests.swift */,
 				721E3A3D297AA72E006B0292 /* MainVCTests.swift */,
@@ -257,6 +262,7 @@
 				72B1C0DE2FEC040000000001 /* TonicBridge.swift */,
 				72B1C0DE2FEC050000000001 /* PitchClassSet.swift */,
 				72B1C0DE2FEC090000000001 /* ForteTable.swift */,
+				72B1C0DE2FEC0D0000000001 /* ChordSymbolFormatter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 				72B1C0DE2FEC050000000002 /* PitchClassSet.swift in Sources */,
 				72B1C0DE2FEC080000000002 /* HarmonyAnalysis.swift in Sources */,
 				72B1C0DE2FEC090000000002 /* ForteTable.swift in Sources */,
+				72B1C0DE2FEC0D0000000002 /* ChordSymbolFormatter.swift in Sources */,
 				72BE787520AC5AE600991D4F /* DefinitionsViewController.swift in Sources */,
 				722E471D2042598D00DAF987 /* HarmonyModel.swift in Sources */,
 				72B1C0DE2FEC040000000002 /* TonicBridge.swift in Sources */,
@@ -454,6 +461,7 @@
 			files = (
 				72B1C0DE2FEC060000000002 /* PitchClassSetTests.swift in Sources */,
 				72B1C0DE2FEC0A0000000002 /* ForteTableTests.swift in Sources */,
+				72B1C0DE2FEC0E0000000002 /* ChordSymbolFormatterTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000002 /* HarmonyAnalysisTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000004 /* TonicBridgeTests.swift in Sources */,
 				72B1C0DE2FEC0B0000000006 /* HarmonySessionTests.swift in Sources */,
