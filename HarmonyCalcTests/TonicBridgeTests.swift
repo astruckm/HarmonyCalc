@@ -76,6 +76,13 @@ class TonicBridgeTests: XCTestCase {
         XCTAssertEqual(tertianThirdCount(of: cChord(.sus4)), 1)    // C then F (a 4th above C)
     }
 
+    func testTertianThirdCountWeighsAlteredThirdsLess() {
+        // D11(♯5) is a full six-tone stack, but A♯→C is a diminished third, so it scores below a clean six-tone stack.
+        let d11Sharp5 = Chord(NoteClass(.D, accidental: .natural), type: .dom11_sharp5)
+        XCTAssertLessThan(tertianThirdCount(of: d11Sharp5), 6)
+        XCTAssertGreaterThan(tertianThirdCount(of: d11Sharp5), 5)
+    }
+
     // MARK: TonalChordInversion
 
     func testTonalChordInversionMapsIndexToLabel() {

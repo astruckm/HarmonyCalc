@@ -70,7 +70,7 @@ public struct HarmonyModel {
         guard let tonicChords = HarmonyModel.chordsByPitchClassMask[mask], !tonicChords.isEmpty else { return (nil, []) }
         guard let bassPitchClass = notes.min()?.pitchClass else { return (nil, []) }
 
-        typealias ScoredChord = (chord: Chord, rootPC: PitchClass, thirdsCount: Int, spellingWeight: Int, offDirection: Int)
+        typealias ScoredChord = (chord: Chord, rootPC: PitchClass, thirdsCount: Double, spellingWeight: Int, offDirection: Int)
         let allSpellings = tonicChords.compactMap { chord -> ScoredChord? in
             guard let rootPC = pitchClass(from: chord.root) else { return nil }
             return (chord, rootPC, tertianThirdCount(of: chord), spellingComplexity(of: chord), accidentalsAgainstDirection(of: chord, usingSharps: usingSharps))
@@ -88,14 +88,14 @@ public struct HarmonyModel {
             }
         }
 
-        // Drop degenerate over-spellings before ranking. Tonic's vocabulary includes altered types whose upper extensions are enharmonically identical to lower chord tones — e.g. ø7(♭5)(♯9)(♯11) where ♯9 = ♭3 and ♯11 = ♭7 as pitch classes.
+        // Drop degenerate over-spellings before ranking. Tonic's vocabulary includes altered types whose upper extensions are enharmonically identical to lower chord tones — e.g. ø7(♭5)(♯9)(♯11) where ♯9 = ♭3 and ♯11 = ♭5 as pitch classes.
         let distinctPitchClasses = Set(pitchClasses).count
         let clean = scored.filter { $0.chord.noteClasses.count == distinctPitchClasses }
         let usable = clean.isEmpty ? scored : clean
         guard !usable.isEmpty else { return (nil, []) }
 
         // Rank the candidates by, in order by:
-        // 1. Fullest stack of thirds
+        // 1. Fullest stack of thirds, favoring major/minor thirds over diminished/augmented ones
         // 2. The simplest overall spelling
         // 3. The collection's accidental direction
         // 4. The reading on the bass

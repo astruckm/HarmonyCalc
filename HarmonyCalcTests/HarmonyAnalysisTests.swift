@@ -436,6 +436,18 @@ class HarmonyAnalysisTests: XCTestCase {
         XCTAssertTrue(analysis.alternatives.contains { $0.root == .b && $0.quality == "11(♯5)" })
     }
 
+    func testDominantNinthSharpElevenBeatsAlteredThirdStackWithSharps() {
+        let c9Sharp11 = [makeNote(.c, 4), makeNote(.e, 4), makeNote(.g, 4),
+                         makeNote(.aSharp, 4), makeNote(.d, 5), makeNote(.fSharp, 5)]
+
+        // D11(♯5) is an equally full, equally simple, all-sharp stack, but its A♯→C is a diminished third.
+        for usingSharps in [true, false] {
+            let analysis = harmonyModel.analyze(c9Sharp11, usingSharps: usingSharps)
+            XCTAssertEqual(analysis.primary?.root, .c)
+            XCTAssertEqual(analysis.primary?.quality, "9(♯11)")
+        }
+    }
+
     // MARK: Thirteen chords
 
     func testSevenNoteDiatonicSetStacksAsThirteenthChord() {
