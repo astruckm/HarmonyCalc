@@ -33,6 +33,7 @@
 		7213F5AA20AB07D000090B75 /* C4.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7213F59220AB07D000090B75 /* C4.m4a */; };
 		721E3A3E297AA72E006B0292 /* MainVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721E3A3D297AA72E006B0292 /* MainVCTests.swift */; };
 		722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E46EA2042593100DAF987 /* AppDelegate.swift */; };
+		72B1C0DE2FEC1A0000000001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C0DE2FEC1A0000000002 /* SceneDelegate.swift */; };
 		722E46ED2042593100DAF987 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722E46EC2042593100DAF987 /* MainViewController.swift */; };
 		722E46F52042593100DAF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F42042593100DAF987 /* Assets.xcassets */; };
 		722E46F82042593100DAF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 722E46F62042593100DAF987 /* LaunchScreen.storyboard */; };
@@ -103,6 +104,7 @@
 		722C8B6B29751AB800F8549B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		722E46E72042593100DAF987 /* HarmonyCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HarmonyCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		722E46EA2042593100DAF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		72B1C0DE2FEC1A0000000002 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		722E46EC2042593100DAF987 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		722E46F42042593100DAF987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		722E46F72042593100DAF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				72F6210520A90D1300DBBE13 /* Sounds */,
 				727E794D2829585F00471A55 /* OSLog+Extensions.swift */,
 				722E46EA2042593100DAF987 /* AppDelegate.swift */,
+				72B1C0DE2FEC1A0000000002 /* SceneDelegate.swift */,
 				722E46F42042593100DAF987 /* Assets.xcassets */,
 				722E46F62042593100DAF987 /* LaunchScreen.storyboard */,
 				722E46F92042593100DAF987 /* Info.plist */,
@@ -450,6 +453,7 @@
 				72B1C0DE2FEC070000000002 /* HarmonySession.swift in Sources */,
 				727E794E2829585F00471A55 /* OSLog+Extensions.swift in Sources */,
 				722E46EB2042593100DAF987 /* AppDelegate.swift in Sources */,
+				72B1C0DE2FEC1A0000000001 /* SceneDelegate.swift in Sources */,
 				724A3CF4204CD8DE008E5840 /* PianoView.swift in Sources */,
 				72C71979206144D50055C742 /* NoteTypes.swift in Sources */,
 			);
